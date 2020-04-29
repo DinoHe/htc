@@ -1,0 +1,167 @@
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+
+.thumbur {
+    width: 160px;
+    height: 150px;
+    background-image: url("/static/home/img/logo.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-x: 10px;
+    margin: 45px auto 0px;
+    border-radius: 100%;
+}
+
+.htmleaf-container{
+    height: 100%;
+}
+.panel-lite {
+    margin: auto;
+    max-width: 600px;
+    height: 100%;
+    background: #fff;
+    padding: 45px;
+}
+
+.panel-lite .tittle{
+    text-align: center;
+    font-size: 1.5em;
+    color: #b517e8;
+    margin: 0 auto 45px;
+}
+
+.login-tip {
+    color: #FF4081;
+    font-size: 14px;
+    display: flex;
+    margin-top: 16px;
+}
+
+.login-tip .login-tip_group {
+    flex: 1;
+}
+
+.login-tip_reg {
+    text-align: left;
+}
+
+.login-tip_pwd {
+    text-align: right;
+}
+
+.login-tip_group a {
+    text-decoration: none;
+    color: #FF4081;
+}
+
+.login-group {
+    position: relative;
+    font-size: 15px;
+    color: #666;
+}
+
+.login-group+.login-group {
+    margin-top: 30px;
+}
+
+.login-group .login-label {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 5px;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.login-group .login-control {
+    width: 100%;
+    position: relative;
+    z-index: 3;
+    height: 35px;
+    background: none;
+    border: none;
+    padding: 5px 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    border-bottom: 1px solid #777;
+}
+
+.login-group .login-control:invalid {
+    outline: none;
+}
+
+.login-group .login-control:focus,
+.login-group .login-control:valid {
+    outline: none;
+    color: #b517e8;
+    box-shadow: 0 1px #b517e8;
+    border-color: #b517e8;
+}
+
+.login-group .login-control:focus+.login-label,
+.login-group .login-control:valid+.login-label {
+    font-size: 12px;
+    -ms-transform: translateY(-21px);
+    -webkit-transform: translateY(-21px);
+    transform: translateY(-21px);
+}
+
+.floating-btn {
+    background: #b517e8;
+    width: 100%;
+    height: 40px;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 1em;
+    border: none;
+    margin-top: 26px;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.3) inset;
+    cursor: pointer;
+}
+
+.floating-btn:hover {
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.3) inset, 0 3px 6px rgba(0, 0, 0, 0.16), 0 5px 11px rgba(0, 0, 0, 0.23);
+}
+
+.floating-btn:hover .icon-arrow {
+    -ms-transform: rotate(45deg) scale(1.2);
+    -webkit-transform: rotate(45deg) scale(1.2);
+    transform: rotate(45deg) scale(1.2);
+}
+
+.floating-btn:focus,
+.floating-btn:active {
+    outline: none;
+}
+
+
+/*register*/
+.btn-verify,.delay{
+    position: absolute;
+    right: 0;
+    top: 4px;
+    cursor: pointer;
+    width: 110px;
+    padding: 4px 3px;
+    text-align: center;
+    z-index: 10;
+}
+.btn-verify {
+    background-color: #b517e8;
+    color: white;
+    border: 2px solid #b517e8;
+}
+.delay{
+    background-color: #6e4d79;
+    color: rgb(218, 211, 211);
+    border: 2px solid #6e4d79;
+    cursor: default;
+}

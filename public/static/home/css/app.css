@@ -1,0 +1,228 @@
+body{
+    font-size: 0.9em;
+}
+.page{
+    max-width: 600px;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    font-family: 新宋体;
+    border: 1px solid #eeeded;
+    background-color: #ffffff;
+}
+.weui-toast{
+    font-size: 13px;
+}
+a{
+    color: white;
+}
+.app-fs-10{
+    font-size: 10px;
+}
+.app-fs-13{
+    font-size: 13px;
+}
+.app-fs-16{
+    font-size: 16px;
+}
+.app-fs-19{
+    font-size: 19px;
+}
+.app-fs-21{
+    font-size: 21px;
+}
+.app-fs-24{
+    font-size: 24px;
+}
+.app-fs-27{
+    font-size: 27px;
+}
+.app-dp_no{
+    display: none !important;
+}
+.app-dp_b{
+    display: block;
+}
+li{
+    list-style-type: none;
+    margin: auto;
+}
+
+.weui-tabbar__item{
+    color: #919191;
+}
+
+.app-grids .weui-grid:active{
+    background-color: #532e63;
+}
+.weui-grids:before{
+    border-top: 1px solid #532e63;
+}
+.weui-grid{
+    padding: 10px;
+}
+.weui-bar__item_on{
+    color: #9521d0;
+}
+.weui-header{
+    background-color: #9521d0;
+    padding: 0;
+}
+.app-cells{
+    padding: 0 16px;
+}
+
+/* 首页 */
+.index-header{
+    margin: 20px auto;
+    display: flex;
+    text-align: center;
+}
+.index-header_list{
+    flex: 1;
+}
+.index-header_list i{
+    border: 1px solid #9521d0;
+    padding: 6px;
+    border-radius: 100%;
+    color: #9521d0;
+    font-size: 30px;
+}
+.index-header_list p{
+    color: #000000;
+}
+.index-miner_tittle{
+    background-color: #e4e1e1;
+    font-size: 16px;
+    padding: 3px;
+    text-align: center;
+}
+.index-miner_list{
+    padding: 16px 0;
+}
+.index-miner_desc{
+    font-size: 13px;
+    color: rgb(156, 154, 154);
+}
+.weui-media-box__bd{
+    position: relative;
+}
+.index-miner_buy{
+    position: absolute;
+    right: 16px;
+    bottom: 20px;
+    background-color: blueviolet;
+    color: white;
+    padding: 5px 16px;
+    border: 1px solid blueviolet;
+    border-radius: 5px;
+}
+.weui-media-box_appmsg .index-miner_img{
+    width: 80px;
+    height: 100px;
+    text-align: end;
+}
+
+/* 我的矿机 */
+.myminer-tittle{
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid #d7d2da;
+}
+.myminer-running,.myminer-finished{
+    flex: 1;
+    padding: 10px;
+    cursor: pointer;
+    color: rgba(17, 16, 16, 0.726);
+}
+.myminer-select{
+    color: rgb(224, 13, 13);
+    border-bottom: 1px solid #da0f2a;
+}
+.app-submit{
+    background-color: #9521d0;
+    width: 100%;
+}
+
+/* 交易中心 */
+.trade-tittle{
+    display: flex;
+    text-align: center;
+}
+.trade-tittle_buy,.trade-tittle_un,.trade-tittle_record{
+    flex: 1;
+    font-size: 16px;
+    color: #9c9898;
+    padding: 8px;
+}
+.trade-select{
+    color: #ff0000;
+    border-bottom: 1px solid #ff0000;
+}
+.trade-bs{
+    text-align: center;
+}
+.trade-bs div{
+    flex: 1;
+}
+.trade-buy,.trade-sales{
+    width: 100px;
+    display: inline-block;
+}
+.trade-buy{
+    background-color: #9521d0;
+}
+.trade-sales{
+    background-color: #ff0000;
+}
+.weui-cell p{
+    padding: 2px 0;
+}
+.weui-uploader__files{
+    position: absolute;
+}
+.weui-uploader__file,.weui-uploader__input-box{
+    width: 220px;
+    height: 240px;
+}
+
+/* 会员中心 */
+.member-header{
+    background-color: #9521d0;
+    color: white;
+    margin: 0;
+    padding: 16px 0 70px 0;
+}
+.member-header_logout{
+    color: #ff0000;
+    border: 1px solid #ff0000;
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 5px;
+}
+.member-container{
+    margin: -50px 26px 0;
+    text-align: center;
+    z-index: 20;
+}
+.member-container .weui-grids span,.member-container .weui-grids i{
+    color: #47ef7b;
+}
+.member-container_assets{
+    border-radius: 6px;
+    background-color: #8f11c5;
+    margin-bottom: 6px;
+    box-shadow: 0px 5px 10px #631086;
+}
+.member-container_list{
+    border-radius: 6px;
+    background-color: #631086;
+    margin-bottom: 6px;
+    box-shadow: 0px 5px 10px #631086;
+}
+.member-container_list i{
+    font-size: 20px;
+}
