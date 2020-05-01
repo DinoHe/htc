@@ -1,8 +1,8 @@
 @extends('layout.master')
 @section('tittle')
-    交易中心
+    @yield('trade-tittle')
 @endsection
-@section('css')@yield('css') @endsection
+@section('css')@yield('trade-css') @endsection
 
 @section('header')
     @component('layout.header')@endcomponent

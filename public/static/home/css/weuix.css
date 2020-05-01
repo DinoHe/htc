@@ -1042,8 +1042,11 @@ label > * {
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
     visibility: hidden;
-    margin: 0;
     top: 45%;
+    left: 50%;
+    right: auto;
+    width: 240px;
+    height: 160px;
     z-index: 2000;
 }
 .weui-dialog .weui-dialog__btn.default,

@@ -12,7 +12,8 @@
             <div class="weui-cell__bd weui-cell_primary">
                 <p class="app-fs-19">{{Auth::user()['phone']}}</p>
                 <p class="app-fs-10">认证状态：已认证</p>
-                <p class="app-fs-10">会员等级：普通会员</p>
+                <p class="app-fs-10">会员等级：一级会员</p>
+                <p class="app-fs-10">信用分：100</p>
                 <p class="app-fs-10">团队人数：0</p>
                 <p class="app-fs-10">我的矿机：50</p>
             </div>
@@ -27,12 +28,12 @@
                 <p class="app-fs-13">余额</p>
             </div>
             <div class="weui-grid">
-                <span>100</span>
-                <p class="app-fs-13">矿机钱包</p>
+                <span>0</span>
+                <p class="app-fs-13">冻结</p>
             </div>
             <div class="weui-grid">
                 <span>0</span>
-                <p class="app-fs-13">冻结资产</p>
+                <p class="app-fs-13">累积购买</p>
             </div>
         </div>
         <div class="weui-grids app-grids app-fs-16 member-container_list">
@@ -60,7 +61,7 @@
                 <i class="iconfont icon-fenxianglianjie"></i>
                 <p class="">推广链接</p>
             </a>
-            <a href="#" class="weui-grid">
+            <a href="{{url('home/notice')}}" class="weui-grid">
                 <i class="iconfont icon-gonggao"></i>
                 <p class="">系统公告</p>
             </a>

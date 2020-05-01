@@ -4,9 +4,10 @@
 namespace App\Http\Controllers\home;
 
 
+use App\Http\Controllers\Base;
 use Illuminate\Support\Facades\Auth;
 
-class Member
+class Member extends Base
 {
     public function member()
     {
@@ -20,8 +21,18 @@ class Member
 
     public function link()
     {
+        return view('home.member.invite_link');
+    }
+
+    public function qrcode()
+    {
         $user = Auth::user();
-        $url = url('/').'/home/register?id='.$user->phone;
-        return view('home.member.invite_link')->with('link', $url);
+        $url = url('/').'/home/register?invite='.$user->phone;
+        $this->getQRcode($url);
+    }
+
+    public function notice()
+    {
+        return view('home.member.notice');
     }
 }

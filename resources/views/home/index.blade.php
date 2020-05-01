@@ -24,15 +24,15 @@
     </div>
 
     <div class="index-header">
-        <a href="#" class="index-header_list">
+        <a href="javascript:qiandao();" class="index-header_list">
             <i class="iconfont icon-qiandao1"></i>
             <p class="app-fs-16">签到</p>
         </a>
-        <a href="#" class="index-header_list">
+        <a href="{{url('home/link')}}" class="index-header_list">
             <i class="iconfont icon-ico app-fs-27"></i>
             <p class="app-fs-16">邀请</p>
         </a>
-        <a href="#" class="index-header_list">
+        <a href="{{url('home/notice')}}" class="index-header_list">
             <i class="iconfont icon-gonggao app-fs-27"></i>
             <p class="app-fs-16">公告</p>
         </a>
@@ -122,6 +122,25 @@
 
 @section('js')
     <script src="{{asset('static/home/js/slider.js')}}"></script>
-
+    <script>
+        function qiandao() {
+            $.ajax({
+                method: 'get',
+                url: '{{url("home/qiandao")}}',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.status == 0){
+                        $.alert(data.message);
+                    }else{
+                        $.alert('签到失败，请稍后再试');
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
 @endsection
 

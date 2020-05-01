@@ -1,5 +1,5 @@
 @extends('home.trade.trade')
-
+@section('trade-tittle')交易中心 @endsection
 @section('trade-container')
 
     <div class="app-cells">

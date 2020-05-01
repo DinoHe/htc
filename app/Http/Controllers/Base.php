@@ -14,6 +14,11 @@ class Base
         $this->request = $request;
     }
 
+    public function getQRcode($url)
+    {
+        \QRcode::png($url,false,QR_ECLEVEL_L,5,1);
+    }
+
     /**
      * 发送短信验证码
      * @param $phone

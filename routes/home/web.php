@@ -11,9 +11,12 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function (){
 
 Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],function (){
     Route::get('index','Index@index');
+    Route::get('qiandao','Index@qiandao');
     Route::get('member','Member@member');
     Route::any('reset','ResetPassword@resetPassword');
     Route::get('link','Member@link');
+    Route::get('qrcode','Member@qrcode');
+    Route::get('notice','Member@notice');
     Route::get('running','MyMiner@running');
     Route::get('finished','MyMiner@finished');
     Route::get('buy','Trade@buy');

@@ -8,7 +8,7 @@
     <meta name="csrf_token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('static/home/css/weui.min.css')}}">
     <link rel="stylesheet" href="{{asset('static/home/css/weuix.css')}}">
-    <link rel="stylesheet" href="{{asset('static/ext/font/iconfont.css')}}">
+    <link rel="stylesheet" href="{{asset('ext/font/iconfont.css')}}">
     <link rel="stylesheet" href="{{asset('static/home/css/app.css')}}">
     @yield('css')
 

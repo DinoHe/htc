@@ -577,7 +577,6 @@
         }).join("");
 
         var tpl = '<div class="weui-dialog">' +
-            '<div class="weui-dialog__hd"><strong class="weui-dialog__title">' + params.title + '</strong></div>' +
             ( params.text ? '<div class="weui-dialog__bd">'+params.text+'</div>' : '')+
             '<div class="weui-dialog__ft">' + buttonsHtml + '</div>' +
             '</div>';
@@ -600,10 +599,10 @@
     };
 
     $.openModal = function(tpl, onOpen) {
-        var mask = $("<div class='weui-mask'></div>").appendTo(document.body);
+        var mask = $("<div class='weui-mask'></div>").appendTo('.page__bd');
         mask.show();
 
-        var dialog = $(tpl).appendTo(document.body);
+        var dialog = $(tpl).appendTo('.page__bd');
 
         if (onOpen) {
             dialog.transitionEnd(function () {
@@ -628,25 +627,19 @@
         });
     };
 
-    $.alert = function(text, title, onOK) {
+    $.alert = function(text, onOK) {
         var config;
         if (typeof text === 'object') {
             config = text;
         } else {
-            if (typeof title === 'function') {
-                onOK = arguments[1];
-                title = undefined;
-            }
 
             config = {
                 text: text,
-                title: title,
                 onOK: onOK
             }
         }
         return $.modal({
             text: config.text,
-            title: config.title,
             buttons: [{
                 text: defaults.buttonOK,
                 className: "primary",
