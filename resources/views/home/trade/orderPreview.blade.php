@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('tittle')订单详情 @endsection
-
+@section('header')@component('layout.header')@endcomponent @endsection
 @section('container')
 
     <div class="app-cells">
@@ -42,7 +42,6 @@
                         <div class="weui-uploader">
                             <div class="weui-uploader__bd">
                                 <ul class="weui-uploader__files" id="uploaderFiles">
-{{--                                    <li class="weui-uploader__file" style="background-image: url({{asset('storage/upload/payImg/6ewuw4kr75hJ5xgIBAGNqWlb82HT5oRmO5cVoHsN.jpeg')}})"></li>--}}
                                 </ul>
                                 <div class="weui-uploader__input-box">
                                     <input id="uploaderInput" class="weui-uploader__input" name="pay_img" accept="image/*" type="file">
@@ -61,7 +60,6 @@
 @section('js')
     <script>
         $(function () {
-            hideTabbar();
             showHeaderBack();
         });
         $('form').submit(function () {

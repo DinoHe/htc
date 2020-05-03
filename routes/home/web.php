@@ -17,6 +17,9 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('link','Member@link');
     Route::get('qrcode','Member@qrcode');
     Route::get('notice','Member@notice');
+    Route::get('noticePreview/{id}','Member@noticePreview');
+    Route::get('memberService','Member@memberService');
+    Route::any('identifyAuth','Member@identifyAuth');
     Route::get('running','MyMiner@running');
     Route::get('finished','MyMiner@finished');
     Route::get('buy','Trade@buy');

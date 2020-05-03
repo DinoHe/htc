@@ -252,4 +252,11 @@ li{
     width: 100%;
     text-align: center;
 }
+.app-id_input,.app-id_file li,.shili{
+    width: 320px;
+    height: 160px;
+}
+.app-id_file li{
+    background-size: 100% 100%;
+}
 

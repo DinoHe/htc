@@ -4,12 +4,14 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Miners;
 
 class Index extends Base
 {
     public function index()
     {
-        return view('home.index');
+        $miners = Miners::all();
+        return view('home.index')->with('miners',$miners);
     }
 
     public function qiandao()

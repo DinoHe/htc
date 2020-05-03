@@ -36,7 +36,7 @@
             <i class="iconfont icon-gonggao app-fs-27"></i>
             <p class="app-fs-16">公告</p>
         </a>
-        <a href="#" class="index-header_list">
+        <a href="{{url('home/memberService')}}" class="index-header_list">
             <i class="iconfont icon-kefu app-fs-27"></i>
             <p class="app-fs-16">联系客服</p>
         </a>
@@ -46,71 +46,22 @@
         <div class="weui-panel weui-panel_access">
             <div class="index-miner_tittle">——矿机列表——</div>
             <div class="weui-panel__bd">
+                @foreach($miners as $miner)
                 <div class="weui-media-box weui-media-box_appmsg index-miner_list">
                     <div class="weui-media-box__hd index-miner_img">
-                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/微型.gif')}}">
+                        <img class="weui-media-box__thumb" src="{{asset('static/home/'.$miner->miner_img)}}">
                     </div>
                     <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">微型矿机</h4>
-                        <p class="index-miner_desc">价格：5 HTC</p>
-                        <p class="index-miner_desc">总产量：7 HTC</p>
-                        <p class="index-miner_desc">每小时产量：0.0001 HTC/小时</p>
-                        <p class="index-miner_desc">运行周期：30 天</p>
-                        <button class="index-miner_buy">购买</button>
+                        <h4 class="weui-media-box__title">{{$miner->tittle}}</h4>
+                        <p class="index-miner_desc">算力：{{$miner->hashrate}} G</p>
+                        <p class="index-miner_desc">价格：{{$miner->coin_number}} HTC</p>
+                        <p class="index-miner_desc">挖币总量：{{$miner->total_dig}} HTC</p>
+                        <p class="index-miner_desc">每小时挖币量：{{$miner->nph}} HTC/小时</p>
+                        <p class="index-miner_desc">运行周期：{{$miner->runtime}} 小时</p>
+                        <button class="index-miner_buy">租用</button>
                     </div>
                 </div>
-                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg index-miner_list">
-                    <div class="weui-media-box__hd index-miner_img">
-                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/小型.gif')}}">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">小型矿机</h4>
-                        <p class="index-miner_desc">价格：5 HTC</p>
-                        <p class="index-miner_desc">总产量：7 HTC</p>
-                        <p class="index-miner_desc">每小时产量：0.0001 HTC/小时</p>
-                        <p class="index-miner_desc">运行周期：30 天</p>
-                        <button class="index-miner_buy">购买</button>
-                    </div>
-                </a>
-                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg index-miner_list">
-                    <div class="weui-media-box__hd index-miner_img">
-                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/中型.gif')}}">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">中型矿机</h4>
-                        <p class="index-miner_desc">价格：5 HTC</p>
-                        <p class="index-miner_desc">总产量：7 HTC</p>
-                        <p class="index-miner_desc">每小时产量：0.0001 HTC/小时</p>
-                        <p class="index-miner_desc">运行周期：30 天</p>
-                        <button class="index-miner_buy">购买</button>
-                    </div>
-                </a>
-                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg index-miner_list">
-                    <div class="weui-media-box__hd index-miner_img">
-                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/大型.gif')}}">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">大型矿机</h4>
-                        <p class="index-miner_desc">价格：5 HTC</p>
-                        <p class="index-miner_desc">总产量：7 HTC</p>
-                        <p class="index-miner_desc">每小时产量：0.0001 HTC/小时</p>
-                        <p class="index-miner_desc">运行周期：30 天</p>
-                        <button class="index-miner_buy">购买</button>
-                    </div>
-                </a>
-                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg index-miner_list">
-                    <div class="weui-media-box__hd index-miner_img">
-                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/超级.gif')}}">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">超级矿机</h4>
-                        <p class="index-miner_desc">价格：5 HTC</p>
-                        <p class="index-miner_desc">总产量：7 HTC</p>
-                        <p class="index-miner_desc">每小时产量：0.0001 HTC/小时</p>
-                        <p class="index-miner_desc">运行周期：30 天</p>
-                        <button class="index-miner_buy">购买</button>
-                    </div>
-                </a>
+                @endforeach
             </div>
         </div>
     </div>

@@ -1,0 +1,155 @@
+@extends('layout.master')
+@section('tittle')身份认证 @endsection
+@section('header')@component('layout.header')@endcomponent @endsection
+@section('container')
+
+    <div class="app-cells">
+        <form action="{{url('home/identifyAuth')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label"><i class="color-warning">*</i>真实姓名</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" class="weui-input" name="name" placeholder="必填" required>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label"><i class="color-warning">*</i>身份证号</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="number" class="weui-input" name="idcard" placeholder="必填" required>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">支付宝</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" class="weui-input" name="alipay" value="{{auth()->user()->phone}}" disabled>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label"><i class="color-warning">*</i>微信</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" class="weui-input" name="weixin" placeholder="必填" required>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">开户银行</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" class="weui-input" name="bank_name" placeholder="可选">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">银行卡号</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="number" class="weui-input" name="credit" placeholder="可选">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label" style="width: 100%"><i class="color-warning">*</i>上传身份证正面</div>
+                    </div>
+                </div>
+                <div class="weui-cell" style="flex-direction: column">
+                    <p class="app-fs-10 color-warning">需要贴上HTC认证专用纸条,否则不予通过</p>
+                    <div class="weui-uploader">
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files app-id_file" id="uploaderFiles1">
+                            </ul>
+                            <div class="weui-uploader__input-box app-id_input">
+                                <input id="uploaderInput1" class="weui-uploader__input" name="id_front" accept="image/*" type="file">
+                            </div>
+                        </div>
+                    </div>
+                    <p>示例：</p>
+                    <img src="{{asset('static/home/img/示例1.gif')}}" class="shili">
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label" style="width: 100%"><i class="color-warning">*</i>上传身份证背面</div>
+                    </div>
+                </div>
+                <div class="weui-cell" style="flex-direction: column">
+                    <p class="app-fs-10 color-warning">需要贴上HTC认证专用纸条,否则不予通过</p>
+                    <div class="weui-uploader">
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files app-id_file" id="uploaderFiles2">
+                            </ul>
+                            <div class="weui-uploader__input-box app-id_input">
+                                <input id="uploaderInput2" class="weui-uploader__input" name="id_back" accept="image/*" type="file">
+                            </div>
+                        </div>
+                    </div>
+                    <p>示例：</p>
+                    <img src="{{asset('static/home/img/示例2.gif')}}" class="shili">
+                </div>
+            </div>
+            <input type="submit" class="weui-btn app-submit" value="提交">
+        </form>
+    </div>
+@endsection
+
+@section('js')
+    <script>
+        $(function () {
+            showHeaderBack();
+        });
+        $('form').submit(function () {
+            $.loading('上传中');
+        });
+        $(function(){
+
+            var tmpl1 = '<li class="weui-uploader__file1" style="background-image:url(#url1#)"></li>',
+                tmpl2 = '<li class="weui-uploader__file2" style="background-image:url(#url2#)"></li>';
+            var $uploaderInput1 = $("#uploaderInput1"), //上传按钮+
+                $uploaderFiles1 = $("#uploaderFiles1"),
+                $uploaderInput2 = $("#uploaderInput2"), //上传按钮+
+                $uploaderFiles2 = $("#uploaderFiles2");    //图片列表
+            $uploaderInput1.on("change", function(e){
+                var src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+                for (var i = 0, len = files.length; i < len; ++i) {
+                    var file = files[i];
+                    if (url) {
+                        src = url.createObjectURL(file);
+                    } else {
+                        src = e.target.result;
+                    }
+                    $uploaderFiles1.empty();
+                    $uploaderFiles1.append($(tmpl1.replace('#url1#', src)));
+                }
+
+                if ($('.weui-uploader__file')){
+                    $(this).parent().css('opacity',0);
+                }
+            });
+            $uploaderInput2.on("change", function(e){
+                var src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+                for (var i = 0, len = files.length; i < len; ++i) {
+                    var file = files[i];
+                    if (url) {
+                        src = url.createObjectURL(file);
+                    } else {
+                        src = e.target.result;
+                    }
+                    $uploaderFiles2.empty();
+                    $uploaderFiles2.append($(tmpl2.replace('#url2#', src)));
+                }
+
+                if ($('.weui-uploader__file')){
+                    $(this).parent().css('opacity',0);
+                }
+            });
+
+        });
+    </script>
+@endsection

@@ -18,7 +18,7 @@
             <div class="weui-panel__bd">
                 <div class="weui-media-box weui-media-box_appmsg index-miner_list">
                     <div class="weui-media-box__hd index-miner_img">
-                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/微型.gif')}}">
+                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/微型云矿机.jpg')}}">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="weui-media-box__title">微型矿机 <i class="iconfont icon-dian1 color-success app-fs-10"> 运行中...</i></h4>
@@ -30,7 +30,7 @@
                 </div>
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg index-miner_list">
                     <div class="weui-media-box__hd index-miner_img">
-                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/小型.gif')}}">
+                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/小型云矿机.jpg')}}">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="weui-media-box__title">小型矿机</h4>
@@ -42,7 +42,7 @@
                 </a>
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg index-miner_list">
                     <div class="weui-media-box__hd index-miner_img">
-                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/中型.gif')}}">
+                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/中型云矿机.jpg')}}">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="weui-media-box__title">中型矿机</h4>
@@ -54,7 +54,7 @@
                 </a>
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg index-miner_list">
                     <div class="weui-media-box__hd index-miner_img">
-                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/大型.gif')}}">
+                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/大型云矿机.jpg')}}">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="weui-media-box__title">大型矿机</h4>
@@ -66,7 +66,7 @@
                 </a>
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg index-miner_list">
                     <div class="weui-media-box__hd index-miner_img">
-                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/超级.gif')}}">
+                        <img class="weui-media-box__thumb" src="{{asset('static/home/img/超级云矿机.jpg')}}">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="weui-media-box__title">超级矿机</h4>

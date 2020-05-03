@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="weui-grids app-grids app-fs-16 member-container_list">
-            <a href="#" class="weui-grid">
+            <a href="{{url('home/identifyAuth')}}" class="weui-grid">
                 <i class="iconfont icon-shimingrenzheng"></i>
                 <p class="">实名认证</p>
             </a>
@@ -93,7 +93,7 @@
                 <i class="iconfont icon-jianyi"></i>
                 <p class="">建议</p>
             </a>
-            <a href="#" class="weui-grid">
+            <a href="{{url('home/memberService')}}" class="weui-grid">
                 <i class="iconfont icon-kefu"></i>
                 <p class="">客服</p>
             </a>
