@@ -20,7 +20,7 @@
             <div class="login-group">
                 <input type="text" required="required" class="login-control" name="captcha"/>
                 <label class="login-label">验证码</label>
-                <button class="btn-verify" id="verify" onclick="smsVerify('{{url("home/forgetVerify")}}');return false;">获取验证码</button>
+                <button type="button" class="btn-verify" id="verify" onclick="smsVerify('{{url("home/forgetVerify")}}');">获取验证码</button>
                 @if($errors->has('captcha'))
                     <i class="app-font_mini">{{$errors->first('captcha')}}</i>
                 @endif

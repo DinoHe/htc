@@ -1,10 +1,6 @@
 @extends('home.myminer.myminer')
 
 @section('myminer-container')
-    <div class="myminer-tittle">
-        <a class="myminer-running myminer-select">运行中的矿机</a>
-        <a href="{{url('home/finished')}}" class="myminer-finished">已结束的矿机</a>
-    </div>
 
     <div class="app-cells">
         <div class="weui-panel weui-panel_access">
@@ -22,6 +18,7 @@
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="weui-media-box__title">微型矿机 <i class="iconfont icon-dian1 color-success app-fs-10"> 运行中...</i></h4>
+                        <p class="index-miner_desc">算力：0.01 G</p>
                         <p class="index-miner_desc">价格：5 HTC</p>
                         <p class="index-miner_desc">总产量：7 HTC</p>
                         <p class="index-miner_desc">每小时产量：0.0001 HTC/小时</p>

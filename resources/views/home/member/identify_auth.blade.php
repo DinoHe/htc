@@ -1,10 +1,10 @@
 @extends('layout.master')
-@section('tittle')身份认证 @endsection
+@section('tittle')实名认证 @endsection
 @section('header')@component('layout.header')@endcomponent @endsection
 @section('container')
 
     <div class="app-cells">
-        <form action="{{url('home/identifyAuth')}}" method="post" enctype="multipart/form-data">
+        <form action="{{url('home/identityAuth')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="weui-cells weui-cells_form">
                 <div class="weui-cell">
@@ -20,7 +20,12 @@
                         <div class="weui-label"><i class="color-warning">*</i>身份证号</div>
                     </div>
                     <div class="weui-cell__bd">
-                        <input type="number" class="weui-input" name="idcard" placeholder="必填" required>
+                        <input type="number" class="weui-input" name="idcard" id="idcard" placeholder="必填" required>
+                        <span class="color-error app-fs-13" style="position: absolute;right: 0">
+                            @if($errors->has('idcard'))
+                                {{$errors->first('idcard')}}
+                            @endif
+                        </span>
                     </div>
                 </div>
                 <div class="weui-cell">
@@ -61,16 +66,24 @@
                     </div>
                 </div>
                 <div class="weui-cell" style="flex-direction: column">
-                    <p class="app-fs-10 color-warning">需要贴上HTC认证专用纸条,否则不予通过</p>
+                    <p class="app-fs-10 color-main">
+                        <span>需要贴上HTC认证专用纸条,否则不予通过;</span>
+                        <span>上传的图片大小不能超过1M</span>
+                    </p>
                     <div class="weui-uploader">
                         <div class="weui-uploader__bd">
                             <ul class="weui-uploader__files app-id_file" id="uploaderFiles1">
                             </ul>
                             <div class="weui-uploader__input-box app-id_input">
-                                <input id="uploaderInput1" class="weui-uploader__input" name="id_front" accept="image/*" type="file">
+                                <input id="uploaderInput1" class="weui-uploader__input" name="id_front" accept="image/*" type="file" required>
                             </div>
                         </div>
                     </div>
+                    <span class="color-error app-fs-13" style="position: absolute;right: 0">
+                        @if($errors->has('front'))
+                            {{$errors->first('front')}}
+                        @endif
+                    </span>
                     <p>示例：</p>
                     <img src="{{asset('static/home/img/示例1.gif')}}" class="shili">
                 </div>
@@ -80,21 +93,31 @@
                     </div>
                 </div>
                 <div class="weui-cell" style="flex-direction: column">
-                    <p class="app-fs-10 color-warning">需要贴上HTC认证专用纸条,否则不予通过</p>
+                    <p class="app-fs-10 color-main">
+                        <span>需要贴上HTC认证专用纸条,否则不予通过;</span>
+                        <span>上传的图片大小不能超过1M</span>
+                    </p>
                     <div class="weui-uploader">
                         <div class="weui-uploader__bd">
                             <ul class="weui-uploader__files app-id_file" id="uploaderFiles2">
                             </ul>
                             <div class="weui-uploader__input-box app-id_input">
-                                <input id="uploaderInput2" class="weui-uploader__input" name="id_back" accept="image/*" type="file">
+                                <input id="uploaderInput2" class="weui-uploader__input" name="id_back" accept="image/*" type="file" required>
                             </div>
                         </div>
                     </div>
+                    <span class="color-error app-fs-13" style="position: absolute;right: 0">
+                        @if($errors->has('back'))
+                            {{$errors->first('back')}}
+                        @endif
+                    </span>
                     <p>示例：</p>
                     <img src="{{asset('static/home/img/示例2.gif')}}" class="shili">
                 </div>
             </div>
-            <input type="submit" class="weui-btn app-submit" value="提交">
+            <div class="weui-cell">
+                <input type="submit" class="weui-btn app-submit" value="提交">
+            </div>
         </form>
     </div>
 @endsection
@@ -104,11 +127,40 @@
         $(function () {
             showHeaderBack();
         });
+        var $idCard = $('#idcard');
         $('form').submit(function () {
-            $.loading('上传中');
+            var error = $idCard.siblings().text();
+            if (error != ''){
+                $.alert(error);
+                return false;
+            }
+            $.loading('正在提交');
         });
-        $(function(){
 
+        $idCard.blur(function () {
+            var idCard = $(this).val(),
+                er = $(this).siblings();
+            er.empty();
+            if (idCard.length != 18){
+                er.text('身份证号码不合法');
+                return false;
+            }
+            $.ajax({
+                method: 'get',
+                url: '{{url("home/idCardCheck")}}/'+idCard,
+                dataType: 'json',
+                success: function (data) {
+                    if (data == 0){
+                        er.text('身份证号码不合法');
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $(function(){
             var tmpl1 = '<li class="weui-uploader__file1" style="background-image:url(#url1#)"></li>',
                 tmpl2 = '<li class="weui-uploader__file2" style="background-image:url(#url2#)"></li>';
             var $uploaderInput1 = $("#uploaderInput1"), //上传按钮+

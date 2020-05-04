@@ -11,7 +11,9 @@
         <div class="tittle">火特币</div>
         <form action="{{url('home/login')}}" method="post">
             @csrf
-            <strong class="app-font_mini" style="color: red">{{ session('error') }}</strong>
+            <div class="login-group">
+                <strong class="app-font_mini color-error">{{ session('error') }}</strong>
+            </div>
             <div class="login-group">
                 <input type="text" required="required" class="login-control" name="phone" value="{{old('phone')}}"/>
                 <label class="login-label">用户名</label>
@@ -45,7 +47,7 @@
     <script>
         $(function () {
             $('form').submit(function () {
-                $.showLoading('登录中');
+                $.loading('登录中');
             });
         });
     </script>

@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('tittle')</title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
     <meta name="csrf_token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('static/home/css/weui.min.css')}}">
-    <link rel="stylesheet" href="{{asset('static/home/css/weuix.css')}}">
     <link rel="stylesheet" href="{{asset('ext/font/iconfont.css')}}">
     <link rel="stylesheet" href="{{asset('static/home/css/app.css')}}">
     @yield('css')
@@ -28,13 +26,52 @@
                 <!-- {{--  footer--}} -->
                 @yield('footer')
             </div>
+{{--alert--}}
+            <div id="alert" style="display: none;">
+                <div class="weui-mask"></div>
+                <div class="weui-dialog">
+                    <div class="weui-dialog__bd" id="alert_content">内容</div>
+                    <div class="weui-dialog__ft">
+                        <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary" id="alert_c">知道了</a>
+                    </div>
+                </div>
+            </div>
+{{--confirm--}}
+            <div id="confirm" style="display: none;">
+                <div class="weui-mask"></div>
+                <div class="weui-dialog">
+                    <div class="weui-dialog__hd"><strong class="weui-dialog__title" id="confirm_tittle">提示</strong></div>
+                    <div class="weui-dialog__bd" id="confirm_content">内容</div>
+                    <div class="weui-dialog__ft">
+                        <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_default" id="confirm_c">取消</a>
+                        <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary" id="confirm_y">确认</a>
+                    </div>
+                </div>
+            </div>
+{{--toast提示--}}
+            <div id="toast" style="display: none;">
+                <div class="weui-mask_transparent"></div>
+                <div class="weui-toast">
+                    <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+                    <p class="weui-toast__content" id="toast_content">已完成</p>
+                </div>
+            </div>
+{{--loading--}}
+            <div id="loading" style="display: none;">
+                <div class="weui-mask_transparent"></div>
+                <div class="weui-toast">
+                    <i class="weui-loading weui-icon_toast"></i>
+                    <p class="weui-toast__content" id="loading_content">数据加载中</p>
+                </div>
+            </div>
+
+            <div class="weui-toptips weui-toptips_warn" id="topTips" style="display: none;">错误提示</div>
+
         </div>
     </div>
 
     <script src="{{asset('js/jquery-3.1.1.min.js')}}"></script>
-    <script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
-    <script src="{{asset('static/home/js/zepto.min.js')}}"></script>
-    <script src="{{asset('static/home/js/zepto.weui.js')}}"></script>
+    <script src="https://res.wx.qq.com/open/libs/weuijs/1.2.1/weui.min.js"></script>
     <script>
 
         function showHeaderBack() {
@@ -44,6 +81,66 @@
         function showTabbarBgColor(obj) {
             $(obj).addClass('weui-bar__item_on').siblings().removeClass('weui-bar__item_on');
         }
+
+        var $alert = $('#alert'),
+            $alert_content = $('#alert_content'),
+            $alert_c = $('#alert_c'),
+            $confirm = $('#confirm'),
+            $confirm_tittle = $('#confirm_tittle'),
+            $confirm_content = $('#confirm_content'),
+            $confirm_c = $('#confirm_c'),
+            $confirm_y = $('#confirm_y'),
+            $toast = $('#toast'),
+            $toast_content = $('#toast_content'),
+            $loading = $('#loading'),
+            $loading_content = $('#loading_content'),
+            $topTips = $('#topTips');
+
+        $.alert = function (content='') {
+            $alert_content.text(content);
+            $alert.fadeIn(100);
+        }
+        $alert_c.on('click',function () {
+            $alert.fadeOut(100);
+        });
+        $.confirm = function (tittle='提示',content='',callback) {
+            $confirm_tittle.text(tittle);
+            $confirm_content.text(content);
+            $confirm.fadeIn(100);
+            $confirm_y.on('click',function () {
+                $confirm.fadeOut(100);
+                if (typeof callback == 'function'){
+                    callback();
+                    $confirm_y.off();
+                }
+            });
+        }
+        $confirm_c.on('click',function () {
+            $confirm.fadeOut(100);
+            $confirm_y.off();
+        });
+        $.toast = function (content='已完成') {
+            $toast_content.text(content);
+            $toast.fadeIn(100);
+            setTimeout(function () {
+                $toast.fadeOut(100);
+            },2000);
+        }
+        $.loading = function (content='加载中') {
+            $loading_content.text(content);
+            $loading.fadeIn(100);
+        }
+        $.hideLoading = function () {
+            $loading.fadeOut(100);
+        }
+        $.topTip = function (content='错误') {
+            $topTips.text(content);
+            $topTips.fadeIn(100);
+            setTimeout(function () {
+                $topTips.fadeOut(100);
+            },2000);
+        }
+
 
         // 限制发送短信验证码
         var time = 60; //短信发送间隔

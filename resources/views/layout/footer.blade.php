@@ -1,6 +1,6 @@
 <div class="weui-tabbar">
     <a href="{{url('home/index')}}" class="weui-tabbar__item weui-bar__item_on" id="shouye">
-        <i class="icon icon-index-0"></i>
+        <i class="iconfont icon-index-0"></i>
         <p class="weui-tabbar__label">首页</p>
     </a>
     <a href="{{url('home/running')}}" class="weui-tabbar__item" id="myminer">

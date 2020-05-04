@@ -82,7 +82,7 @@
                 success: function (data) {
                     console.log(data);
                     if (data.status == 0){
-                        $.alert(data.message);
+                        $.toast(data.message);
                     }else{
                         $.alert('签到失败，请稍后再试');
                     }

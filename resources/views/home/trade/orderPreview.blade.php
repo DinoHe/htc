@@ -33,7 +33,8 @@
                         <p>开户行：中国银行</p>
                         <p>银行卡号：1234567890123456</p>
                         <p>微信：12345678</p>
-                        <p>支付宝：123456789</p>
+                        <p>支付宝：<span id="alipay_copy">12345678</span>
+                            <button type="button" class="copy" data-clipboard-target="#alipay_copy">复制</button></p>
                     </div>
                 </div>
                 <div class="weui-cell border-radius bg-order">
@@ -58,15 +59,24 @@
 @endsection
 
 @section('js')
+    <script src="{{asset('ext/clipboard/clipboard.min.js')}}"></script>
     <script>
         $(function () {
             showHeaderBack();
         });
+
+        var clipboard = new ClipboardJS('.copy');
+        clipboard.on('success', function(e) {
+            $.toast('已复制');
+        });
+        clipboard.on('error', function(e) {
+            console.log(e);
+        });
+
         $('form').submit(function () {
             $.loading('上传中');
         });
         $(function(){
-
             var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>';
             var      $uploaderInput = $("#uploaderInput"); //上传按钮+
             var       $uploaderFiles = $("#uploaderFiles");    //图片列表

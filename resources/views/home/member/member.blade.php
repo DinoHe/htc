@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="weui-grids app-grids app-fs-16 member-container_list">
-            <a href="{{url('home/identifyAuth')}}" class="weui-grid">
+            <a href="{{url('home/identityAuth')}}" class="weui-grid">
                 <i class="iconfont icon-shimingrenzheng"></i>
                 <p class="">实名认证</p>
             </a>

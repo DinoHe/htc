@@ -9,6 +9,10 @@
 @endsection
 
 @section('container')
+    <div class="myminer-tittle">
+        <a href="{{url('home/running')}}" class="myminer-running myminer-select">运行中的矿机</a>
+        <a href="{{url('home/finished')}}" class="myminer-finished">已结束的矿机</a>
+    </div>
     @yield('myminer-container')
 @endsection
 

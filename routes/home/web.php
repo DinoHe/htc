@@ -19,7 +19,8 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('notice','Member@notice');
     Route::get('noticePreview/{id}','Member@noticePreview');
     Route::get('memberService','Member@memberService');
-    Route::any('identifyAuth','Member@identifyAuth');
+    Route::any('identityAuth','Member@identityAuth');
+    Route::get('idCardCheck/{idCard}','Member@idCardCheck');
     Route::get('running','MyMiner@running');
     Route::get('finished','MyMiner@finished');
     Route::get('buy','Trade@buy');

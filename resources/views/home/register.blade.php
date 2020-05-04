@@ -23,7 +23,7 @@
             <div class="login-group">
                 <input type="text" required="required" class="login-control" name="sms_verify" value="{{old('sms_verify')}}"/>
                 <label class="login-label">验证码</label>
-                <button class="btn-verify" id="verify" onclick="smsVerify('{{url("home/registerVerify")}}');return false;">获取验证码</button>
+                <button type="button" class="btn-verify" id="verify" onclick="smsVerify('{{url("home/registerVerify")}}');">获取验证码</button>
                 @if($errors->has('sms_verify'))
                     <span class="app-fs-10 color-error">{{$errors->first('sms_verify')}}</span>
                 @endif
