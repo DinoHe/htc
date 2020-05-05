@@ -20,38 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Models/IdentityAuths.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/ext/clipboard/clipboard.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Models/Assets.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Models/MyMiners.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/ext/font/iconfont.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/ext/font/iconfont.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/ext/font/iconfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/public/ext/font/iconfont.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/ext/font/iconfont.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/ext/font/iconfont.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/ext/font/iconfont.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/ext/font/iconfont.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/ext/font/iconfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/ext/font/iconfont.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/ext/font/iconfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/ext/font/iconfont.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/ext/font/iconfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/public/ext/font/iconfont.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/ext/font/iconfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/public/ext/font/iconfont.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/MyMiner.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/MyMiner.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/IdentityAuths.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/RealNameAuths.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Members.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Members.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/static/home/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/home/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/static/home/css/weui.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/home/css/weui.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/home/css/weuix.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/home/css/weuix.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/home/js/zepto.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/home/js/zepto.weui.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/forget.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/forget.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/member/identify_auth.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/member/identify_auth.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/member/identify_auth.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/member/real-name_auth.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home/member/member.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/member/member.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home/myminer/finished.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/myminer/finished.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/myminer/myminer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/myminer/myminer.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home/myminer/running.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/myminer/running.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/tradeCenter.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/tradeCenter.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/footer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/header.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layout/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/home/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/home/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/.gitignore" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,12 +162,15 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1bDp2TjFgXzDRcC3pC7dxfnFONn" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -190,15 +181,15 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\wamp\www\htc\public" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\wamp\www\htc\app\Http\Models" />
       <recent name="E:\wamp\www\htc\public\ext\clipboard" />
       <recent name="E:\wamp\www\htc\public\ext\font" />
       <recent name="E:\wamp\www\htc\public\static\home\css" />
       <recent name="E:\wamp\www\htc\public\static\home\img" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\wamp\www\htc\public" />
     </key>
   </component>
   <component name="RunManager">
@@ -220,7 +211,8 @@
       <workItem from="1588176312389" duration="1943000" />
       <workItem from="1588314202006" duration="16270000" />
       <workItem from="1588505965424" duration="13347000" />
-      <workItem from="1588574688103" duration="35928000" />
+      <workItem from="1588574688103" duration="36140000" />
+      <workItem from="1588669574791" duration="25207000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
@@ -229,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588527032646</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update">
+      <created>1588615750601</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1588615750601</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,27 +249,28 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="add" />
     <MESSAGE value="update" />
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="205" y="47" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588615414619">
+    <state x="205" y="47" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588690737225">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="205" y="47" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.834@0.0.1536.834" timestamp="1588615414619" />
-    <state x="367" y="0" key="CommitChangelistDialog2" timestamp="1588527027240">
+    <state x="205" y="47" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.834@0.0.1536.834" timestamp="1588690737225" />
+    <state x="367" y="0" key="CommitChangelistDialog2" timestamp="1588615745035">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="367" y="0" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1588527027240" />
+    <state x="367" y="0" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1588615745035" />
     <state x="270" y="62" key="SettingsEditor" timestamp="1588513747294">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="270" y="62" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1588513747294" />
-    <state x="361" y="150" key="Vcs.Push.Dialog.v2" timestamp="1588527084644">
+    <state x="361" y="150" key="Vcs.Push.Dialog.v2" timestamp="1588615764755">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="361" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1588527084644" />
+    <state x="361" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1588615764755" />
     <state x="563" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588527120942">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -283,5 +283,9 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="425" y="189" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1588326917659" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1588690758754">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1588690758754" />
   </component>
 </project>

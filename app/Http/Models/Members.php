@@ -17,11 +17,21 @@ class Members extends Authenticatable
 
     protected $fillable = [
         'phone', 'password', 'safe_password', 'level_id', 'parentid','activated','deleted',
-        'describes','invite_code'
+        'describes','credit'
     ];
 
     public function level()
     {
-        return $this->hasOne('App\Http\Models\MemberLevels','level_id');
+        return $this->belongsTo('App\Http\Models\MemberLevels','level_id');
+    }
+
+    public function assets()
+    {
+        return $this->hasOne('App\Http\Models\Assets','member_id');
+    }
+
+    public function realNameAuths()
+    {
+        return $this->hasOne('App\Http\Models\RealNameAuths','member_id');
     }
 }

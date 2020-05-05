@@ -5,22 +5,31 @@ namespace App\Http\Controllers\home;
 
 
 use App\Http\Controllers\Base;
-use App\Http\Models\IdentityAuths;
+use App\Http\Models\MyMiners;
+use App\Http\Models\RealNameAuths;
 use App\Http\Models\SystemNotices;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class Member extends Base
 {
     public function member()
     {
-        return view('home.member.member');
+        $member = Auth::user();
+        $auth = $member->realNameAuths;
+        $member->authStatus = $auth->getAuthStatusDesc($auth->auth_status);
+        $member->level = $member->level->level_name;
+        $assets = Cache::get('assets'.$member->id);
+        $myMiners = MyMiners::where('member_id',$member->id)->where('run_status',MyMiners::RUNNING)->count();
+        $member->miner_number = $myMiners;
+        return view('home.member.member',['member'=>$member,'assets'=>$assets]);
     }
 
-    public function identityAuth()
+    public function realNameAuth()
     {
         if ($this->request->isMethod('post')){
             $data = $this->request->input();
-            $hasIdcard = IdentityAuths::where('idcard',$data['idcard'])->first();
+            $hasIdcard = RealNameAuths::where('idcard',$data['idcard'])->first();
             if (!empty($hasIdcard)){
                 return back()->withErrors(['idcard'=>'身份证号码已经被认证过'])->withInput();
             }
@@ -33,9 +42,9 @@ class Member extends Base
                 return back()->withErrors(['back'=>'身份证背面照片大于1M'])->withInput();
             }
             $frontPath = $front->storeAs('public/idcardImg',$data['idcard'].'front.jpg');
-            $backPath = $front->storeAs('public/idcardImg',$data['idcard'].'back.jpg');
+            $backPath = $back->storeAs('public/idcardImg',$data['idcard'].'back.jpg');
 
-            IdentityAuths::updateOrCreate([
+            RealNameAuths::updateOrCreate([
                 'member_id'=>Auth::id()
             ],[
                 'name'=>$data['name'],
@@ -43,15 +52,18 @@ class Member extends Base
                 'alipay'=>$data['alipay'],
                 'weixin'=>$data['weixin'],
                 'bank_name'=>$data['bank_name']?:'',
-                'credit_card'=>$data['credit']?:'',
-                'idcard_front_img'=>$frontPath,
-                'idcard_back_img'=>$backPath,
-                'auth_status'=>IdentityAuths::AUTH_CHECKING
+                'bank_card'=>$data['bank_card']?:'',
+                'idcard_front_img'=>substr($frontPath,7),
+                'idcard_back_img'=>substr($backPath,7),
+                'auth_status'=>RealNameAuths::AUTH_CHECKING
             ]);
             return redirect('home/member');
-
         }
-        return view('home.member.identify_auth');
+        $auths = RealNameAuths::where('member_id',Auth::id())->first();
+        if (!empty($auths)){
+            $auths->auth_status_desc = $auths->getAuthStatusDesc($auths->auth_status);
+        }
+        return view('home.member.real-name_auth')->with('auths',$auths);
     }
 
     /**

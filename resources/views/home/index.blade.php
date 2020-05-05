@@ -52,13 +52,14 @@
                         <img class="weui-media-box__thumb" src="{{asset('static/home/'.$miner->miner_img)}}">
                     </div>
                     <div class="weui-media-box__bd">
+                        <input type="hidden" name="id" value="{{$miner->id}}">
                         <h4 class="weui-media-box__title">{{$miner->tittle}}</h4>
-                        <p class="index-miner_desc">算力：{{$miner->hashrate}} G</p>
-                        <p class="index-miner_desc">价格：{{$miner->coin_number}} HTC</p>
-                        <p class="index-miner_desc">挖币总量：{{$miner->total_dig}} HTC</p>
-                        <p class="index-miner_desc">每小时挖币量：{{$miner->nph}} HTC/小时</p>
-                        <p class="index-miner_desc">运行周期：{{$miner->runtime}} 小时</p>
-                        <button class="index-miner_buy">租用</button>
+                        <p class="index-miner_desc">算力：<span>{{$miner->hashrate}}</span> G</p>
+                        <p class="index-miner_desc">价格：<span>{{$miner->coin_number}}</span> HTC</p>
+                        <p class="index-miner_desc">挖币总量：<span>{{$miner->total_dig}}</span> HTC</p>
+                        <p class="index-miner_desc">每小时挖币量：<span>{{$miner->nph}}</span> HTC/小时</p>
+                        <p class="index-miner_desc">运行周期：<span>{{$miner->runtime}}</span> 小时</p>
+                        <button type="button" class="index-miner_buy">租用</button>
                     </div>
                 </div>
                 @endforeach
@@ -80,7 +81,7 @@
                 url: '{{url("home/qiandao")}}',
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data);
+                    // console.log(data);
                     if (data.status == 0){
                         $.toast(data.message);
                     }else{
@@ -88,10 +89,47 @@
                     }
                 },
                 error: function (error) {
-                    console.log(error);
+                    // console.log(error);
+                    $.topTip('系统错误');
                 }
             });
         }
+
+        // 租用矿机
+        $('.index-miner_buy').on('click',function () {
+            var id = $(this).siblings('input').val(),
+                tittle = $(this).siblings('h4').text(),
+                $data = $(this).siblings('p').children(),
+                hashrate = $data.eq(0).text(),
+                coin_number = $data.eq(1).text(),
+                total_dig = $data.eq(2).text(),
+                nph = $data.eq(3).text(),
+                runtime = $data.eq(4).text();
+            $.confirm('租用矿机','确定租用矿机吗？',function () {
+                $.loading();
+                $.ajax({
+                   method: 'post',
+                   url: '{{url("home/rent")}}',
+                   data: {'id':id,'hashrate':hashrate,'coin_number':coin_number,'total_dig':total_dig,'nph':nph,
+                       'runtime':runtime,'miner_tittle':tittle},
+                   dataType: 'json',
+                   success: function (data) {
+                       // console.log(data);
+                       $.hideLoading();
+                        if (data.status == 0){
+                            $.toast('租用矿机成功');
+                        }else{
+                            $.alert(data.message);
+                        }
+                   },
+                    error: function (error) {
+                        // console.log(error);
+                        $.hideLoading();
+                        $.topTip('系统错误');
+                    }
+                });
+            });
+        });
     </script>
 @endsection
 

@@ -12,6 +12,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function (){
 Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],function (){
     Route::get('index','Index@index');
     Route::get('qiandao','Index@qiandao');
+    Route::post('rent','Index@rent');
     Route::get('member','Member@member');
     Route::any('reset','ResetPassword@resetPassword');
     Route::get('link','Member@link');
@@ -19,10 +20,11 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('notice','Member@notice');
     Route::get('noticePreview/{id}','Member@noticePreview');
     Route::get('memberService','Member@memberService');
-    Route::any('identityAuth','Member@identityAuth');
+    Route::any('realNameAuth','Member@realNameAuth');
     Route::get('idCardCheck/{idCard}','Member@idCardCheck');
     Route::get('running','MyMiner@running');
     Route::get('finished','MyMiner@finished');
+    Route::get('getMoreMinerFinished/{offset}','MyMiner@getMoreMinerFinished');
     Route::get('buy','Trade@buy');
     Route::get('unprocessedOrder','Trade@unprocessedOrder');
     Route::get('record','Trade@record');

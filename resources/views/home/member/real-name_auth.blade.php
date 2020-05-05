@@ -4,15 +4,18 @@
 @section('container')
 
     <div class="app-cells">
-        <form action="{{url('home/identityAuth')}}" method="post" enctype="multipart/form-data">
+        <form action="{{url('home/realNameAuth')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="weui-cells weui-cells_form">
+                <div class="weui-cell color-warning" style="text-align: center">
+                    <div class="weui-cell__bd">{{$auths->auth_status_desc}}</div>
+                </div>
                 <div class="weui-cell">
                     <div class="weui-cell__hd">
                         <div class="weui-label"><i class="color-warning">*</i>真实姓名</div>
                     </div>
                     <div class="weui-cell__bd">
-                        <input type="text" class="weui-input" name="name" placeholder="必填" required>
+                        <input type="text" class="weui-input" name="name" value="{{old('name')?:$auths->name}}" placeholder="必填" required>
                     </div>
                 </div>
                 <div class="weui-cell">
@@ -20,8 +23,8 @@
                         <div class="weui-label"><i class="color-warning">*</i>身份证号</div>
                     </div>
                     <div class="weui-cell__bd">
-                        <input type="number" class="weui-input" name="idcard" id="idcard" placeholder="必填" required>
-                        <span class="color-error app-fs-13" style="position: absolute;right: 0">
+                        <input type="number" class="weui-input" name="idcard" id="idcard" value="{{old('idcard')?:$auths->idcard}}" placeholder="必填" required>
+                        <span class="color-error app-fs-13" style="position: absolute;left: 120px;bottom: 0">
                             @if($errors->has('idcard'))
                                 {{$errors->first('idcard')}}
                             @endif
@@ -33,7 +36,7 @@
                         <div class="weui-label">支付宝</div>
                     </div>
                     <div class="weui-cell__bd">
-                        <input type="text" class="weui-input" name="alipay" value="{{auth()->user()->phone}}" disabled>
+                        <input type="text" class="weui-input" name="alipay" value="{{auth()->user()->phone}}" readonly>
                     </div>
                 </div>
                 <div class="weui-cell">
@@ -41,7 +44,7 @@
                         <div class="weui-label"><i class="color-warning">*</i>微信</div>
                     </div>
                     <div class="weui-cell__bd">
-                        <input type="text" class="weui-input" name="weixin" placeholder="必填" required>
+                        <input type="text" class="weui-input" name="weixin" value="{{old('weixin')?:$auths->weixin}}" placeholder="必填" required>
                     </div>
                 </div>
                 <div class="weui-cell">
@@ -49,7 +52,7 @@
                         <div class="weui-label">开户银行</div>
                     </div>
                     <div class="weui-cell__bd">
-                        <input type="text" class="weui-input" name="bank_name" placeholder="可选">
+                        <input type="text" class="weui-input" name="bank_name" value="{{old('bank_name')?:$auths->bank_name}}" placeholder="可选">
                     </div>
                 </div>
                 <div class="weui-cell">
@@ -57,13 +60,18 @@
                         <div class="weui-label">银行卡号</div>
                     </div>
                     <div class="weui-cell__bd">
-                        <input type="number" class="weui-input" name="credit" placeholder="可选">
+                        <input type="number" class="weui-input" name="bank_card" value="{{old('bank_card')?:$auths->bank_card}}" placeholder="可选">
                     </div>
                 </div>
                 <div class="weui-cell">
                     <div class="weui-cell__hd">
                         <div class="weui-label" style="width: 100%"><i class="color-warning">*</i>上传身份证正面</div>
                     </div>
+                    <span class="color-error app-fs-13" style="position: absolute;left: 120px;bottom: 0">
+                        @if($errors->has('front'))
+                            {{$errors->first('front')}}
+                        @endif
+                    </span>
                 </div>
                 <div class="weui-cell" style="flex-direction: column">
                     <p class="app-fs-10 color-main">
@@ -73,17 +81,17 @@
                     <div class="weui-uploader">
                         <div class="weui-uploader__bd">
                             <ul class="weui-uploader__files app-id_file" id="uploaderFiles1">
+                                @if(isset($auths->idcard_front_img))
+                                    <li style="background-image: url({{asset('storage').'/'.$auths->idcard_front_img}})"></li>
+                                @endif
                             </ul>
+                            @if(!isset($auths->idcard_front_img))
                             <div class="weui-uploader__input-box app-id_input">
                                 <input id="uploaderInput1" class="weui-uploader__input" name="id_front" accept="image/*" type="file" required>
                             </div>
+                            @endif
                         </div>
                     </div>
-                    <span class="color-error app-fs-13" style="position: absolute;right: 0">
-                        @if($errors->has('front'))
-                            {{$errors->first('front')}}
-                        @endif
-                    </span>
                     <p>示例：</p>
                     <img src="{{asset('static/home/img/示例1.gif')}}" class="shili">
                 </div>
@@ -91,6 +99,11 @@
                     <div class="weui-cell__hd">
                         <div class="weui-label" style="width: 100%"><i class="color-warning">*</i>上传身份证背面</div>
                     </div>
+                    <span class="color-error app-fs-13" style="position: absolute;left: 120px;bottom: 0">
+                        @if($errors->has('back'))
+                            {{$errors->first('back')}}
+                        @endif
+                    </span>
                 </div>
                 <div class="weui-cell" style="flex-direction: column">
                     <p class="app-fs-10 color-main">
@@ -100,24 +113,26 @@
                     <div class="weui-uploader">
                         <div class="weui-uploader__bd">
                             <ul class="weui-uploader__files app-id_file" id="uploaderFiles2">
+                                @if(isset($auths->idcard_back_img))
+                                    <li style="background-image: url({{asset('storage').'/'.$auths->idcard_back_img}})"></li>
+                                @endif
                             </ul>
+                            @if(!isset($auths->idcard_back_img))
                             <div class="weui-uploader__input-box app-id_input">
                                 <input id="uploaderInput2" class="weui-uploader__input" name="id_back" accept="image/*" type="file" required>
                             </div>
+                            @endif
                         </div>
                     </div>
-                    <span class="color-error app-fs-13" style="position: absolute;right: 0">
-                        @if($errors->has('back'))
-                            {{$errors->first('back')}}
-                        @endif
-                    </span>
                     <p>示例：</p>
                     <img src="{{asset('static/home/img/示例2.gif')}}" class="shili">
                 </div>
             </div>
+            @if($auths->auth_status == \App\Http\Models\RealNameAuths::AUTH_FAIL || $auths->auth_status == \App\Http\Models\RealNameAuths::AUTH_CHECK_FAIL)
             <div class="weui-cell">
                 <input type="submit" class="weui-btn app-submit" value="提交">
             </div>
+            @endif
         </form>
     </div>
 @endsection
@@ -126,6 +141,10 @@
     <script>
         $(function () {
             showHeaderBack();
+
+            if ($('input:submit').length == 0){
+                $('input').attr('disabled','disabled');
+            }
         });
         var $idCard = $('#idcard');
         $('form').submit(function () {
@@ -155,7 +174,8 @@
                     }
                 },
                 error: function (error) {
-                    console.log(error);
+                    // console.log(error);
+                    $.topTip('系统错误');
                 }
             });
         });

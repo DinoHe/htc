@@ -7,51 +7,43 @@
 
 @section('container')
     <div class="member-header">
-        <div class="weui-cell weui-cell_access weui-cell_example">
+        <div class="weui-cell">
             <div class="weui-cell__hd"><img src="{{asset('static/home/img/logo.jpg')}}" style="width:110px;margin-left:10px;display:block;border-radius: 50%"></div>
             <div class="weui-cell__bd weui-cell_primary">
-                <p class="app-fs-19">{{Auth::user()['phone']}}</p>
-                <p class="app-fs-10">认证状态：已认证</p>
-                <p class="app-fs-10">会员等级：一级会员</p>
-                <p class="app-fs-10">信用分：100</p>
+                <p class="app-fs-19">{{$member->phone}}</p>
+                <p class="app-fs-10">认证状态：{{$member->authStatus}}</p>
+                <p class="app-fs-10">会员等级：{{$member->level}}</p>
                 <p class="app-fs-10">团队人数：0</p>
-                <p class="app-fs-10">我的矿机：50</p>
+                <p class="app-fs-10">我的矿机：{{$member->miner_number}}</p>
+                <p class="app-fs-10">信用：{{$member->credit}}</p>
             </div>
             <span><a href="{{ url('/home/logout') }}" class="member-header_logout">退出登录</a></span>
         </div>
     </div>
 
     <div class="member-container color-white">
-        <div class="weui-grids app-grids app-fs-16 member-container_assets">
-            <div class="weui-grid">
-                <span>100</span>
+        <div class="app-fs-16 member-container_assets">
+            <div class="member-container_assets_show">
+                <span>{{$assets->balance}}</span>
                 <p class="app-fs-13">余额</p>
             </div>
-            <div class="weui-grid">
-                <span>0</span>
+            <div class="member-container_assets_show">
+                <span>{{$assets->blocked_assets}}</span>
                 <p class="app-fs-13">冻结</p>
             </div>
-            <div class="weui-grid">
-                <span>0</span>
+            <div class="member-container_assets_show">
+                <span>{{$assets->buy_total}}</span>
                 <p class="app-fs-13">累积购买</p>
             </div>
         </div>
         <div class="weui-grids app-grids app-fs-16 member-container_list">
-            <a href="{{url('home/identityAuth')}}" class="weui-grid">
+            <a href="{{url('home/realNameAuth')}}" class="weui-grid">
                 <i class="iconfont icon-shimingrenzheng"></i>
                 <p class="">实名认证</p>
             </a>
             <a href="#" class="weui-grid">
                 <i class="iconfont icon-xingzhuangjiehe"></i>
                 <p class="">账单</p>
-            </a>
-            <a href="#" class="weui-grid">
-                <i class="iconfont icon-daichulidingdan"></i>
-                <p class="">待处理订单</p>
-            </a>
-            <a href="#" class="weui-grid">
-                <i class="iconfont icon-icon"></i>
-                <p class="">交易记录</p>
             </a>
             <a href="#" class="weui-grid">
                 <i class="iconfont icon-tuandui"></i>
@@ -73,7 +65,7 @@
                 <i class="iconfont icon-hangqing1"></i>
                 <p class="">行情</p>
             </a>
-            <a href="#" class="weui-grid">
+            <a href="{{url('home/running')}}" class="weui-grid">
                 <i class="iconfont icon-kuangji"></i>
                 <p class="">我的矿机</p>
             </a>
@@ -111,7 +103,14 @@
 
 @section('js')
     <script>
-        showTabbarBgColor('#member');
+        $(function () {
+            showTabbarBgColor('#member');
+            $('.member-container_list a').on('click',function () {
+                if ($(this).attr('href') == '#'){
+                    $.alert('暂未开放');
+                }
+            });
+        });
     </script>
 @endsection
 
