@@ -96,12 +96,18 @@
             $loading_content = $('#loading_content'),
             $topTips = $('#topTips');
 
-        $.alert = function (content='') {
+        var url = '';
+        $.alert = function (content='',redirectTo='') {
             $alert_content.text(content);
             $alert.fadeIn(100);
+            url = redirectTo;
         }
         $alert_c.on('click',function () {
-            $alert.fadeOut(100);
+            if (url != ''){
+                location.href = url;
+            }else{
+                $alert.fadeOut(100);
+            }
         });
         $.confirm = function (tittle='提示',content='',callback) {
             $confirm_tittle.text(tittle);
@@ -140,7 +146,6 @@
                 $topTips.fadeOut(100);
             },2000);
         }
-
 
         // 限制发送短信验证码
         var time = 60; //短信发送间隔

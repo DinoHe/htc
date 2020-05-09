@@ -23,6 +23,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::any('realNameAuth','Member@realNameAuth');
     Route::get('idCardCheck/{idCard}','Member@idCardCheck');
     Route::get('running','MyMiner@running');
+    Route::post('collect','MyMiner@collect');
     Route::get('finished','MyMiner@finished');
     Route::get('getMoreMinerFinished/{offset}','MyMiner@getMoreMinerFinished');
     Route::get('buy','Trade@buy');
@@ -31,4 +32,6 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('orderPreview/{id}','Trade@orderPreview');
     Route::post('uploadPayImg','Trade@uploadPayImg');
     Route::get('tradeCenter','Trade@tradeCenter');
+    Route::post('tradeBuy','Trade@tradeBuy');
+    Route::post('tradeSales','Trade@tradeSales');
 });

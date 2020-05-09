@@ -3,101 +3,145 @@
 @section('trade-container')
 
     <div class="app-cells">
-        <div class="weui-panel weui-panel_access">
-            <div class="weui-cells weui-cells_form">
-                <div class="weui-cell">
-                    <div class="weui-cell__hd"><label class="weui-label">购买价格</label></div>
-                    <div class="weui-cell__bd app-fs-19 color-main bold">$5 <span class="app-fs-13 color-primary">≈￥35</span></div>
-                </div>
-                <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="buy-number" class="weui-label">购买数量</label></div>
-                    <div class="weui-cell__bd">
-                        <input class="weui-input" id="buy-number" type="text" value="5" readonly="" data-values="001">
-                    </div>
-                </div>
-                <div class="weui-cell trade-bs">
-                    <div><a href="javascript:void(0);" class="weui-btn trade-buy">买入</a></div>
-                    <div><a href="javascript:void(0);" class="weui-btn trade-sales">卖出</a></div>
-                </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">购买价格</label></div>
+                <div class="weui-cell__bd app-fs-19 color-main bold">$<span id="price">0.1</span> <span class="app-fs-13 color-primary">≈￥35</span></div>
             </div>
-
-            <div class="weui-cell color-white">
-                <a href="{{url('home/tradeCenter')}}" class="weui-btn app-submit">交易行情 <i class="iconfont icon-hangqing1"></i></a>
+            <div class="weui-cell weui-cell_active weui-cell_access weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd"><label class="weui-label">购买数量</label></div>
+                <div class="weui-cell__bd" id="buy-number">5</div>
             </div>
+            <div class="weui-cell trade-bs">
+                <div><a href="javascript:tradeBuy();" class="weui-btn trade-buy">买入</a></div>
+                <div><a href="javascript:tradeSales();" class="weui-btn trade-sales">卖出</a></div>
+            </div>
+        </div>
 
-            <div class="weui-cells__title color-main">委托买入单</div>
-            <div class="weui-cells color-white">
+        <div class="weui-cell color-white">
+            <a href="{{url('home/tradeCenter')}}" class="weui-btn app-submit">交易行情 <i class="iconfont icon-hangqing1"></i></a>
+        </div>
+
+        <div class="weui-cells__title color-main">委托买入单</div>
+        <div class="weui-cells color-white">
+            @if(!is_null($buyOrders))
+                @foreach($buyOrders as $b)
                 <div class="weui-cell border-radius bg-order app-fs-13">
                     <div class="weui-cell__bd">
                         <h2>买入</h2>
-                        <p>数量：10</p>
-                        <p>单价：$5</p>
-                        <p>日期：2020-04-27</p>
+                        <p>数量：{{$b['trade_number']}}</p>
+                        <p>单价：${{$b['trade_price']}}</p>
+                        <p>日期：{{$b['created_at']}}</p>
                     </div>
                     <div class="weui-cell__ft color-success">排队中</div>
                 </div>
-                <div class="weui-cell border-radius bg-order app-fs-13">
-                    <div class="weui-cell__bd">
-                        <h2>买入</h2>
-                        <p>数量：10</p>
-                        <p>单价：$5</p>
-                        <p>日期：2020-04-27</p>
-                    </div>
-                    <div class="weui-cell__ft color-success">排队中</div>
-                </div>
-            </div>
+                @endforeach
+            @else
+                <div class="weui-cell border-radius bg-order app-fs-13">无买单</div>
+            @endif
+        </div>
 
-            <div class="weui-cells__title color-main">委托卖出单</div>
-            <div class="weui-cells color-white">
+        <div class="weui-cells__title color-main">委托卖出单</div>
+        <div class="weui-cells color-white">
+            @if(!is_null($salesOrders))
+                @foreach($salesOrders as $s)
                 <div class="weui-cell border-radius bg-order app-fs-13">
                     <div class="weui-cell__bd">
                         <h2>卖出</h2>
-                        <p>数量：10</p>
-                        <p>单价：$5</p>
-                        <p>日期：2020-04-27</p>
+                        <p>数量：{{$s['trade_number']}}</p>
+                        <p>单价：${{$s['trade_price']}}</p>
+                        <p>日期：{{$s['created_at']}}</p>
                     </div>
                     <div class="weui-cell__ft color-success">排队中</div>
                 </div>
-                <div class="weui-cell border-radius bg-order app-fs-13">
-                    <div class="weui-cell__bd">
-                        <h2>卖出</h2>
-                        <p>数量：10</p>
-                        <p>单价：$5</p>
-                        <p>日期：2020-04-27</p>
-                    </div>
-                    <div class="weui-cell__ft color-success">排队中</div>
-                </div>
-            </div>
+                @endforeach
+            @else
+                <div class="weui-cell border-radius bg-order app-fs-13">无卖单</div>
+            @endif
         </div>
     </div>
 @endsection
 
 @section('trade-js')
-    <script>
+    <script type="text/javascript">
+        {{--var e = '{{$message}}';--}}
+        {{--if (e != 'on'){--}}
+        {{--    $.alert(e,'{{url('home/index')}}');--}}
+        {{--}--}}
 
-        $("#buy-number").select({
-            title: "选择购买数量",
-            items: [
-                {
-                    title: "5",
-                    value: "001",
-                },
-                {
-                    title: "10",
-                    value: "002",
-                },
-                {
-                    title: "20",
-                    value: "003",
-                },
-                {
-                    title: "50",
-                    value: "004",
+        // 买入
+        function tradeBuy() {
+            $.confirm('买入提示','确定买入吗？',function () {
+                $.loading();
+                $.ajax({
+                    method: 'post',
+                    url: '{{url("home/tradeBuy")}}',
+                    data: {'buyNumber':$('#buy-number').text(),'price':$('#price').text()},
+                    success: function (data) {
+                        $.hideLoading();
+                        if (data.status == 0){
+                            $.toast('买入成功');
+                        }
+                        setTimeout(function () {
+                            location.reload();
+                        },2000);
+                    },
+                    error: function (error) {
+                        $.hideLoading();
+                        console.log(error);
+                        $.topTip('系统错误');
+                    },
+                    dataType: 'json'
+                });
+            });
+        }
+
+        // 卖出
+        function tradeSales() {
+            $.confirm('卖出入提示','确定卖出吗？',function () {
+                $.loading();
+                $.ajax({
+                    method: 'post',
+                    url: '{{url("home/tradeBuy")}}',
+                    data: {'buyNumber':$('#buy-number').text()},
+                    success: function (data) {
+                        $.hideLoading();
+                        if (data.status == 0){
+                            $.toast('买入成功');
+                        }
+                    },
+                    error: function (error) {
+                        $.hideLoading();
+                        console.log(error);
+                        $.topTip('系统错误');
+                    },
+                    dataType: 'json'
+                });
+            });
+        }
+
+        //选择器
+        var labelArry=[],
+            numbers = JSON.parse('{{json_encode($tradeNumbers)}}');
+        numbers.forEach(function (v,k) {
+            var label = {
+                    label:v,
+                    value:k,
+                    default:true
                 }
-
-            ]
+            labelArry.push(label);
         });
-
+        $('#buy-number').on('click', function () {
+            weui.picker(labelArry,
+                {
+                onChange: function (result) {
+                    // $('#buy-number').text(result[0].label);
+                },
+                onConfirm: function (result) {
+                    $('#buy-number').text(result[0].label);
+                }
+            });
+        });
 
     </script>
 @endsection

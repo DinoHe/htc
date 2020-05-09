@@ -3,15 +3,44 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
 use App\Http\Models\MyMiners;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class MyMiner extends Base
 {
     public function running()
     {
         $myMiners = MyMiners::where('member_id',Auth::id())->where('run_status',MyMiners::RUNNING)->get();
+        $this->initMiners($myMiners);
 
         return view('home.myminer.running')->with('myMiners',$myMiners);
+    }
+
+    public function collect()
+    {
+        $c = Cache::get('collect'.Auth::id());
+        if (!empty($c)){
+            return $this->dataReturn(['status'=>1021,'message'=>'今天已收取，请明天再来']);
+        }
+        $minersInfo = $this->request->input('info');
+        $minersInfo = json_decode($minersInfo);
+        foreach ($minersInfo as $m){
+            $dug = $m->dug + $m->no_collect;
+            $data['run_status'] = MyMiners::RUNNING;
+            if ($dug >= $m->total_dig){
+                $dug = $m->total_dig;
+                $data['run_status'] = MyMiners::RUN_FINISHED;
+            }
+            MyMiners::where('id',$m->id)->update([
+                'dug' => $dug,
+                'no_collect' => 0,
+                'run_status' => $data['run_status']
+            ]);
+        }
+
+        Cache::put('collect'.Auth::id(),1,Carbon::tomorrow());
+        return $this->dataReturn(['status'=>0,'message'=>'收取成功']);
     }
 
     public function finished()

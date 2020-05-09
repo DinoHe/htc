@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Members;
+use App\Http\Models\MyMiners;
 use App\Libraries\SMS\SendTemplateSMS;
 use App\Http\Models\PhoneTmps;
 use Illuminate\Http\Request;
@@ -12,6 +13,29 @@ class Base
 
     public function __construct(Request $request) {
         $this->request = $request;
+    }
+
+    /**
+     * 初始化计算矿机收益
+     * @param $miners
+     */
+    protected function initMiners($miners)
+    {
+        foreach ($miners as $miner){
+            $timeDiff = (int)((time() - date_timestamp_get(date_create($miner->updated_at))) / 3600); //h
+            if ($timeDiff > 15*24){ //超过15天未收取则失效
+                $miner->run_status = MyMiners::RUN_EXPIRED;
+                $miner->save();
+                continue;
+            }
+            $collect = round($miner->nph * $timeDiff, 2);
+            $maxCollect = $miner->total_dig - $miner->dug;
+            if ($collect >= $maxCollect){
+                $collect = $maxCollect;
+            }
+            $miner->no_collect = $collect;
+        }
+
     }
 
     public function getQRcode($url)

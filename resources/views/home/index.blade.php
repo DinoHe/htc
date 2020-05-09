@@ -76,20 +76,23 @@
     <script src="{{asset('static/home/js/slider.js')}}"></script>
     <script>
         function qiandao() {
+            $.loading('正在排队签到');
             $.ajax({
                 method: 'get',
                 url: '{{url("home/qiandao")}}',
                 dataType: 'json',
                 success: function (data) {
                     // console.log(data);
+                    $.hideLoading();
                     if (data.status == 0){
-                        $.toast(data.message);
+                        $.toast('签到成功');
                     }else{
-                        $.alert('签到失败，请稍后再试');
+                        $.alert(data.message);
                     }
                 },
                 error: function (error) {
                     // console.log(error);
+                    $.hideLoading();
                     $.topTip('系统错误');
                 }
             });
@@ -106,7 +109,7 @@
                 nph = $data.eq(3).text(),
                 runtime = $data.eq(4).text();
             $.confirm('租用矿机','确定租用矿机吗？',function () {
-                $.loading();
+                $.loading('正在排队租用');
                 $.ajax({
                    method: 'post',
                    url: '{{url("home/rent")}}',
