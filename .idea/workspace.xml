@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/storage/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +193,8 @@
       <workItem from="1588314202006" duration="16270000" />
       <workItem from="1588505965424" duration="13347000" />
       <workItem from="1588574688103" duration="36140000" />
-      <workItem from="1588669574791" duration="25590000" />
+      <workItem from="1588669574791" duration="25696000" />
+      <workItem from="1589002975354" duration="269000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
@@ -216,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588703064193</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update">
+      <created>1588703197159</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1588703197159</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,26 +267,26 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="205" y="47" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.834@0.0.1536.834" timestamp="1588690737225" />
-    <state x="367" y="0" key="CommitChangelistDialog2" timestamp="1588703060042">
+    <state x="367" y="0" key="CommitChangelistDialog2" timestamp="1588703194539">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="367" y="0" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1588703060042" />
+    <state x="367" y="0" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1588703194539" />
     <state x="270" y="62" key="SettingsEditor" timestamp="1588513747294">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="270" y="62" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1588513747294" />
-    <state x="361" y="150" key="Vcs.Push.Dialog.v2" timestamp="1588703099762">
+    <state x="361" y="150" key="Vcs.Push.Dialog.v2" timestamp="1588703208091">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="361" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1588703099762" />
+    <state x="361" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1588703208091" />
     <state x="121" y="124" width="1350" height="648" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1588703146420">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="121" y="124" width="1350" height="648" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.834@0.0.1536.834" timestamp="1588703146420" />
-    <state x="563" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588527120942">
+    <state x="563" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588703242146">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="563" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.834@0.0.1536.834" timestamp="1588527120942" />
+    <state x="563" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.834@0.0.1536.834" timestamp="1588703242146" />
     <state x="490" y="204" key="git4idea.merge.GitPullDialog" timestamp="1588314387766">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
