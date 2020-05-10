@@ -2,14 +2,20 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Orders;
 use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
 use App\Jobs\BuyMatch;
+use App\Jobs\SalesMatch;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class Trade extends Base
 {
+    /**
+     * 交易页
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function buy()
     {
         $message['message'] = 'on';
@@ -31,15 +37,32 @@ class Trade extends Base
         }
         //买单
         $buyOrders = Cache::get('tradeBuy');
-//        dd($buyOrders);
+        if (!empty($buyOrders)){
+            foreach ($buyOrders as $k => $buyOrder) {
+                if ($buyOrder['buy_member_id'] != Auth::id() || $buyOrder['order_status'] == Orders::ORDER_MATCHED){
+                    array_splice($buyOrders,$k,1);
+                }
+            }
+        }
         $message['buyOrders'] = $buyOrders;
         // 卖单
         $salesOrders = Cache::get('tradeSales');
+        if (!empty($salesOrders)){
+            foreach ($salesOrders as $k => $salesOrder) {
+                if ($salesOrder['buy_member_id'] != Auth::id() || $salesOrder['order_status'] == Orders::ORDER_MATCHED){
+                    array_splice($salesOrders,$k,1);
+                }
+            }
+        }
         $message['salesOrders'] = $salesOrders;
 
         return view('home.trade.buy',$message);
     }
 
+    /**
+     * 买入
+     * @return false|string
+     */
     public function tradeBuy()
     {
         $data = $this->request->input();
@@ -48,7 +71,7 @@ class Trade extends Base
         $n = 0;
         if (!empty($buyOrders)){
             foreach ($buyOrders as $buyOrder) {
-                if ($buyOrder['memberId'] == $member->id){
+                if ($buyOrder['buy_member_id'] == $member->id){
                     $n++;
                 }
             }
@@ -62,30 +85,94 @@ class Trade extends Base
         return $this->dataReturn(['status'=>0,'message'=>'买入成功']);
     }
 
+    /**
+     * 卖出
+     * @return false|string
+     */
     public function tradeSales()
     {
+        $member = Auth::user();
+        $data = $this->request->input();
+        $assets = Cache::get('assets'.$member->id);
+        $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
+        $deductNumber = $data['salesNumber']*(1+$handRate);
+        if ($assets->balance < $deductNumber){
+            return $this->dataReturn(['status'=>1041,'message'=>'余额不足']);
+        }
+        $assets->balance -= $deductNumber;
+        $assets->blocked_assets += $deductNumber;
+        //加入卖出队列
+        SalesMatch::dispatch($data,$member)->onQueue('match');
 
+        return $this->dataReturn(['status'=>0,'message'=>'卖出成功']);
     }
 
+    /**
+     * 待处理的订单
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function unprocessedOrder()
     {
-        return view('home.trade.unprocessedOrder');
+        $unOrders = Orders::where('trade_status','<>',Orders::TRADE_FINISHED)->cursor()
+            ->filter(function ($orders){
+                return $orders->buy_member_id == Auth::id() || $orders->sales_member_id == Auth::id();
+            });
+
+        return view('home.trade.unprocessedOrder')->with('unOrders',$unOrders);
     }
 
-    public function orderPreview()
+    /**
+     * 订单详情
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function orderPreview($id)
     {
-        return view('home.trade.orderPreview');
+        $previews = Orders::where('id',$id)->first();
+        //买家信息
+        $buyMember = $previews->buyMember;
+        $previews->buyMemberCredit = $buyMember->credit;
+        $previews->buyMemberPhone = $buyMember->phone;
+        $previews->buyMemberW = $buyMember->realNameAuth->weixin;
+        //卖家信息
+        $salesMember = $previews->salesMember;
+        $salesMemberRealNameAuth = $salesMember->realNameAuth;
+        $previews->salesMemberName = $salesMemberRealNameAuth->name;
+        $previews->salesMemberCredit = $salesMember->credit;
+        $previews->salesMemberAlipay = $salesMember->phone;
+        $previews->salesMemberBankName = $salesMemberRealNameAuth->bank_name;
+        $previews->salesMemberBankCard = $salesMemberRealNameAuth->bank_card;
+        $previews->salesMemberW = $salesMemberRealNameAuth->weixin;
+        $d = 2*3600 - (time() - date_timestamp_get(date_create($previews->updated_at)));
+        $previews->h = (int)($d/3600);
+        $previews->i = (int)($d/60%60);
+        $previews->s = $d%60;
+
+        return view('home.trade.orderPreview')->with('previews',$previews);
     }
 
+    /**
+     * 上传截图确认付款
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function uploadPayImg()
     {
         $file = $this->request->file('pay_img');
         if (empty($file)) return back()->withErrors(['uploadError'=>'请选择要上传的截图'])->withInput();
-        $res = $file->store('public/payImg');
-        if (empty($res)){
+        if ($file->getSize()/(1024*1024) > 1) return back()->withErrors(['uploadError'=>'请上传小于1M的截图'])->withInput();
+        $path = $file->store('public/payImg');
+        if (empty($path)){
             return back()->withErrors(['uploadError'=>'上传失败，请稍后重新上传'])->withInput();
+        }else{
+            $res = Orders::where('id',$this->request->input('id'))->update([
+                'payment_img' => substr($path,6),
+                'trade_status' => Orders::TRADE_NO_CONFIRM
+            ]);
+            if ($res){
+                return redirect('home/unprocessedOrder');
+            }
         }
-        return redirect('home/unprocessedOrder');
+        return back()->withErrors(['uploadError'=>'系统错误'])->withInput();
     }
 
     public function record()

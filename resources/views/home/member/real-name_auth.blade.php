@@ -82,7 +82,7 @@
                         <div class="weui-uploader__bd">
                             <ul class="weui-uploader__files app-id_file" id="uploaderFiles1">
                                 @if(isset($auths->idcard_front_img))
-                                    <li style="background-image: url({{asset('storage').'/'.$auths->idcard_front_img}})"></li>
+                                    <li style="background-image: url({{asset('storage').$auths->idcard_front_img}})"></li>
                                 @endif
                             </ul>
                             @if(!isset($auths->idcard_front_img))
@@ -114,7 +114,7 @@
                         <div class="weui-uploader__bd">
                             <ul class="weui-uploader__files app-id_file" id="uploaderFiles2">
                                 @if(isset($auths->idcard_back_img))
-                                    <li style="background-image: url({{asset('storage').'/'.$auths->idcard_back_img}})"></li>
+                                    <li style="background-image: url({{asset('storage').$auths->idcard_back_img}})"></li>
                                 @endif
                             </ul>
                             @if(!isset($auths->idcard_back_img))

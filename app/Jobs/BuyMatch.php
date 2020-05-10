@@ -9,9 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 
 class BuyMatch implements ShouldQueue
 {
@@ -41,34 +39,47 @@ class BuyMatch implements ShouldQueue
     {
         $salesOrders = Cache::get('tradeSales');
         if (!empty($salesOrders)){
-            $salesOrder = $salesOrders[array_rand($salesOrders)];
-            Orders::create([
-                'order_id' => $salesOrder['order_id'],
-                'buy_member_id' => $this->buyMember->id,
-                'buy_member_phone' => $this->buyMember->phone,
-                'sales_member_id' => $salesOrder['sales_member_id'],
-                'sales_member_phone' => $salesOrder['sales_member_phone'],
-                'trade_number' => $this->buyInfo['buyNumber'],
-                'trade_price' => $this->buyInfo['price'],
-                'trade_total_price' => $this->buyInfo['tradeNumber'] * ($this->buyInfo['price'] * 100) / 100,
-                'trade_status' => Orders::TRADE_NO_PAY
-            ]);
-        }else {
-            $buyOrders = Cache::get('tradeBuy');
-            if (empty($buyOrders)){
-                $buyOrders = [];
+            foreach ($salesOrders as $k => $salesOrder) {
+                if ($salesOrder['trade_number'] != $this->buyInfo['buyNumber'] ||
+                    $salesOrder['sales_member_id'] == $this->buyMember->id){
+                    array_splice($salesOrders,$k,1);
+                }
             }
-            $tmp = [
-                'order_id' => 'hb'.substr($this->buyMember->phone,8).time(),
-                'buy_member_id' => $this->buyMember->id,
-                'buy_member_phone' => $this->buyMember->phone,
-                'trade_number' => $this->buyInfo['buyNumber'],
-                'trade_price' => $this->buyInfo['price'],
-                'created_at' => date('Y-m-d H:i:s'),
-                'order_status' => Orders::ORDER_NO_MATCH
-            ];
-            array_push($buyOrders,$tmp);
-            Cache::put('tradeBuy',$buyOrders,Carbon::tomorrow());
+            if (!empty($salesOrders)){
+                $index = array_rand($salesOrders);
+                $salesOrder = $salesOrders[$index];
+                $res = Orders::create([
+                    'order_id' => $salesOrder['order_id'],
+                    'buy_member_id' => $this->buyMember->id,
+                    'buy_member_phone' => $this->buyMember->phone,
+                    'sales_member_id' => $salesOrder['sales_member_id'],
+                    'sales_member_phone' => $salesOrder['sales_member_phone'],
+                    'trade_number' => $this->buyInfo['buyNumber'],
+                    'trade_price' => $this->buyInfo['price'],
+                    'trade_total_price' => $this->buyInfo['tradeNumber'] * ($this->buyInfo['price'] * 100) / 100,
+                    'trade_status' => Orders::TRADE_NO_PAY
+                ]);
+                if ($res){
+                    $salesOrders[$index]['order_status'] = Orders::ORDER_MATCHED;
+                    Cache::put('tradeSales',$salesOrders,Carbon::tomorrow());
+                    return;
+                }
+            }
         }
+        $buyOrders = Cache::get('tradeBuy');
+        if (empty($buyOrders)){
+            $buyOrders = [];
+        }
+        $tmp = [
+            'order_id' => 'hb'.substr($this->buyMember->phone,8).time(),
+            'buy_member_id' => $this->buyMember->id,
+            'buy_member_phone' => $this->buyMember->phone,
+            'trade_number' => $this->buyInfo['buyNumber'],
+            'trade_price' => $this->buyInfo['price'],
+            'created_at' => date('Y-m-d H:i:s'),
+            'order_status' => Orders::ORDER_NO_MATCH
+        ];
+        array_push($buyOrders,$tmp);
+        Cache::put('tradeBuy',$buyOrders,Carbon::tomorrow());
     }
 }

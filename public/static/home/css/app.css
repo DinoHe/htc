@@ -186,12 +186,21 @@ li{
 .weui-cell p{
     padding: 2px 0;
 }
+.weui-uploader__bd{
+    position: relative;
+    width: 320px;
+    height: 240px;
+}
 .weui-uploader__files{
     position: absolute;
 }
 .weui-uploader__file,.weui-uploader__input-box{
     width: 220px;
     height: 240px;
+}
+.weui-uploader__files li{
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 .paidan a{
     color: #0d0d0d;
@@ -261,17 +270,9 @@ li{
     width: 100%;
     text-align: center;
 }
-.weui-uploader__bd{
-    position: relative;
-    width: 320px;
-    height: 160px;
-}
 .app-id_input,.app-id_file li,.shili{
     width: 320px;
     height: 160px;
-}
-.app-id_file li{
-    background-size: 100% 100%;
 }
 
 /*自定义*/

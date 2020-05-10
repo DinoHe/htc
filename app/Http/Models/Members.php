@@ -25,12 +25,12 @@ class Members extends Authenticatable
         return $this->belongsTo('App\Http\Models\MemberLevels','level_id');
     }
 
-    public function assets()
+    public function asset()
     {
         return $this->hasOne('App\Http\Models\Assets','member_id');
     }
 
-    public function realNameAuths()
+    public function realNameAuth()
     {
         return $this->hasOne('App\Http\Models\RealNameAuths','member_id');
     }

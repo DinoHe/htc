@@ -81,10 +81,12 @@
                         $.hideLoading();
                         if (data.status == 0){
                             $.toast('买入成功');
+                            setTimeout(function () {
+                                location.reload();
+                            },2000);
+                        }else {
+                            $.alert(data.message);
                         }
-                        setTimeout(function () {
-                            location.reload();
-                        },2000);
                     },
                     error: function (error) {
                         $.hideLoading();
@@ -102,8 +104,8 @@
                 $.loading();
                 $.ajax({
                     method: 'post',
-                    url: '{{url("home/tradeBuy")}}',
-                    data: {'buyNumber':$('#buy-number').text()},
+                    url: '{{url("home/tradeSales")}}',
+                    data: {'salesNumber':$('#buy-number').text(),'price':$('#price').text()},
                     success: function (data) {
                         $.hideLoading();
                         if (data.status == 0){

@@ -20,35 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Models/Bills.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Models/Orders.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Models/SystemSettings.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Models/TradeNumbers.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/payImg/S2edQJfXwYrCMCmc4RpS1UHMKurdnMGCSNrsuC5H.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/payImg/S2edQJfXwYrCMCmc4RpS1UHMKurdnMGCSNrsuC5H.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Base.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/MyMiner.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/MyMiner.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Trade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/MyMiners.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/MyMiners.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_08_19_000000_create_failed_jobs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_10_010336_create_failed_jobs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_27_161026_create_jobs_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Members.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Members.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/static/home/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/home/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/myminer/running.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/myminer/running.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home/trade/buy.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/buy.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/home/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/home/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/unprocessedOrder.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/unprocessedOrder.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,20 +169,20 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Models" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Jobs" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\wamp\www\htc\public" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\wamp\www\htc\app\Jobs" />
       <recent name="E:\wamp\www\htc\app\Http\Models" />
       <recent name="E:\wamp\www\htc\public\ext\clipboard" />
       <recent name="E:\wamp\www\htc\public\ext\font" />
       <recent name="E:\wamp\www\htc\public\static\home\css" />
-      <recent name="E:\wamp\www\htc\public\static\home\img" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\wamp\www\htc\public" />
     </key>
   </component>
   <component name="RunManager">
@@ -224,7 +208,8 @@
       <workItem from="1588669574791" duration="25696000" />
       <workItem from="1589002975354" duration="269000" />
       <workItem from="1589006406452" duration="427000" />
-      <workItem from="1589007188997" duration="34766000" />
+      <workItem from="1589007188997" duration="35154000" />
+      <workItem from="1589107200859" duration="18058000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>

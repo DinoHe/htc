@@ -16,7 +16,7 @@ class Member extends Base
     public function member()
     {
         $member = Auth::user();
-        $auth = $member->realNameAuths;
+        $auth = $member->realNameAuth;
         $member->authStatus = $auth->getAuthStatusDesc($auth->auth_status);
         $member->level = $member->level->level_name;
         $assets = Cache::get('assets'.$member->id);
@@ -25,6 +25,10 @@ class Member extends Base
         return view('home.member.member',['member'=>$member,'assets'=>$assets]);
     }
 
+    /**
+     * 实名认证
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function realNameAuth()
     {
         if ($this->request->isMethod('post')){
@@ -53,8 +57,8 @@ class Member extends Base
                 'weixin'=>$data['weixin'],
                 'bank_name'=>$data['bank_name']?:'',
                 'bank_card'=>$data['bank_card']?:'',
-                'idcard_front_img'=>substr($frontPath,7),
-                'idcard_back_img'=>substr($backPath,7),
+                'idcard_front_img'=>substr($frontPath,6),
+                'idcard_back_img'=>substr($backPath,6),
                 'auth_status'=>RealNameAuths::AUTH_CHECKING
             ]);
             return redirect('home/member');
