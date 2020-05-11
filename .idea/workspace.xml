@@ -19,21 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/storage/payImg/S2edQJfXwYrCMCmc4RpS1UHMKurdnMGCSNrsuC5H.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/payImg/S2edQJfXwYrCMCmc4RpS1UHMKurdnMGCSNrsuC5H.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Trade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/Members.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Members.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/home/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/home/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/buy.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/buy.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/unprocessedOrder.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/unprocessedOrder.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -209,7 +195,7 @@
       <workItem from="1589002975354" duration="269000" />
       <workItem from="1589006406452" duration="427000" />
       <workItem from="1589007188997" duration="35154000" />
-      <workItem from="1589107200859" duration="18058000" />
+      <workItem from="1589107200859" duration="18437000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
