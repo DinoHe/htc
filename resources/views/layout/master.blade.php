@@ -98,7 +98,7 @@
 
         var url = '';
         $.alert = function (content='',redirectTo='') {
-            $alert_content.text(content);
+            $alert_content.html(content);
             $alert.fadeIn(100);
             url = redirectTo;
         }
@@ -109,38 +109,46 @@
                 $alert.fadeOut(100);
             }
         });
-        $.confirm = function (tittle='提示',content='',callback) {
+        var c_url = '';
+        $.confirm = function (tittle='提示',content='',callback,redirectTo='') {
             $confirm_tittle.text(tittle);
-            $confirm_content.text(content);
+            $confirm_content.html(content);
+            c_url = redirectTo;
             $confirm.fadeIn(100);
             $confirm_y.on('click',function () {
-                $confirm.fadeOut(100);
                 if (typeof callback == 'function'){
-                    callback();
+                    var flag = callback();
+                    if (flag == false) return;
                     $confirm_y.off();
                 }
+                $confirm.fadeOut(100);
             });
         }
         $confirm_c.on('click',function () {
-            $confirm.fadeOut(100);
-            $confirm_y.off();
+            if (c_url != ''){
+                location.href = c_url;
+            }else{
+                $confirm.fadeOut(100);
+                $confirm_y.off();
+            }
         });
+
         $.toast = function (content='已完成') {
-            $toast_content.text(content);
+            $toast_content.html(content);
             $toast.fadeIn(100);
             setTimeout(function () {
                 $toast.fadeOut(100);
             },2000);
         }
         $.loading = function (content='加载中') {
-            $loading_content.text(content);
+            $loading_content.html(content);
             $loading.fadeIn(100);
         }
         $.hideLoading = function () {
             $loading.fadeOut(100);
         }
         $.topTip = function (content='错误') {
-            $topTips.text(content);
+            $topTips.html(content);
             $topTips.fadeIn(100);
             setTimeout(function () {
                 $topTips.fadeOut(100);

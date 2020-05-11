@@ -2,10 +2,12 @@
 
 namespace App\Jobs;
 
+use App\Events\TradingOrder;
 use App\Http\Models\Orders;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
@@ -38,29 +40,32 @@ class SalesMatch implements ShouldQueue
     public function handle()
     {
         $buyOrders = Cache::get('tradeBuy');
+        $buyOrdersArry = [];
         if (!empty($buyOrders)){
             foreach ($buyOrders as $k => $buyOrder) {
-                if ($buyOrder['trade_number'] != $this->salesInfo['salesNumber'] ||
-                    $buyOrder['buy_member_id'] == $this->salesMember->id){
-                    array_splice($buyOrders,$k,1);
+                if ($buyOrder['trade_number'] == $this->salesInfo['salesNumber'] &&
+                    $buyOrder['buy_member_id'] != $this->salesMember->id){
+                    $buyOrder['index'] = $k;
+                    array_push($buyOrdersArry,$buyOrder);
                 }
             }
-            if (!empty($buyOrders)){
-                $index = array_rand($buyOrders);
-                $buyOrder = $buyOrders[$index];
+            if (!empty($buyOrdersArry)){
+                $randIndex = array_rand($buyOrdersArry);
+                $buyOrder = $buyOrdersArry[$randIndex];
                 $res = Orders::create([
-                    'order_id' => $buyOrder['order_id'],
+                    'order_id' => 'HT'.time().substr($this->buyMember->phone,8),
                     'buy_member_id' => $buyOrder['buy_member_id'],
                     'buy_member_phone' => $buyOrder['buy_member_phone'],
                     'sales_member_id' => $this->salesMember->id,
                     'sales_member_phone' => $this->salesMember->phone,
                     'trade_number' => $this->salesInfo['salesNumber'],
                     'trade_price' => $this->salesInfo['price'],
-                    'trade_total_price' => $this->salesInfo['salesNumber'] * ($this->salesInfo['price'] * 100) / 100,
+                    'trade_total_price' => $this->salesInfo['salesNumber'] * $this->salesInfo['price'],
                     'trade_status' => Orders::TRADE_NO_PAY
                 ]);
                 if ($res){
-                    $buyOrders[$index]['order_status'] = Orders::ORDER_MATCHED;
+                    $index = $buyOrdersArry[$randIndex]['index'];
+                    array_splice($buyOrders,$index,1);
                     Cache::put('tradeBuy',$buyOrders,Carbon::tomorrow());
                     return;
                 }
@@ -76,10 +81,9 @@ class SalesMatch implements ShouldQueue
             'buy_member_phone' => $this->salesMember->phone,
             'trade_number' => $this->salesInfo['salesNumber'],
             'trade_price' => $this->salesInfo['price'],
-            'created_at' => date('Y-m-d H:i:s'),
-            'order_status' => Orders::ORDER_NO_MATCH
+            'created_at' => date('Y-m-d H:i:s')
         ];
         array_push($salesOrders,$tmp);
-        Cache::put('tradeBuy',$salesOrders,Carbon::tomorrow());
+        Cache::put('tradeSales',$salesOrders,Carbon::tomorrow());
     }
 }

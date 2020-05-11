@@ -24,7 +24,7 @@
 
         <div class="weui-cells__title color-main">委托买入单</div>
         <div class="weui-cells color-white">
-            @if(!is_null($buyOrders))
+            @if(!empty($buyOrders))
                 @foreach($buyOrders as $b)
                 <div class="weui-cell border-radius bg-order app-fs-13">
                     <div class="weui-cell__bd">
@@ -43,7 +43,7 @@
 
         <div class="weui-cells__title color-main">委托卖出单</div>
         <div class="weui-cells color-white">
-            @if(!is_null($salesOrders))
+            @if(!empty($salesOrders))
                 @foreach($salesOrders as $s)
                 <div class="weui-cell border-radius bg-order app-fs-13">
                     <div class="weui-cell__bd">
@@ -64,10 +64,39 @@
 
 @section('trade-js')
     <script type="text/javascript">
-        {{--var e = '{{$message}}';--}}
-        {{--if (e != 'on'){--}}
-        {{--    $.alert(e,'{{url('home/index')}}');--}}
-        {{--}--}}
+        //交易时间段限制
+        var e = 'on',c = '{{session('safeP')}}';
+        if (e != 'on'){
+            $.alert(e,'{{url('home/index')}}');
+        }else if (c == '') {
+            safeCheck();
+        }
+
+        //验证交易密码
+        function safeCheck() {
+            var content = '<p><input type="password" placeholder="请输入安全密码" name="safePassword"></p>' +
+                '<i class="color-error app-fs-13" style="position: absolute;left: 80px"></i>'
+            $.confirm('安全验证',content,function () {
+                var $password = $('input[name="safePassword"]'),flag = true;
+                $.ajax({
+                    method: 'post',
+                    url: '{{url("home/tradeCheck")}}',
+                    data: {'password':$password.val()},
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        if (data.status != 0){
+                            $password.parent('p').siblings('i').text(data.message);
+                            flag = false;
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+                return flag;
+            },document.referrer);
+        }
 
         // 买入
         function tradeBuy() {
@@ -90,7 +119,7 @@
                     },
                     error: function (error) {
                         $.hideLoading();
-                        console.log(error);
+                        // console.log(error);
                         $.topTip('系统错误');
                     },
                     dataType: 'json'
@@ -100,7 +129,7 @@
 
         // 卖出
         function tradeSales() {
-            $.confirm('卖出入提示','确定卖出吗？',function () {
+            $.confirm('卖出提示','确定卖出吗？',function () {
                 $.loading();
                 $.ajax({
                     method: 'post',
@@ -109,12 +138,14 @@
                     success: function (data) {
                         $.hideLoading();
                         if (data.status == 0){
-                            $.toast('买入成功');
+                            $.toast('卖出成功');
+                        }else {
+                            $.alert(data.message);
                         }
                     },
                     error: function (error) {
                         $.hideLoading();
-                        console.log(error);
+                        // console.log(error);
                         $.topTip('系统错误');
                     },
                     dataType: 'json'

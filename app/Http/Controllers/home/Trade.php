@@ -7,8 +7,10 @@ use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
 use App\Jobs\BuyMatch;
 use App\Jobs\SalesMatch;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
 
 class Trade extends Base
 {
@@ -18,15 +20,15 @@ class Trade extends Base
      */
     public function buy()
     {
-        $message['message'] = 'on';
+        $message['trade'] = 'on';
         $openTrade = SystemSettings::getSysSettingValue('trade_open');
         if ($openTrade == 'off'){
-            $message['message'] = '临时暂停交易';
+            $message['trade'] = '临时暂停交易';
         }else{
             $start = SystemSettings::getSysSettingValue('trade_start');
             $end = SystemSettings::getSysSettingValue('trade_end');
             if (date('H') < $start || date('H') > $end){
-                $message['message'] = '交易时间：'.$start.':00 - '.$end.':00';
+                $message['trade'] = '交易时间：'.$start.':00 - '.$end.':00';
             }
             $numbers = TradeNumbers::all();
             $item = [];
@@ -35,28 +37,44 @@ class Trade extends Base
             }
             $message['tradeNumbers'] = $item;
         }
-        //买单
+        //我的买单
         $buyOrders = Cache::get('tradeBuy');
+        $buyOrdersArry = [];
         if (!empty($buyOrders)){
             foreach ($buyOrders as $k => $buyOrder) {
-                if ($buyOrder['buy_member_id'] != Auth::id() || $buyOrder['order_status'] == Orders::ORDER_MATCHED){
-                    array_splice($buyOrders,$k,1);
+                if ($buyOrder['buy_member_id'] == Auth::id()){
+                    array_push($buyOrdersArry,$buyOrder);
                 }
             }
         }
-        $message['buyOrders'] = $buyOrders;
-        // 卖单
+        $message['buyOrders'] = $buyOrdersArry;
+        //我的卖单
         $salesOrders = Cache::get('tradeSales');
+        $salesOrdersArry = [];
         if (!empty($salesOrders)){
             foreach ($salesOrders as $k => $salesOrder) {
-                if ($salesOrder['buy_member_id'] != Auth::id() || $salesOrder['order_status'] == Orders::ORDER_MATCHED){
-                    array_splice($salesOrders,$k,1);
+                if ($salesOrder['buy_member_id'] == Auth::id()){
+                    array_push($salesOrdersArry,$salesOrder);
                 }
             }
         }
-        $message['salesOrders'] = $salesOrders;
+        $message['salesOrders'] = $salesOrdersArry;
 
         return view('home.trade.buy',$message);
+    }
+
+    /**
+     * 交易安全密码验证
+     * @return false|string
+     */
+    public function tradeCheck()
+    {
+        $safePassword = $this->request->input('password');
+        if (!Hash::check($safePassword,Auth::user()->safe_password)){
+            return $this->dataReturn(['status'=>1044,'message'=>'密码错误']);
+        }
+        $this->request->session()->put('safeP',time());
+        return $this->dataReturn(['status'=>0,'message'=>'验证成功']);
     }
 
     /**
@@ -101,6 +119,7 @@ class Trade extends Base
         }
         $assets->balance -= $deductNumber;
         $assets->blocked_assets += $deductNumber;
+        Cache::put('assets'.$member->id,$assets,Carbon::tomorrow());
         //加入卖出队列
         SalesMatch::dispatch($data,$member)->onQueue('match');
 
@@ -144,25 +163,25 @@ class Trade extends Base
         $previews->salesMemberBankCard = $salesMemberRealNameAuth->bank_card;
         $previews->salesMemberW = $salesMemberRealNameAuth->weixin;
         $d = 2*3600 - (time() - date_timestamp_get(date_create($previews->updated_at)));
-        $previews->h = (int)($d/3600);
-        $previews->i = (int)($d/60%60);
-        $previews->s = $d%60;
+        $previews->h = (int)($d/3600) > 0?:0;
+        $previews->i = (int)($d/60%60) > 0?:0;
+        $previews->s = $d%60 > 0?:0;
 
         return view('home.trade.orderPreview')->with('previews',$previews);
     }
 
     /**
-     * 上传截图确认付款
+     * 完成付款，上传截图
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function uploadPayImg()
+    public function finishPay()
     {
         $file = $this->request->file('pay_img');
-        if (empty($file)) return back()->withErrors(['uploadError'=>'请选择要上传的截图'])->withInput();
+        if (empty($file)) return back()->withErrors(['tradeError'=>'请选择要上传的截图'])->withInput();
         if ($file->getSize()/(1024*1024) > 1) return back()->withErrors(['uploadError'=>'请上传小于1M的截图'])->withInput();
         $path = $file->store('public/payImg');
         if (empty($path)){
-            return back()->withErrors(['uploadError'=>'上传失败，请稍后重新上传'])->withInput();
+            return back()->withErrors(['tradeError'=>'上传失败，请稍后重新上传'])->withInput();
         }else{
             $res = Orders::where('id',$this->request->input('id'))->update([
                 'payment_img' => substr($path,6),
@@ -172,7 +191,17 @@ class Trade extends Base
                 return redirect('home/unprocessedOrder');
             }
         }
-        return back()->withErrors(['uploadError'=>'系统错误'])->withInput();
+        return back()->withErrors(['tradeError'=>'系统错误'])->withInput();
+    }
+
+    /**
+     * 交易确认
+     */
+    public function finishPayConfirm()
+    {
+        $orderId = $this->request->input('id');
+        $orders = new Orders();
+        $orders->finishPayConfirm($orderId);
     }
 
     public function record()

@@ -48,7 +48,7 @@
                                 <ul class="weui-uploader__files" id="uploaderFiles">
                                     <li class="weui-uploader__file" style="background-image: url({{asset('storage').$previews->payment_img}})"></li>
                                 </ul>
-                                @if(!isset($previews->payment_img))
+                                @if(!isset($previews->payment_img) && $previews->sales_member_id!=\Illuminate\Support\Facades\Auth::id())
                                 <div class="weui-uploader__input-box">
                                     <input id="uploaderInput" class="weui-uploader__input" name="pay_img" accept="image/*" type="file">
                                 </div>
@@ -57,8 +57,13 @@
                         </div>
                     </div>
                 </div>
-                <input type="submit" class="weui-btn app-submit"
-                       value="{{$previews->trade_status==\App\Http\Models\Orders::TRADE_NO_PAY?'已付款':'确认收款'}}">
+                @if($previews->buy_member_id == \Illuminate\Support\Facades\Auth::id())
+                    @if($previews->trade_status==\App\Http\Models\Orders::TRADE_NO_PAY)
+                    <input type="submit" class="weui-btn app-submit" id="finish_pay" value="已付款">
+                    @endif
+                @else
+                    <input type="submit" class="weui-btn app-submit" id="finish_pay_confirm" value="确认已收款">
+                @endif
                 </form>
             </div>
         </div>
@@ -70,9 +75,22 @@
     <script>
         $(function () {
             showHeaderBack();
-        });
 
-        var error = '{{$errors->first('uploadError')}}';
+            var $form = $('form');
+            $('#finish_pay').on('click',function () {
+                $.loading();
+                $form.submit();
+                return false;
+            });
+            $('#finish_pay_confirm').on('click',function () {
+                $.loading();
+                $form.attr('action',"{{url('home/finishPayConfirm')}}");
+                $form.submit();
+                return false;
+            })
+        });
+        //错误提示
+        var error = '{{$errors->first('tradeError')}}';
         if (error != ''){
             $.alert(error);
         }
@@ -103,9 +121,6 @@
             console.log(e);
         });
 
-        $('form').submit(function () {
-            $.loading();
-        });
         $(function(){
             var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>';
             var      $uploaderInput = $("#uploaderInput"); //上传按钮+

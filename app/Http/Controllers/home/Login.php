@@ -8,6 +8,7 @@ use App\Jobs\SendMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Mews\Captcha\Facades\Captcha;
 
@@ -27,7 +28,8 @@ class Login
                 if ($user['activated'] != 0){
                     return redirect('home/login')->with('error','账户已被冻结，请联系客服');
                 }
-
+                //登录成功
+                Auth::logoutOtherDevices($data['password']);
                 return redirect('home/index');
             }
             return redirect('home/login')->with('error','用户名或密码错误');
@@ -38,8 +40,19 @@ class Login
     //退出登录
     public function logout()
     {
+        $tradeSales = Cache::get('tradeSales');
+        $flag = true;
+        if (!empty($tradeSales)){
+            foreach ($tradeSales as $tradeSale){
+                if (array_search(Auth::id(),$tradeSale)){
+                    $flag = false;
+                    break;
+                }
+            }
+        }
+        if ($flag) Cache::forget('assets'.Auth::id());
         Auth::logout();
-        return redirect('/home/login');
+        return redirect('home/login');
     }
 
 }
