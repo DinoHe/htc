@@ -2,13 +2,16 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Bills;
 use App\Http\Models\Orders;
 use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
 use App\Jobs\BuyMatch;
 use App\Jobs\SalesMatch;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class Trade extends Base
 {
@@ -144,25 +147,25 @@ class Trade extends Base
         $previews->salesMemberBankCard = $salesMemberRealNameAuth->bank_card;
         $previews->salesMemberW = $salesMemberRealNameAuth->weixin;
         $d = 2*3600 - (time() - date_timestamp_get(date_create($previews->updated_at)));
-        $previews->h = (int)($d/3600);
-        $previews->i = (int)($d/60%60);
-        $previews->s = $d%60;
+        $previews->h = (int)($d/3600) > 0?:0;
+        $previews->i = (int)($d/60%60) > 0?:0;
+        $previews->s = $d%60 > 0?:0;
 
         return view('home.trade.orderPreview')->with('previews',$previews);
     }
 
     /**
-     * 上传截图确认付款
+     * 完成付款，上传截图
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function uploadPayImg()
+    public function finishPay()
     {
         $file = $this->request->file('pay_img');
-        if (empty($file)) return back()->withErrors(['uploadError'=>'请选择要上传的截图'])->withInput();
+        if (empty($file)) return back()->withErrors(['tradeError'=>'请选择要上传的截图'])->withInput();
         if ($file->getSize()/(1024*1024) > 1) return back()->withErrors(['uploadError'=>'请上传小于1M的截图'])->withInput();
         $path = $file->store('public/payImg');
         if (empty($path)){
-            return back()->withErrors(['uploadError'=>'上传失败，请稍后重新上传'])->withInput();
+            return back()->withErrors(['tradeError'=>'上传失败，请稍后重新上传'])->withInput();
         }else{
             $res = Orders::where('id',$this->request->input('id'))->update([
                 'payment_img' => substr($path,6),
@@ -172,7 +175,40 @@ class Trade extends Base
                 return redirect('home/unprocessedOrder');
             }
         }
-        return back()->withErrors(['uploadError'=>'系统错误'])->withInput();
+        return back()->withErrors(['tradeError'=>'系统错误'])->withInput();
+    }
+
+    /**
+     * 交易确认
+     */
+    public function finishPayConfirm()
+    {
+        $order = Orders::where('id',$this->request->input('id'))->first();
+        $buyAssets = Cache::get('assets'.$order->buy_member_id);
+        $salesAssets = Cache::get('assets'.$order->sales_member_id);
+        DB::beginTransaction();
+        //买家资产确认
+        $buyAssets->balance += $order->trade_number;
+        $buyAssets->buy_total += $order->trade_number;
+        //卖家资产确认
+        $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
+        $salesAssets->blocked_assets -= $order->trade_number*(1+$handRate);
+        //订单完成交易
+        $order->trade_status = Orders::TRADE_FINISHED;
+
+        $orderRes = $order->save();
+        $buyRes = $buyAssets->save();
+        $salesRes = $salesAssets->save();
+
+        if (!$orderRes || !$buyRes || !$salesRes) {
+            DB::rollBack();
+            return back()->withErrors(['tradeError'=>'系统错误'])->withInput();
+        }
+        DB::commit();
+        Cache::put('assets'.$order->buy_member_id,$buyAssets,Carbon::tomorrow());
+        Cache::put('assets'.$order->sales_member_id,$buyAssets,Carbon::tomorrow());
+        Bills::createBill($order->buy_member_id,'余额-买入','+'.$order->trade_number);
+        Bills::createBill($order->sales_member_id,'余额-卖出','-'.$order->trade_number);
     }
 
     public function record()

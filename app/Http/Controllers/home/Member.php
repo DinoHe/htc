@@ -5,6 +5,7 @@ namespace App\Http\Controllers\home;
 
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Bills;
 use App\Http\Models\MyMiners;
 use App\Http\Models\RealNameAuths;
 use App\Http\Models\SystemNotices;
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Cache;
 
 class Member extends Base
 {
+    /**
+     * 会员中心
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function member()
     {
         $member = Auth::user();
@@ -97,6 +102,12 @@ class Member extends Base
             }
         }
         return 0;
+    }
+
+    public function bill()
+    {
+        $bills = Bills::orderBy('id','desc')->get();
+        return view('home.member.bill')->with('bills',$bills);
     }
 
     public function changePwd()

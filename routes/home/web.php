@@ -21,6 +21,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('noticePreview/{id}','Member@noticePreview');
     Route::get('memberService','Member@memberService');
     Route::any('realNameAuth','Member@realNameAuth');
+    Route::get('bill','Member@bill');
     Route::get('idCardCheck/{idCard}','Member@idCardCheck');
     Route::get('running','MyMiner@running');
     Route::post('collect','MyMiner@collect');
@@ -30,7 +31,8 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('unprocessedOrder','Trade@unprocessedOrder');
     Route::get('record','Trade@record');
     Route::get('orderPreview/{id}','Trade@orderPreview');
-    Route::post('uploadPayImg','Trade@uploadPayImg');
+    Route::post('finishPay','Trade@finishPay');
+    Route::post('finishPayConfirm','Trade@finishPayConfirm');
     Route::get('tradeCenter','Trade@tradeCenter');
     Route::post('tradeBuy','Trade@tradeBuy');
     Route::post('tradeSales','Trade@tradeSales');

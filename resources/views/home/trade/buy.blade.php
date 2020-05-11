@@ -64,10 +64,18 @@
 
 @section('trade-js')
     <script type="text/javascript">
-        {{--var e = '{{$message}}';--}}
-        {{--if (e != 'on'){--}}
-        {{--    $.alert(e,'{{url('home/index')}}');--}}
-        {{--}--}}
+        //交易时间段限制
+        var e = '{{$message}}';
+        if (e != 'on'){
+            $.alert(e,'{{url('home/index')}}');
+        }
+
+        //验证交易密码
+        var content = '<p><input type="password" placeholder="请输入安全密码" name="safePassword"></p>' +
+            '<i class="color-error app-fs-13" style="position: absolute;left: 75px"></i>'
+        $.confirm('安全验证',content,function () {
+            $.ajax();
+        },document.referrer);
 
         // 买入
         function tradeBuy() {
@@ -110,6 +118,8 @@
                         $.hideLoading();
                         if (data.status == 0){
                             $.toast('买入成功');
+                        }else {
+                            $.alert(data.message);
                         }
                     },
                     error: function (error) {

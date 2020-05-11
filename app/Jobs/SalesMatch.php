@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\TradingOrder;
 use App\Http\Models\Orders;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -56,10 +57,11 @@ class SalesMatch implements ShouldQueue
                     'sales_member_phone' => $this->salesMember->phone,
                     'trade_number' => $this->salesInfo['salesNumber'],
                     'trade_price' => $this->salesInfo['price'],
-                    'trade_total_price' => $this->salesInfo['salesNumber'] * ($this->salesInfo['price'] * 100) / 100,
+                    'trade_total_price' => $this->salesInfo['salesNumber'] * $this->salesInfo['price'],
                     'trade_status' => Orders::TRADE_NO_PAY
                 ]);
                 if ($res){
+                    event(new TradingOrder(time(),$buyOrder['order_id'],true));
                     $buyOrders[$index]['order_status'] = Orders::ORDER_MATCHED;
                     Cache::put('tradeBuy',$buyOrders,Carbon::tomorrow());
                     return;

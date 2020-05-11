@@ -41,7 +41,7 @@
                 <i class="iconfont icon-shimingrenzheng"></i>
                 <p class="">实名认证</p>
             </a>
-            <a href="#" class="weui-grid">
+            <a href="{{url('home/bill')}}" class="weui-grid">
                 <i class="iconfont icon-xingzhuangjiehe"></i>
                 <p class="">账单</p>
             </a>
