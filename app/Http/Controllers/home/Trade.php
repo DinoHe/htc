@@ -2,7 +2,9 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Coins;
 use App\Http\Models\Orders;
+use App\Http\Models\RealNameAuths;
 use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
 use App\Jobs\BuyMatch;
@@ -20,47 +22,56 @@ class Trade extends Base
      */
     public function buy()
     {
-        $message['trade'] = 'on';
+        $viewParams['trade'] = 'on';
+        $auth = new RealNameAuths();
         $openTrade = SystemSettings::getSysSettingValue('trade_open');
-        if ($openTrade == 'off'){
-            $message['trade'] = '临时暂停交易';
+        if (!$auth->realNameAuthCheck()){
+            $viewParams['realNameAuth'] = '请先完成实名认证';
+        }elseif ($openTrade == 'off'){
+            $viewParams['trade'] = '临时暂停交易';
         }else{
             $start = SystemSettings::getSysSettingValue('trade_start');
             $end = SystemSettings::getSysSettingValue('trade_end');
             if (date('H') < $start || date('H') > $end){
-                $message['trade'] = '交易时间：'.$start.':00 - '.$end.':00';
+                $viewParams['trade'] = '交易时间：'.$start.':00 - '.$end.':00';
             }
-            $numbers = TradeNumbers::all();
-            $item = [];
-            foreach ($numbers as $k => $n){
-                $item[$k] = $n->number;
-            }
-            $message['tradeNumbers'] = $item;
-        }
-        //我的买单
-        $buyOrders = Cache::get('tradeBuy');
-        $buyOrdersArry = [];
-        if (!empty($buyOrders)){
-            foreach ($buyOrders as $k => $buyOrder) {
-                if ($buyOrder['buy_member_id'] == Auth::id()){
-                    array_push($buyOrdersArry,$buyOrder);
-                }
-            }
-        }
-        $message['buyOrders'] = $buyOrdersArry;
-        //我的卖单
-        $salesOrders = Cache::get('tradeSales');
-        $salesOrdersArry = [];
-        if (!empty($salesOrders)){
-            foreach ($salesOrders as $k => $salesOrder) {
-                if ($salesOrder['buy_member_id'] == Auth::id()){
-                    array_push($salesOrdersArry,$salesOrder);
-                }
-            }
-        }
-        $message['salesOrders'] = $salesOrdersArry;
 
-        return view('home.trade.buy',$message);
+            //币价
+            $coinPrice = Coins::orderBy('id','desc')->first();
+            $viewParams['coinPrice'] = $coinPrice->price;
+            //我的买单
+            $buyOrders = Cache::get('tradeBuy');
+            $buyOrdersArry = [];
+            if (!empty($buyOrders)){
+                foreach ($buyOrders as $k => $buyOrder) {
+                    if ($buyOrder['buy_member_id'] == Auth::id()){
+                        array_push($buyOrdersArry,$buyOrder);
+                    }
+                }
+            }
+            $viewParams['buyOrders'] = $buyOrdersArry;
+            //我的卖单
+            $salesOrders = Cache::get('tradeSales');
+            $salesOrdersArry = [];
+            if (!empty($salesOrders)){
+                foreach ($salesOrders as $k => $salesOrder) {
+                    if ($salesOrder['buy_member_id'] == Auth::id() &&
+                        $salesOrder['order_status'] == Orders::ORDER_NO_MATCH){
+                        array_push($salesOrdersArry,$salesOrder);
+                    }
+                }
+            }
+            $viewParams['salesOrders'] = $salesOrdersArry;
+        }
+        //交易数量
+        $numbers = TradeNumbers::all();
+        $item = [];
+        foreach ($numbers as $k => $n){
+            $item[$k] = $n->number;
+        }
+        $viewParams['tradeNumbers'] = $item;
+
+        return view('home.trade.buy',$viewParams);
     }
 
     /**
@@ -163,8 +174,8 @@ class Trade extends Base
         $previews->salesMemberBankCard = $salesMemberRealNameAuth->bank_card;
         $previews->salesMemberW = $salesMemberRealNameAuth->weixin;
         $d = 2*3600 - (time() - date_timestamp_get(date_create($previews->updated_at)));
-        $previews->h = (int)($d/3600) > 0?:0;
-        $previews->i = (int)($d/60%60) > 0?:0;
+        $previews->h = (int)($d/3600) > 0?(int)($d/3600):0;
+        $previews->i = (int)($d/60%60) > 0?(int)($d/60%60):0;
         $previews->s = $d%60 > 0?:0;
 
         return view('home.trade.orderPreview')->with('previews',$previews);
@@ -209,8 +220,54 @@ class Trade extends Base
         return view('home.trade.record');
     }
 
+    /**
+     * 交易中心
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function tradeCenter()
     {
-        return view('home.trade.tradeCenter');
+        //构造币价走势
+        $coinPrice = Coins::orderBy('id','desc')->limit(7)->get();
+        $coinPriceArry = [];
+        foreach ($coinPrice as $k => $p) {
+            $coinPriceArry[$k] = $p->price;
+        }
+        for ($i=count($coinPriceArry);$i<7;$i++){
+            $coinPriceArry[$i] = 0;
+        }
+        sort($coinPriceArry);
+        $coinPriceStr = implode(',',$coinPriceArry);
+        //排单数量
+        $tradeNumber = TradeNumbers::all();
+        //买单
+        $buyOrders = $this->getBuyOrders(5);
+
+        return view('home.trade.tradeCenter',
+            ['coinPrice'=>$coinPriceStr,'tradeNumber'=>$tradeNumber,'buyOrders'=>$buyOrders]);
+    }
+
+    public function paidan($number)
+    {
+        $buyOrders = $this->getBuyOrders($number);
+        if (empty($buyOrders)){
+            return $this->dataReturn(['status'=>0,'message'=>'无买单']);
+        }else{
+            return $this->dataReturn(['status'=>1,'orders'=>$buyOrders]);
+        }
+    }
+
+    protected function getBuyOrders($number)
+    {
+        $tradeBuy = Cache::get('tradeBuy');
+        $buyOrders = [];
+        foreach ($tradeBuy as $b) {
+            if (count($buyOrders) > 50){
+                break;
+            }
+            if ($b['trade_number'] == $number){
+                array_push($buyOrders,$b);
+            }
+        }
+        return $buyOrders;
     }
 }

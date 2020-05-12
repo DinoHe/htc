@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Models\Coins;
 use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
+use App\Http\Models\SystemSettings;
 use App\Libraries\SMS\SendTemplateSMS;
 use App\Http\Models\PhoneTmps;
 use Illuminate\Http\Request;
@@ -35,7 +37,18 @@ class Base
             }
             $miner->no_collect = $collect;
         }
+    }
 
+    protected function initCoin()
+    {
+        $coins = Coins::orderBy('id','desc')->first();
+        $coinPriceBase = SystemSettings::getSysSettingValue('coin_price');
+        $coinPriceStep = SystemSettings::getSysSettingValue('coin_price_step');
+        if (empty($coins)){
+            Coins::create(['price'=>$coinPriceBase]);
+        }elseif (date_format($coins->created_at,'Y-m-d') != date('Y-m-d')){
+            Coins::create(['price'=>$coins->price+$coinPriceStep]);
+        }
     }
 
     public function getQRcode($url)

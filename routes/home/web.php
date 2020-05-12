@@ -37,4 +37,5 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::post('tradeBuy','Trade@tradeBuy');
     Route::post('tradeSales','Trade@tradeSales');
     Route::post('tradeCheck','Trade@tradeCheck');
+    Route::get('paidan/{number}','Trade@paidan');
 });

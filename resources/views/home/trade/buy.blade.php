@@ -5,8 +5,9 @@
     <div class="app-cells">
         <div class="weui-cells">
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">购买价格</label></div>
-                <div class="weui-cell__bd app-fs-19 color-main bold">$<span id="price">0.1</span> <span class="app-fs-13 color-primary">≈￥35</span></div>
+                <div class="weui-cell__hd"><label class="weui-label">今日价格</label></div>
+                <div class="weui-cell__bd app-fs-19 color-main bold">$<span id="price">{{isset($coinPrice)?$coinPrice:0}}</span>
+                    <span class="app-fs-13 color-primary">≈￥{{isset($coinPrice)?$coinPrice*7:0}}</span></div>
             </div>
             <div class="weui-cell weui-cell_active weui-cell_access weui-cell_select weui-cell_select-after">
                 <div class="weui-cell__hd"><label class="weui-label">购买数量</label></div>
@@ -65,8 +66,10 @@
 @section('trade-js')
     <script type="text/javascript">
         //交易时间段限制
-        var e = 'on',c = '{{session('safeP')}}';
-        if (e != 'on'){
+        var auth = '{{isset($realNameAuth)?$realNameAuth:""}}',e = '{{$trade}}',c = '{{session('safeP')}}';
+        if (auth != ''){
+            $.alert(auth,'{{url('home/member')}}');
+        }else if (e != 'on'){
             $.alert(e,'{{url('home/index')}}');
         }else if (c == '') {
             safeCheck();

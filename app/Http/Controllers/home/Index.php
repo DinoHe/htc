@@ -8,6 +8,7 @@ use App\Http\Models\Assets;
 use App\Http\Models\Bills;
 use App\Http\Models\Miners;
 use App\Http\Models\MyMiners;
+use App\Http\Models\RealNameAuths;
 use App\Http\Models\SystemSettings;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +22,17 @@ class Index extends Base
         return view('home.index')->with('miners',$miners);
     }
 
+    /**
+     * 签到
+     * @return false|string
+     */
     public function qiandao()
     {
         $id = Auth::id();
+        $realName = new RealNameAuths();
+        if (!$realName->realNameAuthCheck()){
+            return $this->dataReturn(['status'=>1033,'message'=>'请先完成实名认证']);
+        }
         $q = Cache::get('qiandao'.$id);
         if (!empty($q)){
             return $this->dataReturn(['status'=>1032,'message'=>'今天已签到，请明天再来']);

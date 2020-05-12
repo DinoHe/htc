@@ -6,7 +6,7 @@
     <div class="app-cells">
         <div class="weui-panel weui-panel_access">
             <div class="weui-cells color-white app-fs-16">
-                <form action="{{url('home/uploadPayImg')}}" method="post" enctype="multipart/form-data">
+                <form action="{{url('home/finishPay')}}" method="post" enctype="multipart/form-data">
                     @csrf
                 <input type="hidden" name="id" value="{{$previews->id}}">
                 <div class="weui-cell border-radius bg-order">

@@ -13,6 +13,9 @@ class Orders extends Model
     const TRADE_NO_PAY = 0;
     const TRADE_NO_CONFIRM = 1;
     const TRADE_FINISHED = 2;
+    //买卖单状态
+    const ORDER_MATCHED = 3;
+    const ORDER_NO_MATCH = 4;
 
     protected $fillable = [
         'order_id','buy_member_id','buy_member_phone','sales_member_id','sales_member_phone','trade_number',
@@ -53,6 +56,14 @@ class Orders extends Model
             return back()->withErrors(['tradeError'=>'系统错误'])->withInput();
         }
         DB::commit();
+        $tradeSales = Cache::get('tradeSales');
+        foreach ($tradeSales as $k => $tradeSale) {
+            if ($tradeSale['sales_member_id'] == $order->sales_member_id){
+                array_splice($tradeSales,$k,1);
+                break;
+            }
+        }
+        Cache::put('tradeSales',$tradeSales,Carbon::tomorrow());
         Cache::put('assets'.$order->buy_member_id,$buyAssets,Carbon::tomorrow());
         Cache::put('assets'.$order->sales_member_id,$buyAssets,Carbon::tomorrow());
         Bills::createBill($order->buy_member_id,'余额-买入','+'.$order->trade_number);

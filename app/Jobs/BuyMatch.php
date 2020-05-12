@@ -43,7 +43,8 @@ class BuyMatch implements ShouldQueue
         if (!empty($salesOrders)){
             foreach ($salesOrders as $k => $salesOrder) {
                 if ($salesOrder['trade_number'] == $this->buyInfo['buyNumber'] &&
-                    $salesOrder['sales_member_id'] != $this->buyMember->id){
+                    $salesOrder['sales_member_id'] != $this->buyMember->id &&
+                    $salesOrder['order_status' != Orders::ORDER_MATCHED]){
                     $salesOrder->index = $k;
                     array_push($salesOrdersArry,$salesOrder);
                 }
@@ -64,7 +65,7 @@ class BuyMatch implements ShouldQueue
                 ]);
                 if ($res){
                     $index = $salesOrdersArry[$randIndex]['index'];
-                    array_splice($salesOrders,$index,1);
+                    $salesOrders[$index]['order_status'] = Orders::ORDER_MATCHED;
                     Cache::put('tradeSales',$salesOrders,Carbon::tomorrow());
                     return;
                 }

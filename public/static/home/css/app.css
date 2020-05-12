@@ -120,7 +120,7 @@ li{
 .index-miner_buy{
     position: absolute;
     right: 16px;
-    bottom: 20px;
+    bottom: -10px;
     background-color: blueviolet;
     color: white;
     padding: 5px 16px;
@@ -266,7 +266,7 @@ li{
 }
 .qrcode{
     position: absolute;
-    bottom: 26%;
+    bottom: 22%;
     width: 100%;
     text-align: center;
 }

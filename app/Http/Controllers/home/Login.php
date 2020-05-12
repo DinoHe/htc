@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Http\Controllers\Base;
 use App\Http\Models\Jobs;
 use App\Http\Models\Members;
 use App\Jobs\SendMail;
@@ -9,10 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
 use Mews\Captcha\Facades\Captcha;
 
-class Login
+class Login extends Base
 {
 
     public function login(Request $request)
@@ -30,6 +30,8 @@ class Login
                 }
                 //登录成功
                 Auth::logoutOtherDevices($data['password']);
+                //初始化币价
+                $this->initCoin();
                 return redirect('home/index');
             }
             return redirect('home/login')->with('error','用户名或密码错误');

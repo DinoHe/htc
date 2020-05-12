@@ -53,7 +53,7 @@ class SalesMatch implements ShouldQueue
                 $randIndex = array_rand($buyOrdersArry);
                 $buyOrder = $buyOrdersArry[$randIndex];
                 $res = Orders::create([
-                    'order_id' => 'HT'.time().substr($this->buyMember->phone,8),
+                    'order_id' => 'HT'.time().substr($this->salesMember->phone,8),
                     'buy_member_id' => $buyOrder['buy_member_id'],
                     'buy_member_phone' => $buyOrder['buy_member_phone'],
                     'sales_member_id' => $this->salesMember->id,
@@ -81,6 +81,7 @@ class SalesMatch implements ShouldQueue
             'buy_member_phone' => $this->salesMember->phone,
             'trade_number' => $this->salesInfo['salesNumber'],
             'trade_price' => $this->salesInfo['price'],
+            'order_status' => Orders::ORDER_NO_MATCH,
             'created_at' => date('Y-m-d H:i:s')
         ];
         array_push($salesOrders,$tmp);
