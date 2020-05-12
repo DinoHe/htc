@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
-use App\Http\Models\Jobs;
-use App\Http\Models\Members;
-use App\Jobs\SendMail;
+use App\Http\Models\Orders;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Mews\Captcha\Facades\Captcha;
@@ -20,6 +17,9 @@ class Login extends Base
         if ($request->method()=='POST'){
             $data = $request->all();
             $request->flashOnly(['phone','password']);
+
+            $this->remakeSessionId();
+
             if(!Captcha::check($data['captcha'])){
                 return redirect('home/login')->with('error','验证码错误');
             }
@@ -39,14 +39,26 @@ class Login extends Base
         return view('home.login');
     }
 
-    //退出登录
+    /**
+     * 退出登录
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function logout()
     {
         $tradeSales = Cache::get('tradeSales');
+        $tradeBuy = Cache::get('tradeBuy');
         $flag = true;
         if (!empty($tradeSales)){
             foreach ($tradeSales as $tradeSale){
-                if (array_search(Auth::id(),$tradeSale)){
+                if ($tradeSale['sales_member_id'] == Auth::id() && $tradeSale['order_status'] == Orders::ORDER_MATCHED){
+                    $flag = false;
+                    break;
+                }
+            }
+        }
+        if (!empty($tradeBuy)){
+            foreach ($tradeBuy as $b){
+                if ($b['buy_member_id'] == Auth::id() && $b['order_status'] == Orders::ORDER_MATCHED){
                     $flag = false;
                     break;
                 }

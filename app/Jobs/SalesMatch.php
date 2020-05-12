@@ -2,12 +2,10 @@
 
 namespace App\Jobs;
 
-use App\Events\TradingOrder;
 use App\Http\Models\Orders;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
@@ -41,10 +39,12 @@ class SalesMatch implements ShouldQueue
     {
         $buyOrders = Cache::get('tradeBuy');
         $buyOrdersArry = [];
+        $orderStatus = Orders::ORDER_NO_MATCH;
         if (!empty($buyOrders)){
             foreach ($buyOrders as $k => $buyOrder) {
                 if ($buyOrder['trade_number'] == $this->salesInfo['salesNumber'] &&
-                    $buyOrder['buy_member_id'] != $this->salesMember->id){
+                    $buyOrder['buy_member_id'] != $this->salesMember->id &&
+                    $buyOrder['order_status'] != Orders::ORDER_MATCHED){
                     $buyOrder['index'] = $k;
                     array_push($buyOrdersArry,$buyOrder);
                 }
@@ -65,9 +65,9 @@ class SalesMatch implements ShouldQueue
                 ]);
                 if ($res){
                     $index = $buyOrdersArry[$randIndex]['index'];
-                    array_splice($buyOrders,$index,1);
+                    $buyOrders[$index]['order_status'] = Orders::ORDER_MATCHED;
+                    $orderStatus = Orders::ORDER_MATCHED;
                     Cache::put('tradeBuy',$buyOrders,Carbon::tomorrow());
-                    return;
                 }
             }
         }
@@ -77,11 +77,11 @@ class SalesMatch implements ShouldQueue
         }
         $tmp = [
             'order_id' => 'hs'.substr($this->salesMember->phone,8).time(),
-            'buy_member_id' => $this->salesMember->id,
-            'buy_member_phone' => $this->salesMember->phone,
+            'sales_member_id' => $this->salesMember->id,
+            'sales_member_phone' => $this->salesMember->phone,
             'trade_number' => $this->salesInfo['salesNumber'],
             'trade_price' => $this->salesInfo['price'],
-            'order_status' => Orders::ORDER_NO_MATCH,
+            'order_status' => $orderStatus,
             'created_at' => date('Y-m-d H:i:s')
         ];
         array_push($salesOrders,$tmp);

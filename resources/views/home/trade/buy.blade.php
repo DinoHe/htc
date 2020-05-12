@@ -66,14 +66,14 @@
 @section('trade-js')
     <script type="text/javascript">
         //交易时间段限制
-        var auth = '{{isset($realNameAuth)?$realNameAuth:""}}',e = '{{$trade}}',c = '{{session('safeP')}}';
-        if (auth != ''){
-            $.alert(auth,'{{url('home/member')}}');
-        }else if (e != 'on'){
-            $.alert(e,'{{url('home/index')}}');
-        }else if (c == '') {
-            safeCheck();
-        }
+        {{--var auth = '{{isset($realNameAuth)?$realNameAuth:""}}',e = '{{$trade}}',c = '{{session('safeP')}}';--}}
+        {{--if (auth != ''){--}}
+        {{--    $.alert(auth,'{{url('home/member')}}');--}}
+        {{--}else if (e != 'on'){--}}
+        {{--    $.alert(e,'{{url('home/index')}}');--}}
+        {{--}else if (c == '') {--}}
+        {{--    safeCheck();--}}
+        {{--}--}}
 
         //验证交易密码
         function safeCheck() {

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
 use App\Http\Models\Members;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 

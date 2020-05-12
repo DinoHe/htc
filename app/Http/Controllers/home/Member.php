@@ -106,7 +106,7 @@ class Member extends Base
 
     public function bill()
     {
-        $bills = Bills::orderBy('id','desc')->get();
+        $bills = Bills::where('member_id',Auth::id())->orderBy('id','desc')->get();
         return view('home.member.bill')->with('bills',$bills);
     }
 

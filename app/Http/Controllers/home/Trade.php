@@ -44,7 +44,8 @@ class Trade extends Base
             $buyOrdersArry = [];
             if (!empty($buyOrders)){
                 foreach ($buyOrders as $k => $buyOrder) {
-                    if ($buyOrder['buy_member_id'] == Auth::id()){
+                    if ($buyOrder['buy_member_id'] == Auth::id() &&
+                        $buyOrder['order_status'] == Orders::ORDER_NO_MATCH){
                         array_push($buyOrdersArry,$buyOrder);
                     }
                 }
@@ -55,7 +56,7 @@ class Trade extends Base
             $salesOrdersArry = [];
             if (!empty($salesOrders)){
                 foreach ($salesOrders as $k => $salesOrder) {
-                    if ($salesOrder['buy_member_id'] == Auth::id() &&
+                    if ($salesOrder['sales_member_id'] == Auth::id() &&
                         $salesOrder['order_status'] == Orders::ORDER_NO_MATCH){
                         array_push($salesOrdersArry,$salesOrder);
                     }
@@ -212,12 +213,25 @@ class Trade extends Base
     {
         $orderId = $this->request->input('id');
         $orders = new Orders();
-        $orders->finishPayConfirm($orderId);
+        $res = $orders->finishPayConfirm($orderId);
+        if (!$res){
+            return back()->withErrors(['tradeError'=>'系统错误'])->withInput();
+        }
+        return redirect('home/unprocessedOrder');
     }
 
+    /**
+     * 交易记录
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function record()
     {
-        return view('home.trade.record');
+        $orders = Orders::where('trade_status',Orders::TRADE_FINISHED)->cursor()
+            ->filter(function ($orders){
+               return $orders->buy_member_id == Auth::id() || $orders->sales_member_id == Auth::id();
+            });
+
+        return view('home.trade.record')->with('orders',$orders);
     }
 
     /**
@@ -264,7 +278,7 @@ class Trade extends Base
             if (count($buyOrders) > 50){
                 break;
             }
-            if ($b['trade_number'] == $number){
+            if ($b['trade_number'] == $number && $b['order_status'] == Orders::ORDER_NO_MATCH){
                 array_push($buyOrders,$b);
             }
         }

@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Coins;
-use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
 use App\Http\Models\SystemSettings;
 use App\Libraries\SMS\SendTemplateSMS;
@@ -87,6 +86,11 @@ class Base
             }
         }
         return $res;
+    }
+
+    protected function remakeSessionId()
+    {
+        $this->request->session()->regenerate();
     }
 
     public function dataReturn($data)

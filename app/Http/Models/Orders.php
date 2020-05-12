@@ -53,9 +53,10 @@ class Orders extends Model
 
         if (!$orderRes || !$buyRes || !$salesRes) {
             DB::rollBack();
-            return back()->withErrors(['tradeError'=>'系统错误'])->withInput();
+            return false;
         }
         DB::commit();
+        //从缓存中删除该卖单
         $tradeSales = Cache::get('tradeSales');
         foreach ($tradeSales as $k => $tradeSale) {
             if ($tradeSale['sales_member_id'] == $order->sales_member_id){
@@ -64,9 +65,20 @@ class Orders extends Model
             }
         }
         Cache::put('tradeSales',$tradeSales,Carbon::tomorrow());
+        //从缓存中删除该买单
+        $tradeBuys = Cache::get('tradeBuy');
+        foreach ($tradeBuys as $k => $b) {
+            if ($b['buy_member_id'] == $order->buy_member_id){
+                array_splice($tradeBuys,$k,1);
+                break;
+            }
+        }
+        Cache::put('tradeBuy',$tradeBuys,Carbon::tomorrow());
         Cache::put('assets'.$order->buy_member_id,$buyAssets,Carbon::tomorrow());
-        Cache::put('assets'.$order->sales_member_id,$buyAssets,Carbon::tomorrow());
+        Cache::put('assets'.$order->sales_member_id,$salesAssets,Carbon::tomorrow());
         Bills::createBill($order->buy_member_id,'余额-买入','+'.$order->trade_number);
         Bills::createBill($order->sales_member_id,'余额-卖出','-'.$order->trade_number);
+
+        return true;
     }
 }
