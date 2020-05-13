@@ -36,6 +36,7 @@ class RealNameAuths extends Model
     {
         $realName = self::where('member_id',Auth::id())->first();
         if (empty($realName) || $realName->auth_status != RealNameAuths::AUTH_SUCCESS){
+//            dd(Auth::id());
             return false;
         }
         return true;

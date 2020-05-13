@@ -24,6 +24,43 @@
 @section('js')
     <script>
         showTabbarBgColor('#trade');
+
+        //交易时间段限制
+        var auth = '{{isset($realNameAuth)?$realNameAuth:""}}',e = '{{isset($trade)?$trade:""}}',
+            c = '{{session('safeP')}}';
+        if (auth != ''){
+            $.alert(auth,'{{url('home/member')}}');
+        }else if (e != ''){
+            $.alert(e,'{{url('home/index')}}');
+        }else if (c == '') {
+            safeCheck();
+        }
+
+        //验证交易密码
+        function safeCheck() {
+            var content = '<p><input type="password" placeholder="请输入安全密码" name="safePassword"></p>' +
+                '<i class="color-error app-fs-13" style="position: absolute;left: 80px"></i>'
+            $.confirm('安全验证',content,function () {
+                var $password = $('input[name="safePassword"]'),flag = true;
+                $.ajax({
+                    method: 'post',
+                    url: '{{url("home/tradeCheck")}}',
+                    data: {'password':$password.val()},
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        if (data.status != 0){
+                            $password.parent('p').siblings('i').text(data.message);
+                            flag = false;
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+                return flag;
+            },document.referrer);
+        }
     </script>
     @yield('trade-js')
 @endsection

@@ -45,7 +45,7 @@
                 <i class="iconfont icon-xingzhuangjiehe"></i>
                 <p class="">账单</p>
             </a>
-            <a href="#" class="weui-grid">
+            <a href="{{url('home/team')}}" class="weui-grid">
                 <i class="iconfont icon-tuandui"></i>
                 <p class="">我的团队</p>
             </a>

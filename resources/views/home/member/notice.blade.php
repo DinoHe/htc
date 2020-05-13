@@ -4,7 +4,7 @@
 
 @section('container')
 <div class="app-cells bg-gray">
-    <div class="weui-cells bg-gray">
+    <div class="weui-cells">
         @if(count($notices) > 0)
             @foreach($notices as $notice)
             <a href="{{url('home/noticePreview/'.$notice->id)}}" class="weui-cell weui-cell_access">

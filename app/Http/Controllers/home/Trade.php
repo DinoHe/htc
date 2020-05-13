@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Assets;
 use App\Http\Models\Coins;
 use App\Http\Models\Orders;
 use App\Http\Models\RealNameAuths;
@@ -9,6 +10,7 @@ use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
 use App\Jobs\BuyMatch;
 use App\Jobs\SalesMatch;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -16,54 +18,58 @@ use Illuminate\Support\Facades\Hash;
 
 class Trade extends Base
 {
+
+    public function init()
+    {
+        $openTrade = SystemSettings::getSysSettingValue('trade_open');
+        $auth = new RealNameAuths();
+        if (!$auth->realNameAuthCheck()){
+            view()->share('realNameAuth','请先完成实名认证');
+        }elseif ($openTrade == 'off'){
+            view()->share('trade','临时暂停交易');
+        }else{
+            $start = SystemSettings::getSysSettingValue('trade_start');
+            $end = SystemSettings::getSysSettingValue('trade_end');
+            if (date('H') < $start || date('H') > $end){
+                view()->share('trade','交易时间：'.$start.':00 - '.$end.':00');
+            }
+        }
+    }
+
     /**
      * 交易页
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function buy()
     {
-        $viewParams['trade'] = 'on';
-        $auth = new RealNameAuths();
-        $openTrade = SystemSettings::getSysSettingValue('trade_open');
-        if (!$auth->realNameAuthCheck()){
-            $viewParams['realNameAuth'] = '请先完成实名认证';
-        }elseif ($openTrade == 'off'){
-            $viewParams['trade'] = '临时暂停交易';
-        }else{
-            $start = SystemSettings::getSysSettingValue('trade_start');
-            $end = SystemSettings::getSysSettingValue('trade_end');
-            if (date('H') < $start || date('H') > $end){
-                $viewParams['trade'] = '交易时间：'.$start.':00 - '.$end.':00';
-            }
-
-            //币价
-            $coinPrice = Coins::orderBy('id','desc')->first();
-            $viewParams['coinPrice'] = $coinPrice->price;
-            //我的买单
-            $buyOrders = Cache::get('tradeBuy');
-            $buyOrdersArry = [];
-            if (!empty($buyOrders)){
-                foreach ($buyOrders as $k => $buyOrder) {
-                    if ($buyOrder['buy_member_id'] == Auth::id() &&
-                        $buyOrder['order_status'] == Orders::ORDER_NO_MATCH){
-                        array_push($buyOrdersArry,$buyOrder);
-                    }
+        //币价
+        $coinPrice = Coins::orderBy('id','desc')->first();
+        $viewParams['coinPrice'] = $coinPrice->price;
+        //我的买单
+        $buyOrders = Cache::get('tradeBuy');
+        $buyOrdersArry = [];
+        if (!empty($buyOrders)){
+            foreach ($buyOrders as $k => $buyOrder) {
+                if ($buyOrder['buy_member_id'] == Auth::id() &&
+                    $buyOrder['order_status'] == Orders::ORDER_NO_MATCH){
+                    array_push($buyOrdersArry,$buyOrder);
                 }
             }
-            $viewParams['buyOrders'] = $buyOrdersArry;
-            //我的卖单
-            $salesOrders = Cache::get('tradeSales');
-            $salesOrdersArry = [];
-            if (!empty($salesOrders)){
-                foreach ($salesOrders as $k => $salesOrder) {
-                    if ($salesOrder['sales_member_id'] == Auth::id() &&
-                        $salesOrder['order_status'] == Orders::ORDER_NO_MATCH){
-                        array_push($salesOrdersArry,$salesOrder);
-                    }
-                }
-            }
-            $viewParams['salesOrders'] = $salesOrdersArry;
         }
+        $viewParams['buyOrders'] = $buyOrdersArry;
+        //我的卖单
+        $salesOrders = Cache::get('tradeSales');
+        $salesOrdersArry = [];
+        if (!empty($salesOrders)){
+            foreach ($salesOrders as $k => $salesOrder) {
+                if ($salesOrder['sales_member_id'] == Auth::id() &&
+                    $salesOrder['order_status'] == Orders::ORDER_NO_MATCH){
+                    array_push($salesOrdersArry,$salesOrder);
+                }
+            }
+        }
+        $viewParams['salesOrders'] = $salesOrdersArry;
+
         //交易数量
         $numbers = TradeNumbers::all();
         $item = [];
@@ -150,6 +156,41 @@ class Trade extends Base
             });
 
         return view('home.trade.unprocessedOrder')->with('unOrders',$unOrders);
+    }
+
+    /**
+     * 取消委托单
+     * @param $orderId
+     */
+    public function cancelOrder($orderId)
+    {
+        if (substr($orderId,0,2) == 'hb'){
+            $buyOrders = Cache::get('tradeBuy');
+            foreach ($buyOrders as $k => $buyOrder) {
+                if ($buyOrder['order_id'] == $orderId && $buyOrder['order_status'] == Orders::ORDER_NO_MATCH){
+                    array_splice($buyOrders,$k,1);
+                    Cache::put('tradeBuy',$buyOrders,Carbon::tomorrow());
+                    return $this->dataReturn(['status'=>0,'message'=>'取消成功']);
+                }
+            }
+        }else {
+            $salesOrders = Cache::get('tradeSales');
+            foreach ($salesOrders as $k => $salesOrder) {
+                if ($salesOrder['order_id'] == $orderId && $salesOrder['order_status'] == Orders::ORDER_NO_MATCH){
+                    array_splice($salesOrders,$k,1);
+                    Cache::put('tradeSales',$salesOrders,Carbon::tomorrow());
+                    //恢复资产
+                    $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
+                    $blockedNumber = $salesOrder['trade_number'] * (1+$handRate);
+                    $salesAssets = Cache::get('assets'.$salesOrder['sales_member_id']);
+                    $salesAssets->balance += $blockedNumber;
+                    $salesAssets->blocked_assets -= $blockedNumber;
+                    Cache::put('assets'.$salesOrder['sales_member_id'],$salesAssets,Carbon::tomorrow());
+                    return $this->dataReturn(['status'=>0,'message'=>'取消成功']);
+                }
+            }
+        }
+        return $this->dataReturn(['status'=>-1,'message'=>'取消失败，订单已匹配']);
     }
 
     /**

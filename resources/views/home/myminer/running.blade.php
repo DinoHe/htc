@@ -45,7 +45,7 @@
     <script>
         function collect() {
             if ($('.index-miner_list').eq(0).find('.no_collect').text() == 0){
-                $.alert('正在拼命挖币...');
+                $.alert('正在拼命挖...');
                 return;
             }
             $.loading('正在收取');

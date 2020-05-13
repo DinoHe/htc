@@ -214,6 +214,17 @@ li{
     background-color: #9521d0;
     color: white;
 }
+.app-btn_cancel{
+    border: 1px solid red;
+    border-radius: 20px;
+    position: absolute;
+    font-size: 13px;
+    padding: 0 8px;
+    text-align: center;
+    right: 16px;
+    color: #fd0000;
+    font-weight: normal;
+}
 
 /* 会员中心 */
 .member-header{
@@ -273,6 +284,30 @@ li{
 .app-id_input,.app-id_file li,.shili{
     width: 320px;
     height: 160px;
+}
+.subordinate_tittle{
+    background-color: #b517e8;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    padding: 5px;
+}
+.table-body:after{
+    content: " ";
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    height: 1px;
+    border-top: 1px solid rgba(0,0,0,.1);
+    color: rgba(0,0,0,.1);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    z-index: 2;
+}
+.table-body:hover{
+    background-color: #eab2fd;
 }
 
 /*自定义*/

@@ -110,6 +110,11 @@ class Member extends Base
         return view('home.member.bill')->with('bills',$bills);
     }
 
+    public function team()
+    {
+        return view('home.member.team');
+    }
+
     public function changePwd()
     {
         return view('home.member.changePwd');

@@ -16,6 +16,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('member','Member@member');
     Route::any('reset','ResetPassword@resetPassword');
     Route::get('link','Member@link');
+    Route::get('team','Member@team');
     Route::get('qrcode','Member@qrcode');
     Route::get('notice','Member@notice');
     Route::get('noticePreview/{id}','Member@noticePreview');
@@ -38,4 +39,5 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::post('tradeSales','Trade@tradeSales');
     Route::post('tradeCheck','Trade@tradeCheck');
     Route::get('paidan/{number}','Trade@paidan');
+    Route::get('cancelOrder/{orderId}','Trade@cancelOrder');
 });

@@ -29,7 +29,7 @@
                 @foreach($buyOrders as $b)
                 <div class="weui-cell border-radius bg-order app-fs-13">
                     <div class="weui-cell__bd">
-                        <h2>买入</h2>
+                        <h2>买入 <a href="javascript:cancelOrder('{{$b['order_id']}}');" class="app-btn_cancel">取消</a></h2>
                         <p>数量：{{$b['trade_number']}}</p>
                         <p>单价：${{$b['trade_price']}}</p>
                         <p>日期：{{$b['created_at']}}</p>
@@ -48,7 +48,7 @@
                 @foreach($salesOrders as $s)
                 <div class="weui-cell border-radius bg-order app-fs-13">
                     <div class="weui-cell__bd">
-                        <h2>卖出</h2>
+                        <h2>卖出 <a href="javascript:cancelOrder('{{$s['order_id']}}');" class="app-btn_cancel">取消</a></h2>
                         <p>数量：{{$s['trade_number']}}</p>
                         <p>单价：${{$s['trade_price']}}</p>
                         <p>日期：{{$s['created_at']}}</p>
@@ -65,41 +65,6 @@
 
 @section('trade-js')
     <script type="text/javascript">
-        //交易时间段限制
-        {{--var auth = '{{isset($realNameAuth)?$realNameAuth:""}}',e = '{{$trade}}',c = '{{session('safeP')}}';--}}
-        {{--if (auth != ''){--}}
-        {{--    $.alert(auth,'{{url('home/member')}}');--}}
-        {{--}else if (e != 'on'){--}}
-        {{--    $.alert(e,'{{url('home/index')}}');--}}
-        {{--}else if (c == '') {--}}
-        {{--    safeCheck();--}}
-        {{--}--}}
-
-        //验证交易密码
-        function safeCheck() {
-            var content = '<p><input type="password" placeholder="请输入安全密码" name="safePassword"></p>' +
-                '<i class="color-error app-fs-13" style="position: absolute;left: 80px"></i>'
-            $.confirm('安全验证',content,function () {
-                var $password = $('input[name="safePassword"]'),flag = true;
-                $.ajax({
-                    method: 'post',
-                    url: '{{url("home/tradeCheck")}}',
-                    data: {'password':$password.val()},
-                    dataType: 'json',
-                    async: false,
-                    success: function (data) {
-                        if (data.status != 0){
-                            $password.parent('p').siblings('i').text(data.message);
-                            flag = false;
-                        }
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-                return flag;
-            },document.referrer);
-        }
 
         // 买入
         function tradeBuy() {
@@ -154,6 +119,31 @@
                     dataType: 'json'
                 });
             });
+        }
+
+        //取消单
+        function cancelOrder(orderId) {
+            $.loading('正在取消');
+            $.ajax({
+                method: 'get',
+                url: '{{url("home/cancelOrder")}}/'+orderId,
+                dataType: 'json',
+                success: function (data) {
+                    $.hideLoading();
+                    if (data.status == 0){
+                        $.toast('取消成功');
+                        setTimeout(function () {
+                            location.reload();
+                        },2000);
+                    }else {
+                        $.alert(data.message);
+                    }
+                },
+                error: function (error) {
+                    $.hideLoading();
+                    $.topTip('系统错误');
+                }
+            })
         }
 
         //选择器

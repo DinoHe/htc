@@ -4,7 +4,7 @@
 
 @section('container')
 <div class="app-cells bg-gray">
-    <div class="weui-cells bg-gray">
+    <div class="weui-cells">
         @if(!is_null($bills))
             @foreach($bills as $bill)
             <div class="weui-cell">
