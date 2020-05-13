@@ -34,4 +34,27 @@ class Members extends Authenticatable
     {
         return $this->hasOne('App\Http\Models\RealNameAuths','member_id');
     }
+
+    public function getSubordinates($id)
+    {
+        $subordinates = self::where('parentid',$id)->get();
+        $subordinatesArray = [];
+        $realNameAuthed = 0;
+        if (!$subordinates->isEmpty()){
+            foreach ($subordinates as $subordinate) {
+                $realNameAuth = $subordinate->realNameAuth;
+                if (!empty($realNameAuth) && $realNameAuth->auth_status == RealNameAuths::AUTH_SUCCESS){
+                    $subordinate->realNameStatus = '已认证';
+                    $realNameAuthed++;
+                }else{
+                    $subordinate->realNameStatus = '未认证';
+                }
+                $subordinate->memberLevel = $subordinate->level->level_name;
+                $subordinate->subordinatesCount = self::where('parentid',$subordinate->id)->count();
+                array_push($subordinatesArray,$subordinate);
+            }
+        }
+        return array($subordinatesArray,$realNameAuthed);
+    }
+
 }

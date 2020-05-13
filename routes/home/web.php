@@ -23,6 +23,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('memberService','Member@memberService');
     Route::any('realNameAuth','Member@realNameAuth');
     Route::get('bill','Member@bill');
+    Route::get('quotations','Member@quotations');
     Route::get('idCardCheck/{idCard}','Member@idCardCheck');
     Route::get('running','MyMiner@running');
     Route::post('collect','MyMiner@collect');

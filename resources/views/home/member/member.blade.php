@@ -10,12 +10,12 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><img src="{{asset('static/home/img/logo.jpg')}}" style="width:110px;margin-left:10px;display:block;border-radius: 50%"></div>
             <div class="weui-cell__bd weui-cell_primary">
-                <p class="app-fs-19">{{$member->phone}}</p>
-                <p class="app-fs-10">认证状态：{{$member->authStatus}}</p>
-                <p class="app-fs-10">会员等级：{{$member->level}}</p>
-                <p class="app-fs-10">团队人数：0</p>
-                <p class="app-fs-10">我的矿机：{{$member->miner_number}}</p>
-                <p class="app-fs-10">信用：{{$member->credit}}</p>
+                <p class="app-fs-24">{{$member->phone}}</p>
+                <p class="app-fs-13">认证状态：{{$member->authStatus}}</p>
+                <p class="app-fs-13">会员等级：{{$member->level}}</p>
+                <p class="app-fs-13">团队人数：{{$member->teamsNumber}}</p>
+                <p class="app-fs-13">我的矿机：{{$member->minerNumber}}</p>
+                <p class="app-fs-13">信用：{{$member->credit}}</p>
             </div>
             <span><a href="{{ url('/home/logout') }}" class="member-header_logout">退出登录</a></span>
         </div>
@@ -61,7 +61,7 @@
                 <i class="iconfont icon-duihuan-1"></i>
                 <p class="">兑换管理</p>
             </a>
-            <a href="#" class="weui-grid">
+            <a href="{{url('home/quotations')}}" class="weui-grid">
                 <i class="iconfont icon-hangqing1"></i>
                 <p class="">行情</p>
             </a>

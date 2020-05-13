@@ -129,19 +129,39 @@ class Trade extends Base
     {
         $member = Auth::user();
         $data = $this->request->input();
+
         $assets = Cache::get('assets'.$member->id);
         $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
         $deductNumber = $data['salesNumber']*(1+$handRate);
         if ($assets->balance < $deductNumber){
             return $this->dataReturn(['status'=>1041,'message'=>'余额不足']);
         }
+        //限制卖出次数
+        $salesOrders = Cache::get('tradeSales');
+        $availableSalesTimes = $member->level->sales_times;
+        $salesNumber = 0;
+        if (!empty($salesOrders)){
+            foreach ($salesOrders as $salesOrder) {
+                if ($salesOrder['sales_member_id'] == $member->id){
+                    $salesNumber++;
+                }
+            }
+            if ($availableSalesTimes <= $salesNumber){
+                return $this->dataReturn(['status'=>1042,'message'=>'每天只能卖出'.$availableSalesTimes.'单']);
+            }
+        }
+        $tradeCount = Orders::where('sales_member_id',$member->id)->where('updated_at','>=',date('Y-m-d 0:0:0'))->count();
+        if ($availableSalesTimes <= ($tradeCount + $salesNumber)){
+            return $this->dataReturn(['status'=>1042,'message'=>'每天只能卖出'.$availableSalesTimes.'单']);
+        }
+        //临时从余额中扣除币
         $assets->balance -= $deductNumber;
         $assets->blocked_assets += $deductNumber;
         Cache::put('assets'.$member->id,$assets,Carbon::tomorrow());
-        //加入卖出队列
+        //加入卖出队列匹配
         SalesMatch::dispatch($data,$member)->onQueue('match');
 
-        return $this->dataReturn(['status'=>0,'message'=>'卖出成功']);
+        return $this->dataReturn(['status'=>0,'message'=>'委托卖出成功']);
     }
 
     /**

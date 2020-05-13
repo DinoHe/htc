@@ -10,7 +10,7 @@
             <div class="weui-cell">
                 <div class="weui-cell__bd">
                     <p>{{$bill->tittle}}</p>
-                    <span class="color-primary app-fs-10">{{$bill->created_at}}</span>
+                    <span class="color-primary app-fs-13">{{$bill->created_at}}</span>
                 </div>
                 <div class="weui-cell__ft">{{$bill->operation}}</div>
             </div>

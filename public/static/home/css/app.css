@@ -54,7 +54,7 @@ li{
     padding: 0;
 }
 .app-cells{
-    padding: 0 16px;
+    padding: 10px 16px;
 }
 
 /* 首页 */
@@ -225,6 +225,10 @@ li{
     color: #fd0000;
     font-weight: normal;
 }
+.weui-half-screen-dialog__ft a{
+    background-color: #9521d0;
+    width: 100%;
+}
 
 /* 会员中心 */
 .member-header{
@@ -339,7 +343,7 @@ li{
     font-size: 27px;
 }
 .app-dp_no{
-    display: none !important;
+    display: none;
 }
 .app-dp_b{
     display: block;
@@ -352,13 +356,16 @@ li{
 }
 .color-danger,
 .color-error {
-    color: #f6383a !important;
+    color: #ff0e10;
 }
 .color-warning {
-    color: #f60;
+    color: #f68810;
 }
 .color-success {
     color: #07c160;
+}
+.color-green{
+    color: #00e807;
 }
 .color-main{
     color: #9521d0;

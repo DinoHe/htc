@@ -6,6 +6,7 @@ namespace App\Http\Controllers\home;
 
 use App\Http\Controllers\Base;
 use App\Http\Models\Bills;
+use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
 use App\Http\Models\RealNameAuths;
 use App\Http\Models\SystemNotices;
@@ -26,7 +27,8 @@ class Member extends Base
         $member->level = $member->level->level_name;
         $assets = Cache::get('assets'.$member->id);
         $myMiners = MyMiners::where('member_id',$member->id)->where('run_status',MyMiners::RUNNING)->count();
-        $member->miner_number = $myMiners;
+        $member->minerNumber = $myMiners;
+        $member->teamsNumber = count($member->getSubordinates($member->id)[0]);
         return view('home.member.member',['member'=>$member,'assets'=>$assets]);
     }
 
@@ -110,15 +112,20 @@ class Member extends Base
         return view('home.member.bill')->with('bills',$bills);
     }
 
+    /**
+     * 我的团队
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function team()
     {
-        return view('home.member.team');
+        $members = new Members();
+        $subordinatesArray = $members->getSubordinates(Auth::id());
+        $subordinates = $subordinatesArray[0];
+        $realNameAuthedNumber = $subordinatesArray[1];
+
+        return view('home.member.team',['subordinates'=>$subordinates,'realNameAuthedNumber'=>$realNameAuthedNumber]);
     }
 
-    public function changePwd()
-    {
-        return view('home.member.changePwd');
-    }
 
     public function link()
     {
@@ -138,6 +145,26 @@ class Member extends Base
         return view('home.member.notice')->with('notices',$notices);
     }
 
+    /**
+     * 市场行情
+     *
+     */
+    public function quotations()
+    {
+        $url = 'https://www.hqz.com/api/index/get_side_concept_coin/?conceptid=12';
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,$url);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+        $output = curl_exec($curl);
+        curl_close($curl);
+        $output = json_decode($output);
+        $quotations = $output->data;
+
+        return view('home.member.quotations')->with('quotations',$quotations);
+    }
+
     public function noticePreview($id)
     {
         $notice = SystemNotices::find($id);
@@ -147,6 +174,11 @@ class Member extends Base
     public function memberService()
     {
         return view('home.member.member_service');
+    }
+
+    public function changePwd()
+    {
+        return view('home.member.changePwd');
     }
 
 }

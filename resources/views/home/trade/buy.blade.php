@@ -77,7 +77,7 @@
                     success: function (data) {
                         $.hideLoading();
                         if (data.status == 0){
-                            $.toast('买入成功');
+                            $.toast('已委托买入');
                             setTimeout(function () {
                                 location.reload();
                             },2000);
@@ -106,7 +106,10 @@
                     success: function (data) {
                         $.hideLoading();
                         if (data.status == 0){
-                            $.toast('卖出成功');
+                            $.toast('已委托卖出');
+                            setTimeout(function () {
+                                location.reload();
+                            },2000);
                         }else {
                             $.alert(data.message);
                         }
@@ -123,27 +126,29 @@
 
         //取消单
         function cancelOrder(orderId) {
-            $.loading('正在取消');
-            $.ajax({
-                method: 'get',
-                url: '{{url("home/cancelOrder")}}/'+orderId,
-                dataType: 'json',
-                success: function (data) {
-                    $.hideLoading();
-                    if (data.status == 0){
-                        $.toast('取消成功');
-                        setTimeout(function () {
-                            location.reload();
-                        },2000);
-                    }else {
-                        $.alert(data.message);
+            $.confirm('取消提示','确定要取消吗？',function () {
+                $.loading('正在取消');
+                $.ajax({
+                    method: 'get',
+                    url: '{{url("home/cancelOrder")}}/'+orderId,
+                    dataType: 'json',
+                    success: function (data) {
+                        $.hideLoading();
+                        if (data.status == 0){
+                            $.toast('取消成功');
+                            setTimeout(function () {
+                                location.reload();
+                            },2000);
+                        }else {
+                            $.alert(data.message);
+                        }
+                    },
+                    error: function (error) {
+                        $.hideLoading();
+                        $.topTip('系统错误');
                     }
-                },
-                error: function (error) {
-                    $.hideLoading();
-                    $.topTip('系统错误');
-                }
-            })
+                });
+            });
         }
 
         //选择器
