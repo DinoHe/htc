@@ -60,7 +60,7 @@ class SalesMatch implements ShouldQueue
                     'sales_member_phone' => $this->salesMember->phone,
                     'trade_number' => $this->salesInfo['salesNumber'],
                     'trade_price' => $this->salesInfo['price'],
-                    'trade_total_price' => $this->salesInfo['salesNumber'] * $this->salesInfo['price'],
+                    'trade_total_money' => $this->salesInfo['salesNumber'] * $this->salesInfo['price'],
                     'trade_status' => Orders::TRADE_NO_PAY
                 ]);
                 if ($res){

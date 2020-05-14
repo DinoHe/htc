@@ -78,14 +78,18 @@
 
             var $form = $('form');
             $('#finish_pay').on('click',function () {
-                $.loading();
-                $form.submit();
+                $.confirm('付款提示','确认已付款吗？',function () {
+                    $.loading();
+                    $form.submit();
+                });
                 return false;
             });
             $('#finish_pay_confirm').on('click',function () {
-                $.loading();
-                $form.attr('action',"{{url('home/finishPayConfirm')}}");
-                $form.submit();
+                $.confirm('收款提示','确认收到付款吗？',function () {
+                    $.loading('正在处理');
+                    $form.attr('action',"{{url('home/finishPayConfirm')}}");
+                    $form.submit();
+                });
                 return false;
             })
         });
@@ -118,7 +122,8 @@
             $.toast('已复制');
         });
         clipboard.on('error', function(e) {
-            console.log(e);
+            // console.log(e);
+            $.topTip('复制失败');
         });
 
         $(function(){

@@ -60,7 +60,7 @@ class BuyMatch implements ShouldQueue
                     'sales_member_phone' => $salesOrder['sales_member_phone'],
                     'trade_number' => $this->buyInfo['buyNumber'],
                     'trade_price' => $this->buyInfo['price'],
-                    'trade_total_price' => $this->buyInfo['buyNumber'] * $this->buyInfo['price'],
+                    'trade_total_money' => $this->buyInfo['buyNumber'] * $this->buyInfo['price'],
                     'trade_status' => Orders::TRADE_NO_PAY
                 ]);
                 if ($res){

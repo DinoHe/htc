@@ -67,6 +67,7 @@ class Index extends Base
         }
         $res = MyMiners::create([
            'member_id' => $memberId,
+            'miner_id' => $data['id'],
             'miner_tittle' => $data['miner_tittle'],
             'total_dig' => $data['total_dig'],
             'hashrate' => $data['hashrate'],

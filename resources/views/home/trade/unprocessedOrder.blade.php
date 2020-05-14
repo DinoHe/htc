@@ -30,5 +30,10 @@
         $(function () {
             $('.trade-tittle_un').addClass('trade-select').siblings().removeClass('trade-select');
         });
+
+        var error = '{{$errors->first('error')}}';
+        if (error != ''){
+            $.alert(error,document.referrer);
+        }
     </script>
 @endsection

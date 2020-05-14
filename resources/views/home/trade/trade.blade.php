@@ -26,15 +26,15 @@
         showTabbarBgColor('#trade');
 
         //交易时间段限制
-        var auth = '{{isset($realNameAuth)?$realNameAuth:""}}',e = '{{isset($trade)?$trade:""}}',
-            c = '{{session('safeP')}}';
-        if (auth != ''){
-            $.alert(auth,'{{url('home/member')}}');
-        }else if (e != ''){
-            $.alert(e,'{{url('home/index')}}');
-        }else if (c == '') {
-            safeCheck();
-        }
+        {{--var auth = '{{isset($realNameAuth)?$realNameAuth:""}}',e = '{{isset($trade)?$trade:""}}',--}}
+        {{--    c = '{{session('safeP')}}';--}}
+        {{--if (auth != ''){--}}
+        {{--    $.alert(auth,'{{url('home/member')}}');--}}
+        {{--}else if (e != ''){--}}
+        {{--    $.alert(e,'{{url('home/index')}}');--}}
+        {{--}else if (c == '') {--}}
+        {{--    safeCheck();--}}
+        {{--}--}}
 
         //验证交易密码
         function safeCheck() {

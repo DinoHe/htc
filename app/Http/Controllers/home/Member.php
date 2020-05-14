@@ -11,7 +11,6 @@ use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
 use App\Http\Models\RealNameAuths;
 use App\Http\Models\SystemNotices;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
@@ -24,6 +23,8 @@ class Member extends Base
      */
     public function member()
     {
+        //等级初始化
+        parent::initLevel();
         $member = Auth::user();
         $auth = $member->realNameAuth;
         $member->authStatus = $auth->getAuthStatusDesc($auth->auth_status);
@@ -32,6 +33,7 @@ class Member extends Base
         $myMiners = MyMiners::where('member_id',$member->id)->where('run_status',MyMiners::RUNNING)->count();
         $member->minerNumber = $myMiners;
         $member->teamsNumber = count($member->getSubordinates($member->id)[0]);
+
         return view('home.member.member',['member'=>$member,'assets'=>$assets]);
     }
 

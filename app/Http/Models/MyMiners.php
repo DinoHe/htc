@@ -13,6 +13,6 @@ class MyMiners extends Model
     const RUN_EXPIRED = 2;
 
     protected $fillable = [
-        'member_id','miner_tittle','dug','runtime','nph','total_dig','hashrate','run_status'
+        'member_id','miner_id','miner_tittle','dug','runtime','nph','total_dig','hashrate','run_status'
     ];
 }

@@ -2,15 +2,19 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Bills;
+use App\Http\Models\BuyActivities;
 use App\Http\Models\Coins;
 use App\Http\Models\Orders;
 use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
 use App\Jobs\BuyMatch;
+use App\Jobs\RewardLeaderMiner;
 use App\Jobs\SalesMatch;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -57,7 +61,7 @@ class Trade extends Base
         }
         $viewParams['salesOrders'] = $salesOrdersArry;
 
-        //交易数量
+        //交易规格
         $numbers = TradeNumbers::all();
         $item = [];
         foreach ($numbers as $k => $n){
@@ -137,7 +141,7 @@ class Trade extends Base
                 return $this->dataReturn(['status'=>1042,'message'=>'每天只能卖出'.$availableSalesTimes.'单']);
             }
         }
-        $tradeCount = Orders::where('sales_member_id',$member->id)->where('updated_at','>=',date('Y-m-d 0:0:0'))->count();
+        $tradeCount = Orders::where('sales_member_id',$member->id)->where('updated_at','>=',date('Y-m-d'))->count();
         if ($availableSalesTimes <= ($tradeCount + $salesNumber)){
             return $this->dataReturn(['status'=>1042,'message'=>'每天只能卖出'.$availableSalesTimes.'单']);
         }
@@ -208,6 +212,9 @@ class Trade extends Base
     public function orderPreview($id)
     {
         $previews = Orders::where('id',$id)->first();
+        if ($previews->trade_status == Orders::TRADE_FINISHED){
+            return back()->withErrors(['error'=>'交易已完成'])->withInput();
+        }
         //买家信息
         $buyMember = $previews->buyMember;
         $previews->buyMemberCredit = $buyMember->credit;
@@ -260,12 +267,66 @@ class Trade extends Base
     public function finishPayConfirm()
     {
         $orderId = $this->request->input('id');
-        $orders = new Orders();
-        $res = $orders->finishPayConfirm($orderId);
+        $res = $this->finishTrade($orderId);
         if (!$res){
             return back()->withErrors(['tradeError'=>'系统错误'])->withInput();
         }
         return redirect('home/unprocessedOrder');
+    }
+
+    private function finishTrade($orderId)
+    {
+        $order = Orders::where('id',$orderId)->first();
+        $buyAssets = Cache::get('assets'.$order->buy_member_id);
+        $salesAssets = Cache::get('assets'.$order->sales_member_id);
+        DB::beginTransaction();
+        //买家资产确认
+        $buyAssets->balance += $order->trade_number;
+        $buyAssets->buy_total += $order->trade_number;
+        //卖家资产确认
+        $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
+        $salesAssets->blocked_assets -= $order->trade_number*(1+$handRate);
+        //订单完成交易
+        $order->trade_status = Orders::TRADE_FINISHED;
+
+        $orderRes = $order->save();
+        $buyRes = $buyAssets->save();
+        $salesRes = $salesAssets->save();
+
+        if (!$orderRes || !$buyRes || !$salesRes) {
+            DB::rollBack();
+            return false;
+        }
+        DB::commit();
+        //奖励上级矿机
+        $isReward = SystemSettings::getSysSettingValue('subordinate_buy_reward_miner');
+        if ($isReward == 'on' && $leaderId = $this->levelCheck($order->buy_member_id)){
+            RewardLeaderMiner::dispatch($buyAssets->buy_total,$leaderId)->onQueue('give');
+        }
+        //从缓存中删除该卖单
+        $tradeSales = Cache::get('tradeSales');
+        foreach ($tradeSales as $k => $tradeSale) {
+            if ($tradeSale['sales_member_id'] == $order->sales_member_id){
+                array_splice($tradeSales,$k,1);
+                break;
+            }
+        }
+        Cache::put('tradeSales',$tradeSales,Carbon::tomorrow());
+        //从缓存中删除该买单
+        $tradeBuys = Cache::get('tradeBuy');
+        foreach ($tradeBuys as $k => $b) {
+            if ($b['buy_member_id'] == $order->buy_member_id){
+                array_splice($tradeBuys,$k,1);
+                break;
+            }
+        }
+        Cache::put('tradeBuy',$tradeBuys,Carbon::tomorrow());
+        Cache::put('assets'.$order->buy_member_id,$buyAssets,Carbon::tomorrow());
+        Cache::put('assets'.$order->sales_member_id,$salesAssets,Carbon::tomorrow());
+        Bills::createBill($order->buy_member_id,'余额-买入','+'.$order->trade_number);
+        Bills::createBill($order->sales_member_id,'余额-卖出','-'.$order->trade_number);
+
+        return true;
     }
 
     /**

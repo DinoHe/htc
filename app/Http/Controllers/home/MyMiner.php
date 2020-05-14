@@ -42,7 +42,6 @@ class MyMiner extends Base
             }
             MyMiners::where('id',$m->id)->update([
                 'dug' => $dug,
-                'no_collect' => 0,
                 'run_status' => $data['run_status']
             ]);
         }

@@ -1,12 +1,15 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\home\Member;
 use App\Http\Models\Coins;
+use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
 use App\Http\Models\SystemSettings;
 use App\Libraries\SMS\SendTemplateSMS;
 use App\Http\Models\PhoneTmps;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Base extends Controller
 {
@@ -48,6 +51,34 @@ class Base extends Controller
         }elseif (date_format($coins->created_at,'Y-m-d') != date('Y-m-d')){
             Coins::create(['price'=>$coins->price+$coinPriceStep]);
         }
+    }
+
+    protected function initLevel()
+    {
+        $user = Auth::user();
+        $myMinerIdMax = MyMiners::where('run_status',MyMiners::RUNNING)->where('member_id',$user->id)->max('miner_id');
+        if ($myMinerIdMax != $user->level_id){
+            $user->level_id = $myMinerIdMax;
+            $user->save();
+        }
+    }
+
+    /**
+     * 奖励上级受等级限制
+     * @param $memberId
+     * @return bool
+     */
+    protected function levelCheck($memberId){
+        $levelConstraint = SystemSettings::getSysSettingValue('level_constraint');
+        if ($levelConstraint == 'on'){
+            $member = Members::find($memberId);
+            $leader = Members::find($member->parentid);
+            if (!empty($leader) && $leader->level_id > $member->level_id){
+                return $leader->id;
+            }
+        }
+
+        return false;
     }
 
     public function getQRcode($url)
