@@ -6,12 +6,15 @@ namespace App\Http\Controllers\home;
 
 use App\Http\Controllers\Base;
 use App\Http\Models\Bills;
+use App\Http\Models\Ideals;
 use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
 use App\Http\Models\RealNameAuths;
 use App\Http\Models\SystemNotices;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
 
 class Member extends Base
 {
@@ -176,9 +179,44 @@ class Member extends Base
         return view('home.member.member_service');
     }
 
-    public function changePwd()
+    /**
+     * 修改密码
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function resetPassword()
     {
-        return view('home.member.changePwd');
+        if ($this->request->isMethod('post')){
+            $data = $this->request->input();
+            $members = Auth::user();
+            if (!Hash::check($data['old_password'],$members->password)){
+                return back()->withErrors(['passwordError'=>'原登录密码错误']);
+            }
+            if (!Hash::check($data['old_safe_password'],$members->safe_password)){
+                return back()->withErrors(['safePasswordError'=>'原安全密码错误']);
+            }
+            $status = Members::where('id',$members->id)->update([
+                'password' => Hash::make($data['new_password']),
+                'safe_password' => Hash::make($data['new_safe_password'])
+            ]);
+            if ($status){
+                Auth::logout();
+                return redirect('home/login');
+            }
+        }
+        return view('home.member.reset_password');
+    }
+
+    /**
+     * 建议
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     */
+    public function ideal()
+    {
+        if ($this->request->isMethod('post')){
+            Ideals::create(['content'=>$this->request->input('content')]);
+            return $this->dataReturn(['status'=>0,'message'=>'提交成功']);
+        }
+        return view('home.member.ideal');
     }
 
 }

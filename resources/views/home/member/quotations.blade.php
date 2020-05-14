@@ -5,7 +5,7 @@
 @section('container')
 <div class="app-cells">
 
-    <table style="text-align: left;width: 100%" cellspacing="0">
+    <table style="text-align: left;width: 100%" cellspacing="0" >
         <thead>
         <tr>
             <th>名称</th>
@@ -19,8 +19,8 @@
             @foreach($quotations as $q)
             <tr class="table-body">
                 <td style="color: #00a2ca">{{$q->coinshortcode.'-'.$q->coinname}}</td>
-                <td>${{$q->price_usd}} <p>≈{{$q->price_cny_text}}</p></td>
-                <td>{{$q->trademoney24h_cny_text}}</td>
+                <td style="color:#ea1bbe;font-size: 10px">${{$q->price_usd}} <p>≈{{$q->price_cny_text}}</p></td>
+                <td class="app-fs-10">{{$q->trademoney24h_cny_text}}</td>
                 <td><span>{{$q->percent_24h}}</span>%</td>
             </tr>
             @endforeach

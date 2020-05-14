@@ -343,10 +343,10 @@ li{
     font-size: 27px;
 }
 .app-dp_no{
-    display: none;
+    display: none !important;
 }
 .app-dp_b{
-    display: block;
+    display: block !important;
 }
 .color-white{
     color: white;

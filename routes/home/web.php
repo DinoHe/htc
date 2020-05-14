@@ -14,7 +14,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('qiandao','Index@qiandao');
     Route::post('rent','Index@rent');
     Route::get('member','Member@member');
-    Route::any('reset','ResetPassword@resetPassword');
+    Route::any('reset','Member@resetPassword');
     Route::get('link','Member@link');
     Route::get('team','Member@team');
     Route::get('qrcode','Member@qrcode');
@@ -24,6 +24,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::any('realNameAuth','Member@realNameAuth');
     Route::get('bill','Member@bill');
     Route::get('quotations','Member@quotations');
+    Route::any('ideal','Member@ideal');
     Route::get('idCardCheck/{idCard}','Member@idCardCheck');
     Route::get('running','MyMiner@running');
     Route::post('collect','MyMiner@collect');

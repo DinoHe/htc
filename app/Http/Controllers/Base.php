@@ -8,7 +8,7 @@ use App\Libraries\SMS\SendTemplateSMS;
 use App\Http\Models\PhoneTmps;
 use Illuminate\Http\Request;
 
-class Base
+class Base extends Controller
 {
     protected $request;
 

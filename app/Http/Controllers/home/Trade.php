@@ -2,38 +2,25 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
-use App\Http\Models\Assets;
 use App\Http\Models\Coins;
 use App\Http\Models\Orders;
-use App\Http\Models\RealNameAuths;
 use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
 use App\Jobs\BuyMatch;
 use App\Jobs\SalesMatch;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class Trade extends Base
 {
 
-    public function init()
+    public function __construct(Request $request)
     {
-        $openTrade = SystemSettings::getSysSettingValue('trade_open');
-        $auth = new RealNameAuths();
-        if (!$auth->realNameAuthCheck()){
-            view()->share('realNameAuth','请先完成实名认证');
-        }elseif ($openTrade == 'off'){
-            view()->share('trade','临时暂停交易');
-        }else{
-            $start = SystemSettings::getSysSettingValue('trade_start');
-            $end = SystemSettings::getSysSettingValue('trade_end');
-            if (date('H') < $start || date('H') > $end){
-                view()->share('trade','交易时间：'.$start.':00 - '.$end.':00');
-            }
-        }
+        parent::__construct($request);
+        $this->middleware('tradeAuth');
     }
 
     /**
@@ -335,12 +322,14 @@ class Trade extends Base
     {
         $tradeBuy = Cache::get('tradeBuy');
         $buyOrders = [];
-        foreach ($tradeBuy as $b) {
-            if (count($buyOrders) > 50){
-                break;
-            }
-            if ($b['trade_number'] == $number && $b['order_status'] == Orders::ORDER_NO_MATCH){
-                array_push($buyOrders,$b);
+        if (!empty($tradeBuy)){
+            foreach ($tradeBuy as $b) {
+                if (count($buyOrders) > 50){
+                    break;
+                }
+                if ($b['trade_number'] == $number && $b['order_status'] == Orders::ORDER_NO_MATCH){
+                    array_push($buyOrders,$b);
+                }
             }
         }
         return $buyOrders;

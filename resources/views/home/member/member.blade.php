@@ -81,7 +81,7 @@
                 <i class="iconfont icon-youqiachongzhi"></i>
                 <p class="">油卡充值</p>
             </a>
-            <a href="#" class="weui-grid">
+            <a href="{{url('home/ideal')}}" class="weui-grid">
                 <i class="iconfont icon-jianyi"></i>
                 <p class="">建议</p>
             </a>
@@ -89,7 +89,7 @@
                 <i class="iconfont icon-kefu"></i>
                 <p class="">客服</p>
             </a>
-            <a href="/home/reset" class="weui-grid">
+            <a href="{{url('home/reset')}}" class="weui-grid">
                 <i class="iconfont icon-rizhichakan"></i>
                 <p class="">修改密码</p>
             </a>

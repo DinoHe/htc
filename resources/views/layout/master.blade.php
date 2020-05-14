@@ -205,11 +205,11 @@
             setTimeout('sendDelay()', 1000);
         }
 
-        // $.ajaxSetup({
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-        //     }
-        // });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+            }
+        });
     </script>
     @yield('js')
 </body>
