@@ -15,3 +15,4 @@ Route::get('/', 'Home\Index@index')->middleware('guest');
 Route::get('sendSMS/{phone}','Base@sendSMS');
 
 include 'home/web.php';
+include 'admin/web.php';

@@ -20,12 +20,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/static/admin/img/admin-login.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Login.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/css/htc.admin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/css/htc.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/js/htc.admin.page.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/js/htc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/html5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/iconfont/1.0.8/demo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/iconfont/1.0.8/iconfont.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/iconfont/1.0.8/iconfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/iconfont/1.0.8/iconfont.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/iconfont/1.0.8/iconfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/iconfont/1.0.8/iconfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/iconfont/1.0.8/iconfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/layer/2.4/layer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/layer/2.4/skin/default/icon-ext.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/layer/2.4/skin/default/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/layer/2.4/skin/default/loading-0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/layer/2.4/skin/default/loading-1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/layer/2.4/skin/default/loading-2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/layer/2.4/skin/layer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/lib/respond.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/skin/default/acrossTab-bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/skin/default/acrossTab.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/skin/default/icon_arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/skin/default/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layout/admin-header.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layout/admin-master.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layout/admin-menu.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/admin/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/home/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/home/css/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/member/quotations.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/member/quotations.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/trade.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/trade.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.styleci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.styleci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,21 +190,22 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/static/admin/img" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/static/admin/lib" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\wampserver\www\htc\public\static\admin\img" />
-      <recent name="E:\wamp\www\htc\app\Jobs" />
-      <recent name="E:\wamp\www\htc\app\Http\Models" />
-      <recent name="E:\wampserver\www\htc\app\Http\Models" />
-      <recent name="E:\wampserver\www\htc\resources\views\home\member" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\wampserver\www\htc\public\static\home\img" />
       <recent name="E:\wampserver\www\htc\public\static" />
       <recent name="E:\wamp\www\htc\public" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\wampserver\www\htc\public\static\admin\lib" />
+      <recent name="E:\wampserver\www\htc\public\static\admin\js" />
+      <recent name="E:\wampserver\www\htc\public\static\admin\lib\iconfont" />
+      <recent name="E:\wampserver\www\htc\public\static\admin\skin" />
+      <recent name="E:\wampserver\www\htc\public\static\admin\css" />
     </key>
   </component>
   <component name="RunManager">
@@ -207,6 +236,7 @@
       <workItem from="1589163461176" duration="20931000" />
       <workItem from="1589201136154" duration="14310000" />
       <workItem from="1589371340033" duration="17337000" />
+      <workItem from="1589536360341" duration="3192000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
@@ -288,6 +318,10 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="367" y="0" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1588703194539" />
+    <state x="499" y="285" key="NewPhpFileDialog" timestamp="1589537807596">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="499" y="285" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1589537807596" />
     <state x="240" y="0" key="SettingsEditor" timestamp="1589164209902">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
