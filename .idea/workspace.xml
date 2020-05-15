@@ -20,26 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Models/BuyActivities.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Jobs/RewardLeaderMiner.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/storage/payImg/K2SMJ6bW8Oo2C4ySLH8K7owA7NfrL7UKUTJlvCly.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/payImg/K2SMJ6bW8Oo2C4ySLH8K7owA7NfrL7UKUTJlvCly.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/admin/img/admin-login.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Base.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/MyMiner.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/MyMiner.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Trade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/MyMiners.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/MyMiners.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dump.rdb" beforeDir="false" afterPath="$PROJECT_DIR$/dump.rdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/home/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/home/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home/member/quotations.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/member/quotations.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home/trade/trade.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/trade.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/unprocessedOrder.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/unprocessedOrder.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/home/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/home/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,20 +162,21 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Jobs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/static/admin/img" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\wamp\www\htc\public" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\wampserver\www\htc\public\static\admin\img" />
       <recent name="E:\wamp\www\htc\app\Jobs" />
       <recent name="E:\wamp\www\htc\app\Http\Models" />
       <recent name="E:\wampserver\www\htc\app\Http\Models" />
       <recent name="E:\wampserver\www\htc\resources\views\home\member" />
-      <recent name="E:\wampserver\www\htc\app\Http\Middleware" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\wampserver\www\htc\public\static" />
+      <recent name="E:\wamp\www\htc\public" />
     </key>
   </component>
   <component name="RunManager">

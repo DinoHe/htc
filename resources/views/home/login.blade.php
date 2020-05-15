@@ -12,9 +12,8 @@
         <form action="{{url('home/login')}}" method="post">
             @csrf
             <div class="login-group">
-                <strong class="app-font_mini color-error">{{ session('error') }}</strong>
-            </div>
-            <div class="login-group">
+                <strong class="app-font_mini color-error" style="position: absolute;left: 0;top: -35px">{{ session('error') }}</strong>
+
                 <input type="text" required="required" class="login-control" name="phone" value="{{old('phone')}}"/>
                 <label class="login-label">用户名</label>
             </div>
