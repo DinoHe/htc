@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
 use App\Http\Models\Orders;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Mews\Captcha\Facades\Captcha;
@@ -12,11 +11,11 @@ use Mews\Captcha\Facades\Captcha;
 class Login extends Base
 {
 
-    public function login(Request $request)
+    public function login()
     {
-        if ($request->method()=='POST'){
-            $data = $request->all();
-            $request->flashOnly(['phone','password']);
+        if ($this->request->method()=='POST'){
+            $data = $this->request->all();
+            $this->request->flashOnly(['phone','password']);
 
             $this->remakeSessionId();
 

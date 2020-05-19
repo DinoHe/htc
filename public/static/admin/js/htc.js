@@ -1572,7 +1572,7 @@ function stopDefault(e) {
 						var elements_left = elements.length;
 						settings.appear.call(self, elements_left, settings);
 					}
-					$("<img />").on("load",
+					$("<images />").on("load",
 					function() {
 						var original = $self.attr("data-" + settings.data_attribute);
 						$self.hide();
@@ -1683,8 +1683,8 @@ function stopDefault(e) {
 	};
 
 	/* Custom selectors for your convenience.   */
-	/* Use as $("img:below-the-fold").something() or */
-	/* $("img").filter(":below-the-fold").something() which is faster */
+	/* Use as $("images:below-the-fold").something() or */
+	/* $("images").filter(":below-the-fold").something() which is faster */
 	$.extend($.expr[":"], {
 		"below-the-fold": function(a) {
 			return $.belowthefold(a, {
@@ -3583,7 +3583,7 @@ function stopDefault(e) {
 					self.opt.score = methods.between(self.opt.score, 0, self.opt.number);
 				}
 				for (var i = 1; i <= self.opt.number; i++) {
-					$('<img />', {
+					$('<images />', {
 						src: self.opt.path + ((!self.opt.score || self.opt.score < i) ? self.opt.starOff: self.opt.starOn),
 						alt: i,
 						title: (i <= self.opt.hints.length && self.opt.hints[i - 1] !== null) ? self.opt.hints[i - 1] : i
@@ -3594,7 +3594,7 @@ function stopDefault(e) {
 					}
 				}
 
-				self.stars = $this.children('img:not(".raty-cancel")');
+				self.stars = $this.children('images:not(".raty-cancel")');
 				self.score = $('<input />', {
 					type: 'hidden',
 					name: self.opt.scoreName
@@ -3609,7 +3609,7 @@ function stopDefault(e) {
 				var space = self.opt.space ? 4 : 0,
 				width = self.opt.width || (self.opt.number * self.opt.size + self.opt.number * space);
 				if (self.opt.cancel) {
-					self.cancel = $('<img />', {
+					self.cancel = $('<images />', {
 						src: self.opt.path + self.opt.cancelOff,
 						alt: 'x',
 						title: self.opt.cancelHint,
@@ -4871,7 +4871,7 @@ function displaynavbar(obj){
 						} else {
 							var tooltip_keleyi_com =
 								'<div id="preview-wraper" style="position: absolute;z-index:999;width:' + options.bigImgWidth + 'px;height:auto;top:' + imgT + 'px;right:' + tooltipRight + ';left:' + tooltipLeft + '">' +
-								'<img src="' + smallImg + '" width="' + options.bigImgWidth + '">' +
+								'<images src="' + smallImg + '" width="' + options.bigImgWidth + '">' +
 								'</div>';
 							$("body").append(tooltip_keleyi_com);
 							/*图片预加载*/
@@ -4879,7 +4879,7 @@ function displaynavbar(obj){
 							image.src = bigImg;
 							/*创建一个Image对象*/
 							image.onload = function () {
-								$('#preview-wraper').find("img").attr("src", bigImg).css("width", options.bigImgWidth);
+								$('#preview-wraper').find("images").attr("src", bigImg).css("width", options.bigImgWidth);
 							};
 						}
 					}, 500);

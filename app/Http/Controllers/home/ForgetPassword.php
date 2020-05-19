@@ -36,8 +36,9 @@ class ForgetPassword extends Base
         return view('home.forget');
     }
 
-    public function forgetVerify($phone)
+    public function forgetVerify()
     {
+        $phone = $this->request->input('phone');
         $p = Members::where('phone',$phone)->first();
         if (empty($p)){
             return $this->dataReturn(['status'=>1104,'message'=>'该账号不存在，请先注册']);

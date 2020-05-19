@@ -49,8 +49,9 @@ class Register extends Base
         return view('home.register')->with('invite', $invite);
     }
 
-    public function registerVerify($phone)
+    public function registerVerify()
     {
+        $phone = $this->request->input('phone');
         $p = Members::where('phone',$phone)->first();
         if (!empty($p)){
             return $this->dataReturn(['status'=>1103,'message'=>'手机号已注册']);

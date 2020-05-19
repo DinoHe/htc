@@ -86,7 +86,7 @@ function getHTMLDate(obj) {
 };
 
 /*个人信息*/
-function myselfinfo(){
+function myselfinfo(ip,time){
 	layer.open({
 		type: 1,
 		area: ['300px','200px'],
@@ -94,7 +94,7 @@ function myselfinfo(){
 		maxmin: true,
 		shade:0.4,
 		title: '查看信息',
-		content: '<div>管理员信息</div>'
+		content: '<p>上一次登录IP：'+ip+'</p>'+'<p>上一次登录时间：'+time+'</p>'
 	});
 }
 $(function(){

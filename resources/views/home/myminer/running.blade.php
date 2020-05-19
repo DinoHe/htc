@@ -17,7 +17,7 @@
                     @if($miner->run_status == \App\Http\Models\MyMiners::RUNNING)
                     <div class="weui-media-box weui-media-box_appmsg index-miner_list">
                         <div class="weui-media-box__hd index-miner_img">
-                            <img class="weui-media-box__thumb" src="{{asset('static/home/img/'.$miner->miner_tittle.'.jpg')}}">
+                            <img class="weui-media-box__thumb" src="{{asset('static/home/images/'.$miner->miner_tittle.'.jpg')}}">
                         </div>
                         <div class="weui-media-box__bd">
                             <h4 class="weui-media-box__title">{{$miner->miner_tittle}}

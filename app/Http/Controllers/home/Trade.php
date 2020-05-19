@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
 use App\Http\Models\Bills;
-use App\Http\Models\BuyActivities;
 use App\Http\Models\Coins;
 use App\Http\Models\Orders;
 use App\Http\Models\SystemSettings;

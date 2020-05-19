@@ -8,7 +8,7 @@
 @section('container')
     <div class="member-header">
         <div class="weui-cell">
-            <div class="weui-cell__hd"><img src="{{asset('static/home/img/logo.jpg')}}" style="width:110px;margin-left:10px;display:block;border-radius: 50%"></div>
+            <div class="weui-cell__hd"><img src="{{asset('static/home/images/logo.jpg')}}" style="width:110px;margin-left:10px;display:block;border-radius: 50%"></div>
             <div class="weui-cell__bd weui-cell_primary">
                 <p class="app-fs-24">{{$member->phone}}</p>
                 <p class="app-fs-13">认证状态：{{$member->authStatus}}</p>

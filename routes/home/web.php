@@ -4,13 +4,14 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function (){
     Route::any('login','Login@login');
     Route::get('logout','Login@logout');
     Route::any('register','Register@register');
-    Route::get('registerVerify/{phone}','Register@registerVerify');
+    Route::post('registerVerify','Register@registerVerify');
     Route::any('forget','ForgetPassword@forgetPassword');
-    Route::get('forgetVerify/{phone}','ForgetPassword@forgetVerify');
+    Route::post('forgetVerify','ForgetPassword@forgetVerify');
 });
 
 Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],function (){
     Route::get('index','Index@index');
+    Route::get('/','Index@index');
     Route::get('qiandao','Index@qiandao');
     Route::post('rent','Index@rent');
     Route::get('member','Member@member');

@@ -9,7 +9,7 @@
                     @foreach($myMiners as $miner)
                     <div class="weui-media-box weui-media-box_appmsg index-miner_list">
                         <div class="weui-media-box__hd index-miner_img">
-                            <img class="weui-media-box__thumb" src="{{asset('static/home/img/'.$miner->miner_tittle.'.jpg')}}">
+                            <img class="weui-media-box__thumb" src="{{asset('static/home/images/'.$miner->miner_tittle.'.jpg')}}">
                         </div>
                         <div class="weui-media-box__bd">
                             <h4 class="weui-media-box__title">{{$miner->miner_tittle}} <i class="iconfont icon-dian1 color-primary app-fs-10"> 已结束</i></h4>
@@ -54,7 +54,7 @@
                         $.each(data.miners,function (k,v) {
                             var content = '<div class="weui-media-box weui-media-box_appmsg index-miner_list">\n' +
                                 '                        <div class="weui-media-box__hd index-miner_img">\n' +
-                                '                            <img class="weui-media-box__thumb" src="{{asset('static/home/img')}}'+v.miner_tittle+'.jpg">\n' +
+                                '                            <images class="weui-media-box__thumb" src="{{asset('static/home/images')}}'+v.miner_tittle+'.jpg">\n' +
                                 '                        </div>\n' +
                                 '                        <div class="weui-media-box__bd">\n' +
                                 '                            <h4 class="weui-media-box__title">'+v.miner_tittle+' <i class="iconfont icon-dian1 color-primary app-fs-10"> 已结束</i></h4>\n' +

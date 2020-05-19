@@ -166,8 +166,9 @@
             }
             $.showLoading('正在发送');
             $.ajax({
-                url: url+'/'+phone,
-                method: 'get',
+                url: url,
+                data: {'phone':phone},
+                method: 'post',
                 dataType: 'json',
                 success: function(data){
                     // console.log(data);
