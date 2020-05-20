@@ -15,4 +15,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'
     Route::any('adminEdit','Admin@edit');
     Route::post('adminDel','Admin@del');
     Route::get('adminRole','Admin@role');
+    Route::any('adminRoleAdd','Admin@roleAdd');
+    Route::any('adminRoleEdit','Admin@roleEdit');
+    Route::post('adminRoleDel','Admin@roleDel');
+    Route::get('adminPermission','Admin@permission');
+    Route::any('adminPermissionAdd','Admin@permissionAdd');
+    Route::any('adminPermissionEdit','Admin@permissionEdit');
+    Route::post('adminPermissionDel','Admin@permissionDel');
 });

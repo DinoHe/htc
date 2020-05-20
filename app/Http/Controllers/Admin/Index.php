@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Permissions;
 use App\Http\Models\SystemLogs;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +17,27 @@ class Index extends Base
         $lastIp = $log->ip;
         $lastTime = $log->created_at;
         $this->request->session()->put('admin',['account'=>$account,'role'=>$role,'lastIp'=>$lastIp,'lastTime'=>$lastTime]);
+        //初始化权限
+        $this->initPermission();
+
         return view('admin.index');
+    }
+
+    private function initPermission()
+    {
+        $admin = Auth::guard('admin')->user();
+        $p = $admin->roles->permission;
+        if ($p == 0){
+            $this->request->session()->put('permission',$p);
+        }else{
+            $pIds = explode(',',$p)?:$p;
+            $permissions = Permissions::find($pIds);
+            $pa = [];
+            foreach ($permissions as $permission) {
+                array_push($pa,$permission->url);
+            }
+            $this->request->session()->put('permission',$pa);
+        }
+
     }
 }

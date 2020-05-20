@@ -1,13 +1,14 @@
 @extends('layout.admin-master')
-@section('tittle')角色添加 @endsection
+@section('tittle')角色编辑 @endsection
 
 @section('container')
     <article class="cl pd-20">
-        <form action="{{url('admin/adminRoleAdd')}}" method="post" class="form form-horizontal" id="form-admin-role-add">
+        <form action="{{url('admin/adminRoleEdit')}}" method="post" class="form form-horizontal" id="form-admin-role-edit">
             <div class="row cl">
+                <input type="hidden" name="id" value="{{$role->id}}">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名称：</label>
                 <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" class="input-text" name="roleName" required>
+                    <input type="text" class="input-text" name="roleName" value="{{$role->name}}" required>
                 </div>
             </div>
             <div class="row cl">
@@ -27,16 +28,19 @@
                             <dl class="cl permission-list2">
                                 <dt style="width: 150px">
                                     <label>
-                                        <input type="checkbox">
+                                        <input type="checkbox"
+                                            {{in_array($p->id,explode(',',$role->permission))?'checked':''}}>
                                         {{$p->tittle}}</label>
                                 </dt>
                                 <dd>
                                     <label class="findbox">
-                                        <input type="checkbox" value="{{$p->id}}" name="permission[]">
+                                        <input type="checkbox" value="{{$p->id}}" name="permission[]"
+                                            {{in_array($p->id,explode(',',$role->permission))?'checked':''}}>
                                         查看</label>
                                     @foreach($p->childNodes as $node)
                                     <label>
-                                        <input type="checkbox" value="{{$node->id}}" name="permission[]">
+                                        <input type="checkbox" value="{{$node->id}}" name="permission[]"
+                                            {{in_array($node->id,explode(',',$role->permission))?'checked':''}}>
                                         {{$node->tittle}}</label>
                                     @endforeach
                                 </dd>
@@ -83,7 +87,7 @@ $(function(){
         }
     });
 
-	$("#form-admin-role-add").validate({
+	$("#form-admin-role-edit").validate({
 		rules:{
             roleName:{
 				required:true,
@@ -95,7 +99,6 @@ $(function(){
 		submitHandler:function(form){
 			$(form).ajaxSubmit({
                 success: function (data) {
-                    console.log(data);
                     if (data.status == 0){
                         layer.msg('添加成功',{icon:6,time:1000});
                         closeLayer();

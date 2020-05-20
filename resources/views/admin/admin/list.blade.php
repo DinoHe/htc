@@ -17,8 +17,12 @@
             <article class="cl pd-20">
                 <div class="cl pd-5 bg-1 bk-gray mt-20">
                     <span class="l">
+                        @if(session('permission') == 0 || in_array("admin/adminDel",session('permission')))
                         <a href="javascript:;" onclick="dataDel('{{url("admin/adminDel")}}')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+                        @endif
+                        @if(session('permission') == 0 || in_array("admin/adminAdd",session('permission')))
                         <a href="javascript:;" onclick="admin_add('添加管理员','{{url("admin/adminAdd")}}','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加管理员</a>
+                        @endif
                     </span>
                     <span class="r">共有数据：<strong>{{count($admins)}}</strong> 条</span>
                 </div>
@@ -57,13 +61,17 @@
                                 @endif
                             </td>
                             <td class="td-manage">
-                                @if($admin->blocked == \App\Http\Models\Admins::ACCOUNT_ON)
-                                <a style="text-decoration:none" onClick="admin_stop(this,'{{$admin->id}}')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
-                                @else
-                                <a style="text-decoration:none" onClick="admin_start(this,'{{$admin->id}}')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe615;</i></a>
+                                @if(session('permission') == 0 || in_array("admin/adminEdit",session('permission')))
+                                    @if($admin->blocked == \App\Http\Models\Admins::ACCOUNT_ON)
+                                    <a style="text-decoration:none" onClick="admin_stop(this,'{{$admin->id}}')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
+                                    @else
+                                    <a style="text-decoration:none" onClick="admin_start(this,'{{$admin->id}}')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe615;</i></a>
+                                    @endif
+                                    <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','{{url("admin/adminEdit")}}','{{$admin->id}}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
                                 @endif
-                                <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','{{url("admin/adminEdit")}}','{{$admin->id}}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                                @if(session('permission') == 0 || in_array("admin/adminDel",session('permission')))
                                 <a title="删除" href="javascript:;" onclick="admin_del(this,'{{$admin->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

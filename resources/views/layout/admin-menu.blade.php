@@ -48,9 +48,15 @@
         <dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
         <dd>
             <ul>
+                @if(session('permission') == 0 || in_array("admin/adminList",session('permission')))
                 <li><a href="{{url('admin/adminList')}}" title="管理员列表">管理员列表</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/adminRole",session('permission')))
                 <li><a href="{{url('admin/adminRole')}}" title="角色管理">角色管理</a></li>
-                <li><a href="admin-permission.html" title="权限管理">权限管理</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/adminPermission",session('permission')))
+                <li><a href="{{url('admin/adminPermission')}}" title="权限管理">权限管理</a></li>
+                @endif
             </ul>
         </dd>
     </dl>
