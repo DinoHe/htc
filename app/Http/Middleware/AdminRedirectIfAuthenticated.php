@@ -22,9 +22,11 @@ class AdminRedirectIfAuthenticated
         }
         if ($request->isMethod('post')){
             $path = $request->path();
+            $action = substr($path,strpos($path,'/')+1);
             $content = $request->input();
-            $content = json_encode($content);
-            $ip = $request->ip();
+            array_splice($content,0,1,$action);
+            $content = json_encode($content,JSON_UNESCAPED_UNICODE);
+            $ip = $request->getClientIp();
             $event = '';
             if (strpos($path,'Add')){
                 $event = '新增';

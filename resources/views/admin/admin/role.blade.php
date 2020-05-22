@@ -17,8 +17,12 @@
             <article class="cl pd-20">
                 <div class="cl pd-5 bg-1 bk-gray mt-20">
                     <span class="l">
+                        @if(session('permission') == 0 || in_array("admin/adminRoleDel",session('permission')))
                         <a href="javascript:;" onclick="dataDel('{{url("admin/adminRoleDel")}}')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-                        <a href="javascript:;" onclick="admin_add('添加角色','{{url("admin/adminRoleAdd")}}','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加角色</a>
+                        @endif
+                        @if(session('permission') == 0 || in_array("admin/adminRoleAdd",session('permission')))
+                        <a href="javascript:;" onclick="add('添加角色','{{url("admin/adminRoleAdd")}}','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加角色</a>
+                        @endif
                     </span>
                     <span class="r">共有数据：<strong>{{count($roles)}}</strong> 条</span>
                 </div>
@@ -44,8 +48,12 @@
                             <td class="table_content"><a href="javascript:void(0);">{{$role->user}}</a></td>
                             <td class="table_content">{{$role->permission}}</td>
                             <td class="td-manage">
-                                <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','{{url("admin/adminRoleEdit")}}','{{$role->id}}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-                                <a title="删除" href="javascript:;" onclick="admin_del(this,'{{$role->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                                @if(session('permission') == 0 || in_array("admin/adminRoleEdit",session('permission')))
+                                <a title="编辑" href="javascript:;" onclick="edit('管理员编辑','{{url("admin/adminRoleEdit")}}','{{$role->id}}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                                @endif
+                                @if(session('permission') == 0 || in_array("admin/adminRoleDel",session('permission')))
+                                <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/adminRoleDel")}}','{{$role->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -61,31 +69,5 @@
 <script type="text/javascript" src="{{asset('static/admin/lib/datePicker/WdatePicker.js')}}"></script>
 <script type="text/javascript" src="{{asset('static/admin/lib/dataTables/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('static/admin/lib/layerPage/laypage.js')}}"></script>
-<script type="text/javascript">
 
-/*角色-增加*/
-function admin_add(title,url,w,h){
-	layer_show(title,url,w,h);
-}
-/*角色-删除*/
-function admin_del(obj,id){
-	layer.confirm('确认要删除吗？',function(index){
-		//此处请求后台程序，下方是成功后的前台处理……
-        var content = id;
-        $(obj).parent().siblings('.table_content').each(function () {
-            content += ',' + $(this).text();
-        });
-        content = JSON.stringify(content);
-        $.post('{{url("admin/adminRoleDel")}}',{'id':id,'content':content});
-		$(obj).parents("tr").remove();
-		layer.msg('已删除!',{icon:1,time:1000});
-	});
-}
-/*角色-编辑*/
-function admin_edit(title,url,id,w,h){
-    var u = url + '?id=' + id;
-	layer_show(title,u,w,h);
-}
-
-</script>
 @endsection

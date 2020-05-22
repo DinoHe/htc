@@ -64,15 +64,12 @@
     //批量删除
     function dataDel(url) {
         layer.confirm('确认删除吗？',function () {
-            var ids = '',contents = [],content = '';
-            $('.checkBox').each(function () {
+            var action = url.substring(url.lastIndexOf('/')+1);
+            var ids = '',contents = [],content = action;
+            $('tbody .checkBox').each(function () {
                 if ($(this).prop('checked')){
                     $(this).parent().siblings('.table_content').each(function () {
-                        if (content != ''){
-                            content += ',' + $(this).text();
-                        }else {
-                            content += $(this).text();
-                        }
+                        content += ',' + $(this).text();
                     });
                     contents.push(content);
                     if (ids == ''){
@@ -82,6 +79,10 @@
                     }
                 }
             });
+            if (ids == ''){
+                layer.msg('没有可删除的选项',{icon:2,time:1000});
+                return false;
+            }
             contents = JSON.stringify(contents);
             $.ajax({
                 url: url,
@@ -97,11 +98,48 @@
         });
     }
 
+    //删除一条
+    function onesDel(obj,url,id){
+        layer.confirm('确认要删除吗？',function(index){
+            //此处请求后台程序，下方是成功后的前台处理……
+            var content = 'systemNoticeDel';
+            $(obj).parent().siblings('.table_content').each(function () {
+                content += ',' + $(this).text();
+            });
+            content = JSON.stringify(content);
+            $.post(url,{'id':id,'content':content});
+            $(obj).parents("tr").remove();
+            layer.msg('已删除!',{icon:1,time:1000});
+        });
+    }
+
+    //编辑
+    function edit(title,url,id,w,h){
+        var u = url + '?id=' + id;
+        layer_show(title,u,w,h);
+    }
+
+    //新增
+    function add(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+
+    //全选
+    $('thead tr input:checkbox').on('click',function () {
+        $('tbody').find('input:checkbox').prop('checked',$(this).prop('checked'));
+    });
+
     function closeLayer(){
         var index = parent.layer.getFrameIndex(window.name);
         setTimeout(function () {
             parent.location.reload();
             parent.layer.close(index);
+        },1000);
+    }
+
+    function refresh(){
+        setTimeout(function () {
+            location.reload();
         },1000);
     }
 

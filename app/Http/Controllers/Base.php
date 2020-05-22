@@ -44,10 +44,9 @@ class Base extends Controller
     protected function initCoin()
     {
         $coins = Coins::orderBy('id','desc')->first();
-        $coinPriceBase = SystemSettings::getSysSettingValue('coin_price');
         $coinPriceStep = SystemSettings::getSysSettingValue('coin_price_step');
         if (empty($coins)){
-            Coins::create(['price'=>$coinPriceBase]);
+            Coins::create(['price'=>0.1]);
         }elseif (date_format($coins->created_at,'Y-m-d') != date('Y-m-d')){
             Coins::create(['price'=>$coins->price+$coinPriceStep]);
         }

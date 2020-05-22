@@ -64,9 +64,15 @@
         <dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
         <dd>
             <ul>
-                <li><a href="system-base.html" title="系统设置">系统设置</a></li>
-                <li><a href="system-category.html" title="栏目管理">系统公告</a></li>
-                <li><a href="system-log.html" title="系统日志">系统日志</a></li>
+                @if(session('permission') == 0 || in_array("admin/systemSetting",session('permission')))
+                <li><a href="{{url('admin/systemSetting')}}" title="系统设置">系统设置</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/systemNotice",session('permission')))
+                <li><a href="{{url('admin/systemNotice')}}" title="栏目管理">系统公告</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/systemLog",session('permission')))
+                <li><a href="{{url('admin/systemLog')}}" title="系统日志">系统日志</a></li>
+                @endif
             </ul>
         </dd>
     </dl>

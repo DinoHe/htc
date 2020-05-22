@@ -22,4 +22,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'
     Route::any('adminPermissionAdd','Admin@permissionAdd');
     Route::any('adminPermissionEdit','Admin@permissionEdit');
     Route::post('adminPermissionDel','Admin@permissionDel');
+    Route::any('systemSetting','System@setting');
+    Route::any('systemAdvancedSetting','System@advancedSetting');
+    Route::get('systemNotice','System@notice');
+    Route::any('systemNoticeAdd','System@noticeAdd');
+    Route::any('systemNoticeEdit','System@noticeEdit');
+    Route::post('systemNoticeDel','System@noticeDel');
+    Route::any('systemLog','System@log');
+    Route::post('systemLogDestroy','System@logDestroy');
+    Route::get('systemLogDetails','System@logDetails');
 });
