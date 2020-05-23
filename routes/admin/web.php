@@ -31,4 +31,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'
     Route::any('systemLog','System@log');
     Route::post('systemLogDestroy','System@logDestroy');
     Route::get('systemLogDetails','System@logDetails');
+    Route::any('memberList','Member@list');
+    Route::any('memberEdit','Member@edit');
+    Route::post('memberDel','Member@del');
+    Route::get('memberLevel','Member@level');
+    Route::any('memberLevelAdd','Member@levelAdd');
+    Route::any('memberLevelEdit','Member@levelEdit');
+    Route::post('memberLevelDel','Member@levelDel');
+    Route::any('memberRealName','Member@realName');
+    Route::post('memberRealNameCheckEdit','Member@realNameCheck');
 });

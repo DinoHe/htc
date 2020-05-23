@@ -3,12 +3,13 @@
 
 @section('container')
 <article class="cl pd-20">
-	<form action="{{url('admin/adminEdit')}}" method="post" class="form form-horizontal" id="form-admin-add">
+	<form action="{{url('admin/adminEdit')}}" method="post" class="form form-horizontal">
+        @csrf
 		<input type="hidden" name="id" value="{{$admin->id}}">
         <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>管理员账号：</label>
+			<label class="form-label col-xs-4 col-sm-3">管理员账号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="{{$admin->account}}" name="account" required>
+                <div class="input-text">{{$admin->account}}</div>
 			</div>
 		</div>
         <div class="row cl">
@@ -61,17 +62,9 @@
 <script type="text/javascript" src="{{asset('static/admin/lib/jqueryValidation/messages_zh.js')}}"></script>
 <script type="text/javascript">
 $(function(){
-	$('.skin-minimal input').iCheck({
-		checkboxClass: 'icheckbox-blue',
-		radioClass: 'iradio-blue',
-		increaseArea: '20%'
-	});
 
-	$("#form-admin-add").validate({
+	$("form").validate({
 		rules:{
-			account:{
-				required:true,
-			},
             name:{
                 required:true,
             },

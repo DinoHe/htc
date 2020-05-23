@@ -33,14 +33,30 @@
         <dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
         <dd>
             <ul>
-                <li><a href="member-list.html" title="会员列表">会员列表</a></li>
-                <li><a href="member-level.html" title="等级管理">等级管理</a></li>
-                <li><a href="member-scoreoperation.html" title="积分管理">实名认证</a></li>
-                <li><a href="member-scoreoperation.html" title="积分管理">资产管理</a></li>
-                <li><a href="member-record-browse.html" title="浏览记录">矿机管理</a></li>
-                <li><a href="member-record-download.html" title="下载记录">团队</a></li>
-                <li><a href="member-record-share.html" title="分享记录">活动</a></li>
-                <li><a href="member-record-share.html" title="分享记录">建议</a></li>
+                @if(session('permission') == 0 || in_array("admin/memberList",session('permission')))
+                <li><a href="{{url('admin/memberList')}}" title="会员列表">会员列表</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/memberLevel",session('permission')))
+                <li><a href="{{url('admin/memberLevel')}}" title="等级管理">等级管理</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/memberRealName",session('permission')))
+                <li><a href="{{url('admin/memberRealName')}}" title="实名认证">实名认证</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/memberAssets",session('permission')))
+                <li><a href="{{url('admin/memberAssets')}}" title="资产管理">资产管理</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/memberList",session('permission')))
+                <li><a href="{{url('admin/memberMiners')}}" title="矿机管理">矿机管理</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/memberTeams",session('permission')))
+                <li><a href="{{url('admin/memberTeams')}}" title="团队">团队</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/memberActivities",session('permission')))
+                <li><a href="{{url('admin/memberActivities')}}" title="活动">活动</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/memberIdeals",session('permission')))
+                <li><a href="{{url('admin/memberIdeals')}}" title="建议">建议</a></li>
+                @endif
             </ul>
         </dd>
     </dl>

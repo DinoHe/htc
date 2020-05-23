@@ -1,5 +1,5 @@
 <?php
-
+Route::get('/','Home\Index@index')->middleware('guest');
 Route::group(['prefix'=>'home','namespace'=>'Home'],function (){
     Route::any('login','Login@login');
     Route::get('logout','Login@logout');
@@ -11,7 +11,6 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function (){
 
 Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],function (){
     Route::get('index','Index@index');
-    Route::get('/','Index@index');
     Route::get('qiandao','Index@qiandao');
     Route::post('rent','Index@rent');
     Route::get('member','Member@member');

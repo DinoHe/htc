@@ -16,8 +16,7 @@ class Members extends Authenticatable
     const BLOCKED_FOREVER = 3;
 
     protected $fillable = [
-        'phone', 'password', 'safe_password', 'level_id', 'parentid','activated','deleted',
-        'describes','credit'
+        'phone', 'password', 'safe_password', 'level_id', 'parentid','activated', 'describes','credit'
     ];
 
     public function level()
@@ -33,6 +32,20 @@ class Members extends Authenticatable
     public function realNameAuth()
     {
         return $this->hasOne('App\Http\Models\RealNameAuths','member_id');
+    }
+
+    public function getAccountStatus($status)
+    {
+        switch ($status){
+            case self::ACTIVATED:
+                return '已激活';
+            case self::ACTIVATE_NO:
+                return '未激活';
+            case self::BLOCKED_TMP:
+                return '临时冻结';
+            case self::BLOCKED_FOREVER:
+                return '永久冻结';
+        }
     }
 
     public function getSubordinates($id)

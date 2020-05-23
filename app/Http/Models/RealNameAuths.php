@@ -18,6 +18,11 @@ class RealNameAuths extends Model
         'auth_status','describes'
     ];
 
+    public function member()
+    {
+        return $this->belongsTo('App\Http\Models\Members','member_id');
+    }
+
     public function getAuthStatusDesc($status)
     {
         switch ($status){
@@ -26,9 +31,9 @@ class RealNameAuths extends Model
             case RealNameAuths::AUTH_SUCCESS:
                 return '已认证';
             case RealNameAuths::AUTH_CHECK_FAIL:
-                return '审核未通过';
+                return '未通过';
             case RealNameAuths::AUTH_CHECKING:
-                return '审核中';
+                return '待审核';
         }
     }
 
