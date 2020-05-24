@@ -40,4 +40,10 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'
     Route::post('memberLevelDel','Member@levelDel');
     Route::any('memberRealName','Member@realName');
     Route::post('memberRealNameCheckEdit','Member@realNameCheck');
+    Route::any('memberRealNameEdit','Member@realNameEdit');
+    Route::post('memberRealNameDel','Member@realNameDel');
+    Route::any('memberAssets','Member@assets');
+    Route::any('memberAssetsRechargeEdit','Member@assetsRecharge');
+    Route::post('memberAssetsBlockEdit','Member@assetsBlock');
+    Route::get('memberAssetsSum','Member@assetsSum');
 });

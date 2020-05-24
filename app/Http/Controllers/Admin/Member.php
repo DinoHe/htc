@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Assets;
 use App\Http\Models\MemberLevels;
 use App\Http\Models\Members;
 use App\Http\Models\RealNameAuths;
@@ -130,10 +131,35 @@ class Member extends Base
     public function realNameEdit()
     {
         $data = $this->request->input();
+        if ($this->request->isMethod('post')){
+            $info = ['name'=>$data['name'],'idcard'=>$data['idcard'],'weixin'=>$data['weixin'],'alipay'=>$data['alipay']];
+            if (!empty($data['bank_name'])) $info['bank_name'] = $data['bank_name'];
+            if (!empty($data['bank_card'])) $info['bank_card'] = $data['bank_card'];
+
+            $frontFile = $this->request->file('idcard_front_img');
+            $backFile = $this->request->file('idcard_back_img');
+            if (!empty($frontFile)){
+                if ($frontFile->getSize()/(1024*1024) > 1) return $this->dataReturn(['status'=>1,'message'=>'图片大小不能超过1M']);
+                $frontPath = $frontFile->storeAs('public/idcardImg',time().$data['idcard'].'front.jpg');
+                $info['idcard_front_img'] = substr($frontPath,6);
+            }
+            if (!empty($backFile)){
+                if ($backFile->getSize()/(1024*1024) > 1) return $this->dataReturn(['status'=>1,'message'=>'图片大小不能超过1M']);
+                $backPath = $backFile->storeAs('public/idcardImg',time().$data['idcard'].'back.jpg');
+                $info['idcard_back_img'] = substr($backPath,6);
+            }
+
+            RealNameAuths::where('id',$data['id'])->update($info);
+            return $this->dataReturn(['status'=>0,'message'=>'修改成功']);
+        }
         $realName = RealNameAuths::find($data['id']);
         return view('admin.member.realname-edit',['realName'=>$realName]);
     }
 
+    /**
+     * 实名认证审核
+     * @return false|string
+     */
     public function realNameCheck()
     {
         $data = $this->request->input();
@@ -141,5 +167,89 @@ class Member extends Base
         if ($data['auth_status'] == 1) $info['auth_status'] = RealNameAuths::AUTH_SUCCESS;
         RealNameAuths::where('id',$data['id'])->update($info);
         return $this->dataReturn(['status'=>0,'message'=>'操作成功']);
+    }
+
+    public function assets()
+    {
+        $model = Assets::where(null);
+        if ($this->request->isMethod('post')){
+            $data = $this->request->input();
+            $this->request->flashOnly(['account','balanceMin','buyMin']);
+            if (!empty($data['account'])) {
+                $id = Members::where('phone',$data['account'])->first()->id;
+                $model = $model->where('member_id',$id);
+            }
+            if (!empty($data['balanceMin'])) {
+                $model = $model->where('balance','>=',$data['balanceMin']*100);
+            }
+            if (!empty($data['buyMin'])) {
+                $model = $model->where('buy_total','>=',$data['buyMin']);
+            }
+        }
+        $assets = $model->get();
+        return view('admin.member.assets',['assets'=>$assets]);
+    }
+
+    public function assetsRecharge()
+    {
+        $data = $this->request->input();
+        $assets = Assets::find($data['id']);
+        if ($this->request->isMethod('post')){
+            if (empty($data['balance']) && empty($data['blockedAssets']) && empty($data['buyTotal'])){
+                return $this->dataReturn(['status'=>-1,'message'=>'请输入充值数量']);
+            }
+            if (!empty($data['balance'])) $assets->balance += $data['balance'];
+            if (!empty($data['blockedAssets'])) $assets->blocked_assets += $data['blockedAssets'];
+            if (!empty($data['buyTotal'])) $assets->buy_total += $data['buyTotal'];
+            $assets->save();
+            return $this->dataReturn(['status'=>0,'message'=>'充值成功']);
+        }
+
+        return view('admin.member.assets-recharge',['assets'=>$assets]);
+    }
+
+    /**
+     * 冻结HTC资产
+     * @return false|string
+     */
+    public function assetsBlock()
+    {
+        $data = $this->request->input();
+        $assets = Assets::find($data['id']);
+        $assets->balance -= $data['blockNumber'];
+        $assets->blocked_assets += $data['blockNumber'];
+        $assets->save();
+        return $this->dataReturn(['status'=>0,'message'=>'操作成功']);
+    }
+
+    /**
+     * 资产统计
+     * @return false|string
+     */
+    public function assetsSum()
+    {
+        $model = Assets::where(null);
+        $data = $this->request->input();
+        if (!empty($data['account'])) {
+            $id = Members::where('phone',$data['account'])->first()->id;
+            $model = $model->where('member_id',$id);
+        }
+        if (!empty($data['balanceMin'])) {
+            $model = $model->where('balance','>=',$data['balanceMin']*100);
+        }
+        if (!empty($data['buyMin'])) {
+            $model = $model->where('buy_total','>=',$data['buyMin']);
+        }
+        $assets = $model->get();
+        $balanceSum = 0;
+        $blockedSum = 0;
+        $buySum = 0;
+        foreach ($assets as $asset) {
+            $balanceSum += $asset->balance;
+            $blockedSum += $asset->blocked_assets;
+            $buySum += $asset->buy_total;
+        }
+        return $this->dataReturn(['status'=>0,'balanceSum'=>round($balanceSum,2),
+            'blockedSum'=>round($blockedSum,2),'buySum'=>$buySum]);
     }
 }

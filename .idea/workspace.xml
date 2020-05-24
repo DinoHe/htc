@@ -20,22 +20,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Member.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/level-add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/level-edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/level.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/realname-edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/realname.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/idcardImg/1590302823431124199311270779back.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/idcardImg/1590302838431124199311270779back.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/assets-recharge.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/assets.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/idcardImg/1590302823431124199311270779back.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/idcardImg/1590302838431124199311270779back.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/Members.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Members.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/RealNameAuths.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/RealNameAuths.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/admin/lib/datePicker/WdatePicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/admin/lib/datePicker/WdatePicker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Member.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Register.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Assets.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Assets.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/admin/css/htc.admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/admin/css/htc.admin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/storage/idcardImg/431124199311270779back.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/storage/idcardImg/431124199311270779back.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/admin/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admin/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/admin-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/admin-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/level-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/level-add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/level-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/level-edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/realname-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/realname-edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/realname.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/realname.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/system/notice-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/system/notice-add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/system/notice-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/system/notice-edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/system/setting.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/system/setting.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/admin/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/home/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/home/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/idcardImg/431124199311270779back.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/public/idcardImg/431124199311270779back.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,17 +185,17 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\wampserver\www\htc\public\static\home\img" />
+      <recent name="E:\wampserver\www\htc\public\static" />
+      <recent name="E:\wamp\www\htc\public" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\wamp\www\htc\resources\views\admin\member" />
       <recent name="E:\wamp\www\htc\resources\views\admin\system" />
       <recent name="E:\wamp\www\htc\public\static\admin\lib\ueditor" />
       <recent name="E:\wamp\www\htc\resources\views\admin\admin" />
       <recent name="E:\wamp\www\htc\public\static\admin\lib\jqueryValidation" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\wampserver\www\htc\public\static\home\img" />
-      <recent name="E:\wampserver\www\htc\public\static" />
-      <recent name="E:\wamp\www\htc\public" />
     </key>
   </component>
   <component name="RunManager">
@@ -222,7 +230,8 @@
       <workItem from="1589778209107" duration="18616000" />
       <workItem from="1589870240002" duration="29516000" />
       <workItem from="1589962724918" duration="25721000" />
-      <workItem from="1590217163087" duration="22107000" />
+      <workItem from="1590217163087" duration="22302000" />
+      <workItem from="1590295926579" duration="20687000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>

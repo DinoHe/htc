@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Assets;
 use App\Http\Models\Members;
 use App\Http\Models\PhoneTmps;
 use Illuminate\Support\Facades\Hash;
@@ -33,7 +34,7 @@ class Register extends Base
                 return back()->withErrors(['error'=>'无效的邀请码'])->withInput();
             }
 
-            //写入数据库
+            //注册成功
             $status = Members::create([
                 'phone' => $data['phone'],
                 'password' => Hash::make($data['password']),
@@ -41,6 +42,8 @@ class Register extends Base
                 'invite_code' => $this->getInvite($data['phone'])
             ]);
             if ($status){
+                //创建资产
+                Assets::create(['member_id' => Members::where('phone',$data['phone'])->first()->id]);
                 return redirect('home/login');
             }
             return back()->withErrors(['register'=>'注册失败'])->withInput();

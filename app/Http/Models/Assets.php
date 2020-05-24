@@ -11,6 +11,11 @@ class Assets extends Model
         'member_id','balance','blocked_assets','buy_total'
     ];
 
+    public function member()
+    {
+        return $this->belongsTo('App\Http\Models\Members','member_id');
+    }
+
     public function setBalanceAttribute($value)
     {
         $this->attributes['balance'] = $value*100;

@@ -25,7 +25,6 @@
                     </div>
                     <div class="tabCon">
                         <form action="{{url('admin/systemSetting')}}" method="post" class="form form-horizontal">
-                            @csrf
                         @if(count($settings) > 0)
                             @foreach($settings as $s)
                                 @if($s->input_type == 'text')

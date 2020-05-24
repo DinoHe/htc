@@ -4,7 +4,6 @@
 @section('container')
 <article class="cl pd-20">
 	<form action="{{url('admin/adminEdit')}}" method="post" class="form form-horizontal">
-        @csrf
 		<input type="hidden" name="id" value="{{$admin->id}}">
         <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">管理员账号：</label>

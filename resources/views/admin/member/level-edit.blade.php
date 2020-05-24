@@ -4,7 +4,6 @@
 @section('container')
 <article class="cl pd-20">
 	<form action="{{url('admin/memberLevelEdit')}}" method="post" class="form form-horizontal">
-        @csrf
 		<div class="row cl">
             <input type="hidden" name="id" value="{{$level->id}}">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>等级名称：</label>

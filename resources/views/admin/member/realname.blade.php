@@ -3,7 +3,7 @@
 @section('css')
     <style>
         .preview{position: relative}
-        .preview div{width: 300px;height:400px;position: absolute;left: -340px;top: -50px}
+        .preview div{width: 300px;height:400px;position: absolute;left: -340px;top: -50px;z-index: 9}
     </style>
 @endsection
 
@@ -40,11 +40,6 @@
                 </div>
                 </form>
                 <div class="cl pd-5 bg-1 bk-gray mt-20">
-                    <span class="l">
-                        @if(session('permission') == 0)
-                        <a href="javascript:;" onclick="dataDel('{{url("admin/memberDel")}}')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-                        @endif
-                    </span>
                     <span class="r">共有数据：<strong>{{count($realnames)}}</strong> 条</span>
                 </div>
                 <table class="table table-border table-bordered table-bg table-sort">
@@ -92,10 +87,7 @@
                                     <a title="审核" href="javascript:;" onclick="realName_check(this,'{{$r->id}}')" class="ml-5" style="text-decoration:none">审核</a>
                                 @endif
                                 @if(session('permission') == 0 || in_array("admin/memberRealNameEdit",session('permission')))
-                                    <a title="编辑" href="javascript:;" onclick="edit('编辑','{{url("admin/memberRealNameEdit")}}','{{$r->id}}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-                                @endif
-                                @if(session('permission') == 0)
-                                <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/memberRealNameDel")}}','{{$r->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                                    <a title="编辑" href="javascript:;" onclick="edit('编辑','{{url("admin/memberRealNameEdit")}}','{{$r->id}}','800','600')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
                                 @endif
                             </td>
                         </tr>
