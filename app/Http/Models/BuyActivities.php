@@ -11,6 +11,11 @@ class BuyActivities extends Model
         'buy_number','reward_leader_miner_type','reward_leader_miner_number','reward_member'
     ];
 
+    public function miner()
+    {
+        return $this->belongsTo('App\Http\Models\Miners','reward_leader_miner_type');
+    }
+
     public function setRewardMemberAttribute($memberIdArray)
     {
         if (count($memberIdArray) > 1){
@@ -30,4 +35,5 @@ class BuyActivities extends Model
 
         return $memberIdsArray;
     }
+
 }

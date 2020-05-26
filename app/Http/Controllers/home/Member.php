@@ -215,7 +215,8 @@ class Member extends Base
     public function ideal()
     {
         if ($this->request->isMethod('post')){
-            Ideals::create(['content'=>$this->request->input('content')]);
+            $account = Auth::user()->phone;
+            Ideals::create(['account'=>$account,'content'=>$this->request->input('content')]);
             return $this->dataReturn(['status'=>0,'message'=>'提交成功']);
         }
         return view('home.member.ideal');

@@ -25,7 +25,9 @@
         <dt><i class="Hui-iconfont">&#xe620;</i> 矿机商城<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
         <dd>
             <ul>
-                <li><a href="product-brand.html" title="品牌管理">矿机列表</a></li>
+                @if(session('permission') == 0 || in_array("admin/minerList",session('permission')))
+                <li><a href="{{url('admin/minerList')}}" title="矿机列表">矿机列表</a></li>
+                @endif
             </ul>
         </dd>
     </dl>
@@ -45,17 +47,17 @@
                 @if(session('permission') == 0 || in_array("admin/memberAssets",session('permission')))
                 <li><a href="{{url('admin/memberAssets')}}" title="资产管理">资产管理</a></li>
                 @endif
-                @if(session('permission') == 0 || in_array("admin/memberList",session('permission')))
-                <li><a href="{{url('admin/memberMiners')}}" title="矿机管理">矿机管理</a></li>
+                @if(session('permission') == 0 || in_array("admin/memberMiner",session('permission')))
+                <li><a href="{{url('admin/memberMiner')}}" title="矿机管理">矿机管理</a></li>
                 @endif
-                @if(session('permission') == 0 || in_array("admin/memberTeams",session('permission')))
-                <li><a href="{{url('admin/memberTeams')}}" title="团队">团队</a></li>
+                @if(session('permission') == 0 || in_array("admin/memberTeam",session('permission')))
+                <li><a href="{{url('admin/memberTeam')}}" title="团队">团队</a></li>
                 @endif
-                @if(session('permission') == 0 || in_array("admin/memberActivities",session('permission')))
-                <li><a href="{{url('admin/memberActivities')}}" title="活动">活动</a></li>
+                @if(session('permission') == 0 || in_array("admin/memberActivity",session('permission')))
+                <li><a href="{{url('admin/memberActivity')}}" title="活动">活动</a></li>
                 @endif
-                @if(session('permission') == 0 || in_array("admin/memberIdeals",session('permission')))
-                <li><a href="{{url('admin/memberIdeals')}}" title="建议">建议</a></li>
+                @if(session('permission') == 0 || in_array("admin/memberIdeal",session('permission')))
+                <li><a href="{{url('admin/memberIdeal')}}" title="建议反馈">建议反馈</a></li>
                 @endif
             </ul>
         </dd>

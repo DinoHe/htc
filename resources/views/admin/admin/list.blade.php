@@ -33,13 +33,13 @@
                         </tr>
                         <tr class="text-c">
                             <th width="25"></th>
-                            <th width="150">账号</th>
-                            <th width="150">姓名</th>
-                            <th width="150">手机</th>
-                            <th width="150">微信</th>
+                            <th width="120">账号</th>
+                            <th>姓名</th>
+                            <th>手机</th>
+                            <th>微信</th>
                             <th>角色</th>
-                            <th width="130">加入时间</th>
-                            <th width="100">是否已启用</th>
+                            <th>加入时间</th>
+                            <th width="50">状态</th>
                             <th width="100">操作</th>
                         </tr>
                     </thead>

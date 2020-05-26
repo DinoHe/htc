@@ -20,30 +20,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/storage/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/storage/idcardImg/1590302823431124199311270779back.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/storage/idcardImg/1590302838431124199311270779back.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/assets-recharge.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/assets.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/idcardImg/1590302823431124199311270779back.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/idcardImg/1590302838431124199311270779back.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Miner.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/activity-add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/activity-edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/activity.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/ideal.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/myminer-add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/myminer.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/team.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/miner/add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/miner/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/miner/list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Member.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Register.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/Assets.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Assets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/admin/css/htc.admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/admin/css/htc.admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/storage/idcardImg/431124199311270779back.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/storage/idcardImg/431124199311270779back.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/admin/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admin/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/level-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/level-add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/level-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/level-edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/realname-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/realname-edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/realname.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/realname.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/system/notice-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/system/notice-add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/system/notice-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/system/notice-edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/system/setting.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/system/setting.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Base.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/BuyActivities.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/BuyActivities.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Ideals.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Ideals.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Members.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Members.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Miners.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Miners.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/MyMiners.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/MyMiners.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/admin/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admin/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/member/member.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/member/member.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/myminer/running.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/myminer/running.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/admin-master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/admin-master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/admin-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/admin-menu.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/admin/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/public/idcardImg/431124199311270779back.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/public/idcardImg/431124199311270779back.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +185,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/member" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/miner" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
@@ -191,11 +196,11 @@
       <recent name="E:\wamp\www\htc\public" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\wampserver\www\htc\resources\views\admin\miner" />
+      <recent name="E:\wampserver\www\htc\resources\views\admin\member" />
       <recent name="E:\wamp\www\htc\resources\views\admin\member" />
       <recent name="E:\wamp\www\htc\resources\views\admin\system" />
       <recent name="E:\wamp\www\htc\public\static\admin\lib\ueditor" />
-      <recent name="E:\wamp\www\htc\resources\views\admin\admin" />
-      <recent name="E:\wamp\www\htc\public\static\admin\lib\jqueryValidation" />
     </key>
   </component>
   <component name="RunManager">
@@ -232,6 +237,7 @@
       <workItem from="1589962724918" duration="25721000" />
       <workItem from="1590217163087" duration="22302000" />
       <workItem from="1590295926579" duration="20687000" />
+      <workItem from="1590460077958" duration="20365000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
@@ -313,9 +319,10 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="367" y="0" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1588703194539" />
-    <state x="550" y="138" key="NewPhpClassDialog" timestamp="1590218281830">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="489" y="120" key="NewPhpClassDialog" timestamp="1590487449759">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="489" y="120" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1590487449759" />
     <state x="550" y="138" key="NewPhpClassDialog/0.0.1536.834@0.0.1536.834" timestamp="1590218281830" />
     <state x="499" y="285" key="NewPhpFileDialog" timestamp="1589537807596">
       <screen x="0" y="0" width="1366" height="728" />

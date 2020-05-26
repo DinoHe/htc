@@ -79,7 +79,7 @@
                             <td>{{$m->levelName}}</td>
                             <td>{{$m->credit}}</td>
                             <td>{{$m->created_at}}</td>
-                            <td>{{$m->status}}</td>
+                            <td><div class="label radius {{$m->status=='已激活'?'label-success':''}}">{{$m->status}}</div></td>
                             <td class="td-manage">
                                 @if(session('permission') == 0 || in_array("admin/memberEdit",session('permission')))
                                     <a title="编辑" href="javascript:;" onclick="edit('编辑','{{url("admin/memberEdit")}}','{{$m->id}}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>

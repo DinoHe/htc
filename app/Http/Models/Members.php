@@ -62,12 +62,27 @@ class Members extends Authenticatable
                 }else{
                     $subordinate->realNameStatus = '未认证';
                 }
+                $subordinate->team_total = count($this->getChildNodes($subordinate->id));
                 $subordinate->memberLevel = $subordinate->level->level_name;
                 $subordinate->subordinatesCount = self::where('parentid',$subordinate->id)->count();
                 array_push($subordinatesArray,$subordinate);
             }
         }
         return array($subordinatesArray,$realNameAuthed);
+    }
+
+    private function getChildNodes($id)
+    {
+        $childNodes = Members::where('parentid',$id)->get();
+        static $child = [];
+        if (!$childNodes->isEmpty()){
+            foreach ($childNodes as $childNode) {
+                $child[] = $childNode;
+                $this->getChildNodes($childNode->id);
+            }
+        }
+
+        return $child;
     }
 
 }

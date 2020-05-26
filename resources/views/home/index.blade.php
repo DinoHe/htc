@@ -15,10 +15,10 @@
     <div class="slider" id="slider">
         <div class="slider-inner">
             <div class="item">
-                <img src="{{asset("static/home/images/main-slider-1.jpg")}}">
+                <img src="{{asset("static/home/img/main-slider-1.jpg")}}">
             </div>
             <div class="item">
-                <img src="{{asset("static/home/images/main-slider-2.jpg")}}">
+                <img src="{{asset("static/home/img/main-slider-2.jpg")}}">
             </div>
         </div>
     </div>

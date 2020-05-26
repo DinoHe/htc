@@ -26,6 +26,9 @@ class Base extends Controller
     protected function initMiners($miners)
     {
         foreach ($miners as $miner){
+            if ($miner->run_status != MyMiners::RUNNING){
+                continue;
+            }
             $timeDiff = (int)((time() - date_timestamp_get(date_create($miner->updated_at))) / 3600); //h
             if ($timeDiff > 15*24){ //超过15天未收取则失效
                 $miner->run_status = MyMiners::RUN_EXPIRED;

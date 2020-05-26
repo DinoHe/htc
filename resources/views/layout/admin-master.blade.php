@@ -61,6 +61,10 @@
         $.loading();
     });
 
+    $('.breadcrumb a').on('click',function () {
+        $.loading();
+    });
+
     //批量删除
     function dataDel(url) {
         layer.confirm('确认删除吗？',function () {

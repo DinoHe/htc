@@ -8,6 +8,6 @@ class Ideals extends Model
 {
 
     protected $fillable = [
-        'content'
+        'account','content'
     ];
 }

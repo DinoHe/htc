@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Base;
 use App\Http\Models\Assets;
+use App\Http\Models\BuyActivities;
+use App\Http\Models\Ideals;
 use App\Http\Models\MemberLevels;
 use App\Http\Models\Members;
+use App\Http\Models\Miners;
+use App\Http\Models\MyMiners;
 use App\Http\Models\RealNameAuths;
 use Illuminate\Support\Facades\Hash;
 
@@ -118,7 +122,10 @@ class Member extends Base
             $this->request->flashOnly(['auth_status','account','weixin','alipay']);
             $where = [];
             if ($data['auth_status'] != '-1') $where['auth_status'] = $data['auth_status'];
-            if (!empty($data['account'])) $where['member_id'] = Members::where('phone',$data['account'])->first()->id;
+            if (!empty($data['account'])) {
+                $member = Members::where('phone',$data['account'])->first();
+                if (!empty($member)) $where['member_id'] = $member->id;
+            }
             if (!empty($data['weixin'])) $where['weixin'] = $data['weixin'];
             if (!empty($data['alipay'])) $where['alipay'] = $data['alipay'];
             $realnames = RealNameAuths::where($where)->get();
@@ -176,8 +183,10 @@ class Member extends Base
             $data = $this->request->input();
             $this->request->flashOnly(['account','balanceMin','buyMin']);
             if (!empty($data['account'])) {
-                $id = Members::where('phone',$data['account'])->first()->id;
-                $model = $model->where('member_id',$id);
+                $member = Members::where('phone',$data['account'])->first();
+                if (!empty($member)){
+                    $model = $model->where('member_id',$member->id);
+                }
             }
             if (!empty($data['balanceMin'])) {
                 $model = $model->where('balance','>=',$data['balanceMin']*100);
@@ -252,4 +261,171 @@ class Member extends Base
         return $this->dataReturn(['status'=>0,'balanceSum'=>round($balanceSum,2),
             'blockedSum'=>round($blockedSum,2),'buySum'=>$buySum]);
     }
+
+    public function myMiner()
+    {
+        $model = MyMiners::where(null);
+        $miners = Miners::all();
+        $data = $this->request->input();
+        if ($this->request->isMethod('post')){
+            $this->request->flashOnly(['account','minerType']);
+            if (!empty($data['account'])) {
+                $member = Members::where('phone',$data['account'])->first();
+                if (!empty($member)){
+                    $model = $model->where('member_id',$member->id);
+                }
+            }
+            if ($data['minerType'] != '-1') {
+                $model = $model->where('miner_id',$data['minerType']);
+            }
+        }
+
+        $myminers = $model->get();
+        parent::initMiners($myminers);
+        return view('admin.member.myminer',['myminers'=>$myminers,'miners'=>$miners]);
+    }
+
+    /**
+     * 结束矿机运行
+     * @param $id
+     * @return false|string
+     */
+    public function myMinerStop($id)
+    {
+        $myMiner = MyMiners::find($id);
+        if (!empty($myMiner)){
+            $myMiner->run_status = MyMiners::RUN_FINISHED;
+            $myMiner->save();
+        }
+        return $this->dataReturn(['status'=>0,'message'=>'操作成功']);
+    }
+
+    /**
+     * 赠送矿机
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     */
+    public function myMinerAdd()
+    {
+        if ($this->request->isMethod('post')){
+            $data = $this->request->input();
+            $member = Members::where('phone',$data['account'])->first();
+            if (empty($member)){
+                return $this->dataReturn(['status'=>1,'message'=>'账户不存在']);
+            }
+            $miner = Miners::find($data['minerType']);
+            for ($i=0;$i<$data['number'];$i++){
+                MyMiners::create([
+                    'member_id' => $member->id,
+                    'miner_id' => $data['minerType'],
+                    'miner_tittle' => $miner->tittle,
+                    'hashrate' => $miner->hashrate,
+                    'total_dig' => $miner->total_dig,
+                    'runtime' => $miner->runtime,
+                    'nph' => $miner->nph
+                ]);
+            }
+            return $this->dataReturn(['status'=>0,'message'=>'赠送成功']);
+        }
+        $miners = Miners::all();
+        return view('admin.member.myminer-add',['miners'=>$miners]);
+    }
+
+    public function myMinerDel()
+    {
+        $id = $this->request->input('id');
+        $ids = explode(',',$id)?:$id;
+        MyMiners::destroy($ids);
+        return $this->dataReturn(['status'=>0,'message'=>'删除成功']);
+    }
+
+    public function team()
+    {
+        $teams = [];
+        if ($this->request->isMethod('post')){
+            $account = $this->request->input('account');
+            $this->request->flashOnly(['account']);
+            $member = Members::where('phone',$account)->first();
+            if (!empty($member)){
+                $teams = $member->getSubordinates($member->id)[0];
+            }
+        }
+        return view('admin.member.team',['teams'=>$teams]);
+    }
+
+    public function activity()
+    {
+        $activities = BuyActivities::all();
+        foreach ($activities as $activity) {
+            $members = Members::find($activity->reward_member);
+            if (!$members->isEmpty()){
+                $rewardMembers = [];
+                foreach ($members as $member) {
+                    array_push($rewardMembers,$member->phone);
+                }
+                $activity->rewardMembers = implode(',',$rewardMembers);
+            }
+        }
+        return view('admin.member.activity',['activities'=>$activities]);
+    }
+
+    public function activityAdd()
+    {
+        $miners = Miners::all();
+        if ($this->request->isMethod('post')){
+            $data = $this->request->input();
+            BuyActivities::create([
+                'buy_number' => $data['buyNumber'],
+                'reward_leader_miner_type' => $data['minerType'],
+                'reward_leader_miner_number' => $data['number']
+            ]);
+            return $this->dataReturn(['status'=>0,'message'=>'添加成功']);
+        }
+        return view('admin.member.activity-add',['miners'=>$miners]);
+    }
+
+    public function activityEdit()
+    {
+        $miners = Miners::all();
+        $data = $this->request->input();
+        if ($this->request->isMethod('post')){
+            BuyActivities::where('id',$data['id'])->update([
+                'buy_number' => $data['buyNumber'],
+                'reward_leader_miner_type' => $data['minerType'],
+                'reward_leader_miner_number' => $data['number']
+            ]);
+            return $this->dataReturn(['status'=>0,'message'=>'编辑成功']);
+        }
+        $activity = BuyActivities::find($data['id']);
+        return view('admin.member.activity-edit',['miners'=>$miners,'activity'=>$activity]);
+    }
+
+    public function activityDel()
+    {
+        $id = $this->request->input('id');
+        $ids = explode(',',$id)?:$id;
+        BuyActivities::destroy($ids);
+        return $this->dataReturn(['status'=>0,'message'=>'删除成功']);
+    }
+
+    public function ideal()
+    {
+        $model = Ideals::where(null);
+        if ($this->request->isMethod('post')){
+            $member = Members::where('phone',$this->request->input('account'))->first();
+            if (!empty($member)){
+                $model = $model->where('account',$member->phone);
+            }
+        }
+        $ideals = $model->get();
+        return view('admin.member.ideal',['ideals'=>$ideals]);
+    }
+
+    public function idealDel()
+    {
+        $id = $this->request->input('id');
+        $ids = explode(',',$id)?:$id;
+        Ideals::destroy($ids);
+        return $this->dataReturn(['status'=>0,'message'=>'删除成功']);
+    }
+
 }

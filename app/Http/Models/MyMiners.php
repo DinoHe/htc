@@ -15,4 +15,21 @@ class MyMiners extends Model
     protected $fillable = [
         'member_id','miner_id','miner_tittle','dug','runtime','nph','total_dig','hashrate','run_status'
     ];
+
+    public function member()
+    {
+        return $this->belongsTo('App\Http\Models\Members','member_id');
+    }
+
+    public function getMinerStatus($status)
+    {
+        switch ($status){
+            case self::RUNNING:
+                return '运行中';
+            case self::RUN_FINISHED:
+                return '已结束';
+            case self::RUN_EXPIRED:
+                return '已过期';
+        }
+    }
 }
