@@ -46,6 +46,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'
     Route::any('memberAssetsRechargeEdit','Member@assetsRecharge');
     Route::post('memberAssetsBlockEdit','Member@assetsBlock');
     Route::get('memberAssetsSum','Member@assetsSum');
+    Route::post('memberAssetsDel','Member@assetsDel');
     Route::any('memberMiner','Member@myMiner');
     Route::get('memberMinerStop/{id}','Member@myMinerStop');
     Route::any('memberMinerAdd','Member@myMinerAdd');

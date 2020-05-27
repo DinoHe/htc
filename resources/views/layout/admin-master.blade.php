@@ -65,6 +65,10 @@
         $.loading();
     });
 
+    $('form').submit(function () {
+        $('input:submit').css('opacity',0.7).attr('disabled','disabled');
+    });
+
     //批量删除
     function dataDel(url) {
         layer.confirm('确认删除吗？',function () {

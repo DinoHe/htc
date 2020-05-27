@@ -61,6 +61,9 @@
                                 @if(session('permission') == 0 || in_array("admin/memberAssetsBlockedEdit",session('permission')))
                                     <a href="javascript:;" onclick="assets_block('{{url("admin/memberAssetsBlockEdit")}}','{{$a->id}}')" class="ml-5 btn-danger pd-5 radius" style="text-decoration:none">冻结</a>
                                 @endif
+                                @if(session('permission') == 0 || in_array("admin/memberAssetsDel",session('permission')))
+                                    <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/memberAssetsDel")}}','{{$a->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

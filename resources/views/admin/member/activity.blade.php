@@ -46,7 +46,7 @@
                             <td>{{$a->rewardMembers}}</td>
                             <td class="td-manage">
                                 @if(session('permission') == 0 || in_array("admin/memberActivityEdit",session('permission')))
-                                    <a title="编辑" href="javascript:;" onclick="edit('活动编辑','{{url("admin/memberActivityEdit")}}','{{$a->id}}','800','300')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                                    <a title="编辑" href="javascript:;" onclick="edit('活动编辑','{{url("admin/memberActivityEdit")}}','{{$a->id}}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
                                 @endif
                                 @if(session('permission') == 0 || in_array("admin/memberActivityDel",session('permission')))
                                     <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/memberActivityDel")}}','{{$a->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>

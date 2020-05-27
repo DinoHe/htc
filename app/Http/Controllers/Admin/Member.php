@@ -176,6 +176,14 @@ class Member extends Base
         return $this->dataReturn(['status'=>0,'message'=>'操作成功']);
     }
 
+    public function realNameDel()
+    {
+        $id = $this->request->input('id');
+        $ids = explode(',',$id)?:$id;
+        RealNameAuths::destroy($ids);
+        return $this->dataReturn(['status'=>0,'message'=>'删除成功']);
+    }
+
     public function assets()
     {
         $model = Assets::where(null);
@@ -260,6 +268,14 @@ class Member extends Base
         }
         return $this->dataReturn(['status'=>0,'balanceSum'=>round($balanceSum,2),
             'blockedSum'=>round($blockedSum,2),'buySum'=>$buySum]);
+    }
+
+    public function assetsDel()
+    {
+        $id = $this->request->input('id');
+        $ids = explode(',',$id)?:$id;
+        Assets::destroy($ids);
+        return $this->dataReturn(['status'=>0,'message'=>'删除成功']);
     }
 
     public function myMiner()
@@ -391,11 +407,21 @@ class Member extends Base
             BuyActivities::where('id',$data['id'])->update([
                 'buy_number' => $data['buyNumber'],
                 'reward_leader_miner_type' => $data['minerType'],
-                'reward_leader_miner_number' => $data['number']
+                'reward_leader_miner_number' => $data['number'],
+                'reward_member' => $data['rewardMembers']
             ]);
             return $this->dataReturn(['status'=>0,'message'=>'编辑成功']);
         }
         $activity = BuyActivities::find($data['id']);
+        $members = Members::find($activity->reward_member);
+        if (!$members->isEmpty()){
+            $rewardMembers = [];
+            foreach ($members as $member) {
+                array_push($rewardMembers,$member->phone);
+            }
+            $activity->rewardMembers = $rewardMembers;
+            $activity->rewardMemberStr = implode(',',$rewardMembers);
+        }
         return view('admin.member.activity-edit',['miners'=>$miners,'activity'=>$activity]);
     }
 

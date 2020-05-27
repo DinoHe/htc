@@ -40,7 +40,7 @@
                 </div>
                 </form>
                 <div class="cl pd-5 bg-1 bk-gray mt-20">
-                    <span class="r">共有数据：<strong>{{count($realnames)}}</strong> 条</span>
+                    <span class="l">共有数据：<strong>{{count($realnames)}}</strong> 条</span>
                 </div>
                 <table class="table table-border table-bordered table-bg table-sort">
                     <thead>
@@ -88,6 +88,9 @@
                                 @endif
                                 @if(session('permission') == 0 || in_array("admin/memberRealNameEdit",session('permission')))
                                     <a title="编辑" href="javascript:;" onclick="edit('编辑','{{url("admin/memberRealNameEdit")}}','{{$r->id}}','800','600')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                                @endif
+                                @if(session('permission') == 0 || in_array("admin/memberRealNameDel",session('permission')))
+                                    <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/memberRealNameDel")}}','{{$r->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
                                 @endif
                             </td>
                         </tr>

@@ -1,5 +1,15 @@
 @extends('layout.admin-master')
 @section('tittle')编辑购买活动 @endsection
+@section('css')
+    <style>
+        li{margin: 0 2px}
+        .data-item{padding: 2px;color: white;width: 103px;background-color: #00a2d4;
+            float: left;border-radius: 3px}
+        .data-item label{overflow: hidden;}
+        .data-item a{display: inline;color: red;text-decoration: none;font-weight: bold;
+            float: right;padding: 0 2px}
+    </style>
+@endsection
 
 @section('container')
 <article class="cl pd-20">
@@ -29,6 +39,29 @@
 				<input type="number" class="input-text" name="number" value="{{$activity->reward_leader_miner_number}}" min="0" style="width: 200px" required>
 			</div>
 		</div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">添加已获得赠送的会员：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" style="width: 200px" onchange="this.value.length==11?1:this.value=''">
+                <a href="#" onclick="addMember(this)" class="btn btn-success">添加</a>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>已获得赠送的会员：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="hidden" name="rewardMembers" value="{{$activity->rewardMemberStr}}">
+                <ul class="input-text">
+                    @if(!is_null($activity->rewardMembers))
+                    @foreach($activity->rewardMembers as $rm)
+                    <li class="data-item">
+                        <label>{{$rm}}</label>
+                        <a href="#" onclick="removeElement(this)">X</a>
+                    </li>
+                    @endforeach
+                    @endif
+                </ul>
+            </div>
+        </div>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
@@ -80,5 +113,25 @@ $(function(){
 		}
 	});
 });
+
+function removeElement(obj) {
+    $(obj).parent().remove();
+}
+
+function addMember(obj){
+    var $inpt = $(obj).siblings(),
+        $rm = $('input[name="rewardMembers"]');
+        li = '<li class="data-item"><label>'+$inpt.val()+'</label><a href="#" onclick="removeElement(this)">X</a></li>';
+    if ($inpt.val() == ''){
+        return false;
+    }
+    $('ul').append(li);
+    var v = $rm.val();
+    if (v != ''){
+        v += ',' + $inpt.val();
+        $rm.val(v);
+    }
+    $inpt.val('');
+}
 </script>
 @endsection

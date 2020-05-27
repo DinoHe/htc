@@ -20,34 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Miner.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/activity-add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/activity-edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/activity.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/ideal.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/myminer-add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/myminer.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/member/team.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/miner/add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/miner/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/miner/list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Member.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Base.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Member.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/BuyActivities.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/BuyActivities.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/Ideals.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Ideals.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/Members.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Members.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/Miners.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Miners.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/MyMiners.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/MyMiners.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/admin/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admin/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/member/member.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/member/member.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/myminer/running.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/myminer/running.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/activity-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/activity-edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/activity.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/activity.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/assets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/assets.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/realname.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/realname.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layout/admin-master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/admin-master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/admin-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/admin-menu.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/admin/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -237,7 +216,8 @@
       <workItem from="1589962724918" duration="25721000" />
       <workItem from="1590217163087" duration="22302000" />
       <workItem from="1590295926579" duration="20687000" />
-      <workItem from="1590460077958" duration="20365000" />
+      <workItem from="1590460077958" duration="20594000" />
+      <workItem from="1590557776711" duration="12011000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
@@ -310,10 +290,10 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="205" y="47" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.834@0.0.1536.834" timestamp="1588690737225" />
-    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590224989148">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="444" y="150" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590489569771">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="444" y="150" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1589442484470" />
+    <state x="444" y="150" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1590489569771" />
     <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.834@0.0.1536.834" timestamp="1590224989148" />
     <state x="367" y="0" key="CommitChangelistDialog2" timestamp="1588703194539">
       <screen x="0" y="0" width="1536" height="834" />
