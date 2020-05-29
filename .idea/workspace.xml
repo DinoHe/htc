@@ -20,14 +20,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Image.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Trade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Models/Images.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/homeImg/test.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/homeImg/test1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/homeImg/testjpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/homeImg/中型云矿机.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/homeImg/大型云矿机.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/homeImg/小型云矿机.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/homeImg/微型云矿机.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/homeImg/超级云矿机.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/image/add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/image/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/image/list.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/trade/buy-add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/trade/buy-list.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/trade/sales-list.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/homeImg/main-slider-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/homeImg/main-slider-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/homeImg/test.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/homeImg/test1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/homeImg/testjpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Member.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/activity-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/activity-edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/activity.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/activity.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/assets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/assets.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/realname.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/realname.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/admin-master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/admin-master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/home/img/main-slider-1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/storage/homeImg/main-slider-1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/home/img/main-slider-2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/storage/homeImg/main-slider-2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/home/img/中型云矿机.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/home/img/大型云矿机.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/home/img/小型云矿机.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/home/img/微型云矿机.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/home/img/超级云矿机.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/storage/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/myminer/running.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/myminer/running.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/admin-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/admin-menu.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/admin/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/.gitignore" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,22 +195,24 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/miner" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/trade" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\wampserver\www\htc\storage\app\public\homeImg" />
+      <recent name="E:\wampserver\www\htc\storage\app\public\miner" />
       <recent name="E:\wampserver\www\htc\public\static\home\img" />
       <recent name="E:\wampserver\www\htc\public\static" />
       <recent name="E:\wamp\www\htc\public" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\wampserver\www\htc\resources\views\admin\trade" />
+      <recent name="E:\wampserver\www\htc\resources\views\admin\image" />
+      <recent name="E:\wampserver\www\htc\app\Http\Models" />
       <recent name="E:\wampserver\www\htc\resources\views\admin\miner" />
       <recent name="E:\wampserver\www\htc\resources\views\admin\member" />
-      <recent name="E:\wamp\www\htc\resources\views\admin\member" />
-      <recent name="E:\wamp\www\htc\resources\views\admin\system" />
-      <recent name="E:\wamp\www\htc\public\static\admin\lib\ueditor" />
     </key>
   </component>
   <component name="RunManager">
@@ -217,7 +250,9 @@
       <workItem from="1590217163087" duration="22302000" />
       <workItem from="1590295926579" duration="20687000" />
       <workItem from="1590460077958" duration="20594000" />
-      <workItem from="1590557776711" duration="12011000" />
+      <workItem from="1590557776711" duration="12270000" />
+      <workItem from="1590644135142" duration="7559000" />
+      <workItem from="1590732739313" duration="14673000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
@@ -290,19 +325,19 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="205" y="47" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.834@0.0.1536.834" timestamp="1588690737225" />
-    <state x="444" y="150" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590489569771">
+    <state x="444" y="150" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590733521260">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="444" y="150" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1590489569771" />
+    <state x="444" y="150" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1590733521260" />
     <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.834@0.0.1536.834" timestamp="1590224989148" />
     <state x="367" y="0" key="CommitChangelistDialog2" timestamp="1588703194539">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="367" y="0" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1588703194539" />
-    <state x="489" y="120" key="NewPhpClassDialog" timestamp="1590487449759">
+    <state x="489" y="120" key="NewPhpClassDialog" timestamp="1590734154955">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="489" y="120" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1590487449759" />
+    <state x="489" y="120" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1590734154955" />
     <state x="550" y="138" key="NewPhpClassDialog/0.0.1536.834@0.0.1536.834" timestamp="1590218281830" />
     <state x="499" y="285" key="NewPhpFileDialog" timestamp="1589537807596">
       <screen x="0" y="0" width="1366" height="728" />
@@ -333,10 +368,10 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="425" y="189" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1588326917659" />
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1590159921625">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="383" y="135" width="672" height="592" key="search.everywhere.popup" timestamp="1590737067673">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="383" y="135" width="672" height="592" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1589254658691" />
+    <state x="383" y="135" width="672" height="592" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1590737067673" />
     <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1590159921625" />
   </component>
 </project>

@@ -3,6 +3,7 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\Self_;
 
 class Orders extends Model
 {
@@ -27,6 +28,22 @@ class Orders extends Model
     public function salesMember()
     {
         return $this->belongsTo('App\Http\Models\Members','sales_member_id');
+    }
+
+    public function getTradeStatus($status)
+    {
+        switch ($status){
+            case self::TRADE_NO_PAY:
+                return '待支付';
+            case self::TRADE_NO_CONFIRM:
+                return '待确认';
+            case self::TRADE_FINISHED:
+                return '交易完成';
+            case self::ORDER_MATCHED:
+                return '已匹配';
+            case self::ORDER_NO_MATCH:
+                return '待匹配';
+        }
     }
 
 }

@@ -14,12 +14,11 @@
     <!-- {{--轮播图--}} -->
     <div class="slider" id="slider">
         <div class="slider-inner">
-            <div class="item">
-                <img src="{{asset("static/home/img/main-slider-1.jpg")}}">
-            </div>
-            <div class="item">
-                <img src="{{asset("static/home/img/main-slider-2.jpg")}}">
-            </div>
+            @foreach($images as $i)
+                <div class="item">
+                    <img src="{{asset("storage/homeImg/".$i->src)}}">
+                </div>
+            @endforeach
         </div>
     </div>
 
@@ -49,7 +48,7 @@
                 @foreach($miners as $miner)
                 <div class="weui-media-box weui-media-box_appmsg index-miner_list">
                     <div class="weui-media-box__hd index-miner_img">
-                        <img class="weui-media-box__thumb" src="{{asset('static/home/'.$miner->miner_img)}}">
+                        <img class="weui-media-box__thumb" src="{{asset('storage/homeImg/'.$miner->tittle.'.jpg')}}">
                     </div>
                     <div class="weui-media-box__bd">
                         <input type="hidden" name="id" value="{{$miner->id}}">

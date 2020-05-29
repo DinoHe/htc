@@ -42,7 +42,8 @@ class SalesMatch implements ShouldQueue
         $orderStatus = Orders::ORDER_NO_MATCH;
         if (!empty($buyOrders)){
             foreach ($buyOrders as $k => $buyOrder) {
-                if ($buyOrder['trade_number'] == $this->salesInfo['salesNumber'] &&
+                if ($buyOrder['buy_member_id'] != '-1' &&
+                    $buyOrder['trade_number'] == $this->salesInfo['salesNumber'] &&
                     $buyOrder['buy_member_id'] != $this->salesMember->id &&
                     $buyOrder['order_status'] != Orders::ORDER_MATCHED){
                     $buyOrder['index'] = $k;

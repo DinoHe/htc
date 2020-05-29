@@ -62,4 +62,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'
     Route::any('minerAdd','Miner@add');
     Route::any('minerEdit','Miner@edit');
     Route::any('minerDel','Miner@del');
+    Route::get('imageList','Image@list');
+    Route::any('imageAdd','Image@add');
+    Route::any('imageEdit','Image@edit');
+    Route::post('imageDel','Image@del');
+    Route::any('tradeBuyList','Trade@buyList');
+    Route::any('tradeBuyAdd','Trade@buyAdd');
+    Route::post('tradeBuyDestroy','Trade@buyDestroy');
+    Route::post('tradeBuyClear','Trade@buyClear');
+    Route::any('tradeSalesList','Trade@salesList');
 });

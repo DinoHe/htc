@@ -7,9 +7,15 @@
         <dt><i class="Hui-iconfont">&#xe687;</i> 交易管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
         <dd>
             <ul>
-                <li><a href="article-list.html" title="资讯管理">委托买入单</a></li>
-                <li><a href="article-list.html" title="资讯管理">委托卖出单</a></li>
-                <li><a href="article-list.html" title="资讯管理">交易订单</a></li>
+                @if(session('permission') == 0 || in_array("admin/tradeBuyList",session('permission')))
+                <li><a href="{{url('admin/tradeBuyList')}}" title="委托买入单">委托买入单</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/tradeSalesList",session('permission')))
+                <li><a href="{{url('admin/tradeSalesList')}}" title="委托卖出单">委托卖出单</a></li>
+                @endif
+                @if(session('permission') == 0 || in_array("admin/tradeOrder",session('permission')))
+                <li><a href="{{url('admin/tradeOrder')}}" title="交易订单">交易订单</a></li>
+                @endif
             </ul>
         </dd>
     </dl>
@@ -17,7 +23,9 @@
         <dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
         <dd>
             <ul>
-                <li><a href="picture-list.html" title="图片管理">图片管理</a></li>
+                @if(session('permission') == 0 || in_array("admin/imageList",session('permission')))
+                <li><a href="{{url('admin/imageList')}}" title="图片管理">图片管理</a></li>
+                @endif
             </ul>
         </dd>
     </dl>
