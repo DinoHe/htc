@@ -228,10 +228,7 @@ class Trade extends Base
         $previews->salesMemberBankName = $salesMemberRealNameAuth->bank_name;
         $previews->salesMemberBankCard = $salesMemberRealNameAuth->bank_card;
         $previews->salesMemberW = $salesMemberRealNameAuth->weixin;
-        $d = 2*3600 - (time() - date_timestamp_get(date_create($previews->updated_at)));
-        $previews->h = (int)($d/3600) > 0?(int)($d/3600):0;
-        $previews->i = (int)($d/60%60) > 0?(int)($d/60%60):0;
-        $previews->s = $d%60 > 0?:0;
+        $previews->remaining = $previews->remainingTime($previews->updated_at);
 
         return view('home.trade.orderPreview')->with('previews',$previews);
     }

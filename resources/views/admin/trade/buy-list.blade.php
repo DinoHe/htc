@@ -41,7 +41,7 @@
                     <span class="l">
                         @if(session('permission') == 0 || in_array("admin/tradeBuyDestroy",session('permission')))
                         <a href="javascript:;" onclick="dataDel('{{url("admin/tradeBuyDestroy")}}')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-                            <a href="javascript:;" onclick="queueClear('{{url("admin/tradeBuyClear")}}')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 清空买单</a>
+                        <a href="javascript:;" onclick="queueClear('{{url("admin/tradeBuyClear")}}')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 清空买单</a>
                         @endif
                         @if(session('permission') == 0 || in_array("admin/tradeBuyAdd",session('permission')))
                             <a href="javascript:;" onclick="add('添加买单','{{url("admin/tradeBuyAdd")}}','800','400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加买单</a>
@@ -54,7 +54,7 @@
                         <tr class="text-c">
                             <th width="25"><input type="checkbox"></th>
                             <th>订单号</th>
-                            <th width="150">账号</th>
+                            <th>账号</th>
                             <th>买入数量</th>
                             <th>价格</th>
                             <th width="150">挂单时间</th>
@@ -105,8 +105,10 @@
     });
 
     function queueClear(url) {
-        $.post(url);
-        refresh();
+        layer.confirm('确认清空吗？',function () {
+            $.post(url);
+            refresh();
+        });
     }
 
 </script>

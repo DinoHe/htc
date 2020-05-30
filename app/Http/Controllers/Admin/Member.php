@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Base;
 use App\Http\Models\Assets;
+use App\Http\Models\Bills;
 use App\Http\Models\BuyActivities;
 use App\Http\Models\Ideals;
 use App\Http\Models\MemberLevels;
@@ -351,6 +352,34 @@ class Member extends Base
         $id = $this->request->input('id');
         $ids = explode(',',$id)?:$id;
         MyMiners::destroy($ids);
+        return $this->dataReturn(['status'=>0,'message'=>'删除成功']);
+    }
+
+    public function bill()
+    {
+        if ($this->request->isMethod('post')){
+            $data = $this->request->input();
+            $this->request->flashOnly(['date_start','date_end','account']);
+            $model = Bills::where(null);
+            if (!empty($data['date_start']) && !empty($data['date_end'])){
+                $model = $model->WhereBetween('created_at',[$data['date_start'],$data['date_end']]);
+            }
+            if (!empty($data['account'])){
+                $memberId = Members::where('phone',$data['account'])->first()->id;
+                $model = $model->where('member_id',$memberId);
+            }
+            $bills = $model->get();
+            return view('admin.member.bill',['bills'=>$bills]);
+        }
+        $bills = Bills::where('created_at','>=',date('Y-m-d 0:0:0'))->get();
+        return view('admin.member.bill',['bills'=>$bills]);
+    }
+
+    public function billDestroy()
+    {
+        $id = $this->request->input('id');
+        $ids = explode(',',$id)?:$id;
+        Bills::destroy($ids);
         return $this->dataReturn(['status'=>0,'message'=>'删除成功']);
     }
 

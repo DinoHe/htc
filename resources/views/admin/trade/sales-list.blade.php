@@ -39,8 +39,9 @@
                 </form>
                 <div class="cl pd-5 bg-1 bk-gray mt-20">
                     <span class="l">
-                        @if(session('permission') == 0 || in_array("admin/tradeSalesClear",session('permission')))
-                            <a href="javascript:;" onclick="queueClear('{{url("admin/tradeSalesClear")}}')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+                        @if(session('permission') == 0 || in_array("admin/tradeSalesDestroy",session('permission')))
+                            <a href="javascript:;" onclick="dataDel('{{url("admin/tradeSalesDestroy")}}')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+                            <a href="javascript:;" onclick="queueClear('{{url("admin/tradeSalesClear")}}')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 清空卖单</a>
                         @endif
                     </span>
                     <span class="r">共有数据：<strong>{{count($sales)}}</strong> 条</span>
@@ -55,13 +56,14 @@
                             <th>价格</th>
                             <th width="150">挂单时间</th>
                             <th width="100">状态</th>
+                            <th width="100">操作</th>
                         </tr>
                     </thead>
                     <tbody>
                     @if(!empty($sales))
                     @foreach($sales as $s)
                         <tr class="text-c">
-                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox" value="{{$s['order_id']}}" class="checkBox"></td>
                             <td>{{$s['order_id']}}</td>
                             <td>{{$s['sales_member_phone']}}</td>
                             <td>{{$s['trade_number']}}</td>
@@ -69,6 +71,11 @@
                             <td>{{$s['created_at']}}</td>
                             <td><div class="label radius {{$s['order_status']==\App\Http\Models\Orders::ORDER_MATCHED?'label-success':''}}">
                                     {{$s['order_status']==\App\Http\Models\Orders::ORDER_MATCHED?'已匹配':'待匹配'}}</div></td>
+                            <td class="td-manage">
+                                @if(session('permission') == 0 || in_array("admin/tradeSalesDestroy",session('permission')))
+                                    <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/tradeSalesDestroy")}}','{{$s['order_id']}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                     @endif
@@ -90,13 +97,15 @@
         "bStateSave": true,//状态保存
         "aoColumnDefs": [
             //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-            {"orderable":false,"aTargets":[0]}// 制定列不参与排序
+            {"orderable":false,"aTargets":[0,7]}// 制定列不参与排序
         ]
     });
 
     function queueClear(url) {
-        $.post(url);
-        refresh();
+        layer.confirm('确认清空吗？',function () {
+            $.post(url);
+            refresh();
+        });
     }
 
 </script>

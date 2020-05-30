@@ -11,7 +11,12 @@ class Bills extends Model
         'member_id','tittle','operation'
     ];
 
-    public static function createBill($id,$tittle,$operation)
+    public function member()
+    {
+        return $this->belongsTo('App\Http\Models\Members','member_id');
+     }
+
+   public static function createBill($id,$tittle,$operation)
     {
         self::create([
             'member_id' => $id,

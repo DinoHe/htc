@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Base;
 use App\Http\Models\Coins;
+use App\Http\Models\Members;
 use App\Http\Models\Orders;
 use App\Http\Models\TradeNumbers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class Trade extends Base
 {
@@ -68,10 +71,7 @@ class Trade extends Base
         $ids = explode(',',$id)?:[id];
         $buys = Cache::get('tradeBuy');
         foreach ($ids as $id) {
-            $filterArray = array_filter($buys,function ($array) use ($id){
-                if (array_search($id,$array)) return true;
-                return false;
-            });
+            $filterArray = $this->arrayFilter($id,$buys);
             if (!empty($filterArray)){
                 array_splice($buys,array_search($filterArray,$buys),1);
             }
@@ -93,9 +93,9 @@ class Trade extends Base
             $this->request->flashOnly(['account']);
             $salesSearch = [];
             $where = [];
-            if (!empty($data['account'])) $where['sales_member_phone'] = $data['account'];
-            if ($data['number'] != '-1') $where['trade_number'] = $data['number'];
             if ($data['matchStatus'] != '-1') $where['order_status'] = $data['matchStatus'];
+            if ($data['number'] != '-1') $where['trade_number'] = $data['number'];
+            if (!empty($data['account'])) $where['sales_member_phone'] = $data['account'];
             foreach ($sales as $sale) {
                 $assoc = array_intersect_assoc($sale,$where);
                 if (!empty($assoc) && count($assoc) == count($where)){
@@ -105,6 +105,68 @@ class Trade extends Base
             if (!empty($saleSearch)) $sales = $saleSearch;
         }
         return view('admin.trade.sales-list',['sales'=>$sales,'numbers'=>$numbers]);
+    }
+
+    public function salesDestroy()
+    {
+        $id = $this->request->input('id');
+        $ids = explode(',',$id)?:[id];
+        $sales = Cache::get('tradeSales');
+        foreach ($ids as $id) {
+            $filterArray = $this->arrayFilter($id,$sales);
+            if (!empty($filterArray)){
+                array_splice($sales,array_search($filterArray,$sales),1);
+            }
+        }
+        Cache::forever('tradeSales',$sales);
+    }
+
+    public function salesClear()
+    {
+        Cache::forget('tradeSales');
+    }
+
+    public function order()
+    {
+        if ($this->request->isMethod('post')){
+            $data = $this->request->input();
+            $this->request->flashOnly(['tradeStatus','date_start','date_end','account']);
+            $model = Orders::where(null);
+            if ($data['tradeStatus'] != '-1'){
+                $model = $model->where('trade_status',$data['tradeStatus']);
+            }
+            $model = $model->WhereBetween('created_at',[$data['date_start'],$data['date_end']]);
+            $orders = $model->cursor();
+            if (!empty($data['account'])) {
+                $orders = $orders->filter(function ($order) use ($data){
+                    return $order->buy_member_phone == $data['account'] || $order->sales_member_phone == $data['account'];
+                });
+            }
+            return view('admin.trade.order',['orders'=>$orders]);
+        }
+        $orders = Orders::where('trade_status',Orders::TRADE_NO_PAY)
+            ->orWhere('trade_status',Orders::TRADE_NO_CONFIRM)->get();
+        return view('admin.trade.order',['orders'=>$orders]);
+    }
+
+    public function orderCancelEdit()
+    {
+        $id = $this->request->input();
+        $res = Members::where('id',$id['memberId'])->update(['activated'=>Members::BLOCKED_TMP]);
+        if ($res){
+            $s = $this->request->session()->all();
+            $this->request->session()->remove(array_search($id['memberId'],$s));
+            Orders::where('id',$id['orderId'])->update(['trade_status'=>Orders::TRADE_CANCEL]);
+        }
+        return $this->dataReturn(['status'=>0,'message'=>'操作成功']);
+    }
+
+    private function arrayFilter($obj,$array):array
+    {
+        return array_filter($array,function ($array) use ($obj){
+            if (array_search($obj,$array)) return true;
+            return false;
+        });
     }
 
 }

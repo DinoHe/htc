@@ -2,9 +2,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Coins;
+use App\Http\Models\Members;
+use App\Http\Models\MyMiners;
+use App\Http\Models\Orders;
 use App\Http\Models\Permissions;
 use App\Http\Models\SystemLogs;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class Index extends Base
 {
@@ -19,8 +25,61 @@ class Index extends Base
         $this->request->session()->put('admin',['account'=>$account,'role'=>$role,'lastIp'=>$lastIp,'lastTime'=>$lastTime]);
         //初始化权限
         $this->initPermission();
+        //统计当前在线人数
+        $online = $this->countOnline();
+        //获取今日价格
+        $price = Coins::orderBy('id','desc')->first()->price;
+        //统计运行的矿机
+        $countMiner = $this->countMinerRunning();
+        //统计今日注册的人数
+        $countRegister = $this->countRegister();
+        //统计成交额
+        $countTradeMoney = $this->countTradeMoney();
 
-        return view('admin.index');
+        return view('admin.index',['online'=>$online,'price'=>$price,'countMiner'=>$countMiner,
+            'countRegister'=>$countRegister,'countTradeMoney'=>$countTradeMoney]);
+    }
+
+    private function countOnline()
+    {
+        $online = Cache::get('online');
+        $n = 0;
+        if (!empty($online)){
+            foreach ($online as $k => $on) {
+                if (time() - $on < 10*60){
+                    $n++;
+                }
+            }
+        }
+        return $n;
+    }
+
+    private function countRegister():int
+    {
+        return Members::where('created_at','>=',date('Y-m-d'))->count();
+    }
+
+    private function countMinerRunning():int
+    {
+        return MyMiners::where('run_status',MyMiners::RUNNING)->count();
+    }
+
+    private function countTradeMoney():string
+    {
+        $date = Carbon::createFromDate();
+        $t = $date->day;
+        $countTradeMoney = [];
+        for ($i=6;$i>=0;$i--){
+            $start = $date->setDay($t - $i);
+            $dateStart = $start->toDateString();
+            $end = $start->setDay($start->day + 1);
+            $dateEnd = $end->toDateString();
+            $totalMoney = Orders::WhereBetween('created_at',[$dateStart,$dateEnd])->where('trade_status',Orders::TRADE_FINISHED)
+                ->sum('trade_total_money');
+            array_push($countTradeMoney,$totalMoney/100);
+        }
+
+        return implode(',',$countTradeMoney);
     }
 
     private function initPermission()

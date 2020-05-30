@@ -38,10 +38,10 @@
                     </span>
                     注册时间：
                     <input type="text" name="date_start" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}',
-                    dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="logmin" value="{{old('date_start')}}" class="input-text Wdate" style="width:170px;">
+                    dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})" id="logmin" value="{{old('date_start')}}" class="input-text Wdate" style="width:170px;">
                     -
                     <input type="text" name="date_end" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')||\'%y-%M-%d\'}',maxDate:'%y-%M-%d',
-                    dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="logmax" value="{{old('date_end')}}" class="input-text Wdate" style="width:170px;">
+                    dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})" id="logmax" value="{{old('date_end')}}" class="input-text Wdate" style="width:170px;">
                     <input type="text" name="account" value="{{old('account')}}" placeholder="会员账号" style="width:200px" class="input-text">
                     <input type="number" name="credit" value="{{old('credit')}}" placeholder="会员信用" style="width:100px" min="0" class="input-text">
                     <button class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 查找</button>

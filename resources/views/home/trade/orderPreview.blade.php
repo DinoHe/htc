@@ -17,7 +17,7 @@
                         <p>日期：{{$previews->created_at}}</p>
                         <p class="padding10-t">总计：${{$previews->trade_price * $previews->trade_number}}
                             <span class="app-fs-19 color-error">≈￥{{$previews->trade_price * $previews->trade_number * 7}}</span></p>
-                        <p class="color-warning" id="chaoshi">超时剩余时间：{{$previews->h}}小时{{$previews->i}}分{{$previews->s}}秒</p>
+                        <p class="color-warning" id="chaoshi">超时剩余时间：{{$previews->remaining['h']}}小时{{$previews->remaining['i']}}分{{$previews->remaining['s']}}秒</p>
                     </div>
                 </div>
                 <div class="weui-cell border-radius bg-order">
@@ -100,7 +100,7 @@
         }
 
         //超时倒计时
-        var $c = $('#chaoshi'),h = '{{$previews->h}}',i = '{{$previews->i}}',s = '{{$previews->s}}';
+        var $c = $('#chaoshi'),h = '{{$previews->remaining['h']}}',i = '{{$previews->remaining['i']}}',s = '{{$previews->remaining['s']}}';
         var stop = setInterval(function () {
             if (s != 0) {
                 s--;

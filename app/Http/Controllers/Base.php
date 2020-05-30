@@ -59,10 +59,14 @@ class Base extends Controller
     {
         $user = Auth::user();
         $myMinerIdMax = MyMiners::where('run_status',MyMiners::RUNNING)->where('member_id',$user->id)->max('miner_id');
-        if ($myMinerIdMax != $user->level_id){
+        if (empty($myMinerIdMax)){
+            $user->level_id = 1;
+        }elseif ($myMinerIdMax == $user->level_id){
+            return false;
+        }else{
             $user->level_id = $myMinerIdMax;
-            $user->save();
         }
+        $user->save();
     }
 
     /**

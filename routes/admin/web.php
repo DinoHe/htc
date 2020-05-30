@@ -51,6 +51,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'
     Route::get('memberMinerStop/{id}','Member@myMinerStop');
     Route::any('memberMinerAdd','Member@myMinerAdd');
     Route::post('memberMinerDel','Member@myMinerDel');
+    Route::any('memberBill','Member@bill');
+    Route::post('memberBillDestroy','Member@billDestroy');
     Route::any('memberTeam','Member@team');
     Route::get('memberActivity','Member@activity');
     Route::any('memberActivityAdd','Member@activityAdd');
@@ -71,4 +73,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'
     Route::post('tradeBuyDestroy','Trade@buyDestroy');
     Route::post('tradeBuyClear','Trade@buyClear');
     Route::any('tradeSalesList','Trade@salesList');
+    Route::post('tradeSalesDestroy','Trade@salesDestroy');
+    Route::post('tradeSalesClear','Trade@salesClear');
+    Route::any('tradeOrder','Trade@order');
+    Route::post('tradeOrderCancelEdit','Trade@orderCancelEdit');
 });

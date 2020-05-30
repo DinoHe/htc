@@ -58,6 +58,9 @@
                 @if(session('permission') == 0 || in_array("admin/memberMiner",session('permission')))
                 <li><a href="{{url('admin/memberMiner')}}" title="矿机管理">矿机管理</a></li>
                 @endif
+                @if(session('permission') == 0 || in_array("admin/memberBill",session('permission')))
+                    <li><a href="{{url('admin/memberBill')}}" title="账单">账单</a></li>
+                @endif
                 @if(session('permission') == 0 || in_array("admin/memberTeam",session('permission')))
                 <li><a href="{{url('admin/memberTeam')}}" title="团队">团队</a></li>
                 @endif

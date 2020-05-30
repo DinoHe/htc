@@ -77,7 +77,7 @@
                                 <span class="label radius {{$mm->run_status==\App\Http\Models\MyMiners::RUNNING?'label-success':''}}">{{$mm->getMinerStatus($mm->run_status)}}</span>
                             </td>
                             <td class="f-14 td-manage">
-                                @if(session('permission') == 0 || in_array("admin/memberMinerEdit",session('permission')))
+                                @if(session('permission') == 0 || in_array("admin/memberMinerStop",session('permission')))
                                     @if($mm->run_status == \App\Http\Models\MyMiners::RUNNING)
                                     <a style="text-decoration:none" onClick="miner_stop(this,'{{$mm->id}}')" href="javascript:;" title="结束"><i class="Hui-iconfont">&#xe631;</i></a>
                                     @endif

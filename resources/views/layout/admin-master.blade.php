@@ -98,9 +98,7 @@
                 data: {'id':ids,'content':contents},
                 success: function (data) {
                     layer.msg('删除成功',{icon:1,time:1000});
-                    setTimeout(function () {
-                        location.reload();
-                    },1000);
+                    refresh();
                 }
             });
         });

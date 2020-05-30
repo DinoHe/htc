@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
 use App\Http\Models\Orders;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Mews\Captcha\Facades\Captcha;
@@ -31,6 +32,7 @@ class Login extends Base
                 Auth::logoutOtherDevices($data['password']);
                 //初始化币价
                 $this->initCoin();
+
                 return redirect('home/index');
             }
             return redirect('home/login')->with('error','用户名或密码错误');
@@ -46,6 +48,18 @@ class Login extends Base
     {
         $tradeSales = Cache::get('tradeSales');
         $tradeBuy = Cache::get('tradeBuy');
+        $online = Cache::get('online');
+        //清除该用户在线记录
+        if (!empty($online)){
+            foreach ($online as $k => $on) {
+                if ($k == Auth::id()){
+                    array_splice($online,$k,1);
+                    Cache::put('online',$online,Carbon::tomorrow()->setHours(1));
+                    break;
+                }
+            }
+        }
+        //没有交易单，清除该用户资产缓存
         $flag = true;
         if (!empty($tradeSales)){
             foreach ($tradeSales as $tradeSale){

@@ -27,7 +27,20 @@ class RedirectIfAuthenticated
             $assets = Assets::where('member_id',$id)->first();
             Cache::put('assets'.$id,$assets,Carbon::tomorrow());
         }
+        //统计在线人数
+        $this->countOnline();
 
         return $next($request);
+    }
+
+    private function countOnline()
+    {
+        $online = Cache::get('online');
+        if (!empty($online)){
+            $online[Auth::id()] = time();
+        }else{
+            $online = [Auth::id()=>time()];
+        }
+        Cache::put('online',$online,Carbon::tomorrow()->setHours(1));
     }
 }
