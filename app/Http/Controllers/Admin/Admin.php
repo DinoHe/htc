@@ -55,7 +55,6 @@ class Admin extends Base
         if ($this->request->isMethod('post')){
             $data = $this->request->input();
             $res = Admins::where('id',$data['id'])->update([
-                'account' => $data['account'],
                 'password' => Hash::make($data['password']),
                 'name' => $data['name'],
                 'phone' => $data['phone'],
@@ -106,14 +105,13 @@ class Admin extends Base
                 //权限ID转换成名称输出
                 foreach ($permissionIds as $permissionId) {
                     $permission = Permissions::find($permissionId);
+                    if (empty($permission)) continue;
                     if ($permissionTittles == ''){
                         $permissionTittles = $permission->tittle.'： ';
-                    }else{
-                        if ($permission->pid == 0){
+                    }elseif ($permission->pid == 0){
                             $permissionTittles .= '；'.$permission->tittle.'： ';
-                        }else{
-                            $permissionTittles .= '，'.$permission->tittle;
-                        }
+                    }else{
+                        $permissionTittles .= '，'.$permission->tittle;
                     }
                 }
                 $r->permission = preg_replace('/\s，/','',$permissionTittles);

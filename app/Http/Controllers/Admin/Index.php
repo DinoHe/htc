@@ -66,14 +66,10 @@ class Index extends Base
 
     private function countTradeMoney():string
     {
-        $date = Carbon::createFromDate();
-        $t = $date->day;
         $countTradeMoney = [];
-        for ($i=6;$i>=0;$i--){
-            $start = $date->setDay($t - $i);
-            $dateStart = $start->toDateString();
-            $end = $start->setDay($start->day + 1);
-            $dateEnd = $end->toDateString();
+        for ($i = 6;$i >= 0;$i--){
+            $dateStart = Carbon::now()->subDays($i)->toDateString();
+            $dateEnd = Carbon::now()->subDays($i-1)->toDateString();
             $totalMoney = Orders::WhereBetween('created_at',[$dateStart,$dateEnd])->where('trade_status',Orders::TRADE_FINISHED)
                 ->sum('trade_total_money');
             array_push($countTradeMoney,$totalMoney/100);

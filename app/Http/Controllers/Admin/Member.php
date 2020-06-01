@@ -20,6 +20,7 @@ class Member extends Base
 
     public function list()
     {
+        $model = Members::where(null);
         if ($this->request->isMethod('post')){
             $data = $this->request->input();
             $this->request->flashOnly(['activated','level','date_start','date_end','account','credit']);
@@ -28,23 +29,23 @@ class Member extends Base
             if ($data['level'] != '0') $where['level_id'] = $data['level'];
             if (!empty($data['account'])) $where['phone'] = $data['account'];
             if (!empty($data['credit'])) $where['credit'] = $data['credit'];
-            $model = Members::where($where);
+            $model = $model->where($where);
             if (!empty($data['date_start'])) {
                 $date_end = empty($data['date_end'])?date('Y-m-d H:i:s'):$data['date_end'];
                 $model = $model->whereBetween('created_at',[$data['date_start'],$date_end]);
             }
-            $members = $model->get();
-            foreach ($members as $member) {
-                $member->levelName = $member->level->level_name;
-                $member->status = $member->getAccountStatus($member->activated);
-            }
-            return view('admin.member.list',['members'=>$members]);
         }
 
-        $members = Members::limit(1000)->get();
+        $members = $model->get();
         foreach ($members as $member) {
             $member->levelName = $member->level->level_name;
             $member->status = $member->getAccountStatus($member->activated);
+            $auth = $member->realNameAuth;
+            if (!empty($auth)){
+                $member->authStatus = $auth->getAuthStatusDesc($auth->auth_status);
+            }else{
+                $member->authStatus = '未认证';
+            }
         }
         return view('admin.member.list',['members'=>$members]);
     }

@@ -8,7 +8,7 @@
         <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">管理员账号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-                <div class="input-text">{{$admin->account}}</div>
+                <div>{{$admin->account}}</div>
 			</div>
 		</div>
         <div class="row cl">
@@ -26,13 +26,13 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" placeholder="手机号码" name="phone" required>
+				<input type="text" class="input-text" value="{{$admin->phone}}" placeholder="手机号码" pattern="[0-9]{11}" title="请输入11位手机号" name="phone" required>
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>微信：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" placeholder="微信" name="weixin" required>
+				<input type="text" class="input-text" placeholder="微信" value="{{$admin->weixin}}" name="weixin" required>
 			</div>
 		</div>
 		<div class="row cl">
@@ -61,40 +61,21 @@
 <script type="text/javascript" src="{{asset('static/admin/lib/jqueryValidation/messages_zh.js')}}"></script>
 <script type="text/javascript">
 $(function(){
-
-	$("form").validate({
-		rules:{
-            name:{
-                required:true,
+    $('form').submit(function () {
+        $(this).ajaxSubmit({
+            success: function (data) {
+                if (data.status == 0){
+                    layer.msg('修改成功',{icon:6,time:1000});
+                    closeLayer();
+                }else {
+                    layer.msg(data.message,{icon:5,time:1000});
+                }
             },
-			phone:{
-				required:true,
-				isPhone:true,
-			},
-			weixin:{
-				required:true,
-			},
-			role:{
-				required:true,
-			},
-		},
-		onkeyup:false,
-		focusCleanup:true,
-		success:"valid",
-		submitHandler:function(form){
-			$(form).ajaxSubmit({
-                success: function (data) {
-                    if (data.status == 0){
-                        layer.msg('修改成功',{icon:6,time:1000});
-                        closeLayer();
-                    }else {
-                        layer.msg(data.message,{icon:5,time:1000});
-                    }
-                },
-                dataType: 'json'
-            });
-		}
-	});
+            dataType: 'json'
+        });
+        return false;
+    });
+
 });
 </script>
 @endsection

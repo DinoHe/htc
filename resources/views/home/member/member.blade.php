@@ -51,7 +51,7 @@
             </a>
             <a href="{{url('home/link')}}" class="weui-grid">
                 <i class="iconfont icon-fenxianglianjie"></i>
-                <p class="">推广链接</p>
+                <p class="">分享链接</p>
             </a>
             <a href="{{url('home/notice')}}" class="weui-grid">
                 <i class="iconfont icon-gonggao"></i>

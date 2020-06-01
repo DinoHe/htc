@@ -65,6 +65,7 @@
                             <th width="150">账号</th>
                             <th>等级</th>
                             <th>信用</th>
+                            <th>认证状态</th>
                             <th width="150">注册时间</th>
                             <th width="100">状态</th>
                             <th width="100">操作</th>
@@ -78,6 +79,7 @@
                             <td>{{$m->phone}}</td>
                             <td>{{$m->levelName}}</td>
                             <td>{{$m->credit}}</td>
+                            <td>{{$m->authStatus}}</td>
                             <td>{{$m->created_at}}</td>
                             <td><div class="label radius {{$m->status=='已激活'?'label-success':''}}">{{$m->status}}</div></td>
                             <td class="td-manage">
@@ -109,7 +111,7 @@
         "bStateSave": true,//状态保存
         "aoColumnDefs": [
             //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-            {"orderable":false,"aTargets":[0,6]}// 制定列不参与排序
+            {"orderable":false,"aTargets":[0,7]}// 制定列不参与排序
         ]
     });
 

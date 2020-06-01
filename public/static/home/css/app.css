@@ -273,18 +273,72 @@ li{
 .member-container_list i{
     font-size: 20px;
 }
+
 .link{
-    background: url('/static/home/img/share.png') no-repeat center;
+    background: url('/static/home/img/share-bg.jpg') no-repeat center;
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
+    text-align: center;
+    position: relative;
+}
+.link .readonly{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    opacity: 0;
+}
+.link-header{
+    padding: 50px;
+}
+.link-header_logo{
+    background: url("/static/home/img/logo.jpg") no-repeat;
+    background-size: 100%;
+    width: 120px;
+    height: 90px;
+    display: inline-block;
+}
+.link-header_tittle{
+    vertical-align: top;
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+    padding: 10px 0;
+    font-size: 45px;
+    text-shadow: 6px 6px 8px #d40a11;
+}
+.link-container{
+    font-size: 30px;
+    font-family: "Yu Gothic UI Light";
+}
+.link-container .dream{
+    padding: 10px;
+    margin-top: 40px;
+    color: white;
+    background-image: linear-gradient(to right, #eebd0e, #0640ee);
+}
+.link-container .target{
+    color: #5eec06;
+    margin-top: 30px;
+}
+.link-container label{
+    color: #ef890a;
+    font-size: 50px;
+    text-shadow: 5px 5px 5px #dbc609;
 }
 .qrcode{
-    position: absolute;
-    bottom: 22%;
+    margin-top: 40px;
     width: 100%;
     text-align: center;
 }
+
+.qrcode div{
+    color: #e60bee;
+}
+
 .app-id_input,.app-id_file li,.shili{
     width: 320px;
     height: 160px;

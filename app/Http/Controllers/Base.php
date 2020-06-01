@@ -89,7 +89,7 @@ class Base extends Controller
 
     public function getQRcode($url)
     {
-        \QRcode::png($url,false,QR_ECLEVEL_L,5,1);
+        \QRcode::png($url,false,QR_ECLEVEL_L,3,1);
     }
 
     /**

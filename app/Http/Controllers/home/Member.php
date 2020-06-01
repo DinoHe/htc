@@ -10,6 +10,7 @@ use App\Http\Models\Ideals;
 use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
 use App\Http\Models\RealNameAuths;
+use App\Http\Models\Roles;
 use App\Http\Models\SystemNotices;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -178,7 +179,8 @@ class Member extends Base
 
     public function memberService()
     {
-        return view('home.member.member_service');
+        $service = Roles::where('name','客服')->first();
+        return view('home.member.member_service',['service'=>$service]);
     }
 
     /**

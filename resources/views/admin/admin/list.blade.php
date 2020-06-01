@@ -51,7 +51,7 @@
                             <td class="table_content">{{$admin->name}}</td>
                             <td class="table_content">{{$admin->phone}}</td>
                             <td class="table_content">{{$admin->weixin}}</td>
-                            <td class="table_content">{{$admin->roles->name}}</td>
+                            <td class="table_content">{{empty($admin->roles->name)?'':$admin->roles->name}}</td>
                             <td class="table_content">{{$admin->created_at}}</td>
                             <td class="td-status">
                                 @if($admin->blocked == \App\Http\Models\Admins::ACCOUNT_ON)

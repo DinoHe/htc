@@ -29,7 +29,7 @@
         </a>
         <a href="{{url('home/link')}}" class="index-header_list">
             <i class="iconfont icon-ico app-fs-27"></i>
-            <p class="app-fs-16">邀请</p>
+            <p class="app-fs-16">分享</p>
         </a>
         <a href="{{url('home/notice')}}" class="index-header_list">
             <i class="iconfont icon-gonggao app-fs-27"></i>
