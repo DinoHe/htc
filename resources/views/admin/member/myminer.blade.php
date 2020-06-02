@@ -71,7 +71,7 @@
                             <td class="table_content">{{$mm->runtime}}</td>
                             <td class="table_content">{{$mm->nph}}</td>
                             <td class="table_content">{{$mm->dug}}</td>
-                            <td>{{$mm->no_collect}}</td>
+                            <td>{{$mm->no_collect?:0}}</td>
                             <td>{{$mm->created_at}}</td>
                             <td class="td-status">
                                 <span class="label radius {{$mm->run_status==\App\Http\Models\MyMiners::RUNNING?'label-success':''}}">{{$mm->getMinerStatus($mm->run_status)}}</span>

@@ -3,7 +3,6 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use phpDocumentor\Reflection\Types\Self_;
 
 class Orders extends Model
 {

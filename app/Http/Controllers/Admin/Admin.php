@@ -107,14 +107,14 @@ class Admin extends Base
                     $permission = Permissions::find($permissionId);
                     if (empty($permission)) continue;
                     if ($permissionTittles == ''){
-                        $permissionTittles = $permission->tittle.'： ';
+                        $permissionTittles = $permission->tittle.'：查看';
                     }elseif ($permission->pid == 0){
-                            $permissionTittles .= '；'.$permission->tittle.'： ';
+                            $permissionTittles .= '；'.$permission->tittle.'：查看';
                     }else{
                         $permissionTittles .= '，'.$permission->tittle;
                     }
                 }
-                $r->permission = preg_replace('/\s，/','',$permissionTittles);
+                $r->permission = $permissionTittles;
             }
         }
 

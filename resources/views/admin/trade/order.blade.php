@@ -1,5 +1,12 @@
 ﻿@extends('layout.admin-master')
 @section('tittle')订单列表 @endsection
+@section('css')
+    <style>
+        .preview{position: relative}
+        .preview div{width: 300px;height:330px;position: absolute;left: -305px;top: -45px;z-index: 9}
+        .preview div img{width: 100%;height: 100%}
+    </style>
+@endsection
 
 @section('header')
     @component('layout.admin-header')@endcomponent
@@ -49,13 +56,13 @@
                         <tr class="text-c">
                             <th width="25"><input type="checkbox"></th>
                             <th>订单号</th>
-                            <th>买家账号</th>
-                            <th>卖家账号</th>
-                            <th>交易数量(HTC)</th>
+                            <th>买家</th>
+                            <th>卖家</th>
+                            <th>数量(HTC)</th>
                             <th>价格($)</th>
                             <th>总额($)</th>
-                            <th width="130">创建日期</th>
-                            <th width="130">完成日期</th>
+                            <th width="130">截图</th>
+                            <th width="130">日期</th>
                             <th>剩余时间</th>
                             <th width="80">状态</th>
                             <th width="80">操作</th>
@@ -72,10 +79,13 @@
                             <td class="table_content">{{$o->trade_number}}</td>
                             <td class="table_content">{{$o->trade_price}}</td>
                             <td class="table_content">{{$o->trade_total_money}}</td>
+                            <td>
+                                <a href="javascript:;" class="preview" data-src="{{asset('storage').$o->payment_img}}">
+                                <img src="{{asset('storage').$o->payment_img}}" width="100"></a>
+                            </td>
                             <td class="table_content">{{$o->created_at}}</td>
-                            <td class="table_content">{{$o->updated_at}}</td>
                             <td class="table_content">
-                                {{$o->trade_status != \App\Http\Models\Orders::TRADE_CANCEL?implode(':',$o->remainingTime($o->updated_at)):'0:0:0'}}</td>
+                                {{$o->trade_status == \App\Http\Models\Orders::TRADE_NO_PAY || $o->trade_status == \App\Http\Models\Orders::TRADE_NO_CONFIRM?implode(':',$o->remainingTime($o->updated_at)):'0:0:0'}}</td>
                             <td class="table_content"><div class="label radius {{$o->trade_status==2?'label-success':'label-danger'}}">{{$o->getTradeStatus($o->trade_status)}}</div></td>
                             <td class="td-manage">
                                 @if((session('permission') == 0 || in_array("admin/tradeOrderCancelEdit",session('permission'))) && $o->trade_status < 2)
@@ -117,6 +127,14 @@
             refresh();
         });
     }
+
+    var preview = $('.preview');
+    preview.on('mouseover',function () {
+        $(this).append('<div><img src="'+$(this).attr("data-src")+'"></div>')
+    });
+    preview.on('mouseout',function () {
+        $(this).find('div').remove();
+    });
 
 </script>
 @endsection

@@ -69,7 +69,7 @@
         <div class="login-tip">
             <div class="login-tip_reg login-tip_group">
                 <span style="color: #a3a3a3">已有账号？</span>
-                <a href="{{url('/home/login')}}">去登录</a>
+                <a href="{{url('home/login')}}">去登录</a>
             </div>
         </div>
     </div>
@@ -80,7 +80,7 @@
     <script>
         $(function () {
             $('form').submit(function () {
-                $.showLoading('注册中');
+                $.loading('注册中');
             });
         });
     </script>

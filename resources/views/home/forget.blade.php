@@ -65,7 +65,7 @@
 <script>
     $(function () {
         $('form').submit(function () {
-            $.showLoading('正在提交');
+            $.loading('正在提交');
         });
     })
 </script>

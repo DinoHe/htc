@@ -8,6 +8,6 @@ class Miners extends Model
 {
 
     protected $fillable = [
-        'tittle','coin_number','runtime','nph','total_dig','hashrate'
+        'tittle','coin_number','runtime','nph','total_dig','hashrate','rent_max'
     ];
 }

@@ -281,6 +281,7 @@ li{
     height: 100%;
     text-align: center;
     position: relative;
+    top: 0;
 }
 .link .readonly{
     position: absolute;
@@ -292,7 +293,7 @@ li{
     opacity: 0;
 }
 .link-header{
-    padding: 50px;
+    padding: 50px 0 0 0;
 }
 .link-header_logo{
     background: url("/static/home/img/logo.jpg") no-repeat;
@@ -311,18 +312,19 @@ li{
     text-shadow: 6px 6px 8px #d40a11;
 }
 .link-container{
+    padding: 3% 0;
     font-size: 30px;
     font-family: "Yu Gothic UI Light";
 }
 .link-container .dream{
+    margin: 10px 0;
     padding: 10px;
-    margin-top: 40px;
     color: white;
     background-image: linear-gradient(to right, #eebd0e, #0640ee);
 }
 .link-container .target{
     color: #5eec06;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 .link-container label{
     color: #ef890a;
@@ -330,7 +332,6 @@ li{
     text-shadow: 5px 5px 5px #dbc609;
 }
 .qrcode{
-    margin-top: 40px;
     width: 100%;
     text-align: center;
 }

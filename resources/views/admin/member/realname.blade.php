@@ -3,7 +3,8 @@
 @section('css')
     <style>
         .preview{position: relative}
-        .preview div{width: 300px;height:400px;position: absolute;left: -340px;top: -50px;z-index: 9}
+        .preview div{width: 300px;height:330px;position: absolute;left: -305px;top: -45px;z-index: 9}
+        .preview div img{width: 100%;height: 100%}
     </style>
 @endsection
 

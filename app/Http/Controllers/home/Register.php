@@ -14,8 +14,8 @@ class Register extends Base
 
     public function register()
     {
-        if ($this->request->method()=='POST'){
-            $data = $this->request->all();
+        $data = $this->request->input();
+        if ($this->request->isMethod('post')){
             //验证表单
             $this->validator($data)->validate();
 
@@ -29,7 +29,7 @@ class Register extends Base
             if (time() - date_timestamp_get($code->updated_at) > 5*60) return back()->withErrors(['sms_verify'=>'验证码失效，请重新获取'])->withInput();
 
             //邀请码验证
-            $invite = Members::where('invite_code',$data['invite'])->first();
+            $invite = Members::where('phone',$data['invite'])->first();
             if (empty($invite)) {
                 return back()->withErrors(['error'=>'无效的邀请码'])->withInput();
             }
@@ -39,7 +39,7 @@ class Register extends Base
                 'phone' => $data['phone'],
                 'password' => Hash::make($data['password']),
                 'safe_password' => Hash::make($data['safe_password']),
-                'invite_code' => $this->getInvite($data['phone'])
+                'parentid' => $invite->id
             ]);
             if ($status){
                 //创建资产
@@ -48,7 +48,7 @@ class Register extends Base
             }
             return back()->withErrors(['register'=>'注册失败'])->withInput();
         }
-        $invite = $this->request->input('invite', '');
+        $invite = $data['invite'];
         return view('home.register')->with('invite', $invite);
     }
 
@@ -61,12 +61,6 @@ class Register extends Base
         }
         $res = $this->sendSMS($phone);
         return $res;
-    }
-
-    public function getInvite($phone){
-        $mdstring = md5(time().$phone);
-        $invite = substr($mdstring, 7, 3).substr($mdstring, 23, 3);
-        return $invite;
     }
 
     //验证

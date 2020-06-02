@@ -40,6 +40,12 @@
 				<input type="text" class="input-text" placeholder="每小时产量（HTC/小时）" name="nph" required>
 			</div>
 		</div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>最大租用数量：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="number" class="input-text" placeholder="租用数量" name="rentMax" value="1" min="0" required>
+            </div>
+        </div>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
@@ -81,6 +87,9 @@ $(function(){
 			nph:{
 				required:true,
 			},
+            rentMax:{
+                required:true,
+            },
 		},
 		onkeyup:false,
 		focusCleanup:true,

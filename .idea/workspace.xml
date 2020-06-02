@@ -20,22 +20,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/storage/idcardImg/1591092171431124199311270779front.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/payImg/I317iIv9dpDmnB6bK0gSEkPJCNOQTINf5GBDViCV.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/storage/payImg/rNOZhHL2KquCeopm0OLpPcoGPNklTktNGJh4KfvZ.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/idcardImg/1591092171431124199311270779front.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/payImg/I317iIv9dpDmnB6bK0gSEkPJCNOQTINf5GBDViCV.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/payImg/rNOZhHL2KquCeopm0OLpPcoGPNklTktNGJh4KfvZ.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Member.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Miner.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Miner.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Trade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Base.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Home/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Home/Member.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dump.rdb" beforeDir="false" afterPath="$PROJECT_DIR$/dump.rdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Register.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Trade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Miners.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Miners.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/RealNameAuths.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/RealNameAuths.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/static/home/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/home/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/admin/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admin/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/admin/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admin/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/member/invite_link.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/member/invite_link.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/member/member.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/member/member.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/member/member_service.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/member/member_service.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/admin-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/admin-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/myminer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/myminer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/realname.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/realname.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/miner/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/miner/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/miner/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/miner/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/miner/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/miner/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/trade/buy-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/trade/buy-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/trade/order.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/trade/order.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/forget.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/forget.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/trade.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/trade.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/idcardImg/1590302823431124199311270779back.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/idcardImg/1590302838431124199311270779back.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/idcardImg/431124199311270779back.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/idcardImg/431124199311270779front.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/payImg/JYiPysiL7fo47ffBBt27M7b5huMCK950LI0UUweZ.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/payImg/K2SMJ6bW8Oo2C4ySLH8K7owA7NfrL7UKUTJlvCly.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/payImg/K5hET7P56EUoB40UdJa49olOW8N2OSfV0pcTbMXe.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/payImg/QRamfDzlXFIyTEBngXJRUM7XfBYuEZ181nvVRqza.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/payImg/S2edQJfXwYrCMCmc4RpS1UHMKurdnMGCSNrsuC5H.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/payImg/SX7l3meOkJw7MEFbAENKe2LJ2UqvlP8ENjd0Fo5f.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/payImg/X8U19wPHqjwkB1SoHim7rbOYQIP7YPUjnuRaIYTc.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/payImg/vWJvrwpaguw5NPYveFBaHr1WX2LN91rBRGU8tIvC.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/payImg/wythqg9hGft58ESxn4gls1VCKYk9c1g3nTcrAcDB.jpeg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -346,10 +372,10 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="425" y="189" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1591027480791" />
-    <state x="383" y="135" width="672" height="592" key="search.everywhere.popup" timestamp="1590737067673">
+    <state x="383" y="135" width="672" height="592" key="search.everywhere.popup" timestamp="1591088610053">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="383" y="135" width="672" height="592" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1590737067673" />
+    <state x="383" y="135" width="672" height="592" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1591088610053" />
     <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1590159921625" />
   </component>
 </project>

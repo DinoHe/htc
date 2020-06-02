@@ -21,8 +21,8 @@
                     <span class="select-box inline">
                         <select name="matchStatus" class="select">
                             <option value="-1">所有状态</option>
-                            <option value="3">已匹配</option>
-                            <option value="4">未匹配</option>
+                            <option value="4">已匹配</option>
+                            <option value="5">未匹配</option>
                         </select>
                     </span>
                     <span class="select-box inline">

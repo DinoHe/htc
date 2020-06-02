@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Base;
 use App\Http\Models\Bills;
 use App\Http\Models\Coins;
+use App\Http\Models\MyMiners;
 use App\Http\Models\Orders;
 use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
@@ -119,6 +120,12 @@ class Trade extends Base
     {
         $member = Auth::user();
         $data = $this->request->input();
+
+        //有矿机在运行才能卖出
+        $runningNumber = MyMiners::where('member_id',$member->id)->where('run_status',MyMiners::RUNNING)->count();
+        if ($runningNumber == 0){
+            return $this->dataReturn(['status'=>1043,'message'=>'没有运行的矿机，无法卖出']);
+        }
 
         $assets = Cache::get('assets'.$member->id);
         $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
@@ -331,7 +338,7 @@ class Trade extends Base
      */
     public function record()
     {
-        $orders = Orders::where('trade_status',Orders::TRADE_FINISHED)->cursor()
+        $orders = Orders::where('trade_status',Orders::TRADE_FINISHED)->orderBy('updated_at','desc')->cursor()
             ->filter(function ($orders){
                return $orders->buy_member_id == Auth::id() || $orders->sales_member_id == Auth::id();
             });

@@ -33,6 +33,7 @@
                             <th>总产量(HTC)</th>
                             <th>运行周期(H)</th>
                             <th>每小时产量(HTC/H)</th>
+                            <th>最大租用数量</th>
                             <th width="80">操作</th>
                         </tr>
                     </thead>
@@ -47,6 +48,7 @@
                             <td>{{$m->total_dig}}</td>
                             <td>{{$m->runtime}}</td>
                             <td>{{$m->nph}}</td>
+                            <td>{{$m->rent_max}}</td>
                             <td class="td-manage">
                                 @if(session('permission') == 0 || in_array("admin/minerEdit",session('permission')))
                                     <a title="编辑" href="javascript:;" onclick="edit('矿机编辑','{{url("admin/minerEdit")}}','{{$m->id}}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>

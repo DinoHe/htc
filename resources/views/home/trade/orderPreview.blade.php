@@ -15,8 +15,8 @@
                         <p>数量：{{$previews->trade_number}}</p>
                         <p>单价：${{$previews->trade_price}}</p>
                         <p>日期：{{$previews->created_at}}</p>
-                        <p class="padding10-t">总计：${{$previews->trade_price * $previews->trade_number}}
-                            <span class="app-fs-19 color-error">≈￥{{$previews->trade_price * $previews->trade_number * 7}}</span></p>
+                        <p class="padding10-t">总计：${{$previews->trade_total_money}}
+                            <span class="app-fs-19 color-error">≈￥{{$previews->trade_total_money * 7}}</span></p>
                         <p class="color-warning" id="chaoshi">超时剩余时间：{{$previews->remaining['h']}}小时{{$previews->remaining['i']}}分{{$previews->remaining['s']}}秒</p>
                     </div>
                 </div>

@@ -25,7 +25,8 @@ class Miner extends Base
                 'hashrate' => $data['hashrate'],
                 'total_dig' => $data['totalDig'],
                 'runtime' => $data['runtime'],
-                'nph' => $data['nph']
+                'nph' => $data['nph'],
+                'rent_max' => $data['rentMax']
             ]);
             return $this->dataReturn(['status'=>0,'message'=>'添加成功']);
         }
@@ -42,7 +43,8 @@ class Miner extends Base
                 'hashrate' => $data['hashrate'],
                 'total_dig' => $data['totalDig'],
                 'runtime' => $data['runtime'],
-                'nph' => $data['nph']
+                'nph' => $data['nph'],
+                'rent_max' => $data['rentMax']
             ]);
             return $this->dataReturn(['status'=>0,'message'=>'修改成功']);
         }

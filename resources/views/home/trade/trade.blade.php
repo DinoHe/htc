@@ -39,9 +39,14 @@
         //验证交易密码
         function safeCheck() {
             var content = '<p><input type="password" placeholder="请输入安全密码" name="safePassword"></p>' +
-                '<i class="color-error app-fs-13" style="position: absolute;left: 80px"></i>'
+                '<span class="color-error app-fs-13" style="position: absolute;left: 73px"></span>'
             $.confirm('安全验证',content,function () {
-                var $password = $('input[name="safePassword"]'),flag = true;
+                var $password = $('input[name="safePassword"]'),
+                    $error = $password.parent('p').siblings('span');
+                if ($password.val() == ''){
+                    $error.text('请输入安全密码');
+                    return false;
+                }
                 $.ajax({
                     method: 'post',
                     url: '{{url("home/tradeCheck")}}',
@@ -50,15 +55,16 @@
                     async: false,
                     success: function (data) {
                         if (data.status != 0){
-                            $password.parent('p').siblings('i').text(data.message);
-                            flag = false;
+                            $error.text(data.message);
+                        }else {
+                            location.reload();
                         }
                     },
                     error: function (error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
-                return flag;
+                return false;
             },document.referrer);
         }
     </script>

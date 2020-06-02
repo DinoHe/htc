@@ -25,6 +25,7 @@ class Base extends Controller
      */
     protected function initMiners($miners)
     {
+        if ($miners->isEmpty()) return false;
         foreach ($miners as $miner){
             if ($miner->run_status != MyMiners::RUNNING){
                 continue;

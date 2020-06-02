@@ -37,6 +37,10 @@ class RealNameAuths extends Model
         }
     }
 
+    /**
+     * 实名认证验证
+     * @return bool
+     */
     public function realNameAuthCheck()
     {
         $realName = self::where('member_id',Auth::id())->first();

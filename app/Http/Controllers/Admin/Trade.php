@@ -8,15 +8,14 @@ use App\Http\Models\Coins;
 use App\Http\Models\Members;
 use App\Http\Models\Orders;
 use App\Http\Models\TradeNumbers;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use phpDocumentor\Reflection\Types\Boolean;
 
 class Trade extends Base
 {
     public function buyList()
     {
         $buys = Cache::get('tradeBuy')?:[];
+//        dd($buys);
         $numbers = TradeNumbers::all();
         if ($this->request->isMethod('post') && !empty($buys)){
             $data = $this->request->input();
@@ -32,7 +31,11 @@ class Trade extends Base
                     array_push($buySearch,$buy);
                 }
             }
-            if (!empty($buySearch)) $buys = $buySearch;
+            if (!empty($buySearch)) {
+                $buys = $buySearch;
+            }else{
+                $buys = [];
+            }
         }
         return view('admin.trade.buy-list',['buys'=>$buys,'numbers'=>$numbers]);
     }
