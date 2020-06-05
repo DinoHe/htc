@@ -5,11 +5,17 @@
 <article class="cl pd-20">
 	<form action="{{url('admin/memberActivityAdd')}}" method="post" class="form form-horizontal">
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>购买数量：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>直推人数：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="number" class="input-text" placeholder="数量" name="buyNumber" min="0" style="width: 200px" required>
+				<input type="number" class="input-text" placeholder="数量" name="subordinate" min="0" style="width: 200px" required>
 			</div>
 		</div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>要求算力（G）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="number" class="input-text" placeholder="算力G" name="hashrate" min="0" step="0.1" style="width: 200px" required>
+            </div>
+        </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>赠送矿机类型：</label>
             <div class="formControls col-xs-8 col-sm-9">

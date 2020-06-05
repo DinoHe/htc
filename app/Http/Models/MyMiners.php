@@ -32,4 +32,21 @@ class MyMiners extends Model
                 return '已过期';
         }
     }
+
+    /**
+     * 会员算力统计
+     * @param $memberId
+     * @return int
+     */
+    public function hashrateSum($memberId)
+    {
+        $miners = self::where('member_id',$memberId)->where('run_status',self::RUNNING)->get();
+        $hashrateSum = 0;
+        if (!$miners->isEmpty()){
+            foreach ($miners as $miner) {
+                $hashrateSum += $miner->hashrate;
+            }
+        }
+        return $hashrateSum;
+    }
 }

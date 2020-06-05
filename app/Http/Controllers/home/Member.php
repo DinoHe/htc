@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 
 class Member extends Base
 {
+    private $link;
     /**
      * 会员中心
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -135,14 +136,13 @@ class Member extends Base
 
     public function link()
     {
-        return view('home.member.invite_link');
+        $link = url('/').'/home/register?invite='.Auth::user()->phone;
+        return view('home.member.invite_link',['link'=>$link]);
     }
 
-    public function qrcode()
+    public function qrcode($url)
     {
-        $user = Auth::user();
-        $url = url('/').'/home/register?invite='.$user->phone;
-        $this->getQRcode($url);
+        $this->getQRcode(decrypt($url));
     }
 
     public function notice()

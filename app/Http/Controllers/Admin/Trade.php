@@ -74,7 +74,7 @@ class Trade extends Base
         $ids = explode(',',$id)?:[id];
         $buys = Cache::get('tradeBuy');
         foreach ($ids as $id) {
-            $filterArray = $this->arrayFilter($id,$buys);
+            $filterArray = parent::array2Filter($id,$buys);
             if (!empty($filterArray)){
                 array_splice($buys,array_search($filterArray,$buys),1);
             }
@@ -116,7 +116,7 @@ class Trade extends Base
         $ids = explode(',',$id)?:[id];
         $sales = Cache::get('tradeSales');
         foreach ($ids as $id) {
-            $filterArray = $this->arrayFilter($id,$sales);
+            $filterArray = parent::array2Filter($id,$sales);
             if (!empty($filterArray)){
                 array_splice($sales,array_search($filterArray,$sales),1);
             }
@@ -162,14 +162,6 @@ class Trade extends Base
             Orders::where('id',$id['orderId'])->update(['trade_status'=>Orders::TRADE_CANCEL]);
         }
         return $this->dataReturn(['status'=>0,'message'=>'操作成功']);
-    }
-
-    private function arrayFilter($obj,$array):array
-    {
-        return array_filter($array,function ($array) use ($obj){
-            if (array_search($obj,$array)) return true;
-            return false;
-        });
     }
 
 }

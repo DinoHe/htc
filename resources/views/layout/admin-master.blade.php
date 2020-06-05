@@ -30,11 +30,6 @@
 
 @yield('container')
 
-    <div id="loading" style="display:none;">
-        <div style="width: 100%;height: 100%;background-color: rgba(230,231,234,0.38);z-index: 9999;position:absolute;"></div>
-        <div class="loading pos-a" style="z-index: 9999;text-align: center;width: 100%;height: 80%"></div>
-    </div>
-
 
 <script type="text/javascript" src="{{asset('js/jquery-3.1.1.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('static/admin/lib/layer/2.4/layer.js')}}"></script>
@@ -51,10 +46,14 @@
     });
 
     $.loading = function (){
-        $('#loading').fadeIn(100);
+        var loading = '<div id="loading">\n' +
+            '        <div style="top: 0;left: 0;right:0;bottom:0;background-color: rgba(230,231,234,0.38);z-index: 999;position:absolute;"></div>\n' +
+            '        <div class="loading pos-a pos-top" style="z-index: 9999;text-align: center;width: 100%;height: 80%"></div>\n' +
+            '    </div>';
+        $(loading).appendTo('body');
     }
     $.hideLoading = function (){
-        $('#loading').fadeOut(100);
+        $('#loading').remove();
     }
 
     $('.menu_dropdown a').on('click',function () {

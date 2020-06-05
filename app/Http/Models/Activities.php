@@ -4,16 +4,26 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BuyActivities extends Model
+class Activities extends Model
 {
 
     protected $fillable = [
-        'buy_number','reward_leader_miner_type','reward_leader_miner_number','reward_member'
+        'subordinate','hashrate','reward_miner_type','reward_miner_number','reward_member'
     ];
 
     public function miner()
     {
-        return $this->belongsTo('App\Http\Models\Miners','reward_leader_miner_type');
+        return $this->belongsTo('App\Http\Models\Miners','reward_miner_type');
+    }
+
+    public function setHashrateAttribute($hashrate)
+    {
+        $this->attributes['hashrate'] = $hashrate * 10;
+    }
+
+    public function getHashrateAttribute($hashrate)
+    {
+        return $hashrate / 10;
     }
 
     public function setRewardMemberAttribute($memberIdArray)

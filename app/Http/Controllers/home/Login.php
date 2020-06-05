@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
 use App\Http\Models\Orders;
+use App\Http\Models\SystemSettings;
+use App\Jobs\RewardMiner;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -32,6 +34,8 @@ class Login extends Base
                 Auth::logoutOtherDevices($data['password']);
                 //初始化币价
                 $this->initCoin();
+                //分享奖励矿机
+                $this->shareRewardMiner($user->id,$user->level_id);
 
                 return redirect('home/index');
             }
@@ -80,6 +84,14 @@ class Login extends Base
         if ($flag) Cache::forget('assets'.Auth::id());
         Auth::logout();
         return redirect('home/login');
+    }
+
+    private function shareRewardMiner($id,$level)
+    {
+        $shareReward = SystemSettings::getSysSettingValue('share_reward');
+        if ($shareReward == 'on'){
+            RewardMiner::dispatch($id,$level)->onQueue('give');
+        }
     }
 
 }

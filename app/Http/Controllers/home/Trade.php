@@ -9,7 +9,7 @@ use App\Http\Models\Orders;
 use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
 use App\Jobs\BuyMatch;
-use App\Jobs\RewardLeaderMiner;
+use App\Jobs\RewardCoin;
 use App\Jobs\SalesMatch;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -301,10 +301,10 @@ class Trade extends Base
             return false;
         }
         DB::commit();
-        //奖励上级矿机
-        $isReward = SystemSettings::getSysSettingValue('subordinate_buy_reward_miner');
+        //奖励上级币
+        $isReward = SystemSettings::getSysSettingValue('subordinate_buy_reward');
         if ($isReward == 'on' && $leaderId = $this->levelCheck($order->buy_member_id)){
-            RewardLeaderMiner::dispatch($buyAssets->buy_total,$leaderId)->onQueue('give');
+            RewardCoin::dispatch($order->trade_number,$leaderId)->onQueue('give');
         }
         //从缓存中删除该卖单
         $tradeSales = Cache::get('tradeSales');

@@ -27,6 +27,8 @@ a{
     padding: 0 5px;
     color: white;
     font-size: 13px;
+    z-index: 99;
+    position: relative;
 }
 li{
     list-style-type: none;
@@ -289,7 +291,7 @@ li{
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 9999;
+    z-index: 9;
     opacity: 0;
 }
 .link-header{
@@ -328,7 +330,7 @@ li{
 }
 .link-container label{
     color: #ef890a;
-    font-size: 50px;
+    font-size: 40px;
     text-shadow: 5px 5px 5px #dbc609;
 }
 .qrcode{

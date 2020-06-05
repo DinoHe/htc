@@ -28,9 +28,10 @@
                         </tr>
                         <tr class="text-c">
                             <th width="25"></th>
-                            <th>购买数量</th>
-                            <th>奖励上级矿机类型</th>
-                            <th>奖励上级矿机数量</th>
+                            <th>直推人数</th>
+                            <th>要求算力(G)</th>
+                            <th>奖励矿机类型</th>
+                            <th>奖励矿机数量</th>
                             <th>已获得奖励的会员</th>
                             <th width="80">操作</th>
                         </tr>
@@ -40,9 +41,10 @@
                     @foreach($activities as $a)
                         <tr class="text-c">
                             <td><input type="checkbox" value="{{$a->id}}"></td>
-                            <td>{{$a->buy_number}}</td>
+                            <td>{{$a->subordinate}}</td>
+                            <td>{{$a->hashrate}}</td>
                             <td>{{$a->miner->tittle}}</td>
-                            <td>{{$a->reward_leader_miner_number}}</td>
+                            <td>{{$a->reward_miner_number}}</td>
                             <td>{{$a->rewardMembers}}</td>
                             <td class="td-manage">
                                 @if(session('permission') == 0 || in_array("admin/memberActivityEdit",session('permission')))
@@ -72,7 +74,7 @@
         "bStateSave": true,//状态保存
         "aoColumnDefs": [
             //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-            {"orderable":false,"aTargets":[0,5]}// 制定列不参与排序
+            {"orderable":false,"aTargets":[0,6]}// 制定列不参与排序
         ]
     });
 

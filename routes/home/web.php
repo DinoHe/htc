@@ -17,7 +17,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::any('reset','Member@resetPassword');
     Route::get('link','Member@link');
     Route::get('team','Member@team');
-    Route::get('qrcode','Member@qrcode');
+    Route::get('qrcode/{url}','Member@qrcode');
     Route::get('notice','Member@notice');
     Route::get('noticePreview/{id}','Member@noticePreview');
     Route::get('memberService','Member@memberService');

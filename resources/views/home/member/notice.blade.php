@@ -9,7 +9,7 @@
             @foreach($notices as $notice)
             <a href="{{url('home/noticePreview/'.$notice->id)}}" class="weui-cell weui-cell_access">
                 <div class="weui-cell__bd">{{$notice->tittle}}</div>
-                <div class="weui-cell__ft">{{$notice->updated_at}}</div>
+                <div class="weui-cell__ft"></div>
             </a>
             @endforeach
         @endif

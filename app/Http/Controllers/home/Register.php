@@ -29,8 +29,8 @@ class Register extends Base
             if (time() - date_timestamp_get($code->updated_at) > 5*60) return back()->withErrors(['sms_verify'=>'验证码失效，请重新获取'])->withInput();
 
             //邀请码验证
-            $invite = Members::where('phone',$data['invite'])->first();
-            if (empty($invite)) {
+            $existInvite = Members::where('invite',$data['invite'])->first();
+            if (empty($existInvite)) {
                 return back()->withErrors(['error'=>'无效的邀请码'])->withInput();
             }
 
@@ -39,7 +39,8 @@ class Register extends Base
                 'phone' => $data['phone'],
                 'password' => Hash::make($data['password']),
                 'safe_password' => Hash::make($data['safe_password']),
-                'parentid' => $invite->id
+                'parentid' => $existInvite->id,
+                'invite' => $this->getInviteCode()
             ]);
             if ($status){
                 //创建资产
@@ -48,7 +49,7 @@ class Register extends Base
             }
             return back()->withErrors(['register'=>'注册失败'])->withInput();
         }
-        $invite = $data['invite'];
+        $invite = isset($data['invite'])?$data['invite']:null;
         return view('home.register')->with('invite', $invite);
     }
 
@@ -61,6 +62,24 @@ class Register extends Base
         }
         $res = $this->sendSMS($phone);
         return $res;
+    }
+
+    public function getInviteCode()
+    {
+        $char = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $micro = microtime();
+        list($a,$b) = explode(' ',$micro);
+        $base = $b.substr($a,2,6);
+        $code = '';
+        while ($base){
+            $mod = $base % 62;
+            $base = (int)($base / 62);
+            $code .= $char[$mod];
+        }
+        $tmpArray = str_split($code);
+        shuffle($tmpArray);
+        $code = implode($tmpArray);
+        return $code;
     }
 
     //验证

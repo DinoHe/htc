@@ -14,20 +14,26 @@
 @section('container')
 <article class="cl pd-20">
 	<form action="{{url('admin/memberActivityEdit')}}" method="post" class="form form-horizontal">
-		<div class="row cl">
-            <input type="hidden" name="id" value="{{$activity->id}}">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>购买数量：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="number" class="input-text" placeholder="数量" name="buyNumber" value="{{$activity->buy_number}}" min="0" style="width: 200px" required>
-			</div>
-		</div>
+        <input type="hidden" name="id" value="{{$activity->id}}">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>直推人数：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="number" class="input-text" placeholder="数量" value="{{$activity->subordinate}}" name="subordinate" min="0" style="width: 200px" required>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>要求算力（G）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="number" class="input-text" placeholder="算力G" value="{{$activity->hashrate}}" name="hashrate" min="0" step="0.1" style="width: 200px" required>
+            </div>
+        </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>赠送矿机类型：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <span class="select-box inline">
                     <select name="minerType" class="select">
                         @foreach($miners as $miner)
-                            <option value="{{$miner->id}}" {{$activity->reward_leader_miner_type==$miner->id?'selected':''}}>{{$miner->tittle}}</option>
+                            <option value="{{$miner->id}}" {{$activity->reward_miner_type==$miner->id?'selected':''}}>{{$miner->tittle}}</option>
                         @endforeach
                     </select>
                 </span>
@@ -36,7 +42,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>赠送矿机数量：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="number" class="input-text" name="number" value="{{$activity->reward_leader_miner_number}}" min="0" style="width: 200px" required>
+				<input type="number" class="input-text" name="number" value="{{$activity->reward_miner_number}}" min="0" style="width: 200px" required>
 			</div>
 		</div>
         <div class="row cl">
@@ -85,9 +91,12 @@ $(function(){
 
 	$("form").validate({
 		rules:{
-			buyNumber:{
+			subordinate:{
 				required:true,
 			},
+            hashrate:{
+                required:true,
+            },
             minerType:{
                 required:true,
             },
@@ -114,24 +123,42 @@ $(function(){
 	});
 });
 
+var $rm = $('input[name="rewardMembers"]');
 function removeElement(obj) {
+    var account = $(obj).siblings('label').text();
+    var c = $rm.val().replace(account,'');
+    $rm.val(c);
     $(obj).parent().remove();
 }
-
 function addMember(obj){
     var $inpt = $(obj).siblings(),
-        $rm = $('input[name="rewardMembers"]');
         li = '<li class="data-item"><label>'+$inpt.val()+'</label><a href="#" onclick="removeElement(this)">X</a></li>';
     if ($inpt.val() == ''){
         return false;
     }
-    $('ul').append(li);
-    var v = $rm.val();
-    if (v != ''){
-        v += ',' + $inpt.val();
-        $rm.val(v);
-    }
-    $inpt.val('');
+    $.loading();
+    $.ajax({
+        method:'post',
+        url:'{{url("admin/memberActivityAccountCheck")}}',
+        data:{'account':$inpt.val()},
+        dataType: 'json',
+        success: function (data) {
+            $.hideLoading();
+            if (data.status != 0){
+                layer.msg('账号不存在',{icon:2,time:1000});
+            }else{
+                $('ul').append(li);
+                var v = $rm.val();
+                if (v != ''){
+                    v += ',' + $inpt.val();
+                }else{
+                    v = $inpt.val();
+                }
+                $rm.val(v);
+                $inpt.val('');
+            }
+        }
+    });
 }
 </script>
 @endsection

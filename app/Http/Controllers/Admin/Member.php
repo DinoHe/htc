@@ -6,13 +6,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Base;
 use App\Http\Models\Assets;
 use App\Http\Models\Bills;
-use App\Http\Models\BuyActivities;
+use App\Http\Models\Activities;
 use App\Http\Models\Ideals;
 use App\Http\Models\MemberLevels;
 use App\Http\Models\Members;
 use App\Http\Models\Miners;
 use App\Http\Models\MyMiners;
 use App\Http\Models\RealNameAuths;
+use App\Http\Models\SystemSettings;
 use Illuminate\Support\Facades\Hash;
 
 class Member extends Base
@@ -173,7 +174,24 @@ class Member extends Base
     {
         $data = $this->request->input();
         $info['auth_status'] = RealNameAuths::AUTH_CHECK_FAIL;
-        if ($data['auth_status'] == 1) $info['auth_status'] = RealNameAuths::AUTH_SUCCESS;
+        if ($data['auth_status'] == 1) {
+            $info['auth_status'] = RealNameAuths::AUTH_SUCCESS;
+            //审核通过赠送矿机
+            $rewardMinerNumber = SystemSettings::getSysSettingValue('realname_reward_miner_number');
+            $miner = Miners::find(1); //默认赠送微型矿机
+            for ($i=0;$i<$rewardMinerNumber;$i++){
+                MyMiners::create([
+                    'member_id' => $data['id'],
+                    'miner_id' => $miner->id,
+                    'miner_tittle' => $miner->tittle,
+                    'runtime' => $miner->runtime,
+                    'hashrate' => $miner->hashrate,
+                    'nph' => $miner->nph,
+                    'total_dig' => $miner->total_dig,
+                    'run_status' => MyMiners::RUNNING
+                ]);
+            }
+        }
         RealNameAuths::where('id',$data['id'])->update($info);
         return $this->dataReturn(['status'=>0,'message'=>'操作成功']);
     }
@@ -400,7 +418,7 @@ class Member extends Base
 
     public function activity()
     {
-        $activities = BuyActivities::all();
+        $activities = Activities::all();
         foreach ($activities as $activity) {
             $members = Members::find($activity->reward_member);
             if (!$members->isEmpty()){
@@ -419,10 +437,11 @@ class Member extends Base
         $miners = Miners::all();
         if ($this->request->isMethod('post')){
             $data = $this->request->input();
-            BuyActivities::create([
-                'buy_number' => $data['buyNumber'],
-                'reward_leader_miner_type' => $data['minerType'],
-                'reward_leader_miner_number' => $data['number']
+            Activities::create([
+                'subordinate' => $data['subordinate'],
+                'hashrate' => $data['hashrate']*10,
+                'reward_miner_type' => $data['minerType'],
+                'reward_miner_number' => $data['number']
             ]);
             return $this->dataReturn(['status'=>0,'message'=>'添加成功']);
         }
@@ -434,15 +453,25 @@ class Member extends Base
         $miners = Miners::all();
         $data = $this->request->input();
         if ($this->request->isMethod('post')){
-            BuyActivities::where('id',$data['id'])->update([
-                'buy_number' => $data['buyNumber'],
-                'reward_leader_miner_type' => $data['minerType'],
-                'reward_leader_miner_number' => $data['number'],
-                'reward_member' => $data['rewardMembers']
+            $accounts = explode(',',$data['rewardMembers'])?:$data['rewardMembers'];
+            $ids = [];
+            foreach ($accounts as $account) {
+                $member = Members::where('phone',$account)->first();
+                if (!empty($member)){
+                    array_push($ids,$member->id);
+                }
+            }
+            Activities::where('id',$data['id'])->update([
+                'subordinate' => $data['subordinate'],
+                'hashrate' => $data['hashrate']*10,
+                'reward_miner_type' => $data['minerType'],
+                'reward_miner_number' => $data['number'],
+                'reward_member' => implode(',',$ids)?:$ids
             ]);
             return $this->dataReturn(['status'=>0,'message'=>'编辑成功']);
         }
-        $activity = BuyActivities::find($data['id']);
+
+        $activity = Activities::find($data['id']);
         $members = Members::find($activity->reward_member);
         if (!$members->isEmpty()){
             $rewardMembers = [];
@@ -455,11 +484,20 @@ class Member extends Base
         return view('admin.member.activity-edit',['miners'=>$miners,'activity'=>$activity]);
     }
 
+    public function activityAccountCheck()
+    {
+        $member = Members::where('phone',$this->request->input('account'))->first();
+        if (empty($member)){
+            return $this->dataReturn(['status'=>1,'message'=>'账号不存在']);
+        }
+        return $this->dataReturn(['status'=>0,'message'=>'账号正确']);
+    }
+
     public function activityDel()
     {
         $id = $this->request->input('id');
         $ids = explode(',',$id)?:$id;
-        BuyActivities::destroy($ids);
+        Activities::destroy($ids);
         return $this->dataReturn(['status'=>0,'message'=>'删除成功']);
     }
 

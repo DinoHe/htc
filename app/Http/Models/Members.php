@@ -16,7 +16,7 @@ class Members extends Authenticatable
     const BLOCKED_FOREVER = 3;
 
     protected $fillable = [
-        'phone', 'password', 'safe_password', 'level_id', 'parentid','activated', 'describes','credit'
+        'phone','password','safe_password','level_id','parentid','activated','describes','credit','invite'
     ];
 
     public function level()

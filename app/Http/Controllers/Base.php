@@ -126,12 +126,26 @@ class Base extends Controller
         return $res;
     }
 
+    /**
+     * 过滤二维数组中的元素, 无法过滤中文
+     * @param $obj
+     * @param $array
+     * @return array
+     */
+    protected function array2Filter($obj,$array):array
+    {
+        return array_filter($array,function ($array) use ($obj){
+            if (array_search($obj,$array)) return true;
+            return false;
+        });
+    }
+
     protected function remakeSessionId()
     {
         $this->request->session()->regenerate();
     }
 
-    public function dataReturn($data)
+    protected function dataReturn($data)
     {
         return json_encode($data);
     }

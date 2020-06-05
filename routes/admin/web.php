@@ -57,6 +57,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'
     Route::get('memberActivity','Member@activity');
     Route::any('memberActivityAdd','Member@activityAdd');
     Route::any('memberActivityEdit','Member@activityEdit');
+    Route::post('memberActivityAccountCheck','Member@activityAccountCheck');
     Route::post('memberActivityDel','Member@activityDel');
     Route::any('memberIdeal','Member@ideal');
     Route::post('memberIdealDel','Member@idealDel');
