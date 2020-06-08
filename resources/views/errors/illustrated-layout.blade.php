@@ -461,7 +461,7 @@
             <div class="w-full md:w-1/2 bg-white flex items-center justify-center">
                 <div class="max-w-sm m-8">
                     <div class="text-black text-5xl md:text-3xl font-black">
-                        页面出错了！o(╥﹏╥)o
+                        页面出错了！o(╥﹏╥)o @yield('code')
 {{--                        @yield('code', __('Oh no'))--}}
                     </div>
 
