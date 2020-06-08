@@ -20,10 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/home/Login.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/home/Login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/errors/illustrated-layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/errors/illustrated-layout.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +220,7 @@
       <workItem from="1591237058006" duration="21912000" />
       <workItem from="1591322339114" duration="3007000" />
       <workItem from="1591523930575" duration="6655000" />
-      <workItem from="1591596399134" duration="1824000" />
+      <workItem from="1591596399134" duration="3642000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
