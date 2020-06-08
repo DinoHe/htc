@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\home\Member;
 use App\Http\Models\Coins;
 use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
