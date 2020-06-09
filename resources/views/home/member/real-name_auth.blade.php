@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <p>示例：</p>
-                    <img src="{{asset('static/home/images/示例1.gif')}}" class="shili">
+                    <img src="{{asset('static/home/img/示例1.gif')}}" class="shili">
                 </div>
                 <div class="weui-cell">
                     <div class="weui-cell__hd">
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <p>示例：</p>
-                    <img src="{{asset('static/home/images/示例2.gif')}}" class="shili">
+                    <img src="{{asset('static/home/img/示例2.gif')}}" class="shili">
                 </div>
             </div>
             @if($auths->auth_status == \App\Http\Models\RealNameAuths::AUTH_FAIL || $auths->auth_status == \App\Http\Models\RealNameAuths::AUTH_CHECK_FAIL)

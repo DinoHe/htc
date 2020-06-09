@@ -51,7 +51,7 @@ class System extends Base
                 'tittle' => $data['tittle'],
                 'content' => $data['content']
             ]);
-            return true;
+            return $this->dataReturn(['status'=>0,'message'=>'添加成功']);
         }
         return view('admin.system.notice-add');
     }
@@ -64,7 +64,7 @@ class System extends Base
                 'tittle' => $data['tittle'],
                 'content' => $data['content']
             ]);
-            return true;
+            return $this->dataReturn(['status'=>0,'message'=>'修改成功']);
         }
 
         $notice = SystemNotices::find($this->request->input('id'));

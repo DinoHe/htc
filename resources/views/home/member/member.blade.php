@@ -51,7 +51,7 @@
             </a>
             <a href="{{url('home/link')}}" class="weui-grid">
                 <i class="iconfont icon-fenxianglianjie"></i>
-                <p class="">分享赚钱</p>
+                <p class="">分享</p>
             </a>
             <a href="{{url('home/notice')}}" class="weui-grid">
                 <i class="iconfont icon-gonggao"></i>
@@ -83,7 +83,7 @@
             </a>
             <a href="{{url('home/ideal')}}" class="weui-grid">
                 <i class="iconfont icon-jianyi"></i>
-                <p class="">建议</p>
+                <p class="">建议反馈</p>
             </a>
             <a href="{{url('home/memberService')}}" class="weui-grid">
                 <i class="iconfont icon-kefu"></i>
