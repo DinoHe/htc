@@ -32,7 +32,7 @@
             </div>
             <div class="member-container_assets_show">
                 <span>{{$assets->buy_total}}</span>
-                <p class="app-fs-13">累积购买</p>
+                <p class="app-fs-13">奖励</p>
             </div>
         </div>
         <div class="weui-grids app-grids app-fs-16 member-container_list">

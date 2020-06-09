@@ -136,7 +136,7 @@ class Member extends Base
 
     public function link()
     {
-        $link = url('/').'/home/register?invite='.Auth::user()->phone;
+        $link = url('/').'/home/register?invite='.Auth::user()->invite;
         return view('home.member.invite_link',['link'=>$link]);
     }
 

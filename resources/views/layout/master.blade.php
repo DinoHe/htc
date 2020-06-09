@@ -161,10 +161,10 @@
         function smsVerify(url){
             var phone = $('input[name="phone"]').val();
             if(11 != phone.length){
-                $.toptip('手机号错误');
+                $.topTip('手机号错误');
                 return false;
             }
-            $.showLoading('正在发送');
+            $.loading('正在发送');
             $.ajax({
                 url: url,
                 data: {'phone':phone},
@@ -177,13 +177,13 @@
                         $.toast('发送成功');
                         sendDelay();
                     }else{
-                        $.toptip(data.message);
+                        $.topTip(data.message);
                     }
                 },
                 error: function(error){
-                    console.log(error);
+                    // console.log(error);
                     $.hideLoading();
-                    $.toptip('发送失败，系统错误');
+                    $.topTip('发送失败，系统错误');
                 }
             });
         }
