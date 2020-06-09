@@ -35,8 +35,14 @@
 $(function(){
 
     $('form').submit(function () {
-        layer.msg('修改成功',{icon:6,time:1000});
-        closeLayer();
+        $(this).ajaxSubmit({
+            dataType:'json',
+            success:function(data) {
+                layer.msg('修改成功',{icon:6,time:1000});
+                closeLayer();
+            }
+        });
+        return false;
     });
 
     var ue = UE.getEditor('editor');
