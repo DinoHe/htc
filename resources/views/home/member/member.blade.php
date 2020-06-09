@@ -17,7 +17,6 @@
                 <p class="app-fs-13">我的矿机：{{$member->minerNumber}}</p>
                 <p class="app-fs-13">信用：{{$member->credit}}</p>
             </div>
-            <span><a href="{{ url('/home/logout') }}" class="member-header_logout">退出登录</a></span>
         </div>
     </div>
 
@@ -93,7 +92,11 @@
                 <i class="iconfont icon-rizhichakan"></i>
                 <p class="">修改密码</p>
             </a>
-            </div>
+            <a href="{{url('home/logout')}}" class="weui-grid">
+                <i class="iconfont icon-tuichufffpx"></i>
+                <p class="">退出登录</p>
+            </a>
+        </div>
     </div>
 @endsection
 

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9989500",
+      "name": "退出登录",
+      "font_class": "tuichufffpx",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
       "icon_id": "9593615",
       "name": "返 回",
       "font_class": "fanhui",
