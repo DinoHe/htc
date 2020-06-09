@@ -36,17 +36,17 @@
     },
     {
         "name": "doctrine/inflector",
-        "version": "1.4.3",
-        "version_normalized": "1.4.3.0",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/inflector.git",
-            "reference": "4650c8b30c753a76bf44fb2ed00117d6f367490c"
+            "reference": "9cf661f4eb38f7c881cac67c75ea9b00bf97b210"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/inflector/zipball/4650c8b30c753a76bf44fb2ed00117d6f367490c",
-            "reference": "4650c8b30c753a76bf44fb2ed00117d6f367490c",
+            "url": "https://api.github.com/repos/doctrine/inflector/zipball/9cf661f4eb38f7c881cac67c75ea9b00bf97b210",
+            "reference": "9cf661f4eb38f7c881cac67c75ea9b00bf97b210",
             "shasum": ""
         },
         "require": {
@@ -59,7 +59,7 @@
             "phpstan/phpstan-strict-rules": "^0.11",
             "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
         },
-        "time": "2020-05-29T07:19:59+00:00",
+        "time": "2020-05-29T15:13:26+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -69,7 +69,6 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector",
                 "Doctrine\\Inflector\\": "lib/Doctrine/Inflector"
             }
         },
@@ -989,28 +988,28 @@
     },
     {
         "name": "laravel/framework",
-        "version": "v6.18.13",
-        "version_normalized": "6.18.13.0",
+        "version": "v6.18.18",
+        "version_normalized": "6.18.18.0",
         "source": {
             "type": "git",
             "url": "https://github.com/laravel/framework.git",
-            "reference": "39519d03237a81380e2126d667e898e2922db444"
+            "reference": "9e5226ecc28f960cba1bd38b6d1d82a52e072dc3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/39519d03237a81380e2126d667e898e2922db444",
-            "reference": "39519d03237a81380e2126d667e898e2922db444",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/9e5226ecc28f960cba1bd38b6d1d82a52e072dc3",
+            "reference": "9e5226ecc28f960cba1bd38b6d1d82a52e072dc3",
             "shasum": ""
         },
         "require": {
-            "doctrine/inflector": "^1.1",
+            "doctrine/inflector": "^1.4|^2.0",
             "dragonmantank/cron-expression": "^2.0",
             "egulias/email-validator": "^2.1.10",
             "ext-json": "*",
             "ext-mbstring": "*",
             "ext-openssl": "*",
             "league/commonmark": "^1.3",
-            "league/flysystem": "^1.0.8",
+            "league/flysystem": "^1.0.34",
             "monolog/monolog": "^1.12|^2.0",
             "nesbot/carbon": "^2.0",
             "opis/closure": "^3.1",
@@ -1024,6 +1023,7 @@
             "symfony/finder": "^4.3.4",
             "symfony/http-foundation": "^4.3.4",
             "symfony/http-kernel": "^4.3.4",
+            "symfony/polyfill-php73": "^1.17",
             "symfony/process": "^4.3.4",
             "symfony/routing": "^4.3.4",
             "symfony/var-dumper": "^4.3.4",
@@ -1101,7 +1101,7 @@
             "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^1.2).",
             "wildbit/swiftmailer-postmark": "Required to use Postmark mail driver (^3.0)."
         },
-        "time": "2020-05-05T15:53:49+00:00",
+        "time": "2020-06-02T22:32:07+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
