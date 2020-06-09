@@ -35,7 +35,7 @@
 $(function(){
 
     $('form').submit(function () {
-        layer.msg('提交成功',{icon:6,time:1000});
+        layer.msg('修改成功',{icon:6,time:1000});
         closeLayer();
     });
 
