@@ -79,13 +79,10 @@ class Index extends Base
             'run_status' => MyMiners::RUNNING
         ]);
         if ($res){
-            $balance = $assets->balance - $data['coin_number'];
-            $update = Assets::where('member_id',$memberId)->update(['balance'=>$balance]);
-            if ($update){
-                $assets->balance = $balance;
-                Cache::put('assets'.$memberId,$assets,Carbon::tomorrow());
-                Bills::createBill($memberId,'余额-租用矿机','-'.$data['coin_number']);
-            }
+            $assets->balance -= $data['coin_number'];
+            $assets->save();
+            Cache::put('assets'.$memberId,$assets,Carbon::tomorrow());
+            Bills::createBill($memberId,'余额-租用矿机','-'.$data['coin_number']);
         }
         return $this->dataReturn(['status'=>0,'message'=>'租用成功']);
     }

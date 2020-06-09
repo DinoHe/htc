@@ -31,8 +31,8 @@
                 <p class="app-fs-13">冻结</p>
             </div>
             <div class="member-container_assets_show">
-                <span>{{$assets->buy_total}}</span>
-                <p class="app-fs-13">奖励</p>
+                <span>{{$assets->rewards}}</span>
+                <p class="app-fs-13">累积奖励</p>
             </div>
         </div>
         <div class="weui-grids app-grids app-fs-16 member-container_list">

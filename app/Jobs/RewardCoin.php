@@ -41,6 +41,7 @@ class RewardCoin implements ShouldQueue
         $rewardRate = SystemSettings::getSysSettingValue('subordinate_buy_reward_rate');
         $rewardCoin = $this->tradeNumber * $rewardRate;
         $leaderAssets->balance += $rewardCoin;
+        $leaderAssets->rewards += $rewardCoin;
         $leaderAssets->save();
         Bills::createBill($this->leaderId,'余额-直推买币奖励','+'.$rewardCoin);
     }

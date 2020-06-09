@@ -14,6 +14,8 @@ use App\Http\Models\Miners;
 use App\Http\Models\MyMiners;
 use App\Http\Models\RealNameAuths;
 use App\Http\Models\SystemSettings;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 
 class Member extends Base
@@ -232,12 +234,28 @@ class Member extends Base
         $data = $this->request->input();
         $assets = Assets::find($data['id']);
         if ($this->request->isMethod('post')){
-            if (empty($data['balance']) && empty($data['blockedAssets']) && empty($data['buyTotal'])){
+            if (empty($data['balance']) && empty($data['rewards'])){
                 return $this->dataReturn(['status'=>-1,'message'=>'请输入充值数量']);
             }
-            if (!empty($data['balance'])) $assets->balance += $data['balance'];
-            if (!empty($data['blockedAssets'])) $assets->blocked_assets += $data['blockedAssets'];
-            if (!empty($data['buyTotal'])) $assets->buy_total += $data['buyTotal'];
+            if (!empty($data['balance'])) {
+                $assets->balance += $data['balance'];
+                $i = '+';
+                $tittle = '赠送';
+                if ($data['balance'] < 0) {
+                    $i = '';
+                    $tittle = '扣除';
+                }
+                Bills::createBill($assets->member_id,'余额-'.$tittle,$i.$data['balance']);
+            }
+            if (!empty($data['rewards'])) {
+                $assets->balance += $data['rewards'];
+                $assets->rewards += $data['rewards'];
+                Bills::createBill($assets->member_id,'余额-奖励','+'.$data['rewards']);
+            }
+            //更新资产缓存
+            if (Cache::has('assets'.$data['id'])) {
+                Cache::put('assets'.$data['id'],$assets,Carbon::tomorrow());
+            }
             $assets->save();
             return $this->dataReturn(['status'=>0,'message'=>'充值成功']);
         }
@@ -275,19 +293,22 @@ class Member extends Base
             $model = $model->where('balance','>=',$data['balanceMin']*100);
         }
         if (!empty($data['buyMin'])) {
-            $model = $model->where('buy_total','>=',$data['buyMin']);
+            $model = $model->where('buys','>=',$data['buyMin']*100);
         }
         $assets = $model->get();
         $balanceSum = 0;
         $blockedSum = 0;
         $buySum = 0;
+        $rewardSum = 0;
         foreach ($assets as $asset) {
             $balanceSum += $asset->balance;
             $blockedSum += $asset->blocked_assets;
-            $buySum += $asset->buy_total;
+            $buySum += $asset->buys;
+            $rewardSum += $asset->rewards;
         }
         return $this->dataReturn(['status'=>0,'balanceSum'=>round($balanceSum,2),
-            'blockedSum'=>round($blockedSum,2),'buySum'=>$buySum]);
+            'blockedSum'=>round($blockedSum,2),'buySum'=>round($buySum,2),
+            'rewardSum'=>round($rewardSum,2)]);
     }
 
     public function assetsDel()
@@ -360,6 +381,7 @@ class Member extends Base
                     'nph' => $miner->nph
                 ]);
             }
+            Bills::createBill($member->id,$miner->tittle.'-赠送','+'.$data['number'].'台');
             return $this->dataReturn(['status'=>0,'message'=>'赠送成功']);
         }
         $miners = Miners::all();

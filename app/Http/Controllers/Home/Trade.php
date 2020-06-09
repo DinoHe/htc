@@ -285,7 +285,7 @@ class Trade extends Base
         DB::beginTransaction();
         //买家资产确认
         $buyAssets->balance += $order->trade_number;
-        $buyAssets->buy_total += $order->trade_number;
+        $buyAssets->buys += $order->trade_number;
         //卖家资产确认
         $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
         $salesAssets->blocked_assets -= $order->trade_number*(1+$handRate);

@@ -8,7 +8,7 @@
             <input type="hidden" name="id" value="{{$realName->id}}">
 			<label class="form-label col-xs-4 col-sm-3">账号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="{{$realName->member->phone}}" disabled>
+                <div>{{$realName->member->phone}}</div>
 			</div>
 		</div>
         <div class="row cl">
@@ -107,8 +107,10 @@ $(function(){
 		focusCleanup:true,
 		success:"valid",
 		submitHandler:function(form){
+		    $.loading();
 			$(form).ajaxSubmit({
                 success: function (data) {
+                    $.hideLoading();
                     if (data.status == 0){
                         layer.msg('修改成功',{icon:1,time:1000});
                         closeLayer();

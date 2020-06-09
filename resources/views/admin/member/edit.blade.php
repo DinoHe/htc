@@ -9,7 +9,7 @@
         <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">会员账号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-                <div class="input-text">{{$member->phone}}</div>
+                <div>{{$member->phone}}</div>
 			</div>
 		</div>
         <div class="row cl">
@@ -21,13 +21,13 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">登录密码：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" autocomplete="off" placeholder="登录密码" name="password">
+				<input type="text" class="input-text" autocomplete="off" placeholder="修改登录密码" name="password">
 			</div>
 		</div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">安全密码：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" autocomplete="off" placeholder="安全密码" name="safe_password">
+                <input type="text" class="input-text" autocomplete="off" placeholder="修改安全密码" name="safe_password">
             </div>
         </div>
 		<div class="row cl">

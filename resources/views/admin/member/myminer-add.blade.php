@@ -65,8 +65,10 @@ $(function(){
 		focusCleanup:true,
 		success:"valid",
 		submitHandler:function(form){
+		    $.loading();
 			$(form).ajaxSubmit({
                 success: function (data) {
+                    $.hideLoading();
                     if (data.status == 0){
                         layer.msg('赠送矿机成功',{icon:6,time:1000});
                         closeLayer();

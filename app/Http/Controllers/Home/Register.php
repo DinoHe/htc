@@ -29,8 +29,8 @@ class Register extends Base
             if (time() - date_timestamp_get($code->updated_at) > 5*60) return back()->withErrors(['sms_verify'=>'验证码失效，请重新获取'])->withInput();
 
             //邀请码验证
-            $existInvite = Members::where('invite',$data['invite'])->first();
-            if (empty($existInvite)) {
+            $superiors = Members::where('invite',$data['invite'])->first();
+            if (empty($superiors)) {
                 return back()->withErrors(['error'=>'无效的邀请码'])->withInput();
             }
 
@@ -39,7 +39,7 @@ class Register extends Base
                 'phone' => $data['phone'],
                 'password' => Hash::make($data['password']),
                 'safe_password' => Hash::make($data['safe_password']),
-                'parentid' => $existInvite->id,
+                'parentid' => $superiors->id,
                 'invite' => $this->getInviteCode()
             ]);
             if ($status){
@@ -64,6 +64,10 @@ class Register extends Base
         return $res;
     }
 
+    /**
+     * 创建邀请码
+     * @return string
+     */
     public function getInviteCode()
     {
         $char = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

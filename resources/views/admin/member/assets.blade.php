@@ -41,7 +41,8 @@
                             <th width="150">账号</th>
                             <th>余额</th>
                             <th>冻结资产</th>
-                            <th>购币总数</th>
+                            <th>累积奖励</th>
+                            <th>累积购买（HTC）</th>
                             <th width="150">操作</th>
                         </tr>
                     </thead>
@@ -53,7 +54,8 @@
                             <td>{{$a->member->phone}}</td>
                             <td>{{$a->balance}}</td>
                             <td>{{$a->blocked_assets}}</td>
-                            <td>{{$a->buy_total}}</td>
+                            <td>{{$a->rewards}}</td>
+                            <td>{{$a->buys}}</td>
                             <td class="td-manage">
                                 @if(session('permission') == 0 || in_array("admin/memberAssetsRechargeEdit",session('permission')))
                                     <a href="javascript:;" onclick="edit('充值','{{url("admin/memberAssetsRechargeEdit")}}','{{$a->id}}','800','400')" class="ml-5 btn-success pd-5 radius" style="text-decoration:none">充值</a>
@@ -85,7 +87,7 @@
         "bStateSave": true,//状态保存
         "aoColumnDefs": [
             //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-            {"orderable":false,"aTargets":[0,5]}// 制定列不参与排序
+            {"orderable":false,"aTargets":[0,6]}// 制定列不参与排序
         ]
     });
 
@@ -99,7 +101,7 @@
             success:function (data) {
                 if (data.status == 0){
                     $(obj).siblings().empty();
-                    $(obj).siblings().text('余额总计：'+data.balanceSum+'， 冻结总计：'+data.blockedSum+'， 购币总计：'+data.buySum);
+                    $(obj).siblings().text('余额总计：'+data.balanceSum+'， 冻结总计：'+data.blockedSum+'， 奖励总计：'+data.rewardSum+'， 购买总计：'+data.buySum);
                 }
             }
         });

@@ -74,7 +74,7 @@
         "bStateSave": true,//状态保存
         "aoColumnDefs": [
             //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-            {"orderable":false,"aTargets":[0,6]}// 制定列不参与排序
+            {"orderable":false,"aTargets":[0,4]}// 制定列不参与排序
         ]
     });
 

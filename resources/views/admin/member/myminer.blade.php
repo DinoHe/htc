@@ -81,7 +81,6 @@
                                     @if($mm->run_status == \App\Http\Models\MyMiners::RUNNING)
                                     <a style="text-decoration:none" onClick="miner_stop(this,'{{$mm->id}}')" href="javascript:;" title="结束"><i class="Hui-iconfont">&#xe631;</i></a>
                                     @endif
-                                    <a title="编辑" href="javascript:;" onclick="edit('编辑','{{url("admin/memberMinerEdit")}}','{{$mm->id}}','800','600')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
                                 @endif
                                 @if(session('permission') == 0 || in_array("admin/memberMinerDel",session('permission')))
                                     <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/memberMinerDel")}}','{{$mm->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>

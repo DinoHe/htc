@@ -24,9 +24,9 @@
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">购币总数：</label>
+            <label class="form-label col-xs-4 col-sm-3">奖励HTC：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="number" class="input-text" name="buyTotal" step="0.01" style="width: 200px"> HTC
+                <input type="number" class="input-text" name="rewards" min="0" step="0.01" style="width: 200px"> HTC
             </div>
         </div>
 		<div class="row cl">
