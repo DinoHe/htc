@@ -157,7 +157,7 @@ class Member extends Base
      */
     public function quotations()
     {
-        $url = 'https://www.hqz.com/api/index/get_side_concept_coin/?conceptid=12';
+        $url = 'http://api.coindog.com/api/v1/ticks/BITFINEX?unit=cny';
         $curl = curl_init();
         curl_setopt($curl,CURLOPT_URL,$url);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
@@ -166,9 +166,8 @@ class Member extends Base
         $output = curl_exec($curl);
         curl_close($curl);
         $output = json_decode($output);
-        $quotations = $output->data;
 
-        return view('home.member.quotations')->with('quotations',$quotations);
+        return view('home.member.quotations')->with('quotations',$output);
     }
 
     public function noticePreview($id)

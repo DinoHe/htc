@@ -15,7 +15,6 @@ class Trade extends Base
     public function buyList()
     {
         $buys = Cache::get('tradeBuy')?:[];
-//        dd($buys);
         $numbers = TradeNumbers::all();
         if ($this->request->isMethod('post') && !empty($buys)){
             $data = $this->request->input();

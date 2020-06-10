@@ -57,6 +57,7 @@ li{
 }
 .app-cells{
     padding: 10px 16px;
+    position: relative;
 }
 
 /* 首页 */

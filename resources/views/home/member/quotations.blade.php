@@ -4,25 +4,26 @@
 
 @section('container')
 <div class="app-cells">
-
-    <table style="text-align: left;width: 100%" cellspacing="0" >
+    <table style="text-align: center;width: 100%;" cellspacing="0" >
         <thead>
         <tr>
             <th>名称</th>
             <th>价格</th>
-            <th>成交额(24h)</th>
-            <th>涨幅(24h)</th>
+            <th>成交量</th>
+            <th>涨幅</th>
         </tr>
         </thead>
         <tbody>
         @if(!empty($quotations))
             @foreach($quotations as $q)
-            <tr class="table-body">
-                <td style="color: #00a2ca">{{$q->coinshortcode.'-'.$q->coinname}}</td>
-                <td style="color:#ea1bbe;font-size: 13px">${{$q->price_usd}} <p>≈{{$q->price_cny_text}}</p></td>
-                <td class="app-fs-13">{{$q->trademoney24h_cny_text}}</td>
-                <td width="56"><span>{{$q->percent_24h}}</span>%</td>
-            </tr>
+                @if($q->currency == 'USD')
+                <tr class="table-body">
+                    <td style="color: #00a2ca">{{$q->base}}</td>
+                    <td style="color:#ea1bbe;font-size: 13px">${{$q->close}} <p>≈￥{{$q->close * 7}}</p></td>
+                    <td class="app-fs-13">{{$q->vol}}</td>
+                    <td><span>{{$q->degree}}</span>%</td>
+                </tr>
+                @endif
             @endforeach
         @endif
         </tbody>

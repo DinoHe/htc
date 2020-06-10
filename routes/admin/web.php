@@ -6,6 +6,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'],function (){
     Route::get('index','Index@index');
+    Route::post('count','Index@count');
     Route::get('/','Index@index');
     Route::get('logout','Login@logout');
     Route::get('adminList','Admin@list');

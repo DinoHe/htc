@@ -13,12 +13,11 @@ class Login extends Base
     {
         if ($this->request->isMethod('post')){
             $data = $this->request->input();
-            $this->remakeSessionId();
+            parent::remakeSessionId();
 
             if (!Captcha::check($data['captcha'])){
                 return back()->withErrors(['loginError'=>'验证码错误'])->withInput();
             }
-
             if (Auth::guard('admin')->attempt(['account'=>$data['account'],'password'=>$data['password']])){
                 if (Auth::guard('admin')->user()->blocked != Admins::ACCOUNT_ON){
                     return back()->withErrors(['loginError'=>'账号已被停用'])->withInput();

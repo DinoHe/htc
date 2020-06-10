@@ -29,39 +29,21 @@ class Index extends Base
         $online = $this->countOnline();
         //获取今日价格
         $price = Coins::orderBy('id','desc')->first()->price;
-        //统计运行的矿机
-        $countMiner = $this->countMinerRunning();
-        //统计今日注册的人数
-        $countRegister = $this->countRegister();
-        //统计成交额
-        $countTradeMoney = $this->countTradeMoney();
 
-        return view('admin.index',['online'=>$online,'price'=>$price,'countMiner'=>$countMiner,
-            'countRegister'=>$countRegister,'countTradeMoney'=>$countTradeMoney]);
+        return view('admin.index',['online'=>$online,'price'=>$price]);
     }
 
-    private function countOnline()
+    /**
+     * 统计在线矿机数量 当天注册的会员人数 成交额
+     * @return false|string
+     */
+    public function count()
     {
-        $online = Cache::get('online');
-        $n = 0;
-        if (!empty($online)){
-            foreach ($online as $k => $on) {
-                if (time() - $on < 10*60){
-                    $n++;
-                }
-            }
-        }
-        return $n;
-    }
-
-    private function countRegister():int
-    {
-        return Members::where('created_at','>=',date('Y-m-d'))->count();
-    }
-
-    private function countMinerRunning():int
-    {
-        return MyMiners::where('run_status',MyMiners::RUNNING)->count();
+        $countMiners = MyMiners::where('run_status',MyMiners::RUNNING)->count();
+        $countRegister = Members::where('created_at','>=',date('Y-m-d'))->count();
+        $countMoney = $this->countTradeMoney();
+        return $this->dataReturn(['status'=>0,'countMiners'=>$countMiners,'countRegister'=>$countRegister,
+            'countMoney'=>$countMoney]);
     }
 
     private function countTradeMoney():string
@@ -93,6 +75,19 @@ class Index extends Base
             }
             $this->request->session()->put('permission',$pa);
         }
+    }
 
+    private function countOnline()
+    {
+        $online = Cache::get('online');
+        $n = 0;
+        if (!empty($online)){
+            foreach ($online as $k => $on) {
+                if (time() - $on < 10*60){
+                    $n++;
+                }
+            }
+        }
+        return $n;
     }
 }

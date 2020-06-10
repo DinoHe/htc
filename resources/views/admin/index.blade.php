@@ -35,11 +35,11 @@
                     </div>
                     <div class="index-content">
                         <p class="index-content_tittle">运行中的矿机</p>
-                        <p class="index-content_ft">{{$countMiner}}</p>
+                        <p class="index-content_ft" id="count_miner">0</p>
                     </div>
                     <div class="index-content">
                         <p class="index-content_tittle">今日注册的会员</p>
-                        <p class="index-content_ft">{{$countRegister}}</p>
+                        <p class="index-content_ft" id="count_register">0</p>
                     </div>
                 </div>
                 <div id="echarts-bar" style="width: 800px;height: 500px"></div>
@@ -51,52 +51,67 @@
 @section('js')
     <script src="{{asset('ext/echarts/echarts-bar.min.js')}}"></script>
     <script>
-        var dom = document.getElementById("echarts-bar");
-        var myChart = echarts.init(dom);
-        var x_data = getDay7(),
-            y_data = '{{$countTradeMoney}}'.split(',');
-
-        var option = {
-            title: {
-                text: '今日成交额：$'+y_data[6],
-                left: '10%'
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                },
-
-            },
-            grid: {
-                left: '10%',
-                right: '5%',
-                // bottom: '3%',
-                // containLabel: true
-            },
-            xAxis: {
-                type: 'category',
-                data: x_data
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [
-                {
-                    name:'成交额($)',
-                    type:'bar',
-                    stack: 'one',
-                    label: {
-                        show: true,
-                        position: 'top'
-                    },
-                    data: y_data
+        $.ajax({
+            url: '{{asset("admin/count")}}',
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == 0){
+                    $('#count_miner').text(data.countMiners);
+                    $('#count_register').text(data.countRegister);
+                    var countTradeMoney = data.countMoney.split(',');
+                    loadEcharts(countTradeMoney);
                 }
-            ]
-        };
+            }
+        });
 
-        if (option && typeof option === "object") {
-            myChart.setOption(option, true);
+        function loadEcharts(countTradeMoney) {
+            var dom = document.getElementById("echarts-bar");
+            var myChart = echarts.init(dom);
+            var x_data = getDay7(),
+                y_data = countTradeMoney;
+
+            var option = {
+                title: {
+                    text: '今日成交额：$'+y_data[6],
+                    left: '10%'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                },
+                grid: {
+                    left: '10%',
+                    right: '5%',
+                    // bottom: '3%',
+                    // containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: x_data
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name:'成交额($)',
+                        type:'bar',
+                        stack: 'one',
+                        label: {
+                            show: true,
+                            position: 'top'
+                        },
+                        data: y_data
+                    }
+                ]
+            };
+
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
         }
 
         function getDay7() {

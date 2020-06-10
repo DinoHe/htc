@@ -62,7 +62,7 @@
             </a>
             <a href="{{url('home/quotations')}}" class="weui-grid">
                 <i class="iconfont icon-hangqing1"></i>
-                <p class="">行情</p>
+                <p class="">市场行情</p>
             </a>
             <a href="{{url('home/running')}}" class="weui-grid">
                 <i class="iconfont icon-kuangji"></i>
