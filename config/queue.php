@@ -46,7 +46,7 @@ return [
             'host' => 'localhost',
             'queue' => 'default',
             'retry_after' => 90,
-            'block_for' => 0,
+            'block_for' => 5,
         ],
 
         'sqs' => [
@@ -63,7 +63,7 @@ return [
             'connection' => 'default',
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => 90,
-            'block_for' => null,
+            'block_for' => 5,
         ],
 
     ],
