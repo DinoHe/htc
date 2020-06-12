@@ -279,6 +279,9 @@ class Member extends Base
         $assets->balance -= $data['blockNumber'];
         $assets->blocked_assets += $data['blockNumber'];
         $assets->save();
+        if (Cache::has('assets'.$data['id'])){
+            Cache::put('assets'.$data['id'],$assets,Carbon::tomorrow());
+        }
         return $this->dataReturn(['status'=>0,'message'=>'操作成功']);
     }
 
