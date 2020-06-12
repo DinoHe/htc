@@ -81,6 +81,7 @@ class Member extends Base
         if (!empty($auths)){
             $auths->auth_status_desc = $auths->getAuthStatusDesc($auths->auth_status);
         }else{
+            $auths = new RealNameAuths();
             $auths->auth_status_desc = '';
             $auths->name = '';
             $auths->idcard = '';
