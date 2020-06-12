@@ -29,7 +29,7 @@ class Member extends Base
         parent::initLevel();
         $member = Auth::user();
         $auth = $member->realNameAuth;
-        $member->authStatus = $auth->getAuthStatusDesc($auth->auth_status);
+        $member->authStatus = empty($auth)?'未认证':$auth->getAuthStatusDesc($auth->auth_status);
         $member->level = $member->level->level_name;
         $assets = Cache::get('assets'.$member->id);
         $myMiners = MyMiners::where('member_id',$member->id)->where('run_status',MyMiners::RUNNING)->count();
