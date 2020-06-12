@@ -34,6 +34,7 @@
                             <th width="25"><input type="checkbox"></th>
                             <th>账号</th>
                             <th>等级</th>
+                            <th>实名认证</th>
                             <th>团队人数</th>
                             <th>注册时间</th>
                             <th>状态</th>
@@ -46,6 +47,7 @@
                             <td><input type="checkbox" value="{{$t->id}}"></td>
                             <td>{{$t->phone}}</td>
                             <td>{{$t->level->level_name}}</td>
+                            <td>{{isset($t->realNameAuths)?$t->realNameAuths:'未认证'}}</td>
                             <td>{{$t->team_total}}</td>
                             <td>{{$t->created_at}}</td>
                             <td class="td-status">
