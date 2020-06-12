@@ -112,7 +112,7 @@
             var balance = $(obj).parent().siblings('.balance').text(),
                 blocked = $(obj).parent().siblings('.blocked').text();
 
-            if (n == 0){
+            if (n == 0 || isNaN(n)){
                 layer.msg('请输入冻结数量',{icon:2,time:1000});
                 return false;
             }else if (n < 0 && Math.abs(n) > blocked){
