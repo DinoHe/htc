@@ -53,7 +53,7 @@
                             <td><input type="checkbox" value="{{$a->id}}" class="checkBox"></td>
                             <td>{{$a->member->phone}}</td>
                             <td class="balance">{{$a->balance}}</td>
-                            <td>{{$a->blocked_assets}}</td>
+                            <td class="blocked">{{$a->blocked_assets}}</td>
                             <td>{{$a->rewards}}</td>
                             <td>{{$a->buys}}</td>
                             <td class="td-manage">
@@ -109,9 +109,18 @@
 
     function assets_block(obj,url,id) {
         layer.prompt({title:'冻结HTC'},function (n) {
-            if ($(obj).parent().siblings('.balance').text() < n){
+            var balance = $(obj).parent().siblings('.balance').text(),
+                blocked = $(obj).parent().siblings('.blocked').text();
+
+            if (n == 0){
+                layer.msg('请输入冻结数量',{icon:2,time:1000});
+                return false;
+            }else if (n < 0 && Math.abs(n) > blocked){
+                layer.msg('超过了用户已被冻结的数量',{icon:2,time:1000});
+                return false;
+            }
+            if (balance < n){
                 layer.msg('冻结数量超过了用户余额',{icon:2,time:1000});
-                layer_close();
                 return false;
             }
             $.post(url,{'id':id,'blockNumber':n});

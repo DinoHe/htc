@@ -273,6 +273,8 @@ class Member extends Base
         $assets = Assets::find($data['id']);
         if ($assets->balance < $data['blockNumber']){
             return $this->dataReturn(['status'=>1,'message'=>'冻结数量超过余额']);
+        }elseif ($data['blockNumber'] < 0 && abs($data['blockNumber']) > $assets->blocked_assets){
+            return $this->dataReturn(['status'=>2,'message'=>'超过了用户已被冻结的数量']);
         }
         $assets->balance -= $data['blockNumber'];
         $assets->blocked_assets += $data['blockNumber'];
