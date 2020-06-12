@@ -80,6 +80,14 @@ class Member extends Base
         $auths = RealNameAuths::where('member_id',Auth::id())->first();
         if (!empty($auths)){
             $auths->auth_status_desc = $auths->getAuthStatusDesc($auths->auth_status);
+        }else{
+            $auths->auth_status_desc = '';
+            $auths->name = '';
+            $auths->idcard = '';
+            $auths->weixin = '';
+            $auths->bank_name = '';
+            $auths->bank_card = '';
+            $auths->auth_status = RealNameAuths::AUTH_FAIL;
         }
         return view('home.member.real-name_auth')->with('auths',$auths);
     }

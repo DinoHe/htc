@@ -8,7 +8,7 @@
             @csrf
             <div class="weui-cells weui-cells_form">
                 <div class="weui-cell color-warning" style="text-align: center">
-                    <div class="weui-cell__bd">{{$auths->auth_status_desc}}</div>
+                    <div class="weui-cell__bd">{{$auths->getAuthStatusDesc($auths->auth_status)}}</div>
                 </div>
                 <div class="weui-cell">
                     <div class="weui-cell__hd">
@@ -36,7 +36,7 @@
                         <div class="weui-label">支付宝</div>
                     </div>
                     <div class="weui-cell__bd">
-                        <input type="text" class="weui-input" name="alipay" value="{{auth()->user()->phone}}" readonly>
+                        <input type="text" class="weui-input" name="alipay" value="{{\Illuminate\Support\Facades\Auth::user()->phone}}" readonly>
                     </div>
                 </div>
                 <div class="weui-cell">
