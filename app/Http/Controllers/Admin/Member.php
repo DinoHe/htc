@@ -271,6 +271,9 @@ class Member extends Base
     {
         $data = $this->request->input();
         $assets = Assets::find($data['id']);
+        if ($assets->balance < $data['blockNumber']){
+            return $this->dataReturn(['status'=>1,'message'=>'冻结数量超过余额']);
+        }
         $assets->balance -= $data['blockNumber'];
         $assets->blocked_assets += $data['blockNumber'];
         $assets->save();

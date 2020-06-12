@@ -52,7 +52,7 @@
                         <tr class="text-c">
                             <td><input type="checkbox" value="{{$a->id}}" class="checkBox"></td>
                             <td>{{$a->member->phone}}</td>
-                            <td>{{$a->balance}}</td>
+                            <td class="balance">{{$a->balance}}</td>
                             <td>{{$a->blocked_assets}}</td>
                             <td>{{$a->rewards}}</td>
                             <td>{{$a->buys}}</td>
@@ -61,7 +61,7 @@
                                     <a href="javascript:;" onclick="edit('充值','{{url("admin/memberAssetsRechargeEdit")}}','{{$a->id}}','800','400')" class="ml-5 btn-success pd-5 radius" style="text-decoration:none">充值</a>
                                 @endif
                                 @if(session('permission') == 0 || in_array("admin/memberAssetsBlockedEdit",session('permission')))
-                                    <a href="javascript:;" onclick="assets_block('{{url("admin/memberAssetsBlockEdit")}}','{{$a->id}}')" class="ml-5 btn-danger pd-5 radius" style="text-decoration:none">冻结</a>
+                                    <a href="javascript:;" onclick="assets_block(this,'{{url("admin/memberAssetsBlockEdit")}}','{{$a->id}}')" class="ml-5 btn-danger pd-5 radius" style="text-decoration:none">冻结</a>
                                 @endif
                                 @if(session('permission') == 0 || in_array("admin/memberAssetsDel",session('permission')))
                                     <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/memberAssetsDel")}}','{{$a->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
@@ -107,8 +107,13 @@
         });
     }
 
-    function assets_block(url,id) {
+    function assets_block(obj,url,id) {
         layer.prompt({title:'冻结HTC'},function (n) {
+            if ($(obj).parent().siblings('.balance').text() < n){
+                layer.msg('冻结数量超过了用户余额',{icon:2,time:1000});
+                layer_close();
+                return false;
+            }
             $.post(url,{'id':id,'blockNumber':n});
             layer.msg('操作成功',{icon:1,time:1000});
             refresh();
