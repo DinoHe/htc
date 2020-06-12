@@ -25,6 +25,7 @@ class RealNameAuths extends Model
 
     public function getAuthStatusDesc($status)
     {
+        if (empty($status)) return '未认证';
         switch ($status){
             case RealNameAuths::AUTH_SUCCESS:
                 return '已认证';
