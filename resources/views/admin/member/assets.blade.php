@@ -118,8 +118,7 @@
             }else if (n < 0 && Math.abs(n) > blocked){
                 layer.msg('超过了用户已被冻结的数量',{icon:2,time:1000});
                 return false;
-            }
-            if (balance < n){
+            }else if (balance < n){
                 layer.msg('冻结数量超过了用户余额',{icon:2,time:1000});
                 return false;
             }
