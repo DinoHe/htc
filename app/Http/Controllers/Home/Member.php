@@ -105,7 +105,8 @@ class Member extends Base
             "ssl" => [
                 "verify_peer"=>false,
                 "verify_peer_name"=>false,
-            ]
+            ],
+            'http' => ['follow_location'=>0]
         ];
         $output = file_get_contents($url,false,stream_context_create($stream_opts));
         if (!$output) return 0;
