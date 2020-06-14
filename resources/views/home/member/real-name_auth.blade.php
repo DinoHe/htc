@@ -175,7 +175,6 @@
                 },
                 error: function (error) {
                     // console.log(error);
-                    $.topTip('系统错误');
                 }
             });
         });

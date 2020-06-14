@@ -101,14 +101,13 @@ class Member extends Base
     public function idCardCheck($idCard)
     {
         $url = 'https://qq.ip138.com/idsearch/index.asp?userid='.$idCard.'&action=idcard';
-        $stream_opts = [
-            "ssl" => [
-                "verify_peer"=>false,
-                "verify_peer_name"=>false,
-            ],
-            'http' => ['follow_location'=>0]
-        ];
-        $output = file_get_contents($url,false,stream_context_create($stream_opts));
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+        $output = curl_exec($ch);
+        curl_close($ch);
         if (!$output) return 0;
         preg_match('#<tbody>(.|\r\n)*</table>#',$output,$matches);
         dd($output);
