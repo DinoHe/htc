@@ -110,6 +110,7 @@ class Member extends Base
         $output = file_get_contents($url,false,stream_context_create($stream_opts));
         if (!$output) return 0;
         preg_match('#<tbody>(.|\r\n)*</table>#',$output,$matches);
+        dd($output);
         $res1 = preg_match('#验证身份证号有误#',$matches[0],$matches1);
         if (!$res1){
             $res2 = preg_match('#<font color="red">提示(.|\r\n)*</font>#',$matches[0],$matches2);
