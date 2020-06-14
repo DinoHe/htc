@@ -101,15 +101,13 @@ class Member extends Base
     public function idCardCheck($idCard)
     {
         $url = 'https://qq.ip138.com/idsearch/index.asp?userid='.$idCard.'&action=idcard';
-        $headerArray = array("Content-type:application/json;","Accept:application/json");
-        $curl = curl_init();
-        curl_setopt($curl,CURLOPT_URL,$url);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
-        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);
-        $output = curl_exec($curl);
-        curl_close($curl);
+        $stream_opts = [
+            "ssl" => [
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ]
+        ];
+        $output = file_get_contents($url,false,stream_context_create($stream_opts));
         if (!$output) return 0;
         preg_match('#<tbody>(.|\r\n)*</table>#',$output,$matches);
         $res1 = preg_match('#验证身份证号有误#',$matches[0],$matches1);
