@@ -100,23 +100,32 @@ class Member extends Base
      */
     public function idCardCheck($idCard)
     {
-        $url = 'https://qq.ip138.com/idsearch/index.asp?userid='.$idCard.'&action=idcard';
-        $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
-        curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-        $output = curl_exec($ch);
-        curl_close($ch);
-        if (!$output) return 0;
-        preg_match('#<tbody>(.|\r\n)*</table>#',$output,$matches);
-        dd($output);
-        $res1 = preg_match('#验证身份证号有误#',$matches[0],$matches1);
-        if (!$res1){
-            $res2 = preg_match('#<font color="red">提示(.|\r\n)*</font>#',$matches[0],$matches2);
-            if (!$res2){
-                return 1;
-            }
+        $regex = "#^"
+            . "\\d{6}" // 6位地区码
+            . "(18|19|([23]\\d))\\d{2}" // 年YYYY
+            . "((0[1-9])|(10|11|12))" // 月MM
+            . "(([0-2][1-9])|10|20|30|31)" // 日DD
+            . "\\d{3}" // 3位顺序码
+            . "[0-9Xx]" // 校验码
+            . "$#";
+        preg_match($regex,$idCard,$matches);
+        if (empty($matches)) return 0;
+        //身份证校验码校验
+        $w = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8,4, 2]; //加权因子
+        $s = 0;
+        $idArray = str_split($idCard);
+        for ($i=0;$i<count($w);$i++){
+            $s += $w[$i] * $idArray[$i];
+        }
+        //如果校验码是X x， 代表10
+        if ($idArray[17] == 'X' || $idArray[17] == 'x'){
+            $s += 10;
+        }else{
+            $s += $idArray[17];
+        }
+        //mod 11余1,通过
+        if ($s % 11 == 1){
+            return 1;
         }
         return 0;
     }
