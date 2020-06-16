@@ -176,7 +176,7 @@ class Member extends Base
     {
         $data = $this->request->input();
         $info['auth_status'] = RealNameAuths::AUTH_CHECK_FAIL;
-        if ($data['auth_status'] == 1) {
+        if ($data['auth_status'] == RealNameAuths::AUTH_SUCCESS) {
             $info['auth_status'] = RealNameAuths::AUTH_SUCCESS;
             //审核通过赠送矿机
             $rewardMinerNumber = SystemSettings::getSysSettingValue('realname_reward_miner_number');

@@ -85,7 +85,7 @@
                             </td>
                             <td class="f-14 td-manage">
                                 @if(session('permission') == 0 || in_array("admin/memberRealNameCheckEdit",session('permission')))
-                                    <a title="审核" href="javascript:;" onclick="realName_check(this,'{{$r->id}}')" class="ml-5" style="text-decoration:none">审核</a>
+                                    <a title="审核" href="javascript:;" onclick="realName_check(this,'{{$r->member_id}}')" class="ml-5" style="text-decoration:none">审核</a>
                                 @endif
                                 @if(session('permission') == 0 || in_array("admin/memberRealNameEdit",session('permission')))
                                     <a title="编辑" href="javascript:;" onclick="edit('编辑','{{url("admin/memberRealNameEdit")}}','{{$r->id}}','800','600')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
@@ -125,14 +125,18 @@
                 closeBtn: 0
             },
             function(){
-                $.post('{{url("admin/memberRealNameCheckEdit")}}',{'id':id,'auth_status':1});
+                if ($(obj).parent().siblings('.td-status').children().text() === '已认证'){
+                    layer.msg('已审核通过，无需重复审核', {icon:2,time:1000});
+                    return false;
+                }
+                $.post('{{url("admin/memberRealNameCheckEdit")}}',{'id':id,'auth_status':{{\App\Http\Models\RealNameAuths::AUTH_SUCCESS}}});
                 $(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="realName_check(this,id)" href="javascript:;" title="审核">审核</a>');
                 $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已认证</span>');
                 $(obj).remove();
                 layer.msg('已认证', {icon:6,time:1000});
             },
             function(){
-                $.post('{{url("admin/memberRealNameCheckEdit")}}',{'id':id,'auth_status':0});
+                $.post('{{url("admin/memberRealNameCheckEdit")}}',{'id':id,'auth_status':{{\App\Http\Models\RealNameAuths::AUTH_CHECK_FAIL}}});
                 $(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="realName_check(this,id)" href="javascript:;" title="审核">审核</a>');
                 $(obj).parents("tr").find(".td-status").html('<span class="label label-danger radius">未通过</span>');
                 $(obj).remove();
