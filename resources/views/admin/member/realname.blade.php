@@ -85,7 +85,7 @@
                             </td>
                             <td class="f-14 td-manage">
                                 @if(session('permission') == 0 || in_array("admin/memberRealNameCheckEdit",session('permission')))
-                                    <a title="审核" href="javascript:;" onclick="realName_check(this,'{{$r->member_id}}')" class="ml-5" style="text-decoration:none">审核</a>
+                                    <a title="审核" href="javascript:;" onclick="realName_check(this,'{{$r->id}}','{{$r->member_id}}')" class="ml-5" style="text-decoration:none">审核</a>
                                 @endif
                                 @if(session('permission') == 0 || in_array("admin/memberRealNameEdit",session('permission')))
                                     <a title="编辑" href="javascript:;" onclick="edit('编辑','{{url("admin/memberRealNameEdit")}}','{{$r->id}}','800','600')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
@@ -118,7 +118,7 @@
         ]
     });
 
-    function realName_check(obj,id) {
+    function realName_check(obj,id,memberId) {
         layer.confirm('审核实名认证？', {
                 btn: ['通过','不通过','取消'],
                 shade: false,
@@ -129,7 +129,7 @@
                     layer.msg('已审核通过，无需重复审核', {icon:2,time:1000});
                     return false;
                 }
-                $.post('{{url("admin/memberRealNameCheckEdit")}}',{'id':id,'auth_status':{{\App\Http\Models\RealNameAuths::AUTH_SUCCESS}}});
+                $.post('{{url("admin/memberRealNameCheckEdit")}}',{'id':id,'memberId':memberId,'auth_status':{{\App\Http\Models\RealNameAuths::AUTH_SUCCESS}}});
                 $(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="realName_check(this,id)" href="javascript:;" title="审核">审核</a>');
                 $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已认证</span>');
                 $(obj).remove();

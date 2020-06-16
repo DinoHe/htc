@@ -175,15 +175,13 @@ class Member extends Base
     public function realNameCheck()
     {
         $data = $this->request->input();
-        $info['auth_status'] = RealNameAuths::AUTH_CHECK_FAIL;
         if ($data['auth_status'] == RealNameAuths::AUTH_SUCCESS) {
-            $info['auth_status'] = RealNameAuths::AUTH_SUCCESS;
             //审核通过赠送矿机
             $rewardMinerNumber = SystemSettings::getSysSettingValue('realname_reward_miner_number');
             $miner = Miners::find(1); //默认赠送微型矿机
             for ($i=0;$i<$rewardMinerNumber;$i++){
                 MyMiners::create([
-                    'member_id' => $data['id'],
+                    'member_id' => $data['memberId'],
                     'miner_id' => $miner->id,
                     'miner_tittle' => $miner->tittle,
                     'runtime' => $miner->runtime,
@@ -194,7 +192,7 @@ class Member extends Base
                 ]);
             }
         }
-        RealNameAuths::where('id',$data['id'])->update($info);
+        RealNameAuths::where('id',$data['id'])->update(['auth_status'=>$data['auth_status']]);
         return $this->dataReturn(['status'=>0,'message'=>'操作成功']);
     }
 
