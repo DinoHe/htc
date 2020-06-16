@@ -313,6 +313,7 @@ li{
     padding: 10px 0;
     font-size: 45px;
     text-shadow: 6px 6px 8px #d40a11;
+    margin-left: -15px;
 }
 .link-container{
     padding: 3% 0;
