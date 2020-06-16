@@ -7,7 +7,7 @@
 @section('container')
     <div class="app-cells">
         <div class="weui-form__text-area">
-            <div class="weui-form__desc app-fs-13 color-warning">如果建议被采纳，奖励100到1000币</div>
+            <div class="weui-form__desc app-fs-13 color-warning">如果建议被采纳，根据建议的实用性，最高奖励大型云矿机一台</div>
         </div>
         <div class="weui-form__control-area">
             <div class="weui-cells__group weui-cells__group_form">
