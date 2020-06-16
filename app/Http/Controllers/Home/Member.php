@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Hash;
 
 class Member extends Base
 {
-    private $link;
     /**
      * 会员中心
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View

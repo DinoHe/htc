@@ -20,10 +20,135 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/Vagrantfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/config.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/cover/btconsole.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/docker/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/docker/docker-entrypoint.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/docker/php.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/ClassLoader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/AbstractCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/BuryCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/IgnoreCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/KickCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/KickJobCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/ListTubeUsedCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/PauseTubeCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/PeekCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/PutCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/ReleaseCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/ReserveCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/StatsCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/UseCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Command/WatchCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Connection.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Exception.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Exception/ClientException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Exception/ServerDrainingException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Exception/ServerException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Exception/ServerInternalErrorException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Exception/SocketException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Response.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Response/ArrayResponse.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/ResponseParser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Socket.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/Socket/NativeSocket.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/Pheanstalk/YamlResponseParser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/include.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/ajax.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/allTubes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/currentTube.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/currentTubeJobs.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/currentTubeJobsActionsRow.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/currentTubeJobsShowcase.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/currentTubeJobsSummaryTable.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/currentTubeSearchResults.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/main.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/modalAddJob.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/modalAddSample.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/modalAddServer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/modalClearTubes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/modalSettings.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/sampleJobsEdit.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/sampleJobsManage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/lib/tpl/serversList.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/assets/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/assets/hamburger.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/assets/vendor/bootstrap/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/assets/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/assets/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/assets/vendor/bootstrap/img/glyphicons-halflings-white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/assets/vendor/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/1c.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/actionscript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/avrasm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/axapta.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/bash.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/cs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/css.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/erlang-repl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/erlang.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/haskell.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/http.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/java.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/json.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/lisp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/lua.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/markdown.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/mel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/nginx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/perl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/php.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/profile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/python.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/r.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/rib.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/rsl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/ruby.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/scala.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/smalltalk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/sql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/tex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/vala.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/vbscript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/languages/xml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/arta.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/ascetic.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/brown_papersq.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/default.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/github.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/googlecode.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/idea.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/ir_black.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/magula.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/pojoaque.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/school_book.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/school_book.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/solarized_dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/solarized_light.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/sunburst.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/tomorrow-night-blue.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/tomorrow-night-bright.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/tomorrow.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/vs.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/xcode.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/highlight/styles/zenburn.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/public/js/jquery.regexp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/src/Model.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/src/Server.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/vagrant/provision.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/beanstalk_console/vagrant/virtualhost" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Home/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Home/Member.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/member/real-name_auth.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/member/real-name_auth.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,6 +354,7 @@
       <workItem from="1591678618686" duration="32269000" />
       <workItem from="1591807222231" duration="2964000" />
       <workItem from="1592115025998" duration="7905000" />
+      <workItem from="1592293527567" duration="5569000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
