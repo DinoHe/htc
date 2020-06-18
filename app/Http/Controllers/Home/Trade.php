@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Base;
 use App\Http\Models\Bills;
 use App\Http\Models\Coins;
+use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
 use App\Http\Models\Orders;
 use App\Http\Models\SystemSettings;
@@ -121,6 +122,12 @@ class Trade extends Base
         $member = Auth::user();
         $data = $this->request->input();
 
+        //信用过低无法卖出
+        $creditMin = SystemSettings::getSysSettingValue('low_credit_forbidden_sales');
+        if ($member->credit < $creditMin){
+            return $this->dataReturn(['status'=>1044,'message'=>'信用过低，请先买入增加信用']);
+        }
+
         //有矿机在运行才能卖出
         $runningNumber = MyMiners::where('member_id',$member->id)->where('run_status',MyMiners::RUNNING)->count();
         if ($runningNumber == 0){
@@ -162,22 +169,9 @@ class Trade extends Base
     }
 
     /**
-     * 待处理的订单
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function unprocessedOrder()
-    {
-        $unOrders = Orders::where('trade_status','<>',Orders::TRADE_FINISHED)->cursor()
-            ->filter(function ($orders){
-                return $orders->buy_member_id == Auth::id() || $orders->sales_member_id == Auth::id();
-            });
-
-        return view('home.trade.unprocessedOrder')->with('unOrders',$unOrders);
-    }
-
-    /**
      * 取消委托单
      * @param $orderId
+     * @return string
      */
     public function cancelOrder($orderId)
     {
@@ -211,6 +205,37 @@ class Trade extends Base
     }
 
     /**
+     * 待处理的订单
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function unprocessedOrder()
+    {
+        $unOrders = Orders::where('trade_status','<',Orders::TRADE_FINISHED)->cursor()
+            ->filter(function ($orders){
+                return $orders->buy_member_id == Auth::id() || $orders->sales_member_id == Auth::id();
+            });
+
+        foreach ($unOrders as $unOrder) {
+            $timeArray = $unOrder->remainingTime($unOrder->updated_at);
+            if (array_sum($timeArray) == 0){
+                if ($unOrder->trade_status == Orders::TRADE_NO_PAY){
+                    ////订单超时,交易取消，信用减2
+                    $buy = Members::find($unOrder->buy_member_id);
+                    $buy->credit -= 2;
+                    $buy->save();
+                    $unOrder->cancelTrade($unOrder);
+                }elseif ($unOrder->trade_status == Orders::TRADE_NO_CONFIRM){
+                    //超时，交易自动完成
+                    $this->finishTrade($unOrder->id);
+                }
+
+            }
+        }
+
+        return view('home.trade.unprocessedOrder')->with('unOrders',$unOrders);
+    }
+
+    /**
      * 订单详情
      * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -238,6 +263,17 @@ class Trade extends Base
         $previews->remaining = $previews->remainingTime($previews->updated_at);
 
         return view('home.trade.orderPreview')->with('previews',$previews);
+    }
+
+    /**
+     * 投诉
+     * @param $orderId
+     * @return false|string
+     */
+    public function tradeComplaint($orderId)
+    {
+        Orders::where('id',$orderId)->update(['describes'=>'投诉假图']);
+        return $this->dataReturn(['status'=>0]);
     }
 
     /**
@@ -338,7 +374,7 @@ class Trade extends Base
      */
     public function record()
     {
-        $orders = Orders::where('trade_status',Orders::TRADE_FINISHED)->orderBy('updated_at','desc')->cursor()
+        $orders = Orders::where('trade_status','>=',Orders::TRADE_FINISHED)->orderBy('updated_at','desc')->cursor()
             ->filter(function ($orders){
                return $orders->buy_member_id == Auth::id() || $orders->sales_member_id == Auth::id();
             });

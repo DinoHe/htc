@@ -63,6 +63,7 @@
                     @endif
                 @else
                     <input type="submit" class="weui-btn app-submit" id="finish_pay_confirm" value="确认已收款">
+                    <input type="button" class="weui-btn app-submit bg-error" onclick="complaint('{{$previews->id}}')" value="投诉少付钱或传假图">
                 @endif
                 </form>
             </div>
@@ -125,6 +126,13 @@
             // console.log(e);
             $.topTip('复制失败');
         });
+
+        function complaint(orderId){
+            $.confirm('信息','确认投诉？',function () {
+                $.get('{{url("home/tradeComplaint")}}/'+orderId);
+                $.alert('投诉成功');
+            });
+        }
 
         $(function(){
             var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>';

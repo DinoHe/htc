@@ -5,7 +5,7 @@
     <div class="app-cells">
         <div class="weui-panel weui-panel_access">
             <div class="weui-cells color-white">
-                @if(count($orders))
+                @if(count($orders) > 0)
                     @foreach($orders as $order)
                     <div class="weui-cell border-radius bg-order app-fs-13">
                         <div class="weui-cell__bd">
@@ -14,7 +14,7 @@
                             <p>单价：${{$order->trade_price}}</p>
                             <p>日期：{{$order->created_at}}</p>
                         </div>
-                        <div class="weui-cell__ft color-danger">交易完成</div>
+                        <div class="weui-cell__ft color-danger">{{$order->getTradeStatus($order->trade_status)}}</div>
                     </div>
                     @endforeach
                 @endif

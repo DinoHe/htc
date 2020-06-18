@@ -20,7 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Http/Models/FailedJobs.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Trade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Home/Trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Home/Trade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/RewardCoin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/RewardCoin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/RewardMiner.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/RewardMiner.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/trade/order.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/trade/order.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/record.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/record.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/home/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/home/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,24 +173,24 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/phpmyadmin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Models" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\wamp\www\htc\app\Http\Models" />
+      <recent name="E:\wamp\www\htc\public\phpmyadmin" />
+      <recent name="E:\wamp\www\htc\public\ext\font" />
+      <recent name="E:\wampserver\www\htc\app\Http\Models" />
+      <recent name="E:\wampserver\www\htc\app\Jobs" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\wamp\www\htc\public" />
       <recent name="E:\wamp\www\htc" />
       <recent name="E:\wampserver\www\htc\storage\app\public\homeImg" />
       <recent name="E:\wampserver\www\htc\storage\app\public\miner" />
       <recent name="E:\wampserver\www\htc\public\static\home\img" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\wamp\www\htc\public\phpmyadmin" />
-      <recent name="E:\wamp\www\htc\public\ext\font" />
-      <recent name="E:\wampserver\www\htc\app\Http\Models" />
-      <recent name="E:\wampserver\www\htc\app\Jobs" />
-      <recent name="E:\wamp\www\htc\public\ext\echarts" />
     </key>
   </component>
   <component name="RunManager">
@@ -226,7 +240,8 @@
       <workItem from="1591678618686" duration="32269000" />
       <workItem from="1591807222231" duration="2964000" />
       <workItem from="1592115025998" duration="7905000" />
-      <workItem from="1592293527567" duration="11143000" />
+      <workItem from="1592293527567" duration="20941000" />
+      <workItem from="1592480117021" duration="8989000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
@@ -300,11 +315,11 @@
     </state>
     <state x="182" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1591255313801" />
     <state x="205" y="47" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.834@0.0.1536.834" timestamp="1588690737225" />
-    <state x="444" y="150" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590733521260">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592486905117">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="444" y="150" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1590733521260" />
-    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.834@0.0.1536.834" timestamp="1590224989148" />
+    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.834@0.0.1536.834" timestamp="1592486905117" />
     <state x="367" y="0" key="CommitChangelistDialog2" timestamp="1588703194539">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -343,10 +358,10 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="425" y="189" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1591027480791" />
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1591688163991">
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1592325889103">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="383" y="135" width="672" height="592" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1591088610053" />
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1591688163991" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1592325889103" />
   </component>
 </project>

@@ -3,6 +3,8 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class Orders extends Model
 {
@@ -17,7 +19,7 @@ class Orders extends Model
 
     protected $fillable = [
         'order_id','buy_member_id','buy_member_phone','sales_member_id','sales_member_phone','trade_number',
-        'trade_price','trade_total_money','payment_img','trade_status'
+        'trade_price','trade_total_money','payment_img','trade_status','describes'
     ];
 
     public function buyMember()
@@ -60,6 +62,36 @@ class Orders extends Model
         $remainingTime['i'] = (int)($d/60%60) > 0?(int)($d/60%60):0;
         $remainingTime['s'] = $d%60 > 0?$d%60:0;
         return $remainingTime;
+    }
+
+    public function cancelTrade($order)
+    {
+        $buys = Cache::get('tradeBuy');
+        foreach ($buys as $k => $buy) {
+            if ($buy['buy_member_id'] == $order->buy_member_id){
+                array_splice($buys,$k,1);
+                Cache::put('tradeBuy',$buys,Carbon::tomorrow());
+                break;
+            }
+        }
+        $sales = Cache::get('tradeSales');
+        foreach ($sales as $k => $sale) {
+            if ($sale['sales_member_id'] == $order->sales_member_id){
+                array_splice($sales,$k,1);
+                Cache::put('tradeSales',$sales,Carbon::tomorrow());
+                break;
+            }
+        }
+
+        $saleAssets = Cache::get('assets'.$order->sales_member_id);
+        $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
+        $a = $order->trade_number * (1 + $handRate);
+        $saleAssets->balance += $a;
+        $saleAssets->blocked_assets -= $a;
+        Cache::put('assets'.$order->sales_member_id,$saleAssets,Carbon::tomorrow());
+
+        $order->trade_status = self::TRADE_CANCEL;
+        $order->save();
     }
 
     public function setTradePriceAttribute($value)

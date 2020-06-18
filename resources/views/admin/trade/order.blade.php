@@ -59,11 +59,12 @@
                             <th>买家</th>
                             <th>卖家</th>
                             <th>数量(HTC)</th>
-                            <th>价格($)</th>
-                            <th>总额($)</th>
+                            <th>单价($)</th>
+                            <th>总计</th>
                             <th width="130">截图</th>
                             <th width="130">日期</th>
                             <th>剩余时间</th>
+                            <th>备注</th>
                             <th width="80">状态</th>
                             <th width="80">操作</th>
                         </tr>
@@ -78,7 +79,7 @@
                             <td class="table_content">{{$o->sales_member_phone}}</td>
                             <td class="table_content">{{$o->trade_number}}</td>
                             <td class="table_content">{{$o->trade_price}}</td>
-                            <td class="table_content">{{$o->trade_total_money}}</td>
+                            <td class="table_content">${{$o->trade_total_money}}<p>≈￥{{$o->trade_total_money*7}}</p></td>
                             <td>
                                 <a href="javascript:;" class="preview" data-src="{{asset('storage').$o->payment_img}}">
                                 <img src="{{asset('storage').$o->payment_img}}" width="100"></a>
@@ -86,10 +87,11 @@
                             <td class="table_content">{{$o->created_at}}</td>
                             <td class="table_content">
                                 {{$o->trade_status == \App\Http\Models\Orders::TRADE_NO_PAY || $o->trade_status == \App\Http\Models\Orders::TRADE_NO_CONFIRM?implode(':',$o->remainingTime($o->updated_at)):'0:0:0'}}</td>
+                            <td class="table_content">{{$o->describes}}</td>
                             <td class="table_content"><div class="label radius {{$o->trade_status==2?'label-success':'label-danger'}}">{{$o->getTradeStatus($o->trade_status)}}</div></td>
                             <td class="td-manage">
                                 @if((session('permission') == 0 || in_array("admin/tradeOrderCancelEdit",session('permission'))) && $o->trade_status < 2)
-                                    <a href="javascript:;" onclick="cancelOrder('{{url("admin/tradeOrderCancelEdit")}}','{{$o->id}}','{{$o->buy_member_id}}')" class="pd-5 radius btn-warning" style="text-decoration:none">取消交易</a>
+                                    <a href="javascript:;" onclick="cancelOrder('{{url("admin/tradeOrderCancelEdit")}}','{{$o->id}}')" class="pd-5 radius btn-warning" style="text-decoration:none">取消交易</a>
                                 @endif
                                 @if(session('permission') == 0 || in_array("admin/tradeOrderDel",session('permission')))
                                 <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/tradeOrderDel")}}','{{$o->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
@@ -116,15 +118,21 @@
         "bStateSave": true,//状态保存
         "aoColumnDefs": [
             //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-            {"orderable":false,"aTargets":[0,10]}// 制定列不参与排序
+            {"orderable":false,"aTargets":[0,11]}// 制定列不参与排序
         ]
     });
 
-    function cancelOrder(url,orderId,memberId) {
-        layer.confirm('取消订单并冻结买家账号，是否操作？',function () {
-            $.post(url,{'orderId':orderId,'memberId':memberId});
-            layer.msg('操作成功',{icon:1,time:1000});
-            refresh();
+    function cancelOrder(url,orderId) {
+        layer.open({
+            title:'取消交易',
+            content:'<option value="blockBuy">冻结买家并取消</option>' +
+                '<select name="cancel"><option value="0">取消</option>' +
+                '<option value="blockSales">冻结卖家并取消</option></select>',
+            yes:function () {
+                $.post(url,{'orderId':orderId,'cancelType':$('select[name="cancel"]').val()});
+                layer.msg('操作成功',{icon:1,time:1000});
+                refresh();
+            }
         });
     }
 

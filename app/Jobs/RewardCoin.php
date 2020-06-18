@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Http\Models\Assets;
 use App\Http\Models\Bills;
+use App\Http\Models\FailedJobs;
 use App\Http\Models\SystemSettings;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -44,5 +45,13 @@ class RewardCoin implements ShouldQueue
         $leaderAssets->rewards += $rewardCoin;
         $leaderAssets->save();
         Bills::createBill($this->leaderId,'余额-直推买币奖励','+'.$rewardCoin);
+    }
+
+    public function failed(\Exception $exception)
+    {
+        FailedJobs::create([
+            'queue' => 'give',
+            'exception' => $exception->getMessage()
+        ]);
     }
 }

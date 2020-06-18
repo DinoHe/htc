@@ -7,7 +7,9 @@ use App\Http\Controllers\Base;
 use App\Http\Models\Coins;
 use App\Http\Models\Members;
 use App\Http\Models\Orders;
+use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 class Trade extends Base
@@ -153,14 +155,28 @@ class Trade extends Base
 
     public function orderCancelEdit()
     {
-        $id = $this->request->input();
-        $res = Members::where('id',$id['memberId'])->update(['activated'=>Members::BLOCKED_TMP]);
-        if ($res){
-            $s = $this->request->session()->all();
-            $this->request->session()->remove(array_search($id['memberId'],$s));
-            Orders::where('id',$id['orderId'])->update(['trade_status'=>Orders::TRADE_CANCEL]);
+        $data = $this->request->input();
+        $order = Orders::where('id',$data['orderId'])->first();
+        if ($data['cancelType'] == 'blockBuy'){
+            $buy = Members::where('id',$order->buy_member_id)->first();
+            $buy->activated = Members::BLOCKED_TMP;
+            $buy->credit -= 6;
+            $buy->save();
+            //强制退出登录
+            Cache::put('blocked'.$order->buy_member_id,time(),Carbon::now()->addHours(2));
+        }elseif ($data['cancelType'] == 'blockSales'){
+            $sales = Members::where('id',$order->sales_member_id)->first();
+            $sales->activated = Members::BLOCKED_TMP;
+            $sales->credit -= 6;
+            $sales->save();
+            Cache::put('blocked'.$order->sales_member_id,time(),Carbon::now()->addHours(2));
         }
+        //取消交易
+        $order->cancelTrade($order);
+
         return $this->dataReturn(['status'=>0,'message'=>'操作成功']);
     }
+
+
 
 }

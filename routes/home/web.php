@@ -34,6 +34,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('unprocessedOrder','Trade@unprocessedOrder');
     Route::get('record','Trade@record');
     Route::get('orderPreview/{id}','Trade@orderPreview');
+    Route::get('tradeComplaint/{orderId}','Trade@tradeComplaint');
     Route::post('finishPay','Trade@finishPay');
     Route::post('finishPayConfirm','Trade@finishPayConfirm');
     Route::get('tradeCenter','Trade@tradeCenter');
