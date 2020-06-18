@@ -20,21 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Models/FailedJobs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Trade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Home/Trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Home/Trade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/RewardCoin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/RewardCoin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/RewardMiner.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/RewardMiner.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/trade/order.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/trade/order.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/orderPreview.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/trade/record.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/trade/record.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/home/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/home/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/home/img/share.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,7 +228,7 @@
       <workItem from="1591807222231" duration="2964000" />
       <workItem from="1592115025998" duration="7905000" />
       <workItem from="1592293527567" duration="20941000" />
-      <workItem from="1592480117021" duration="8989000" />
+      <workItem from="1592480117021" duration="9990000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
