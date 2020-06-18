@@ -53,6 +53,10 @@ class Member extends Base
         return view('admin.member.list',['members'=>$members]);
     }
 
+    /**
+     * 会员信息修改
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     */
     public function edit()
     {
         $data = $this->request->input();
@@ -63,6 +67,9 @@ class Member extends Base
             $info['credit'] = $data['credit'];
             $info['activated'] = $data['activated'];
             Members::where('id',$data['id'])->update($info);
+            if ($data['activated'] == Members::ACTIVATED){
+                Cache::forget('blocked'.$data['id']);
+            }
             return $this->dataReturn(['status'=>0,'message'=>'修改成功']);
         }
         $member = Members::find($data['id']);
