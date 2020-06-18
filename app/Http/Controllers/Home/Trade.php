@@ -324,7 +324,8 @@ class Trade extends Base
         $buyAssets->buys += $order->trade_number;
         //卖家资产确认
         $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
-        $salesAssets->blocked_assets -= $order->trade_number*(1+$handRate);
+        $n = $order->trade_number*(1+$handRate);
+        $salesAssets->blocked_assets -= $n;
         //订单完成交易
         $order->trade_status = Orders::TRADE_FINISHED;
 
@@ -370,7 +371,7 @@ class Trade extends Base
         Cache::put('assets'.$order->buy_member_id,$buyAssets,Carbon::tomorrow());
         Cache::put('assets'.$order->sales_member_id,$salesAssets,Carbon::tomorrow());
         Bills::createBill($order->buy_member_id,'余额-买入','+'.$order->trade_number);
-        Bills::createBill($order->sales_member_id,'余额-卖出','-'.$order->trade_number);
+        Bills::createBill($order->sales_member_id,'余额-卖出','-'.$n);
 
         return true;
     }
