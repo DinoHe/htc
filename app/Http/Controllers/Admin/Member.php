@@ -446,9 +446,10 @@ class Member extends Base
             $this->request->flashOnly(['account']);
             $member = Members::where('phone',$account)->first();
             if (!empty($member)){
-                $teams = $member->getSubordinates($member->id)[0];
+                $s = $member->getSubordinates($member->id);
+                $teams = $s[0];
                 $myMiner = new MyMiners();
-                $teamHashrates = $myMiner->hashrateSum($member->id) + $teams[2];
+                $teamHashrates = $myMiner->hashrateSum($member->id) + $s[2];
             }
         }
         return view('admin.member.team',['teams'=>$teams,'teamHashrates'=>$teamHashrates]);
