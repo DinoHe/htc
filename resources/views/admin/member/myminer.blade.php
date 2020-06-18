@@ -37,13 +37,11 @@
                     @if(session('permission') == 0 || in_array("admin/memberMinerAdd",session('permission')))
                         <a href="javascript:;" onclick="add('赠送矿机','{{url("admin/memberMinerAdd")}}','800','300')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>赠送矿机</a>
                     @endif
+                    <span class="l" style="margin-left: 10px">总算力：<strong>{{$hashrates}}</strong> </span>
                     <span class="r">共有数据：<strong>{{count($myminers)}}</strong> 条</span>
                 </div>
                 <table class="table table-border table-bordered table-bg table-sort">
                     <thead>
-                        <tr>
-                            <th scope="col" colspan="12">实名认证列表</th>
-                        </tr>
                         <tr class="text-c">
                             <th width="25"><input type="checkbox"></th>
                             <th width="80">账号</th>

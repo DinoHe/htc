@@ -351,8 +351,9 @@ class Member extends Base
         }
 
         $myminers = $model->get();
+        $hashrates = $model->sum('hashrate');
         parent::initMiners($myminers);
-        return view('admin.member.myminer',['myminers'=>$myminers,'miners'=>$miners]);
+        return view('admin.member.myminer',['myminers'=>$myminers,'miners'=>$miners,'hashrates'=>$hashrates]);
     }
 
     /**
