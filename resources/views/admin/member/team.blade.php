@@ -24,6 +24,7 @@
                 </form>
                 <div class="cl pd-5 bg-1 bk-gray mt-20">
                     <span class="l">直推人数：<strong>{{count($teams)}}</strong> </span>
+                    <span class="l"> 团队算力：<strong>{{$teamHashrates}}</strong> </span>
                 </div>
                 <table class="table table-border table-bordered table-bg table-sort">
                     <thead>
