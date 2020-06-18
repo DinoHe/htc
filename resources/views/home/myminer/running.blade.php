@@ -6,7 +6,7 @@
         <div class="weui-panel weui-panel_access">
             <div class="weui-panel__hd app-fs-13">
                 <p>矿机数量：<span class="color-success">{{count($myMiners)}}</span></p>
-                <p>当前算力：<span class="color-success">{{$hashrates}}</span> G</p>
+                <p>当前算力：<span class="color-success">{{$hashrates}} G</span></p>
                 <p class="color-warning">* 每天只能收取一次,超过15天未收取自动结束！</p>
             </div>
             @if(count($myMiners) > 0)

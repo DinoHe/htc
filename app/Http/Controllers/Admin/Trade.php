@@ -32,11 +32,7 @@ class Trade extends Base
                     array_push($buySearch,$buy);
                 }
             }
-            if (!empty($buySearch)) {
-                $buys = $buySearch;
-            }else{
-                $buys = [];
-            }
+            $buys = $buySearch;
         }
         return view('admin.trade.buy-list',['buys'=>$buys,'numbers'=>$numbers]);
     }
