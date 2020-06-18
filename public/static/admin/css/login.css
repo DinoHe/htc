@@ -11,7 +11,7 @@ body{font-size:14px}
     line-height: 0.6em;
 }
 
-.loginWraper{ position:absolute;width:100%; left:0; top:0; bottom:0; right:0; z-index:1; background:#3283AC url(../images/admin-login-bg.jpg) no-repeat center}
+.loginWraper{ position:absolute;width:100%; left:0; top:0; bottom:0; right:0; z-index:1; background:#3283AC url(../images/admin-login-bg.jpg) no-repeat center;background-size: 100%}
 .loginBox{ position:absolute; width:617px; height:330px; background:url(../images/admin-loginform-bg.png) no-repeat; left:50%; top:50%; margin-left:-309px; margin-top:-184px; padding-top:38px}
 @media (max-width:617px) {
 	.loginbox{ width:100%; position:static; margin-top:0; margin-left:0;}
