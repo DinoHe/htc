@@ -125,9 +125,11 @@
     function cancelOrder(url,orderId) {
         layer.open({
             title:'取消交易',
-            content:'<option value="blockBuy">冻结买家并取消</option>' +
-                '<select name="cancel"><option value="0">取消</option>' +
-                '<option value="blockSales">冻结卖家并取消</option></select>',
+            content: '<select name="cancel">' +
+                '<option value="blockBuy">冻结买家并取消</option>' +
+                '<option value="0">取消</option>' +
+                '<option value="blockSales">冻结卖家并取消</option>' +
+                '</select>',
             yes:function () {
                 $.post(url,{'orderId':orderId,'cancelType':$('select[name="cancel"]').val()});
                 layer.msg('操作成功',{icon:1,time:1000});

@@ -21,14 +21,14 @@ class TradeAuthenticate
         $auth = new RealNameAuths();
         if (!$auth->realNameAuthCheck()){
             view()->share('realNameAuth','请先完成实名认证');
-        }elseif ($openTrade == 'off'){
+        }
+        if ($openTrade == 'off'){
             view()->share('trade','临时暂停交易');
-        }else{
-            $start = SystemSettings::getSysSettingValue('trade_start');
-            $end = SystemSettings::getSysSettingValue('trade_end');
-            if (date('H') < $start || date('H') > $end){
-                view()->share('trade','交易时间：'.$start.':00 - '.$end.':00');
-            }
+        }
+        $start = SystemSettings::getSysSettingValue('trade_start');
+        $end = SystemSettings::getSysSettingValue('trade_end');
+        if (date('H') < $start || date('H') > $end){
+            view()->share('trade','交易时间：'.$start.':00 - '.$end.':00');
         }
 
         return $next($request);

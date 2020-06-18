@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/home/img/share.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/TradeAuthenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/TradeAuthenticate.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,17 +160,17 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Models" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/static/admin/images" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\wamp\www\htc\public\static\admin\images" />
+      <recent name="E:\wamp\www\htc\public\static\home\img" />
       <recent name="E:\wamp\www\htc\app\Http\Models" />
       <recent name="E:\wamp\www\htc\public\phpmyadmin" />
       <recent name="E:\wamp\www\htc\public\ext\font" />
-      <recent name="E:\wampserver\www\htc\app\Http\Models" />
-      <recent name="E:\wampserver\www\htc\app\Jobs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\wamp\www\htc\public" />
@@ -228,7 +228,7 @@
       <workItem from="1591807222231" duration="2964000" />
       <workItem from="1592115025998" duration="7905000" />
       <workItem from="1592293527567" duration="20941000" />
-      <workItem from="1592480117021" duration="9990000" />
+      <workItem from="1592480117021" duration="10698000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
