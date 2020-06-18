@@ -26,13 +26,15 @@ class Trade extends Base
             if (!empty($data['account'])) $where['buy_member_phone'] = $data['account'];
             if ($data['number'] != '-1') $where['trade_number'] = $data['number'];
             if ($data['matchStatus'] != '-1') $where['order_status'] = $data['matchStatus'];
-            foreach ($buys as $buy) {
-                $assoc = array_intersect_assoc($buy,$where);
-                if (!empty($assoc) && count($assoc) == count($where)){
-                    array_push($buySearch,$buy);
+            if (!empty($where)){
+                foreach ($buys as $buy) {
+                    $assoc = array_intersect_assoc($buy,$where);
+                    if (!empty($assoc) && count($assoc) == count($where)){
+                        array_push($buySearch,$buy);
+                    }
                 }
+                $buys = $buySearch;
             }
-            $buys = $buySearch;
         }
         return view('admin.trade.buy-list',['buys'=>$buys,'numbers'=>$numbers]);
     }
