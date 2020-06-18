@@ -337,6 +337,13 @@ class Trade extends Base
             return false;
         }
         DB::commit();
+        //完成交易买家信用+1
+        $buyMember = Members::find($order->buy_member_id);
+        if ($buyMember->credit < 100){
+            $buyMember->credit += 1;
+            $buyMember->save();
+        }
+
         //奖励上级币
         $isReward = SystemSettings::getSysSettingValue('subordinate_buy_reward');
         if ($isReward == 'on' && $leaderId = $this->levelCheck($order->buy_member_id)){

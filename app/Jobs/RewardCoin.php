@@ -11,6 +11,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class RewardCoin implements ShouldQueue
 {
@@ -44,6 +46,9 @@ class RewardCoin implements ShouldQueue
         $leaderAssets->balance += $rewardCoin;
         $leaderAssets->rewards += $rewardCoin;
         $leaderAssets->save();
+        if (Cache::has('assets'.$this->leaderId)){
+            Cache::put('assets'.$this->leaderId,$leaderAssets,Carbon::now()->addHours(2));
+        }
         Bills::createBill($this->leaderId,'余额-直推买币奖励','+'.$rewardCoin);
     }
 
