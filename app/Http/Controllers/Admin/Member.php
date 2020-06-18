@@ -440,6 +440,7 @@ class Member extends Base
     public function team()
     {
         $teams = [];
+        $teamHashrates = 0;
         if ($this->request->isMethod('post')){
             $account = $this->request->input('account');
             $this->request->flashOnly(['account']);
