@@ -36,17 +36,11 @@ class MyMiners extends Model
     /**
      * 会员算力统计
      * @param $memberId
-     * @return int
+     * @return float
      */
     public function hashrateSum($memberId)
     {
-        $miners = self::where('member_id',$memberId)->where('run_status',self::RUNNING)->get();
-        $hashrateSum = 0;
-        if (!$miners->isEmpty()){
-            foreach ($miners as $miner) {
-                $hashrateSum += $miner->hashrate;
-            }
-        }
-        return $hashrateSum;
+        $hashrateSum = self::where('member_id',$memberId)->where('run_status',self::RUNNING)->sum('hashrate');
+        return round($hashrateSum,2);
     }
 }

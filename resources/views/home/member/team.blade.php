@@ -5,7 +5,9 @@
 @section('container')
 <div class="app-cells">
     <h4 class="weui-cells__title">我的直推人数：{{count($subordinates)}}
-        <p class="color-success">已认证：{{$realNameAuthedNumber}}</p></h4>
+        <p class="color-success">已认证：{{$realNameAuthedNumber}}</p>
+        <p class="color-success">团队总算力：{{$teamHashrates}}</p>
+    </h4>
     <div class="subordinate_tittle">我的下级</div>
     <table style="text-align: center;width: 100%" cellspacing="0">
         <thead>

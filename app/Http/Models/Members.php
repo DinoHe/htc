@@ -53,6 +53,7 @@ class Members extends Authenticatable
         $subordinates = self::where('parentid',$id)->get();
         $subordinatesArray = [];
         $realNameAuthed = 0;
+        $subordinateHashrates = 0;
         if (!$subordinates->isEmpty()){
             foreach ($subordinates as $subordinate) {
                 $realNameAuth = $subordinate->realNameAuth;
@@ -62,13 +63,15 @@ class Members extends Authenticatable
                 }else{
                     $subordinate->realNameStatus = '未认证';
                 }
+                $myMiners = new MyMiners();
+                $subordinateHashrates += $myMiners->hashrateSum($subordinate->id);
                 $subordinate->team_total = count($this->getChildNodes($subordinate->id));
                 $subordinate->memberLevel = $subordinate->level->level_name;
                 $subordinate->subordinatesCount = self::where('parentid',$subordinate->id)->count();
                 array_push($subordinatesArray,$subordinate);
             }
         }
-        return array($subordinatesArray,$realNameAuthed);
+        return array($subordinatesArray,$realNameAuthed,$subordinateHashrates);
     }
 
     private function getChildNodes($id)

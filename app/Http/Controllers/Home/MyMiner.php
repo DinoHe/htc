@@ -7,15 +7,18 @@ use App\Http\Models\MyMiners;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use PhpParser\Node\Expr\New_;
 
 class MyMiner extends Base
 {
     public function running()
     {
+        $myMiner = new MyMiners();
         $myMiners = MyMiners::where('member_id',Auth::id())->where('run_status',MyMiners::RUNNING)->get();
         $this->initMiners($myMiners);
+        $hashrates = $myMiner->hashrateSum(Auth::id());
 
-        return view('home.myminer.running')->with('myMiners',$myMiners);
+        return view('home.myminer.running',['hashrates'=>$hashrates,'myMiners'=>$myMiners]);
     }
 
     /**
