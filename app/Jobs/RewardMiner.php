@@ -44,7 +44,7 @@ class RewardMiner implements ShouldQueue
         try {
             Log::info('---reward---');
             $subordinates = Members::where('parentid',$this->id)->get();
-            if (!$subordinates->isEmpty()){
+            if (count($subordinates) > 0){
                 $hashrate = 0;
                 $myMiner = new MyMiners();
                 foreach ($subordinates as $s) {
