@@ -46,7 +46,7 @@
             </a>
             <a href="{{url('home/unprocessedOrder')}}" class="weui-grid">
                 <i class="iconfont icon-xingzhuangjiehe"></i>
-                <p class="">未处理订单</p>
+                <p class="">未完成订单</p>
             </a>
             <a href="{{url('home/record')}}" class="weui-grid">
                 <i class="iconfont icon-xingzhuangjiehe"></i>

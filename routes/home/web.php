@@ -23,6 +23,12 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('memberService','Member@memberService');
     Route::any('realNameAuth','Member@realNameAuth');
     Route::get('bill','Member@bill');
+    Route::get('unprocessedOrder','Member@unprocessedOrder');
+    Route::get('record','Member@record');
+    Route::get('orderPreview/{id}','Member@orderPreview');
+    Route::get('tradeComplaint/{orderId}','Member@tradeComplaint');
+    Route::post('finishPay','Member@finishPay');
+    Route::post('finishPayConfirm','Member@finishPayConfirm');
     Route::get('quotations','Member@quotations');
     Route::any('ideal','Member@ideal');
     Route::get('idCardCheck/{idCard}','Member@idCardCheck');
@@ -31,12 +37,6 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'guest'],functi
     Route::get('finished','MyMiner@finished');
     Route::get('getMoreMinerFinished/{offset}','MyMiner@getMoreMinerFinished');
     Route::get('buy','Trade@buy');
-    Route::get('unprocessedOrder','Trade@unprocessedOrder');
-    Route::get('record','Trade@record');
-    Route::get('orderPreview/{id}','Trade@orderPreview');
-    Route::get('tradeComplaint/{orderId}','Trade@tradeComplaint');
-    Route::post('finishPay','Trade@finishPay');
-    Route::post('finishPayConfirm','Trade@finishPayConfirm');
     Route::get('tradeCenter','Trade@tradeCenter');
     Route::post('tradeBuy','Trade@tradeBuy');
     Route::post('tradeSales','Trade@tradeSales');

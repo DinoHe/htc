@@ -9,11 +9,16 @@ use App\Http\Models\Bills;
 use App\Http\Models\Ideals;
 use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
+use App\Http\Models\Orders;
 use App\Http\Models\RealNameAuths;
 use App\Http\Models\Roles;
 use App\Http\Models\SystemNotices;
+use App\Http\Models\SystemSettings;
+use App\Jobs\RewardCoin;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class Member extends Base
@@ -136,6 +141,175 @@ class Member extends Base
     }
 
     /**
+     * 待处理的订单
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function unprocessedOrder()
+    {
+        $unOrders = Orders::where('trade_status','<',Orders::TRADE_FINISHED)->cursor()
+            ->filter(function ($orders){
+                return $orders->buy_member_id == Auth::id() || $orders->sales_member_id == Auth::id();
+            });
+
+        foreach ($unOrders as $unOrder) {
+            $timeArray = $unOrder->remainingTime($unOrder->updated_at);
+            if (array_sum($timeArray) == 0){
+                if ($unOrder->trade_status == Orders::TRADE_NO_PAY){
+                    ////订单超时,交易取消，信用减2
+                    $buy = Members::find($unOrder->buy_member_id);
+                    $buy->credit -= 2;
+                    $buy->save();
+                    $unOrder->cancelTrade($unOrder);
+                }elseif ($unOrder->trade_status == Orders::TRADE_NO_CONFIRM){
+                    //超时，交易自动完成
+                    $this->finishTrade($unOrder->id);
+                }
+
+            }
+        }
+
+        return view('home.trade.unprocessedOrder')->with('unOrders',$unOrders);
+    }
+
+    /**
+     * 订单详情
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function orderPreview($id)
+    {
+        $previews = Orders::where('id',$id)->first();
+        if ($previews->trade_status == Orders::TRADE_FINISHED){
+            return back()->withErrors(['error'=>'交易已完成'])->withInput();
+        }
+        //买家信息
+        $buyMember = $previews->buyMember;
+        $previews->buyMemberCredit = $buyMember->credit;
+        $previews->buyMemberPhone = $buyMember->phone;
+        $previews->buyMemberW = $buyMember->realNameAuth->weixin;
+        //卖家信息
+        $salesMember = $previews->salesMember;
+        $salesMemberRealNameAuth = $salesMember->realNameAuth;
+        $previews->salesMemberName = $salesMemberRealNameAuth->name;
+        $previews->salesMemberCredit = $salesMember->credit;
+        $previews->salesMemberAlipay = $salesMember->phone;
+        $previews->salesMemberBankName = $salesMemberRealNameAuth->bank_name;
+        $previews->salesMemberBankCard = $salesMemberRealNameAuth->bank_card;
+        $previews->salesMemberW = $salesMemberRealNameAuth->weixin;
+        $previews->remaining = $previews->remainingTime($previews->updated_at);
+
+        return view('home.trade.orderPreview')->with('previews',$previews);
+    }
+
+    /**
+     * 投诉
+     * @param $orderId
+     * @return false|string
+     */
+    public function tradeComplaint($orderId)
+    {
+        Orders::where('id',$orderId)->update(['describes'=>'投诉假图']);
+        return $this->dataReturn(['status'=>0]);
+    }
+
+    /**
+     * 完成付款，上传截图
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function finishPay()
+    {
+        $file = $this->request->file('pay_img');
+        if (empty($file)) return back()->withErrors(['tradeError'=>'请选择要上传的截图'])->withInput();
+        if ($file->getSize()/(1024*1024) > 1) return back()->withErrors(['uploadError'=>'请上传小于1M的截图'])->withInput();
+        $path = $file->store('public/payImg');
+        if (empty($path)){
+            return back()->withErrors(['tradeError'=>'上传失败，请稍后重新上传'])->withInput();
+        }else{
+            $res = Orders::where('id',$this->request->input('id'))->update([
+                'payment_img' => substr($path,6),
+                'trade_status' => Orders::TRADE_NO_CONFIRM
+            ]);
+            if ($res){
+                return redirect('home/unprocessedOrder');
+            }
+        }
+        return back()->withErrors(['tradeError'=>'系统错误'])->withInput();
+    }
+
+    /**
+     * 交易确认
+     */
+    public function finishPayConfirm()
+    {
+        $orderId = $this->request->input('id');
+        $res = $this->finishTrade($orderId);
+        if (!$res){
+            return back()->withErrors(['tradeError'=>'系统错误'])->withInput();
+        }
+        return redirect('home/unprocessedOrder');
+    }
+
+    private function finishTrade($orderId)
+    {
+        $order = Orders::where('id',$orderId)->first();
+        $buyAssets = Cache::get('assets'.$order->buy_member_id);
+        $salesAssets = Cache::get('assets'.$order->sales_member_id);
+        DB::beginTransaction();
+        //买家资产确认
+        $buyAssets->balance += $order->trade_number;
+        $buyAssets->buys += $order->trade_number;
+        //卖家资产确认
+        $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
+        $n = $order->trade_number*(1+$handRate);
+        $salesAssets->blocked_assets -= $n;
+        //订单完成交易
+        $order->trade_status = Orders::TRADE_FINISHED;
+
+        $orderRes = $order->save();
+        $buyRes = $buyAssets->save();
+        $salesRes = $salesAssets->save();
+
+        if (!$orderRes || !$buyRes || !$salesRes) {
+            DB::rollBack();
+            return false;
+        }
+        DB::commit();
+        //完成交易买家信用+1
+        $buyMember = Members::find($order->buy_member_id);
+        if ($buyMember->credit < 100){
+            $buyMember->credit += 1;
+            $buyMember->save();
+        }
+
+        //奖励上级币
+        $isReward = SystemSettings::getSysSettingValue('subordinate_buy_reward');
+        if ($isReward == 'on' && $leaderId = parent::levelCheck($order->buy_member_id)){
+            RewardCoin::dispatch($order->trade_number,$leaderId)->onQueue('give');
+        }
+
+        Cache::put('assets'.$order->buy_member_id,$buyAssets,Carbon::tomorrow());
+        Cache::put('assets'.$order->sales_member_id,$salesAssets,Carbon::tomorrow());
+        Bills::createBill($order->buy_member_id,'余额-买入','+'.$order->trade_number);
+        Bills::createBill($order->sales_member_id,'余额-卖出','-'.$n);
+
+        return true;
+    }
+
+    /**
+     * 交易记录
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function record()
+    {
+        $orders = Orders::where('trade_status','>=',Orders::TRADE_FINISHED)->orderBy('updated_at','desc')->cursor()
+            ->filter(function ($orders){
+                return $orders->buy_member_id == Auth::id() || $orders->sales_member_id == Auth::id();
+            });
+
+        return view('home.trade.record')->with('orders',$orders);
+    }
+
+    /**
      * 我的团队
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -152,7 +326,6 @@ class Member extends Base
         return view('home.member.team',['subordinates'=>$subordinates,'realNameAuthedNumber'=>$realNameAuthedNumber,
             'teamHashrates'=>$teamHashrates]);
     }
-
 
     public function link()
     {
