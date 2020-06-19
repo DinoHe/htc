@@ -99,12 +99,12 @@ class Trade extends Base
         $n = 0;
         if (!empty($buyOrders)){
             foreach ($buyOrders as $buyOrder) {
-                if ($buyOrder['buy_member_id'] == $member->id){
+                if ($buyOrder['buy_member_id'] == $member->id && $buyOrder['order_status'] == Orders::ORDER_NO_MATCH){
                     $n++;
                 }
             }
             if ($n == 5){
-                return $this->dataReturn(['status'=>1040,'message'=>'最多买入5单']);
+                return $this->dataReturn(['status'=>1040,'message'=>'最多挂5单']);
             }
         }
         //加入队列匹配
@@ -146,7 +146,7 @@ class Trade extends Base
         $salesNumber = 0;
         if (!empty($salesOrders)){
             foreach ($salesOrders as $salesOrder) {
-                if ($salesOrder['sales_member_id'] == $member->id){
+                if ($salesOrder['sales_member_id'] == $member->id && $salesOrder['order_status'] == Orders::ORDER_NO_MATCH){
                     $salesNumber++;
                 }
             }
