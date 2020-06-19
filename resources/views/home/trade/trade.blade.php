@@ -11,7 +11,7 @@
 @section('container')
     <div class="trade-tittle">
         <a href="{{url('home/buy')}}" class="trade-tittle_buy trade-select"><i class="iconfont icon-goumai"></i> 购买</a>
-        <a href="{{url('home/tradeCenter')}}" class="trade-tittle_un"><i class="iconfont icon-hangqing1"></i> 交易行情</a>
+        <a href="{{url('home/tradeCenter')}}" class="trade-tittle_center"><i class="iconfont icon-hangqing1"></i> 交易行情</a>
     </div>
     @yield('trade-container')
 @endsection
