@@ -13,6 +13,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class RewardMiner implements ShouldQueue
 {
@@ -41,6 +42,7 @@ class RewardMiner implements ShouldQueue
     public function handle()
     {
         try {
+            Log::info('---reward---');
             $subordinates = Members::where('parentid',$this->id)->get();
             if (!$subordinates->isEmpty()){
                 $hashrate = 0;
@@ -52,11 +54,13 @@ class RewardMiner implements ShouldQueue
                     }
                 }
                 $activities = Activities::all();
+                Log::info('hashrate: '.$hashrate);
                 foreach ($activities as $activity) {
                     $rewardMember = $activity->reward_member;
                     if (count($subordinates) >= $activity->subordinate
                         && $hashrate >= $activity->hashrate
                         && !in_array($this->id,$rewardMember)){
+                        Log::info('rewardMiner: '.$activity->reward_miner_type);
                         $miner = Miners::find($activity->reward_miner_type);
                         for ($i=0;$i<$activity->reward_miner_number;$i++){
                             MyMiners::create([
