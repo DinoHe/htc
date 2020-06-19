@@ -13,7 +13,7 @@ class Coins extends Model
 
     public function setPriceAttribute($price)
     {
-        $this->attributes['price'] = $price * 100;
+        $this->attributes['price'] = (int)($price * 100);
     }
 
     public function getPriceAttribute($price)

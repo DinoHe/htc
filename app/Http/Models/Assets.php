@@ -18,7 +18,7 @@ class Assets extends Model
 
     public function setBalanceAttribute($value)
     {
-        $this->attributes['balance'] = $value * 100;
+        $this->attributes['balance'] = (int)($value * 100);
     }
 
     public function getBalanceAttribute($value)
@@ -28,7 +28,7 @@ class Assets extends Model
 
     public function setBlockedAssetsAttribute($value)
     {
-        $this->attributes['blocked_assets'] = $value * 100;
+        $this->attributes['blocked_assets'] = (int)($value * 100);
     }
 
     public function getBlockedAssetsAttribute($value)
@@ -38,7 +38,7 @@ class Assets extends Model
 
     public function setRewardsAttribute($value)
     {
-        $this->attributes['rewards'] = $value * 100;
+        $this->attributes['rewards'] = (int)($value * 100);
     }
 
     public function getRewardsAttribute($value)
@@ -48,7 +48,7 @@ class Assets extends Model
 
     public function setBuysAttribute($value)
     {
-        $this->attributes['buys'] = $value * 100;
+        $this->attributes['buys'] = (int)($value * 100);
     }
 
     public function getBuysAttribute($value)

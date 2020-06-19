@@ -45,7 +45,7 @@ class RewardMiner implements ShouldQueue
             foreach ($subordinates as $s) {
                 //等级烧伤，累计团队算力
                 if ($this->member->level_id >= $s->level_id) {
-                    $hashrate += $myMiner->hashrateSum($s->member_id);
+                    $hashrate += $myMiner->hashrateSum($s->id);
                 }
             }
         }
@@ -72,7 +72,7 @@ class RewardMiner implements ShouldQueue
                 array_push($rewardMember,$this->member->id);
                 $activity->reward_member = $rewardMember;
                 $activity->save();
-                Bills::createBill($this->id,$miner->tittle.'-分享奖励','+'.$activity->reward_miner_number);
+                Bills::createBill($this->member->id,$miner->tittle.'-分享奖励','+'.$activity->reward_miner_number);
             }
         }
     }

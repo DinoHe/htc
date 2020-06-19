@@ -18,7 +18,7 @@ class Activities extends Model
 
     public function setHashrateAttribute($hashrate)
     {
-        $this->attributes['hashrate'] = $hashrate * 10;
+        $this->attributes['hashrate'] = (int)($hashrate * 10);
     }
 
     public function getHashrateAttribute($hashrate)
