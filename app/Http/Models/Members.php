@@ -51,6 +51,7 @@ class Members extends Authenticatable
     public function getSubordinates($id)
     {
         $subordinates = self::where('parentid',$id)->get();
+        $levelConstraint = SystemSettings::getSysSettingValue('level_constraint');
         $subordinatesArray = [];
         $realNameAuthed = 0;
         $subordinateHashrates = 0;
@@ -64,7 +65,10 @@ class Members extends Authenticatable
                     $subordinate->realNameStatus = '未认证';
                 }
                 $myMiners = new MyMiners();
-                $subordinateHashrates += $myMiners->hashrateSum($subordinate->id);
+                //符合等级奖励，则累计到所有的直推算力
+                if ($levelConstraint == 'on' && self::find($id)->level_id >= $subordinate->level_id){
+                    $subordinateHashrates += $myMiners->hashrateSum($subordinate->id);
+                }
                 $subordinate->team_total = count($this->getChildNodes($subordinate->id));
                 $subordinate->memberLevel = $subordinate->level->level_name;
                 $subordinate->subordinatesCount = self::where('parentid',$subordinate->id)->count();

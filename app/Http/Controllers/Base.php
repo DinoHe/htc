@@ -70,7 +70,7 @@ class Base extends Controller
     }
 
     /**
-     * 奖励上级受等级限制
+     * 判断是否符合等级奖励
      * @param $memberId
      * @return bool
      */

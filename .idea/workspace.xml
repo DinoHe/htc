@@ -19,7 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="" />
+    <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Home/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Home/Index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Home/Login.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Home/Login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Members.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Members.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/RewardCoin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/RewardCoin.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -159,7 +166,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public/static/admin/images" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="vcs.Mercurial" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -225,7 +232,8 @@
       <workItem from="1591807222231" duration="2964000" />
       <workItem from="1592115025998" duration="7905000" />
       <workItem from="1592293527567" duration="20941000" />
-      <workItem from="1592480117021" duration="19836000" />
+      <workItem from="1592480117021" duration="20433000" />
+      <workItem from="1592561219193" duration="2265000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>
@@ -289,6 +297,10 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/app/Libraries/beanstalk_console" />
+      <path value="$PROJECT_DIR$/beanstalk_console" />
+    </ignored-roots>
     <MESSAGE value="add" />
     <MESSAGE value="update" />
     <option name="LAST_COMMIT_MESSAGE" value="update" />
@@ -299,11 +311,11 @@
     </state>
     <state x="182" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1591255313801" />
     <state x="205" y="47" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.834@0.0.1536.834" timestamp="1588690737225" />
-    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592486905117">
+    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592563072147">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="444" y="150" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1590733521260" />
-    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.834@0.0.1536.834" timestamp="1592486905117" />
+    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.834@0.0.1536.834" timestamp="1592563072147" />
     <state x="367" y="0" key="CommitChangelistDialog2" timestamp="1588703194539">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -317,11 +329,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="499" y="285" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1589537807596" />
-    <state x="240" y="0" key="SettingsEditor" timestamp="1589164209902">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="139" y="66" key="SettingsEditor" timestamp="1592561743145">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="240" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1589164209902" />
-    <state x="270" y="62" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1588513747294" />
+    <state x="139" y="66" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1592561743145" />
     <state x="361" y="150" key="Vcs.Push.Dialog.v2" timestamp="1588703208091">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -342,10 +354,10 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="425" y="189" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1591027480791" />
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1592325889103">
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1592562527255">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="383" y="135" width="672" height="592" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1591088610053" />
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1592325889103" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1592562527255" />
   </component>
 </project>

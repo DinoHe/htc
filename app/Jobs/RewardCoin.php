@@ -47,7 +47,7 @@ class RewardCoin implements ShouldQueue
         $leaderAssets->rewards += $rewardCoin;
         $leaderAssets->save();
         if (Cache::has('assets'.$this->leaderId)){
-            Cache::put('assets'.$this->leaderId,$leaderAssets,Carbon::now()->addHours(2));
+            Cache::put('assets'.$this->leaderId,$leaderAssets,Carbon::tomorrow());
         }
         Bills::createBill($this->leaderId,'余额-直推买币奖励','+'.$rewardCoin);
     }

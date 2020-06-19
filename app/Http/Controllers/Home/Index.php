@@ -11,6 +11,7 @@ use App\Http\Models\Miners;
 use App\Http\Models\MyMiners;
 use App\Http\Models\RealNameAuths;
 use App\Http\Models\SystemSettings;
+use App\Jobs\RewardMiner;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -81,9 +82,21 @@ class Index extends Base
         if ($res){
             $assets->balance -= $data['coin_number'];
             $assets->save();
+
             Cache::put('assets'.$memberId,$assets,Carbon::tomorrow());
+            //上级分享奖励
+            $this->shareRewardMiner($memberId,Auth::user()->level_id);
+
             Bills::createBill($memberId,'余额-租用矿机','-'.$data['coin_number']);
         }
         return $this->dataReturn(['status'=>0,'message'=>'租用成功']);
+    }
+
+    private function shareRewardMiner($id,$level)
+    {
+        $shareReward = SystemSettings::getSysSettingValue('share_reward');
+        if ($shareReward == 'on'){
+            RewardMiner::dispatch($id,$level)->onQueue('give');
+        }
     }
 }

@@ -347,7 +347,7 @@ class Trade extends Base
 
         //奖励上级币
         $isReward = SystemSettings::getSysSettingValue('subordinate_buy_reward');
-        if ($isReward == 'on' && $leaderId = $this->levelCheck($order->buy_member_id)){
+        if ($isReward == 'on' && $leaderId = parent::levelCheck($order->buy_member_id)){
             RewardCoin::dispatch($order->trade_number,$leaderId)->onQueue('give');
         }
         //从缓存中删除该卖单
