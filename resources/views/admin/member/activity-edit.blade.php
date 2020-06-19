@@ -3,7 +3,7 @@
 @section('css')
     <style>
         li{margin: 0 2px}
-        .data-item{padding: 2px;color: white;width: 103px;background-color: #00a2d4;
+        .data-item{padding: 2px;color: white;width: 106px;background-color: #00a2d4;
             float: left;border-radius: 3px}
         .data-item label{overflow: hidden;}
         .data-item a{display: inline;color: red;text-decoration: none;font-weight: bold;
