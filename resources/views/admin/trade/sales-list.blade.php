@@ -52,7 +52,7 @@
                             <th width="25"><input type="checkbox"></th>
                             <th>订单号</th>
                             <th width="150">账号</th>
-                            <th>买入数量</th>
+                            <th>卖出数量</th>
                             <th>价格</th>
                             <th width="150">挂单时间</th>
                             <th width="100">状态</th>
