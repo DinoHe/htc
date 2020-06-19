@@ -27,7 +27,7 @@ class TradeAuthenticate
         }
         $start = SystemSettings::getSysSettingValue('trade_start');
         $end = SystemSettings::getSysSettingValue('trade_end');
-        if (date('H') < $start || date('H') > $end){
+        if (date('H') <= $start || date('H') >= $end){
             view()->share('trade','交易时间：'.$start.':00 - '.$end.':00');
         }
 
