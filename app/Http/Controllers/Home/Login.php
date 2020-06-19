@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
-use App\Http\Models\Members;
 use App\Http\Models\Orders;
 use App\Http\Models\SystemSettings;
 use App\Jobs\RewardMiner;

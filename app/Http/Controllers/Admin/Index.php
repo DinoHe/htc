@@ -8,7 +8,6 @@ use App\Http\Models\MyMiners;
 use App\Http\Models\Orders;
 use App\Http\Models\Permissions;
 use App\Http\Models\SystemLogs;
-use Illuminate\Queue\Jobs\BeanstalkdJob;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;

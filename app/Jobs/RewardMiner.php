@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Http\Models\Activities;
 use App\Http\Models\Bills;
-use App\Http\Models\FailedJobs;
 use App\Http\Models\Members;
 use App\Http\Models\Miners;
 use App\Http\Models\MyMiners;
@@ -77,11 +76,4 @@ class RewardMiner implements ShouldQueue
         }
     }
 
-    public function failed(\Exception $exception)
-    {
-        FailedJobs::create([
-            'queue' => 'give',
-            'exception' => $exception->getMessage()
-        ]);
-    }
 }

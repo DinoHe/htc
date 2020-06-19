@@ -7,7 +7,6 @@ use App\Http\Models\MyMiners;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use PhpParser\Node\Expr\New_;
 
 class MyMiner extends Base
 {

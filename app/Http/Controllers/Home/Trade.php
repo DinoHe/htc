@@ -2,20 +2,16 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
-use App\Http\Models\Bills;
 use App\Http\Models\Coins;
-use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
 use App\Http\Models\Orders;
 use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
 use App\Jobs\BuyMatch;
-use App\Jobs\RewardCoin;
 use App\Jobs\SalesMatch;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 

@@ -7,7 +7,6 @@ use App\Http\Controllers\Base;
 use App\Http\Models\Coins;
 use App\Http\Models\Members;
 use App\Http\Models\Orders;
-use App\Http\Models\SystemSettings;
 use App\Http\Models\TradeNumbers;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;

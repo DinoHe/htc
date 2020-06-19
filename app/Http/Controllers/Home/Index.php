@@ -4,14 +4,12 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
-use App\Http\Models\Assets;
 use App\Http\Models\Bills;
 use App\Http\Models\Images;
 use App\Http\Models\Miners;
 use App\Http\Models\MyMiners;
 use App\Http\Models\RealNameAuths;
 use App\Http\Models\SystemSettings;
-use App\Jobs\RewardMiner;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;

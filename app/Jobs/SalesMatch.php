@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Http\Models\FailedJobs;
 use App\Http\Models\Orders;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -90,11 +89,4 @@ class SalesMatch implements ShouldQueue
         Cache::put('tradeSales',$salesOrders,Carbon::tomorrow());
     }
 
-    public function failed(\Exception $exception)
-    {
-        FailedJobs::create([
-            'queue' => 'match',
-            'exception' => $exception->getMessage()
-        ]);
-    }
 }
