@@ -44,6 +44,14 @@
                 <i class="iconfont icon-xingzhuangjiehe"></i>
                 <p class="">账单</p>
             </a>
+            <a href="{{url('home/unprocessedOrder')}}" class="weui-grid">
+                <i class="iconfont icon-xingzhuangjiehe"></i>
+                <p class="">未处理订单</p>
+            </a>
+            <a href="{{url('home/record')}}" class="weui-grid">
+                <i class="iconfont icon-xingzhuangjiehe"></i>
+                <p class="">交易记录</p>
+            </a>
             <a href="{{url('home/team')}}" class="weui-grid">
                 <i class="iconfont icon-tuandui"></i>
                 <p class="">我的团队</p>

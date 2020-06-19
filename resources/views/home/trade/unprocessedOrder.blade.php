@@ -1,7 +1,7 @@
-@extends('home.trade.trade')
-@section('trade-tittle')交易中心 @endsection
-@section('trade-container')
-
+@extends('layout.master')
+@section('tittle')未完成订单 @endsection
+@section('header')@component('layout.header')@endcomponent @endsection
+@section('container')
     <div class="app-cells">
         <div class="weui-panel weui-panel_access">
             <div class="weui-cells color-white">
@@ -25,10 +25,10 @@
     </div>
 @endsection
 
-@section('trade-js')
+@section('js')
     <script>
         $(function () {
-            $('.trade-tittle_un').addClass('trade-select').siblings().removeClass('trade-select');
+            showHeaderBack();
         });
 
         var error = '{{$errors->first('error')}}';

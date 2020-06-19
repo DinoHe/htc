@@ -1,7 +1,6 @@
 @extends('home.trade.trade')
 @section('trade-tittle')交易中心 @endsection
 @section('trade-container')
-
     <div class="app-cells">
         <div class="weui-cells">
             <div class="weui-cell">
@@ -17,10 +16,6 @@
                 <div><a href="javascript:tradeBuy();" class="weui-btn trade-buy">买入</a></div>
                 <div><a href="javascript:tradeSales();" class="weui-btn trade-sales">卖出</a></div>
             </div>
-        </div>
-
-        <div class="weui-cell color-white">
-            <a href="{{url('home/tradeCenter')}}" class="weui-btn app-submit">交易行情 <i class="iconfont icon-hangqing1"></i></a>
         </div>
 
         <div class="weui-cells__title color-main">委托买入单</div>
@@ -65,7 +60,6 @@
 
 @section('trade-js')
     <script type="text/javascript">
-
         // 买入
         function tradeBuy() {
             $.confirm('买入提示','确定买入吗？',function () {

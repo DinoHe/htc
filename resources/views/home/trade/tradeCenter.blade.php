@@ -1,10 +1,7 @@
-@extends('layout.master')
-@section('tittle')交易行情 @endsection
-@section('header')
-    @component('layout.header')@endcomponent
-@endsection
-@section('container')
+@extends('home.trade.trade')
+@section('trade-tittle')交易行情 @endsection
 
+@section('trade-container')
     <div class="app-cells color-white">
         <div class="weui-panel weui-panel_access">
             <div class="padding15"><div id="container" style="height: 300px;width: 100%"></div></div>
@@ -41,13 +38,9 @@
     </div>
 @endsection
 
-@section('js')
+@section('trade-js')
     <script src="{{asset('ext/echarts/echarts-line.min.js')}}"></script>
     <script>
-        $(function () {
-            showHeaderBack();
-        });
-
         var $p = $('.paidan a');
         $p.eq(0).addClass('paidan-bg');
         $p.click(function () {
