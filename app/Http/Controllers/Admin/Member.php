@@ -258,8 +258,8 @@ class Member extends Base
                 Bills::createBill($assets->member_id,'余额-奖励','+'.$data['rewards']);
             }
             //更新资产缓存
-            if (Cache::has('assets'.$data['id'])) {
-                Cache::put('assets'.$data['id'],$assets,Carbon::tomorrow());
+            if (Cache::has('assets'.$assets->member_id)) {
+                Cache::put('assets'.$assets->member_id,$assets,Carbon::tomorrow());
             }
             $assets->save();
             return $this->dataReturn(['status'=>0,'message'=>'充值成功']);
