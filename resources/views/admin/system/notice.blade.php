@@ -28,9 +28,6 @@
                 </div>
                 <table class="table table-border table-bordered table-bg table-sort">
                     <thead>
-                        <tr>
-                            <th scope="col" colspan="9">系统公告列表</th>
-                        </tr>
                         <tr class="text-c">
                             <th width="25"></th>
                             <th width="150">标题</th>

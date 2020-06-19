@@ -25,9 +25,6 @@
                 </div>
                 <table class="table table-border table-bordered table-bg">
                     <thead>
-                        <tr>
-                            <th scope="col" colspan="9">等级列表</th>
-                        </tr>
                         <tr class="text-c">
                             <th width="25"></th>
                             <th>等级名称</th>

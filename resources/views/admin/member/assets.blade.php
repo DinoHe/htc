@@ -33,9 +33,6 @@
                 </div>
                 <table class="table table-border table-bordered table-bg table-sort">
                     <thead>
-                        <tr>
-                            <th scope="col" colspan="12">实名认证列表</th>
-                        </tr>
                         <tr class="text-c">
                             <th width="25"><input type="checkbox"></th>
                             <th width="150">账号</th>

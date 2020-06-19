@@ -29,9 +29,6 @@
                 <div class="mt-10">
                 <table class="table table-border table-bordered table-bg">
                     <thead>
-                        <tr>
-                            <th scope="col" colspan="9">角色列表</th>
-                        </tr>
                         <tr class="text-c">
                             <th width="25"></th>
                             <th width="150">角色名称</th>

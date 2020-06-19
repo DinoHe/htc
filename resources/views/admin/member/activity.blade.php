@@ -23,9 +23,6 @@
                 </div>
                 <table class="table table-border table-bordered table-bg table-sort">
                     <thead>
-                        <tr>
-                            <th scope="col" colspan="12">活动列表</th>
-                        </tr>
                         <tr class="text-c">
                             <th width="25"></th>
                             <th>直推人数</th>

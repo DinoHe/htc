@@ -29,9 +29,6 @@
                 <div class="mt-10">
                 <table class="table table-border table-bordered table-bg">
                     <thead>
-                        <tr>
-                            <th scope="col" colspan="9">权限列表</th>
-                        </tr>
                         <tr class="text-c">
                             <th width="25"></th>
                             <th>权限名称</th>
