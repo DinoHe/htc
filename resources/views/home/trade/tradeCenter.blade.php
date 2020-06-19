@@ -41,7 +41,7 @@
 @section('trade-js')
     <script src="{{asset('ext/echarts/echarts-line.min.js')}}"></script>
     <script>
-        $('.trade-tittle_center').addClass('.trade-select').siblings().removeClass('.trade-select');
+        $('.trade-tittle_center').addClass('trade-select').siblings().removeClass('trade-select');
 
         var $p = $('.paidan a');
         $p.eq(0).addClass('paidan-bg');
