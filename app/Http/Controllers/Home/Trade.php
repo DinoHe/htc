@@ -154,7 +154,7 @@ class Trade extends Base
                 return $this->dataReturn(['status'=>1042,'message'=>'每天只能卖出'.$availableSalesTimes.'单']);
             }
         }
-        $tradeCount = Orders::where('sales_member_id',$member->id)->where('updated_at','>=',date('Y-m-d'))->count();
+        $tradeCount = Orders::where('sales_member_id',$member->id)->where('created_at','>=',date('Y-m-d'))->count();
         if ($availableSalesTimes <= ($tradeCount + $salesNumber)){
             return $this->dataReturn(['status'=>1042,'message'=>'每天只能卖出'.$availableSalesTimes.'单']);
         }
