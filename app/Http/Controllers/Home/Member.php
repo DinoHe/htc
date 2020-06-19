@@ -316,12 +316,10 @@ class Member extends Base
     public function team()
     {
         $member = Auth::user();
-        $myMiners = new MyMiners();
         $subordinatesArray = $member->getSubordinates($member->id);
         $subordinates = $subordinatesArray[0];
         $realNameAuthedNumber = $subordinatesArray[1];
-        $hashrates = $myMiners->hashrateSum($member->id);
-        $teamHashrates = $hashrates + $subordinatesArray[2];
+        $teamHashrates = $subordinatesArray[2];
 
         return view('home.member.team',['subordinates'=>$subordinates,'realNameAuthedNumber'=>$realNameAuthedNumber,
             'teamHashrates'=>$teamHashrates]);
