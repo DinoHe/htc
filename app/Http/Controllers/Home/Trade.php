@@ -350,24 +350,7 @@ class Trade extends Base
         if ($isReward == 'on' && $leaderId = parent::levelCheck($order->buy_member_id)){
             RewardCoin::dispatch($order->trade_number,$leaderId)->onQueue('give');
         }
-        //从缓存中删除该卖单
-        $tradeSales = Cache::get('tradeSales');
-        foreach ($tradeSales as $k => $tradeSale) {
-            if ($tradeSale['sales_member_id'] == $order->sales_member_id){
-                array_splice($tradeSales,$k,1);
-                break;
-            }
-        }
-        Cache::put('tradeSales',$tradeSales,Carbon::tomorrow());
-        //从缓存中删除该买单
-        $tradeBuys = Cache::get('tradeBuy');
-        foreach ($tradeBuys as $k => $b) {
-            if ($b['buy_member_id'] == $order->buy_member_id){
-                array_splice($tradeBuys,$k,1);
-                break;
-            }
-        }
-        Cache::put('tradeBuy',$tradeBuys,Carbon::tomorrow());
+
         Cache::put('assets'.$order->buy_member_id,$buyAssets,Carbon::tomorrow());
         Cache::put('assets'.$order->sales_member_id,$salesAssets,Carbon::tomorrow());
         Bills::createBill($order->buy_member_id,'余额-买入','+'.$order->trade_number);
