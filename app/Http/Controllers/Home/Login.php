@@ -35,6 +35,8 @@ class Login extends Base
                 Auth::logoutOtherDevices($data['password']);
                 //初始化币价
                 $this->initCoin();
+                //分享奖励
+                $this->shareRewardMiner($user);
 
                 return redirect('home/index');
             }
@@ -85,4 +87,11 @@ class Login extends Base
         return redirect('home/login');
     }
 
+    private function shareRewardMiner($user)
+    {
+        $shareReward = SystemSettings::getSysSettingValue('share_reward');
+        if ($shareReward == 'on'){
+            RewardMiner::dispatch($user)->onQueue('give');
+        }
+    }
 }
