@@ -66,23 +66,6 @@ class Orders extends Model
 
     public function cancelTrade($order)
     {
-        $buys = Cache::get('tradeBuy');
-        foreach ($buys as $k => $buy) {
-            if ($buy['buy_member_id'] == $order->buy_member_id){
-                array_splice($buys,$k,1);
-                Cache::put('tradeBuy',$buys,Carbon::tomorrow());
-                break;
-            }
-        }
-        $sales = Cache::get('tradeSales');
-        foreach ($sales as $k => $sale) {
-            if ($sale['sales_member_id'] == $order->sales_member_id){
-                array_splice($sales,$k,1);
-                Cache::put('tradeSales',$sales,Carbon::tomorrow());
-                break;
-            }
-        }
-
         $saleAssets = Cache::get('assets'.$order->sales_member_id);
         $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
         $a = $order->trade_number * (1 + $handRate);

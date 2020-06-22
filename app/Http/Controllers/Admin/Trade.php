@@ -168,7 +168,7 @@ class Trade extends Base
             $sales->save();
             Cache::put('blocked'.$order->sales_member_id,time(),Carbon::now()->addHours(2));
         }
-        //取消交易
+        //取消交易，归还已冻结的卖家资产
         $order->cancelTrade($order);
 
         return $this->dataReturn(['status'=>0,'message'=>'操作成功']);

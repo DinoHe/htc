@@ -21,7 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/member/activity-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/member/activity-edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Trade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Models/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/BuyMatch.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SalesMatch.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
