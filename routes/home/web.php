@@ -3,6 +3,7 @@ Route::get('/','Home\Index@index')->middleware('guest');
 Route::group(['prefix'=>'home','namespace'=>'Home'],function (){
     Route::any('login','Login@login');
     Route::get('logout','Login@logout');
+    Route::get('download','Login@download');
     Route::any('register','Register@register');
     Route::post('registerVerify','Register@registerVerify');
     Route::any('forget','ForgetPassword@forgetPassword');

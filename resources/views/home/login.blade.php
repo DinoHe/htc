@@ -35,6 +35,9 @@
                 <a href="{{url('home/register')}}">注册</a>
             </div>
             <div class="login-tip_pwd login-tip_group">
+                <a href="{{url('home/download')}}">APP下载</a>
+            </div>
+            <div class="login-tip_pwd login-tip_group">
                 <a href="{{url('home/forget')}}">忘记密码？</a>
             </div>
         </div>

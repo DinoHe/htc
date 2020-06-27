@@ -9,6 +9,7 @@ use App\Jobs\RewardMiner;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use Mews\Captcha\Facades\Captcha;
 
 class Login extends Base
@@ -42,6 +43,11 @@ class Login extends Base
             return redirect('home/login')->with('error','用户名或密码错误');
         }
         return view('home.login');
+    }
+
+    public function download()
+    {
+        return Storage::download('/storage/app/htc.apk');
     }
 
     /**
