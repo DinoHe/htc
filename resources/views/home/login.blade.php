@@ -31,7 +31,6 @@
         </form>
         <div class="login-tip">
             <div class="login-tip_reg login-tip_group">
-                <span style="color: #a3a3a3">没有账号？</span>
                 <a href="{{url('home/register')}}">注册</a>
             </div>
             <div class="login-tip_pwd login-tip_group">
