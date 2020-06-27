@@ -30,13 +30,13 @@
             <button type="submit" class="floating-btn">登录</button>
         </form>
         <div class="login-tip">
-            <div class="login-tip_reg login-tip_group">
+            <div class="login-tip_group">
                 <a href="{{url('home/register')}}">注册</a>
             </div>
-            <div class="login-tip_pwd login-tip_group">
+            <div class="login-tip_group">
                 <a href="{{url('home/download')}}">APP下载</a>
             </div>
-            <div class="login-tip_pwd login-tip_group">
+            <div class="login-tip_group">
                 <a href="{{url('home/forget')}}">忘记密码？</a>
             </div>
         </div>

@@ -45,14 +45,7 @@ a{
 
 .login-tip .login-tip_group {
     flex: 1;
-}
-
-.login-tip_reg {
-    text-align: left;
-}
-
-.login-tip_pwd {
-    text-align: right;
+    text-align: center;
 }
 
 .login-tip_group a {
