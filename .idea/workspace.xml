@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/storage/app/public/app/htc.apk" afterDir="false" />
-    </list>
+    <list default="true" id="27d6e879-4654-47b3-a9ee-cfcba1b4c929" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -164,19 +162,19 @@
     <property name="settings.editor.selected.configurable" value="vcs.Mercurial" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\wamp\www\htc\storage\app\public\app" />
+      <recent name="E:\wamp\www\htc\public\static\admin\images" />
+      <recent name="E:\wamp\www\htc\public\static\home\img" />
+      <recent name="E:\wamp\www\htc\app\Http\Models" />
+      <recent name="E:\wamp\www\htc\public\phpmyadmin" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\wamp\www\htc\public" />
       <recent name="E:\wamp\www\htc" />
       <recent name="E:\wampserver\www\htc\storage\app\public\homeImg" />
       <recent name="E:\wampserver\www\htc\storage\app\public\miner" />
       <recent name="E:\wampserver\www\htc\public\static\home\img" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\wamp\www\htc\public\static\admin\images" />
-      <recent name="E:\wamp\www\htc\public\static\home\img" />
-      <recent name="E:\wamp\www\htc\app\Http\Models" />
-      <recent name="E:\wamp\www\htc\public\phpmyadmin" />
-      <recent name="E:\wamp\www\htc\public\ext\font" />
     </key>
   </component>
   <component name="RunManager">

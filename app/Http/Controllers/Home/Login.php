@@ -9,7 +9,6 @@ use App\Jobs\RewardMiner;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
 use Mews\Captcha\Facades\Captcha;
 
 class Login extends Base
@@ -47,7 +46,7 @@ class Login extends Base
 
     public function download()
     {
-        return Storage::download('/storage/app/htc.apk');
+        return response()->download(public_path('storage/app/htc.apk'));
     }
 
     /**
