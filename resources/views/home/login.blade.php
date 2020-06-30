@@ -24,7 +24,7 @@
             <div class="login-group">
                 <input type="text" required="required" class="login-control" name="captcha" pattern="[a-zA-Z0-9]*"/>
                 <label class="login-label">验证码</label>
-                <img src="{{captcha_src()}}" style="position:absolute;top:-2px;right:0;cursor:pointer;z-index:9999"
+                <img src="{{captcha_src()}}" style="position:absolute;top:-2px;right:0;cursor:pointer;z-index:9"
                      onclick="this.src='{{captcha_src()}}'+Math.random()">
             </div>
             <button type="submit" class="floating-btn">登录</button>
