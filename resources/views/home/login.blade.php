@@ -34,7 +34,7 @@
                 <a href="{{url('home/register')}}">注册</a>
             </div>
             <div class="login-tip_group">
-                <a href="{{url('home/download')}}">APP下载</a>
+                <a href="javascript:;" onclick="appDownload()">APP下载</a>
             </div>
             <div class="login-tip_group">
                 <a href="{{url('home/forget')}}">忘记密码？</a>
@@ -51,5 +51,11 @@
                 $.loading('登录中');
             });
         });
+
+        function appDownload() {
+            $.confirm('','确认下载APP？',function () {
+                location.href = "{{url('home/download')}}";
+            });
+        }
     </script>
 @endsection
