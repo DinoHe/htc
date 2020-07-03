@@ -23,8 +23,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/System.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/System.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/system/setting.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/system/setting.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/admin/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +234,7 @@
       <workItem from="1592588977156" duration="569000" />
       <workItem from="1592589601910" duration="342000" />
       <workItem from="1593669015465" duration="779000" />
-      <workItem from="1593744529005" duration="3085000" />
+      <workItem from="1593744529005" duration="4120000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1588527032646</created>

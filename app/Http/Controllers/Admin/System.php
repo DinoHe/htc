@@ -39,8 +39,7 @@ class System extends Base
     public function sendTest()
     {
         $phone = $this->request->input('phone');
-        $msg = parent::sendSMS($phone);
-        return $this->dataReturn(['status'=>0,'message'=>$msg]);
+        return parent::sendSMS($phone);
     }
 
     public function notice()

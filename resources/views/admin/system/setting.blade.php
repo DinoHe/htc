@@ -131,7 +131,7 @@
             data:{'phone':$(obj).siblings().val()},
             dataType: 'json',
             success:function (data) {
-                $('#testContent').text(JSON.stringify(data.message));
+                $('#testContent').text(data.message);
             },
             error:function (error) {
                 console.log(error);
