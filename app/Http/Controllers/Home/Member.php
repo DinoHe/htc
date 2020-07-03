@@ -338,7 +338,7 @@ class Member extends Base
 
     public function notice()
     {
-        $notices = SystemNotices::all();
+        $notices = SystemNotices::orderBy('id','desc')->get();
         return view('home.member.notice')->with('notices',$notices);
     }
 
