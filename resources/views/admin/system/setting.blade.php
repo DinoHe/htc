@@ -67,6 +67,19 @@
                                 </div>
                             </div>
                             <div class="row cl">
+                                <label class="form-label col-xs-4 col-sm-2">手机号码：</label>
+                                <div class="formControls col-xs-8 col-sm-9">
+                                    <input type="number" class="input-text">
+                                    <a onclick="sendTest(this)" class="btn btn-success">发送验证码</a>
+                                </div>
+                            </div>
+                            <div class="row cl">
+                                <label class="form-label col-xs-4 col-sm-2">返回内容：</label>
+                                <div class="formControls col-xs-8 col-sm-9">
+                                    <div id="testContent"></div>
+                                </div>
+                            </div>
+                            <div class="row cl">
                                 <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                                     <button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
                                 </div>
@@ -110,5 +123,20 @@
             $(this).find('input:hidden').val('off');
         }
     });
+
+    function sendTest(obj) {
+        $.ajax({
+            method:'post',
+            url:'{{url("admin/sendTest")}}',
+            data:{'phone':$(obj).siblings().val()},
+            dataType: 'json',
+            success:function (data) {
+                $('#testContent').text(data.message);
+            },
+            error:function (error) {
+                console.log(error);
+            }
+        })
+    }
 </script>
 @endsection

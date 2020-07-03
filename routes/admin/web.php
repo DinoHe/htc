@@ -25,6 +25,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'
     Route::post('adminPermissionDel','Admin@permissionDel');
     Route::any('systemSetting','System@setting');
     Route::any('systemAdvancedSetting','System@advancedSetting');
+    Route::post('sendTest','System@sendTest');
     Route::get('systemNotice','System@notice');
     Route::any('systemNoticeAdd','System@noticeAdd');
     Route::any('systemNoticeEdit','System@noticeEdit');

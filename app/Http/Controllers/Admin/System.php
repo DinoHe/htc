@@ -36,6 +36,13 @@ class System extends Base
         return $this->dataReturn(['status'=>0,'message'=>'保存成功']);
     }
 
+    public function sendTest()
+    {
+        $phone = $this->request->input('phone');
+        $msg = parent::sendSMS($phone);
+        return $this->dataReturn(['status'=>0,'message'=>$msg]);
+    }
+
     public function notice()
     {
         $notices = SystemNotices::all();
