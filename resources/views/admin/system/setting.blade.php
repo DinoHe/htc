@@ -69,7 +69,7 @@
                             <div class="row cl">
                                 <label class="form-label col-xs-4 col-sm-2">手机号码：</label>
                                 <div class="formControls col-xs-8 col-sm-9">
-                                    <input type="number" class="input-text">
+                                    <input type="number" class="input-text" style="width: 200px">
                                     <a onclick="sendTest(this)" class="btn btn-success">发送验证码</a>
                                 </div>
                             </div>
@@ -131,7 +131,7 @@
             data:{'phone':$(obj).siblings().val()},
             dataType: 'json',
             success:function (data) {
-                $('#testContent').text(data.message);
+                $('#testContent').text(JSON.stringify(data.message));
             },
             error:function (error) {
                 console.log(error);
