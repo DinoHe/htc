@@ -57,15 +57,8 @@
 
                     @if(session('permission') == 0)
                     <div class="tabCon">
-                        <form action="{{url('admin/systemAdvancedSetting')}}" method="post" class="form form-horizontal">
-                            @csrf
-                            <div class="row cl">
-                                <label class="form-label col-xs-4 col-sm-2">当前币价($)：</label>
-                                <div class="formControls col-xs-8 col-sm-9">
-                                    <input type="hidden" value="{{$coin->id}}" name="id">
-                                    <input type="text" value="{{$coin->price}}" name="price" class="input-text" required>
-                                </div>
-                            </div>
+{{--                        <form action="{{url('admin/systemAdvancedSetting')}}" method="post" class="form form-horizontal">--}}
+{{--                            @csrf--}}
                             <div class="row cl">
                                 <label class="form-label col-xs-4 col-sm-2">手机号码：</label>
                                 <div class="formControls col-xs-8 col-sm-9">
@@ -83,12 +76,12 @@
                                     <div id="testContent"></div>
                                 </div>
                             </div>
-                            <div class="row cl">
-                                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                                    <button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
-                                </div>
-                            </div>
-                        </form>
+{{--                            <div class="row cl">--}}
+{{--                                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">--}}
+{{--                                    <button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </form>--}}
                     </div>
                     @endif
                 </div>
