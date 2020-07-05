@@ -46,7 +46,7 @@
                             <td>{{$c->created_at}}</td>
                             <td class="td-manage">
                                 @if(session('permission') == 0 || in_array("admin/coinEdit",session('permission')))
-                                    <a title="编辑" href="javascript:;" onclick="edit('修改币价','{{url("admin/coinEdit")}}','{{$c->id}}','800','300')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                                    <a title="编辑" href="javascript:;" onclick="edit('修改币价','{{url("admin/coinEdit")}}','{{$c->id}}','800','300')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
                                 @endif
                                 @if(session('permission') == 0 || in_array("admin/coinDestroy",session('permission')))
                                 <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/coinDestroy")}}','{{$c->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
