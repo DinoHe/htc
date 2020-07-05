@@ -192,11 +192,12 @@ class Trade extends Base
     public function coinEdit()
     {
         $data = $this->request->input();
+        $coin = Coins::find($data['id']);
         if ($this->request->isMethod('post')){
-            Coins::where('id',$data['id'])->update(['price'=>$data['price']]);
+            $coin->price = $data['price'];
+            $coin->save();
             return $this->dataReturn(['status'=>0,'message'=>'修改成功']);
         }
-        $coin = Coins::find($data['id']);
         return view('admin.trade.coin-edit',['coin'=>$coin]);
     }
 
