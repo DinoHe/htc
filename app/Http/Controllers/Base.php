@@ -6,7 +6,6 @@ use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
 use App\Http\Models\SystemSettings;
 use App\Libraries\SMS\SendSmsYZ;
-use App\Libraries\SMS\SendTemplateSMS;
 use App\Http\Models\PhoneTmps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
