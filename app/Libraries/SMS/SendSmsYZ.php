@@ -1,4 +1,5 @@
 ﻿<?php
+
 namespace App\Libraries\SMS;
 
 class SendSmsYZ
