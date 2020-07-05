@@ -17,11 +17,11 @@
             <article class="cl pd-20">
                 <div class="cl pd-5 bg-1 bk-gray mt-20">
                     <span class="l">
-                        @if(session('permission') == 0 || in_array("admin/tradeCoinDestroy",session('permission')))
-                        <a href="javascript:;" onclick="dataDel('{{url("admin/tradeCoinDestroy")}}')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+                        @if(session('permission') == 0 || in_array("admin/coinDestroy",session('permission')))
+                        <a href="javascript:;" onclick="dataDel('{{url("admin/coinDestroy")}}')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
                         @endif
-                        @if(session('permission') == 0 || in_array("admin/tradeCoinAdd",session('permission')))
-                            <a href="javascript:;" onclick="add('添加币价','{{url("admin/tradeCoinAdd")}}','800','300')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加币价</a>
+                        @if(session('permission') == 0 || in_array("admin/coinAdd",session('permission')))
+                            <a href="javascript:;" onclick="add('添加币价','{{url("admin/coinAdd")}}','800','300')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加币价</a>
                         @endif
                     </span>
                     <span class="r">共有数据：<strong>{{count($coins)}}</strong> 条</span>
@@ -45,11 +45,11 @@
                             <td>{{$c->price}}</td>
                             <td>{{$c->created_at}}</td>
                             <td class="td-manage">
-                                @if(session('permission') == 0 || in_array("admin/tradeCoinEdit",session('permission')))
-                                    <a title="编辑" href="javascript:;" onclick="edit('修改币价','{{url("admin/tradeCoinEdit")}}','{{$c->id}}','800','300')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                                @if(session('permission') == 0 || in_array("admin/coinEdit",session('permission')))
+                                    <a title="编辑" href="javascript:;" onclick="edit('修改币价','{{url("admin/coinEdit")}}','{{$c->id}}','800','300')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
                                 @endif
-                                @if(session('permission') == 0 || in_array("admin/tradeCoinDestroy",session('permission')))
-                                <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/tradeCoinDestroy")}}','{{$c->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                                @if(session('permission') == 0 || in_array("admin/coinDestroy",session('permission')))
+                                <a title="删除" href="javascript:;" onclick="onesDel(this,'{{url("admin/coinDestroy")}}','{{$c->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
                                 @endif
                             </td>
                         </tr>
