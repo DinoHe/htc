@@ -80,4 +80,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.guest'
     Route::post('tradeSalesClear','Trade@salesClear');
     Route::any('tradeOrder','Trade@order');
     Route::post('tradeOrderCancelEdit','Trade@orderCancelEdit');
+    Route::get('coinList','Trade@coinList');
+    Route::any('coinAdd','Trade@coinAdd');
+    Route::any('coinEdit','Trade@coinEdit');
+    Route::post('coinDestroy','Trade@coinDestroy');
 });

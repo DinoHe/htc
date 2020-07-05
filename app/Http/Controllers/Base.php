@@ -46,6 +46,8 @@ class Base extends Controller
 
     protected function initCoin()
     {
+        $tradeClose = SystemSettings::getSysSettingValue('trade_open');
+        if ($tradeClose == 'off') return false;
         $coins = Coins::orderBy('id','desc')->first();
         $coinPriceStep = SystemSettings::getSysSettingValue('coin_price_step');
         if (empty($coins)){
@@ -107,7 +109,6 @@ class Base extends Controller
                 return $this->dataReturn(['status'=>1104,'message'=>'发送频繁，请'.(60 - $t).'s后获取']);
             }
         }
-        return $this->dataReturn(['status'=>0,'message'=>'发送成功']);
         $sendSMS = new SendSmsYZ();
         $code = rand(1000,9999);
         $sendRes = $sendSMS->sendSms($phone,$code,$captchaTemplate);

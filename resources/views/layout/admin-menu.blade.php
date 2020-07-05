@@ -18,6 +18,9 @@
                 @if(session('permission') == 0 || in_array("admin/tradeOrder",session('permission')))
                 <li><a href="{{url('admin/tradeOrder')}}" title="交易订单">交易订单</a></li>
                 @endif
+                @if(session('permission') == 0 || in_array("admin/coinList",session('permission')))
+                    <li><a href="{{url('admin/coinList')}}" title="币价">币价列表</a></li>
+                @endif
             </ul>
         </dd>
     </dl>

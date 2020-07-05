@@ -174,6 +174,31 @@ class Trade extends Base
         return $this->dataReturn(['status'=>0,'message'=>'操作成功']);
     }
 
+    public function coinList()
+    {
+        $coins = Coins::all();
+        return view('admin.trade.coin',['coins'=>$coins]);
+    }
 
+    public function coinAdd()
+    {
+        Coins::create(['price'=>$this->request->input('price')]);
+        return $this->dataReturn(['status'=>0,'message'=>'添加成功']);
+    }
+
+    public function coinEdit()
+    {
+        $data = $this->request->input();
+        Coins::where('id',$data['id'])->update(['price'=>$data['price']]);
+        return $this->dataReturn(['status'=>0,'message'=>'修改成功']);
+    }
+
+    public function coinDestroy()
+    {
+        $id = $this->request->input('id');
+        $ids = explode(',',$id)?:$id;
+        Coins::destroy($ids);
+        return $this->dataReturn(['status'=>0,'message'=>'删除成功']);
+    }
 
 }

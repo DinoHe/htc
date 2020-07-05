@@ -23,7 +23,7 @@ class TradeAuthenticate
             view()->share('realNameAuth','请先完成实名认证');
         }
         if ($openTrade == 'off'){
-            view()->share('trade','临时暂停交易');
+            view()->share('trade','暂未开启交易');
         }
         $start = SystemSettings::getSysSettingValue('trade_start');
         $end = SystemSettings::getSysSettingValue('trade_end');
