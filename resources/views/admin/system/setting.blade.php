@@ -119,7 +119,7 @@
         return false;
     });
 
-    $('#tab-system').Huitab("#tab-system .tabBar span","#tab-system .tabCon","current","click","0");
+    $('#tab-system').Huitab("#tab-system .tabBar span");
     $('.switch').on('switch-change',function (e,data) {
         if (data.value){
             $(this).find('input:hidden').val('on');
