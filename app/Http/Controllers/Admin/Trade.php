@@ -177,20 +177,27 @@ class Trade extends Base
     public function coinList()
     {
         $coins = Coins::all();
-        return view('admin.trade.coin',['coins'=>$coins]);
+        return view('admin.trade.coin-list',['coins'=>$coins]);
     }
 
     public function coinAdd()
     {
-        Coins::create(['price'=>$this->request->input('price')]);
-        return $this->dataReturn(['status'=>0,'message'=>'添加成功']);
+        if ($this->request->isMethod('post')){
+            Coins::create(['price'=>$this->request->input('price')]);
+            return $this->dataReturn(['status'=>0,'message'=>'添加成功']);
+        }
+        return view('admin.trade.coin-add');
     }
 
     public function coinEdit()
     {
         $data = $this->request->input();
-        Coins::where('id',$data['id'])->update(['price'=>$data['price']]);
-        return $this->dataReturn(['status'=>0,'message'=>'修改成功']);
+        if ($this->request->isMethod('post')){
+            Coins::where('id',$data['id'])->update(['price'=>$data['price']]);
+            return $this->dataReturn(['status'=>0,'message'=>'修改成功']);
+        }
+        $coin = Coins::find($data['id']);
+        return view('admin.trade.coin-edit',['coin'=>$coin]);
     }
 
     public function coinDestroy()
