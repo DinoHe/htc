@@ -135,6 +135,7 @@
             data:{'phone':$(obj).siblings('input').val(),'type':$(obj).siblings('select').val()},
             dataType: 'json',
             success:function (data) {
+                console.log(data);
                 $('#testContent').text(data);
             },
             error:function (error) {

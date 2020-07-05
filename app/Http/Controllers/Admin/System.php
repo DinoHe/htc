@@ -45,7 +45,7 @@ class System extends Base
         }else{
             $captchaTemplate = false;
         }
-        parent::sendSMS($phone,$captchaTemplate);
+        return parent::sendSMS($phone,$captchaTemplate);
     }
 
     public function notice()
