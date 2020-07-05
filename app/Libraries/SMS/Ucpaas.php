@@ -1,13 +1,9 @@
-﻿<?php
+<?php
+
+
 namespace App\Libraries\SMS;
 
-/**
- * Created by Notepad++
- * User: UCPAAS NickLuo
- * Date: 2017/11/09
- * Time: 08:28
- * Dec : ucpass php sdk
- */
+
 class Ucpaas
 {
     //API请求地址
@@ -87,7 +83,7 @@ class Ucpaas
     }
 
     /**
-	单条发送短信的function，适用于注册/找回密码/认证/操作提醒等单个用户单条短信的发送场景
+    单条发送短信的function，适用于注册/找回密码/认证/操作提醒等单个用户单条短信的发送场景
      * @param $appid        应用ID
      * @param $mobile       接收短信的手机号码
      * @param $templateid   短信模板，可在后台短信产品→选择接入的应用→短信模板-模板ID，查看该模板ID
@@ -103,17 +99,17 @@ class Ucpaas
             'token'=>$this->token,
             'appid'=>$appid,
             'templateid'=>$templateid,
-			'param'=>$param,
-			'mobile'=>$mobile,
-			'uid'=>$uid,
+            'param'=>$param,
+            'mobile'=>$mobile,
+            'uid'=>$uid,
         );
         $body = json_encode($body_json);
         $data = $this->getResult($url, $body,'post');
         return $data;
     }
 
-	 /**
-	 群发送短信的function，适用于运营/告警/批量通知等多用户的发送场景
+    /**
+    群发送短信的function，适用于运营/告警/批量通知等多用户的发送场景
      * @param $appid        应用ID
      * @param $mobileList   接收短信的手机号码，多个号码将用英文逗号隔开，如“18088888888,15055555555,13100000000”
      * @param $templateid   短信模板，可在后台短信产品→选择接入的应用→短信模板-模板ID，查看该模板ID
@@ -122,16 +118,16 @@ class Ucpaas
      * @return mixed|string
      * @throws Exception
      */
-	public function SendSms_Batch($appid,$templateid,$param=null,$mobileList,$uid){
+    public function SendSms_Batch($appid,$templateid,$param=null,$mobileList,$uid){
         $url = self::BaseUrl . 'sendsms_batch';
         $body_json = array(
             'sid'=>$this->accountSid,
             'token'=>$this->token,
             'appid'=>$appid,
             'templateid'=>$templateid,
-			'param'=>$param,
-			'mobile'=>$mobileList,
-			'uid'=>$uid,
+            'param'=>$param,
+            'mobile'=>$mobileList,
+            'uid'=>$uid,
         );
         $body = json_encode($body_json);
         $data = $this->getResult($url, $body,'post');
