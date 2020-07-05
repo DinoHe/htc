@@ -98,7 +98,7 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript" src="{{asset('static/admin/lib/jqueryValidation/messages_zh.js')}}"></script>
+{{--    <script type="text/javascript" src="{{asset('static/admin/lib/jqueryValidation/messages_zh.js')}}"></script>--}}
 <script type="text/javascript">
     $('button:submit').click(function () {
         var form = $(this).parents('form');
