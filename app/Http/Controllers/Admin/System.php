@@ -39,7 +39,13 @@ class System extends Base
     public function sendTest()
     {
         $phone = $this->request->input('phone');
-        return parent::sendSMS($phone);
+        $type = $this->request->input('type');
+        if ($type == '0'){
+            $captchaTemplate = true;
+        }else{
+            $captchaTemplate = false;
+        }
+        return parent::sendSMS($phone,$captchaTemplate);
     }
 
     public function notice()

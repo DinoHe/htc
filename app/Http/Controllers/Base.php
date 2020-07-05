@@ -5,6 +5,7 @@ use App\Http\Models\Coins;
 use App\Http\Models\Members;
 use App\Http\Models\MyMiners;
 use App\Http\Models\SystemSettings;
+use App\Libraries\SMS\SendSmsYZ;
 use App\Libraries\SMS\SendTemplateSMS;
 use App\Http\Models\PhoneTmps;
 use Illuminate\Http\Request;
@@ -95,9 +96,10 @@ class Base extends Controller
     /**
      * 发送短信验证码
      * @param $phone
+     * @param bool $captchaTemplate
      * @return false|mixed|string
      */
-    public function sendSMS($phone)
+    public function sendSMS($phone,$captchaTemplate=true)
     {
         $phoneTmp = PhoneTmps::where('phone',$phone)->first();
         if (!empty($phoneTmp)){
@@ -106,12 +108,11 @@ class Base extends Controller
                 return $this->dataReturn(['status'=>1104,'message'=>'发送频繁，请'.(60 - $t).'s后获取']);
             }
         }
-        $sendSMS = new SendTemplateSMS();
+        $sendSMS = new SendSmsYZ();
         $code = rand(1000,9999);
-        $sendRes = $sendSMS->sendTemplateSMS($phone, array($code,5), 1);
+        $sendRes = $sendSMS->sendSms($phone,$code,$captchaTemplate);
         $res = json_decode($sendRes,true);
-        $res['status'] = 0;
-        if ($res['status'] == 0) {
+        if ($res['code'] == '000000') {
             $tmp = PhoneTmps::updateOrCreate(
                 ['phone' => $phone],
                 ['code' => $code]

@@ -43,7 +43,7 @@ class ForgetPassword extends Base
         if (empty($p)){
             return $this->dataReturn(['status'=>1104,'message'=>'该账号不存在，请先注册']);
         }
-        $res = $this->sendSMS($phone);
+        $res = $this->sendSMS($phone,true);
         return $res;
     }
 

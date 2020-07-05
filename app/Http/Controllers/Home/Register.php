@@ -60,7 +60,7 @@ class Register extends Base
         if (!empty($p)){
             return $this->dataReturn(['status'=>1103,'message'=>'手机号已注册']);
         }
-        $res = $this->sendSMS($phone);
+        $res = $this->sendSMS($phone,true);
         return $res;
     }
 

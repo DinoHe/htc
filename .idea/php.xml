@@ -96,6 +96,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/pda/pheanstalk" />
+      <path value="$PROJECT_DIR$/vendor/tencentcloud/tencentcloud-sdk-php" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

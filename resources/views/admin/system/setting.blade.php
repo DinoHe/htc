@@ -70,7 +70,11 @@
                                 <label class="form-label col-xs-4 col-sm-2">手机号码：</label>
                                 <div class="formControls col-xs-8 col-sm-9">
                                     <input type="number" class="input-text" style="width: 200px">
-                                    <a onclick="sendTest(this)" class="btn btn-success">发送验证码</a>
+                                    <select name="type">
+                                        <option value="0">验证码</option>
+                                        <option value="1">通知短信</option>
+                                    </select>
+                                    <a onclick="sendTest(this)" class="btn btn-success">发送</a>
                                 </div>
                             </div>
                             <div class="row cl">
@@ -128,7 +132,7 @@
         $.ajax({
             method:'post',
             url:'{{url("admin/sendTest")}}',
-            data:{'phone':$(obj).siblings().val()},
+            data:{'phone':$(obj).siblings('input').val(),'type':$(obj).siblings('select').val()},
             dataType: 'json',
             success:function (data) {
                 $('#testContent').text(data);
