@@ -68,8 +68,7 @@
                             '                        <div class="weui-cell__bd">\n' +
                             '                            <h2>买入</h2>\n' +
                             '                            <p>数量：' + v['trade_number'] + '</p>\n' +
-                            '                            <p>单价：' + v['trade_price'] + '</p>\n' +
-                            '                            <p>日期：' + v['created_at'] + '</p>\n' +
+                            '                            <p>单价：$' + v['trade_price'] + '</p>\n' +
                             '                        </div>\n' +
                             '                        <div class="weui-cell__ft color-success">待匹配</div>\n' +
                             '                    </div>';
