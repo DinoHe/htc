@@ -4,7 +4,7 @@
     <div class="app-cells">
         <div class="weui-cells">
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">今日价格</label></div>
+                <div class="weui-cell__hd"><label class="weui-label">今日单价</label></div>
                 <div class="weui-cell__bd app-fs-19 color-main bold">$<span id="price">{{isset($coinPrice)?$coinPrice:0}}</span>
                     <span class="app-fs-13 color-primary">≈￥{{isset($coinPrice)?$coinPrice*7:0}}</span></div>
             </div>
