@@ -22,7 +22,6 @@
                             <h2>买入</h2>
                             <p>数量：{{$o['trade_number']}}</p>
                             <p>单价：${{$o['trade_price']}}</p>
-                            <p>日期：{{$o['created_at']}}</p>
                         </div>
                         <div class="weui-cell__ft color-success">待匹配</div>
                     </div>
@@ -93,7 +92,7 @@
 
         var option = {
             title: {
-                text: '实时价格：'+y_data[y_data.length-1],
+                text: '实时价格：$'+y_data[y_data.length-1],
                 left: '30%'
             },
             tooltip: {
