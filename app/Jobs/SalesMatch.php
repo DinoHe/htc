@@ -2,10 +2,12 @@
 
 namespace App\Jobs;
 
+use App\Http\Controllers\Base;
 use App\Http\Models\Orders;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
@@ -32,10 +34,10 @@ class SalesMatch implements ShouldQueue
 
     /**
      * Execute the job.
-     *
+     * @param Request $request
      * @return void
      */
-    public function handle()
+    public function handle(Request $request)
     {
         $buyOrders = Cache::get('tradeBuy');
         $buyOrdersArry = [];
@@ -67,6 +69,9 @@ class SalesMatch implements ShouldQueue
                     $index = $buyOrdersArry[$randIndex]['index'];
                     $buyOrders[$index]['order_status'] = Orders::ORDER_MATCHED;
                     Cache::put('tradeBuy',$buyOrders,Carbon::tomorrow());
+                    //短信通知买家付款
+                    $sms = new Base($request);
+                    $sms->sendSMS($this->salesMember->phone,false);
                     return;
                 }
             }
