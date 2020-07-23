@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Assets;
 use App\Http\Models\Bills;
 use App\Http\Models\Ideals;
 use App\Http\Models\Members;
@@ -252,7 +253,10 @@ class Member extends Base
     private function finishTrade($orderId)
     {
         $order = Orders::where('id',$orderId)->first();
-        $buyAssets = Cache::get('assets'.$order->buy_member_id);
+        $buyId = $order->buy_member_id;
+        $buyAssets = Cache::remember('assets'.$buyId,Carbon::tomorrow(),function () use ($buyId){
+            return Assets::where('member_id',$buyId)->first();
+        });
         $salesAssets = Cache::get('assets'.$order->sales_member_id);
         DB::beginTransaction();
         //买家资产确认
@@ -260,14 +264,17 @@ class Member extends Base
         $buyAssets->buys += $order->trade_number;
         //卖家资产确认
         $handRate = SystemSettings::getSysSettingValue('trade_handling_charge');
-        $n = $order->trade_number*(1+$handRate);
-        $salesAssets->blocked_assets -= $n;
+        $deduct = $order->trade_number*(1+$handRate);
+        $salesAssets->blocked_assets -= $deduct;
         //订单完成交易
         $order->trade_status = Orders::TRADE_FINISHED;
 
         $orderRes = $order->save();
         $buyRes = $buyAssets->save();
-        $salesRes = $salesAssets->save();
+        $sa = Assets::find($salesAssets->id);
+        $sa->balance -= $deduct;
+        $sa->blocked_assets -= $deduct;
+        $salesRes = $sa->save();
 
         if (!$orderRes || !$buyRes || !$salesRes) {
             DB::rollBack();
