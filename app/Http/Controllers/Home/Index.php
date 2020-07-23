@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Assets;
 use App\Http\Models\Bills;
 use App\Http\Models\Images;
 use App\Http\Models\Miners;
@@ -39,12 +40,14 @@ class Index extends Base
             return $this->dataReturn(['status'=>1032,'message'=>'今天已签到，请明天再来']);
         }
         $give = SystemSettings::getSysSettingValue('qiandao_give_coin');
-        $assets = Cache::get('assets'.$id);
-        $assets->balance += $give;
-        $assetsDb = $assets;
-        $assetsDb->save();
-        Cache::put('assets'.Auth::id(),$assets,Carbon::tomorrow());
+        //更新缓存
+        $assetsCache = Cache::get('assets'.$id);
+        $assetsCache->balance += $give;
+        Cache::put('assets'.Auth::id(),$assetsCache,Carbon::tomorrow());
         Cache::put('qiandao'.Auth::id(),time(),Carbon::tomorrow());
+        //保存数据到数据库
+        Assets::where('member_id',$id)->update(['balance'=>$assetsCache->balance]);
+
         Bills::createBill($id,'余额-签到赠送','+'.$give);
         return $this->dataReturn(['status'=>0,'message'=>'签到成功']);
     }

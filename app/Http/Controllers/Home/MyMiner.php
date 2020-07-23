@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
+use App\Http\Models\Assets;
 use App\Http\Models\Bills;
 use App\Http\Models\MyMiners;
 use Illuminate\Support\Carbon;
@@ -47,11 +48,14 @@ class MyMiner extends Base
                 'run_status' => $data['run_status']
             ]);
         }
-        $assets = Cache::get('assets'.$memberId);
-        $assets->balance += $collectSum;
-        $assets->save();
-        Cache::put('assets'.$memberId,$assets,Carbon::tomorrow());
+        //更新缓存
+        $assetsCache = Cache::get('assets'.$memberId);
+        $assetsCache->balance += $collectSum;
+        Cache::put('assets'.$memberId,$assetsCache,Carbon::tomorrow());
         Cache::put('collect'.$memberId,time(),Carbon::tomorrow());
+        //保存数据到数据库
+        Assets::where('member_id',$memberId)->update(['balance'=>$assetsCache->balance]);
+
         Bills::createBill($memberId,'余额-矿机产出','+'.$collectSum);
         return $this->dataReturn(['status'=>0,'message'=>'收取成功']);
     }
