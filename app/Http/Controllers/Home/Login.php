@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Base;
-use App\Http\Models\Orders;
+use App\Http\Models\Assets;
 use App\Http\Models\SystemSettings;
 use App\Jobs\RewardMiner;
 use Illuminate\Support\Carbon;
@@ -55,8 +55,6 @@ class Login extends Base
      */
     public function logout()
     {
-        $tradeSales = Cache::get('tradeSales');
-        $tradeBuy = Cache::get('tradeBuy');
         $online = Cache::get('online');
         //清除该用户在线记录
         if (!empty($online)){
@@ -68,25 +66,13 @@ class Login extends Base
                 }
             }
         }
-        //没有交易单，清除该用户资产缓存
-        $flag = true;
-        if (!empty($tradeSales)){
-            foreach ($tradeSales as $tradeSale){
-                if ($tradeSale['sales_member_id'] == Auth::id() && $tradeSale['order_status'] == Orders::ORDER_MATCHED){
-                    $flag = false;
-                    break;
-                }
-            }
+        //资产缓存数据没有变化，清除该用户资产缓存
+        $assets = Assets::where('member_id',Auth::id())->first();
+        $assetsCache = Cache::get('assets'.Auth::id());
+        if ($assets->balance == $assetsCache->balance){
+            Cache::forget('assets'.Auth::id());
         }
-        if (!empty($tradeBuy)){
-            foreach ($tradeBuy as $b){
-                if ($b['buy_member_id'] == Auth::id() && $b['order_status'] == Orders::ORDER_MATCHED){
-                    $flag = false;
-                    break;
-                }
-            }
-        }
-        if ($flag) Cache::forget('assets'.Auth::id());
+
         Auth::logout();
         return redirect('home/login');
     }
