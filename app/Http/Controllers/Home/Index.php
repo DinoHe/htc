@@ -45,8 +45,10 @@ class Index extends Base
         $assetsCache->balance += $give;
         Cache::put('assets'.Auth::id(),$assetsCache,Carbon::tomorrow());
         Cache::put('qiandao'.Auth::id(),time(),Carbon::tomorrow());
-        //保存数据到数据库
-        Assets::where('member_id',$id)->update(['balance'=>$assetsCache->balance * 100]);
+        //签到奖励
+        $a = Assets::find($assetsCache->id);
+        $a->balance += $give;
+        $a->save();
 
         Bills::createBill($id,'余额-签到赠送','+'.$give);
         return $this->dataReturn(['status'=>0,'message'=>'签到成功']);
