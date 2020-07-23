@@ -41,7 +41,8 @@ class Index extends Base
         $give = SystemSettings::getSysSettingValue('qiandao_give_coin');
         $assets = Cache::get('assets'.$id);
         $assets->balance += $give;
-        $assets->save();
+        $assetsDb = $assets;
+        $assetsDb->save();
         Cache::put('assets'.Auth::id(),$assets,Carbon::tomorrow());
         Cache::put('qiandao'.Auth::id(),time(),Carbon::tomorrow());
         Bills::createBill($id,'余额-签到赠送','+'.$give);
