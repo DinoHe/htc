@@ -69,7 +69,7 @@ class Trade extends Base
     public function buyDestroy()
     {
         $id = $this->request->input('id');
-        $ids = explode(',',$id)?:[id];
+        $ids = explode(',',$id)?:[$id];
         $buys = Cache::get('tradeBuy');
         foreach ($ids as $id) {
             $filterArray = parent::array2Filter($id,$buys);
@@ -111,7 +111,7 @@ class Trade extends Base
     public function salesDestroy()
     {
         $id = $this->request->input('id');
-        $ids = explode(',',$id)?:[id];
+        $ids = explode(',',$id)?:[$id];
         $sales = Cache::get('tradeSales');
         foreach ($ids as $id) {
             $filterArray = parent::array2Filter($id,$sales);
