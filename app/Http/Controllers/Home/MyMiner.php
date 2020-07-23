@@ -54,7 +54,7 @@ class MyMiner extends Base
         Cache::put('assets'.$memberId,$assetsCache,Carbon::tomorrow());
         Cache::put('collect'.$memberId,time(),Carbon::tomorrow());
         //保存数据到数据库
-        Assets::where('member_id',$memberId)->update(['balance'=>$assetsCache->balance]);
+        Assets::where('member_id',$memberId)->update(['balance'=>$assetsCache->balance*100]);
 
         Bills::createBill($memberId,'余额-矿机产出','+'.$collectSum);
         return $this->dataReturn(['status'=>0,'message'=>'收取成功']);
