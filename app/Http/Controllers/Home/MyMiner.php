@@ -69,7 +69,8 @@ class MyMiner extends Base
             ->where('run_status','>=',MyMiners::RUN_FINISHED)
             ->limit(0,20)
             ->get();
-        Log::info($myMiners);
+        $miners = MyMiners::all();
+        Log::info($miners);
         return view('home.myminer.finished')->with('myMiners',$myMiners);
     }
 
