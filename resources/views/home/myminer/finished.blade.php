@@ -24,7 +24,7 @@
                     @endforeach
                 @endif
             </div>
-            @if(count($myMiners) > 20)
+            @if(count($myMiners) >= 20)
             <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
                 <div class="weui-cell__bd" id="getmore">查看更多<i id="loading" class="weui-loading app-dp_no"></i></div>
             </a>

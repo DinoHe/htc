@@ -8,6 +8,7 @@ use App\Http\Models\MyMiners;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class MyMiner extends Base
 {
@@ -65,17 +66,17 @@ class MyMiner extends Base
     public function finished()
     {
         $myMiners = MyMiners::where('member_id',Auth::id())
-            ->where('run_status',MyMiners::RUN_FINISHED)
+            ->where('run_status','>=',MyMiners::RUN_FINISHED)
             ->limit(0,20)
             ->get();
-
+        Log::info($myMiners);
         return view('home.myminer.finished')->with('myMiners',$myMiners);
     }
 
     public function getMoreMinerFinished($offset)
     {
         $myMiners = MyMiners::where('member_id',Auth::id())
-            ->where('run_status',MyMiners::RUN_FINISHED)
+            ->where('run_status','>=',MyMiners::RUN_FINISHED)
             ->limit($offset,20)
             ->get();
         if ($myMiners->isEmpty()){
