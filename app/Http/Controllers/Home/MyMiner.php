@@ -67,10 +67,9 @@ class MyMiner extends Base
     {
         $myMiners = MyMiners::where('member_id',Auth::id())
             ->where('run_status','>=',MyMiners::RUN_FINISHED)
-            ->limit(0,20)
+            ->limit(20)
             ->get();
-        $miners = MyMiners::where('member_id',Auth::id())->get();
-        Log::info($miners);
+
         return view('home.myminer.finished')->with('myMiners',$myMiners);
     }
 
@@ -78,7 +77,8 @@ class MyMiner extends Base
     {
         $myMiners = MyMiners::where('member_id',Auth::id())
             ->where('run_status','>=',MyMiners::RUN_FINISHED)
-            ->limit($offset,20)
+            ->offset($offset)
+            ->limit(20)
             ->get();
         if ($myMiners->isEmpty()){
             return $this->dataReturn(['status'=>-1,'message'=>'没有更多数据']);
