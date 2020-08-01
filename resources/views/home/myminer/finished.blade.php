@@ -12,7 +12,7 @@
                             <img class="weui-media-box__thumb" src="{{asset('storage/homeImg/'.$miner->miner_tittle.'.jpg')}}">
                         </div>
                         <div class="weui-media-box__bd">
-                            <h4 class="weui-media-box__title">{{$miner->miner_tittle}} <i class="iconfont icon-dian1 color-primary app-fs-10"> 已结束</i></h4>
+                            <h4 class="weui-media-box__title">{{$miner->miner_tittle}} <i class="iconfont icon-dian1 color-primary app-fs-10"> {{$miner->getMinerStatus($miner->run_status)}}</i></h4>
                             <p class="index-miner_desc">算力：{{$miner->hashrate}} G</p>
                             <p class="index-miner_desc">总产量：{{$miner->total_dig}} HTC</p>
                             <p class="index-miner_desc">每小时产量：{{$miner->nph}} HTC/小时</p>
