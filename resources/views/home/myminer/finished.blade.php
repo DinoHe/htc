@@ -9,7 +9,7 @@
                     @foreach($myMiners as $miner)
                     <div class="weui-media-box weui-media-box_appmsg index-miner_list">
                         <div class="weui-media-box__hd index-miner_img">
-                            <img class="weui-media-box__thumb" src="{{asset('static/home/images/'.$miner->miner_tittle.'.jpg')}}">
+                            <img class="weui-media-box__thumb" src="{{asset('storage/homeImg/'.$miner->miner_tittle.'.jpg')}}">
                         </div>
                         <div class="weui-media-box__bd">
                             <h4 class="weui-media-box__title">{{$miner->miner_tittle}} <i class="iconfont icon-dian1 color-primary app-fs-10"> 已结束</i></h4>
